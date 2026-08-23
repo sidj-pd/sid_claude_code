@@ -2,11 +2,14 @@ import React from 'react';
 import {Img, staticFile} from 'remotion';
 
 /**
- * Real paper-cutout illustrations (generated art, dropped into
- * public/cutouts/). Each is a flat ~4:3 image on a plain cream backdrop —
- * no alpha transparency — so <PaperCutout> just renders it with
- * object-fit: contain inside whatever box the beat gives it, and the beat's
- * own background is picked to match the art's backdrop tone.
+ * Real paper-cutout illustrations. The source art in public/cutouts/ is flat
+ * JPGs on a cream backdrop; scripts/cutout-alpha.mjs keys that backdrop out
+ * (edge flood fill, so interior cream survives) into true transparent PNGs
+ * in public/cutouts-alpha/, which is what we render. Transparency is what
+ * lets a drop-shadow hug the artwork's real silhouette — without it every
+ * cutout reads as a rectangular postcard with a shadow around the card.
+ *
+ * Re-run `node scripts/cutout-alpha.mjs` after replacing any source art.
  */
 
 const IMAGE_STYLE: React.CSSProperties = {
@@ -20,13 +23,13 @@ const makeCutout = (file: string): React.FC => {
 	return Cutout;
 };
 
-export const VidhanaSoudha = makeCutout('cutouts/vidhana-soudha.jpg');
-export const AutoRickshaw = makeCutout('cutouts/auto-rickshaw.jpg');
-export const ExhaustPuff = makeCutout('cutouts/exhaust-puff.jpg');
-export const ItParkBuilding = makeCutout('cutouts/it-park-building.jpg');
-export const LalbaghGlassHouse = makeCutout('cutouts/lalbagh-glass-house.jpg');
-export const NammaMetro = makeCutout('cutouts/namma-metro.jpg');
-export const MgRoadSignage = makeCutout('cutouts/mg-road-signage.jpg');
+export const VidhanaSoudha = makeCutout('cutouts-alpha/vidhana-soudha.png');
+export const AutoRickshaw = makeCutout('cutouts-alpha/auto-rickshaw.png');
+export const ExhaustPuff = makeCutout('cutouts-alpha/exhaust-puff.png');
+export const ItParkBuilding = makeCutout('cutouts-alpha/it-park-building.png');
+export const LalbaghGlassHouse = makeCutout('cutouts-alpha/lalbagh-glass-house.png');
+export const NammaMetro = makeCutout('cutouts-alpha/namma-metro.png');
+export const MgRoadSignage = makeCutout('cutouts-alpha/mg-road-signage.png');
 
 export type CutoutAsset =
 	| 'vidhana-soudha'

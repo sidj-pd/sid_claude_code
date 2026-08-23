@@ -1,22 +1,25 @@
 import React from 'react';
-import {AbsoluteFill} from 'remotion';
+import {AbsoluteFill, useCurrentFrame} from 'remotion';
 import {RansomHeadlineText} from '../../components/RansomHeadlineText';
 import {StampImpact} from '../../components/StampImpact';
+import {B8_TITLE} from './beats';
 
-const LETTER_STAGGER = 1;
-const STAMP_TRIGGER_FRAME = 26;
+const STAMP_AT = 14;
 
 /**
- * Headline + stamp only — the six locations/vehicles now handle their own
- * grow-into-poster and flip-down-away finale as part of their persistent
- * lifecycle, scattered around this title at a high z-index so it stays
- * legible above the collage.
+ * The punchline. Lands on top of the frozen jam rather than on a cleared
+ * stage — the mess stays visible behind it, which is the point.
  */
 export const TitleFinale: React.FC = () => {
+	const frame = useCurrentFrame();
+	if (frame < B8_TITLE) {
+		return null;
+	}
+
 	return (
 		<AbsoluteFill style={{justifyContent: 'center', alignItems: 'center', zIndex: 200}}>
-			<StampImpact triggerFrame={STAMP_TRIGGER_FRAME} punchDurationInFrames={4} sfxSrc={undefined}>
-				<RansomHeadlineText text="BIZZARO BANGALORE" letterStagger={LETTER_STAGGER} fontSize={72} />
+			<StampImpact triggerFrame={B8_TITLE + STAMP_AT} punchDurationInFrames={4}>
+				<RansomHeadlineText text="BIZZARO BANGALORE" letterStagger={1} fontSize={74} />
 			</StampImpact>
 		</AbsoluteFill>
 	);

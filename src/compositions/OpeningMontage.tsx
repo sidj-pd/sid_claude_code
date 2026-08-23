@@ -1,51 +1,52 @@
 import React from 'react';
-import {AbsoluteFill, Sequence, interpolateColors, useCurrentFrame} from 'remotion';
-import {NewsprintTexture} from '../components/NewsprintTexture';
-import {AutoAsset} from './montage/assets/AutoAsset';
-import {ItParkAsset} from './montage/assets/ItParkAsset';
-import {LalbaghAsset} from './montage/assets/LalbaghAsset';
-import {MetroAsset} from './montage/assets/MetroAsset';
-import {MgRoadAsset} from './montage/assets/MgRoadAsset';
-import {VidhanaSoudhaAsset} from './montage/assets/VidhanaSoudhaAsset';
+import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
+import {CollageBackdrop} from '../components/CollageBackdrop';
+import {CityScene} from './montage/CityScene';
 import {TitleFinale} from './montage/TitleFinale';
-import {TITLE_START} from './montage/timeline';
+import {B2_TURN, B6_SIGN, B7_GRIDLOCK, B8_TITLE, END} from './montage/beats';
+import {cameraAt} from './montage/camera';
 
-export const OPENING_MONTAGE_DURATION_IN_FRAMES = 360;
+export const OPENING_MONTAGE_DURATION_IN_FRAMES = END;
 export const OPENING_MONTAGE_FPS = 30;
 export const OPENING_MONTAGE_WIDTH = 1080;
 export const OPENING_MONTAGE_HEIGHT = 1920;
 
-const BG_DUSK_START = 285;
-const BG_DUSK_END = 315;
-
 /**
- * BIZZARO BANGALORE — opening montage, frames 0-360 (0:00-0:12).
+ * BIZZARO BANGALORE — opening montage, 360 frames (12s @ 30fps).
  *
- * Unlike a slideshow of discrete cards, every location/vehicle is a single
- * persistent component mounted for the whole timeline: each has its own
- * "hero" moment in the foreground, then recedes into a background skyline
- * where it stays visible (smaller, softer-shadowed) while the next asset
- * takes the stage — so the previous beat is still on screen, receding,
- * while the next one is already animating in. At the title, every asset
- * grows back into a large overlapping poster collage around the headline,
- * then flips downward away before the hard cut into Scene 1.
+ * Premise: the city keeps trying to take a dignified portrait of itself and
+ * keeps photobombing it. Beat 1 sets up the prestige shot; beat 2 undercuts
+ * it (an auto parks dead centre and never leaves); beats 3-6 pile on faster
+ * and faster until the frame can't hold everything; beat 7 jams solid; the
+ * title stamps down on the mess.
+ *
+ * Every cutout lives at a fixed spot in world space (`world.ts`) and a
+ * single virtual camera (`camera.ts`) moves over it, so the piece has actual
+ * shot language — push-in, whip-tilt, progressive pull-back — rather than a
+ * locked frame with elements swapping in and out.
  */
 export const OpeningMontage: React.FC = () => {
 	const frame = useCurrentFrame();
-	const backgroundColor = interpolateColors(frame, [BG_DUSK_START, BG_DUSK_END], ['#f6f1e6', '#0b0906']);
+	const camera = cameraAt(frame);
+
+	// The backdrop escalates with the pile-up: warmer and brighter while the
+	// city is still behaving, dimmer and closing in once it isn't.
+	const chaos = interpolate(frame, [B2_TURN, B6_SIGN, B7_GRIDLOCK], [0, 0.75, 1], {
+		extrapolateLeft: 'clamp',
+		extrapolateRight: 'clamp',
+	});
+	// Snap to the title card late and hard. Ramping it earlier just muddies
+	// the gridlock beat, which should still read as paper.
+	const blackout = interpolate(frame, [B8_TITLE - 3, B8_TITLE + 7], [0, 0.86], {
+		extrapolateLeft: 'clamp',
+		extrapolateRight: 'clamp',
+	});
 
 	return (
-		<AbsoluteFill style={{backgroundColor}}>
-			<NewsprintTexture opacity={0.08} />
-			<VidhanaSoudhaAsset />
-			<AutoAsset />
-			<ItParkAsset />
-			<LalbaghAsset />
-			<MetroAsset />
-			<MgRoadAsset />
-			<Sequence from={TITLE_START} durationInFrames={OPENING_MONTAGE_DURATION_IN_FRAMES - TITLE_START}>
-				<TitleFinale />
-			</Sequence>
+		<AbsoluteFill>
+			<CollageBackdrop chaos={chaos} blackout={blackout} />
+			<CityScene camera={camera} />
+			<TitleFinale />
 		</AbsoluteFill>
 	);
 };

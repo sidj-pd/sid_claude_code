@@ -55,7 +55,15 @@ export const PaperCutout: React.FC<PaperCutoutProps> = ({
 			style={{
 				position: 'relative',
 				transform: jitter ? `rotate(${jitterRotation}deg)` : undefined,
-				filter: `drop-shadow(0 ${6 * elevation}px ${12 * elevation}px rgba(0,0,0,${Math.min(0.45, 0.22 * elevation)}))`,
+				// Two stacked shadows read as real paper lifted off the backdrop:
+				// a tight, darker contact shadow anchoring it to the surface, plus
+				// a wider, softer cast shadow for the height. Both scale with
+				// elevation, so a receded background cutout sits nearly flat while
+				// a foreground one floats well clear of the page.
+				filter: [
+					`drop-shadow(0 ${1.5 * elevation}px ${2 * elevation}px rgba(48,34,18,${Math.min(0.5, 0.3 * elevation)}))`,
+					`drop-shadow(0 ${9 * elevation}px ${16 * elevation}px rgba(48,34,18,${Math.min(0.4, 0.24 * elevation)}))`,
+				].join(' '),
 				...style,
 			}}
 		>

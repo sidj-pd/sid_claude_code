@@ -10,14 +10,15 @@
     "lint": "tsc --noEmit"
   },
   "dependencies": {
+    "@remotion/cli": "4.0.515",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "remotion": "4.0.515",
-    "@remotion/cli": "4.0.515"
+    "remotion": "4.0.515"
   },
   "devDependencies": {
     "@types/react": "18.3.1",
     "@types/react-dom": "18.3.1",
+    "sharp": "^0.35.3",
     "typescript": "5.5.4"
   }
 }
