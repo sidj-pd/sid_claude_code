@@ -29,7 +29,7 @@ const Cutout: React.FC<{asset: CutoutAsset; entrance: Entrance; camera: Camera}>
 	camera,
 }) => {
 	const place = WORLD[asset];
-	if (entrance.opacity <= 0) {
+	if (!place || entrance.opacity <= 0) {
 		return null;
 	}
 

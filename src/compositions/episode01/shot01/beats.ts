@@ -23,6 +23,14 @@ export const SCREECH_PUFF = AUTO_STOPS - 3;
  */
 export const WAVE_ENDS = AUTO_STOPS + 3;
 
+/**
+ * The VO is cued to land exactly as the auto comes to rest. The line runs
+ * longer than this shot and carries over into Shot 2 — that is how the
+ * script is written, so previewing Shot 1 alone will sound cut off. That is
+ * correct, not a bug; the full line plays once the scene is assembled.
+ */
+export const VO_STARTS = AUTO_STOPS;
+
 export const SHOT_01_DURATION = 120;
 
 /** Each stop-motion pose is held this many frames. Chunky on purpose. */

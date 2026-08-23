@@ -34,6 +34,8 @@ export const PotholeRoad = makeCutout('cutouts-alpha/pothole-road.png');
 export const TrafficSignal = makeCutout('cutouts-alpha/traffic-signal.png');
 export const MasalaDosa = makeCutout('cutouts-alpha/masala-dosa.png');
 export const WorkBarricade = makeCutout('cutouts-alpha/work-barricade.png');
+export const HailingHand = makeCutout('cutouts-alpha/hailing-hand.png');
+export const AutoDriver34 = makeCutout('cutouts-alpha/auto-driver-34.png');
 
 export type CutoutAsset =
 	| 'vidhana-soudha'
@@ -46,7 +48,9 @@ export type CutoutAsset =
 	| 'pothole-road'
 	| 'traffic-signal'
 	| 'masala-dosa'
-	| 'work-barricade';
+	| 'work-barricade'
+	| 'hailing-hand'
+	| 'auto-driver-34';
 
 export const CUTOUT_REGISTRY: Record<CutoutAsset, React.FC> = {
 	'vidhana-soudha': VidhanaSoudha,
@@ -60,4 +64,6 @@ export const CUTOUT_REGISTRY: Record<CutoutAsset, React.FC> = {
 	'traffic-signal': TrafficSignal,
 	'masala-dosa': MasalaDosa,
 	'work-barricade': WorkBarricade,
+	'hailing-hand': HailingHand,
+	'auto-driver-34': AutoDriver34,
 };

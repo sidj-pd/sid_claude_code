@@ -26,7 +26,12 @@ export type WorldPlacement = {
 /** World Y of the road surface the auto's wheels rest on. */
 export const ROAD_SURFACE_Y = 363;
 
-export const WORLD: Record<CutoutAsset, WorldPlacement> = {
+/**
+ * Partial by design: this is the opening montage's layout, and cutouts that
+ * only ever appear inside an episode scene (the hailing arm, the auto with
+ * the driver) have no place in it.
+ */
+export const WORLD: Partial<Record<CutoutAsset, WorldPlacement>> = {
 	// Back layer — the metro glides above everything, ignoring the mess below.
 	'namma-metro': {x: -40, y: -880, width: 1500, height: 1125, rotate: -1.5, z: 10, elevation: 0.7},
 	// The tower overshoots up and to the right, crowding under the metro.

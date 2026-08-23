@@ -46,6 +46,13 @@ const FEATHER = 1.5;
  */
 const OVERRIDES = {
 	'traffic-signal': {inset: 0.1},
+	// Its windscreen is a large enclosed cream area that IS artwork (glass),
+	// not backdrop showing through, so the enclosed-hole pass must be off or
+	// it punches the screen out of the vehicle.
+	'auto-driver-34': {interior: false},
+	// Carries a soft grey drop shadow baked onto the cream; the default
+	// tolerance stops at the shadow's edge and leaves it as a halo.
+	'hailing-hand': {tolerance: 72},
 };
 
 const removeBackground = async (srcPath, outPath, options = {}) => {
@@ -82,11 +89,12 @@ const removeBackground = async (srcPath, outPath, options = {}) => {
 	bg /= corners.length;
 	bb /= corners.length;
 
+	const tolerance = options.tolerance ?? TOLERANCE;
 	const isBackground = (i) => {
 		const dr = raw[i] - br;
 		const dg = raw[i + 1] - bg;
 		const db = raw[i + 2] - bb;
-		return Math.sqrt(dr * dr + dg * dg + db * db) <= TOLERANCE;
+		return Math.sqrt(dr * dr + dg * dg + db * db) <= tolerance;
 	};
 
 	// Iterative flood fill (an explicit stack, not recursion — these images
@@ -121,6 +129,7 @@ const removeBackground = async (srcPath, outPath, options = {}) => {
 	}
 
 	// Second pass: enclosed holes the border fill could not reach.
+	const skipInterior = options.interior === false;
 	const nearBackground = (i) => {
 		const dr = raw[i] - br;
 		const dg = raw[i + 1] - bg;
@@ -130,6 +139,7 @@ const removeBackground = async (srcPath, outPath, options = {}) => {
 
 	const considered = new Uint8Array(width * height);
 	for (let seed = 0; seed < width * height; seed++) {
+		if (skipInterior) break;
 		if (visited[seed] || considered[seed] || !nearBackground(seed * 4)) continue;
 
 		// Collect this connected component before deciding whether to clear it.
@@ -193,7 +203,10 @@ const removeBackground = async (srcPath, outPath, options = {}) => {
 };
 
 const main = async () => {
-	const files = (await readdir(SRC_DIR)).filter((f) => /\.(jpe?g|png)$/i.test(f));
+	const only = process.argv.slice(2);
+	const files = (await readdir(SRC_DIR))
+		.filter((f) => /\.(jpe?g|png)$/i.test(f))
+		.filter((f) => only.length === 0 || only.includes(f.replace(/\.[^.]+$/, '')));
 	for (const file of files) {
 		const base = file.replace(/\.[^.]+$/, '');
 		const outPath = path.join(OUT_DIR, `${base}.png`);

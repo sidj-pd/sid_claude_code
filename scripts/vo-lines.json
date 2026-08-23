@@ -1,0 +1,32 @@
+{
+  "_comment": [
+    "Voice-over lines for Bizzaro Bangalore. Generate with:",
+    "  GEMINI_API_KEY=... python3 scripts/tts.py",
+    "Output lands in public/vo/<id>.wav.",
+    "",
+    "Two separate levers, per the pipeline notes: 'character' is fixed per",
+    "speaker and never changes between lines (that is the voice); 'delivery'",
+    "is per line (that is the take). Keeping them apart is what makes the",
+    "performance directable — without a delivery note every line in a scene",
+    "comes out in the same register regardless of what is happening in it.",
+    "",
+    "Character descriptions deliberately say what NOT to do: left to itself",
+    "the model performs an accent rather than speaking in one."
+  ],
+
+  "voices": {
+    "narrator": {
+      "voiceName": "Fenrir",
+      "character": "a documentary narrator in the Vox explainer register — bright, articulate and conversational, speaking clean measured sentences with crisp consonants and a light forward momentum, as though walking the listener through evidence. He is dry rather than jokey, and trusts the material to be funny without selling it. Speak plainly and naturally — no announcer boom, no over-warm radio voice, no sing-song cadence, no theatrical emphasis, no caricature"
+    }
+  },
+
+  "lines": [
+    {
+      "id": "ep01-shot01",
+      "speaker": "narrator",
+      "text": "Every day, thousands of auto rides begin in Bangalore. This is the story of the one that went right.",
+      "delivery": "matter-of-fact and unhurried, opening a case file; let the first sentence sit flat and ordinary, then land 'the one that went right' with a small dry lift — understated, never winking at the audience"
+    }
+  ]
+}
