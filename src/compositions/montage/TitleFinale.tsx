@@ -2,7 +2,7 @@ import React from 'react';
 import {AbsoluteFill, useCurrentFrame} from 'remotion';
 import {RansomHeadlineText} from '../../components/RansomHeadlineText';
 import {StampImpact} from '../../components/StampImpact';
-import {B8_TITLE} from './beats';
+import {B11_TITLE} from './beats';
 
 const STAMP_AT = 14;
 
@@ -12,13 +12,13 @@ const STAMP_AT = 14;
  */
 export const TitleFinale: React.FC = () => {
 	const frame = useCurrentFrame();
-	if (frame < B8_TITLE) {
+	if (frame < B11_TITLE) {
 		return null;
 	}
 
 	return (
 		<AbsoluteFill style={{justifyContent: 'center', alignItems: 'center', zIndex: 200}}>
-			<StampImpact triggerFrame={B8_TITLE + STAMP_AT} punchDurationInFrames={4}>
+			<StampImpact triggerFrame={B11_TITLE + STAMP_AT} punchDurationInFrames={4}>
 				<RansomHeadlineText text="BIZZARO BANGALORE" letterStagger={1} fontSize={74} />
 			</StampImpact>
 		</AbsoluteFill>

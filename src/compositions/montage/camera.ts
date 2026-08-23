@@ -1,5 +1,18 @@
 import {Easing, interpolate} from 'remotion';
-import {B1_SETUP, B2_TURN, B3_TOWER, B4_GARDEN, B5_METRO, B6_SIGN, B7_GRIDLOCK, B8_TITLE, END} from './beats';
+import {
+	B1_SOUDHA,
+	B2_ROAD,
+	B3_AUTO,
+	B4_SIGNAL,
+	B5_TOWER,
+	B6_GARDEN,
+	B7_METRO,
+	B8_SIGN,
+	B9_GRIDLOCK,
+	B10_DOSA,
+	B11_TITLE,
+	END,
+} from './beats';
 
 /**
  * A single virtual camera over the whole collage. Every cutout lives at a
@@ -12,22 +25,27 @@ import {B1_SETUP, B2_TURN, B3_TOWER, B4_GARDEN, B5_METRO, B6_SIGN, B7_GRIDLOCK, 
 type CameraKey = {frame: number; focusY: number; scale: number};
 
 const KEYS: CameraKey[] = [
-	// Beat 1 — slow, majestic push-in. Sell the dignity before undercutting it.
-	{frame: B1_SETUP, focusY: -10, scale: 0.9},
-	{frame: B2_TURN, focusY: 90, scale: 0.98},
-	// Beat 2 — locked off. The auto parks and we simply hold. Comedy is in the stillness.
-	{frame: B3_TOWER, focusY: 130, scale: 0.98},
-	// Beat 3 — whip-tilt up chasing the tower, and deliberately fail to contain it.
-	{frame: B3_TOWER + 26, focusY: -380, scale: 0.88},
-	{frame: B4_GARDEN, focusY: -450, scale: 0.84},
-	// Beats 4-6 — keep pulling back, because more keeps arriving than fits.
-	{frame: B5_METRO, focusY: -60, scale: 0.78},
-	{frame: B6_SIGN, focusY: -300, scale: 0.73},
-	{frame: B7_GRIDLOCK, focusY: -120, scale: 0.7},
-	// Beat 7 — frozen wide on the jam.
-	{frame: B8_TITLE, focusY: -120, scale: 0.7},
-	// Beat 8 — a last, barely-perceptible drift so the title card isn't dead still.
-	{frame: END, focusY: -120, scale: 0.68},
+	// Beat 1 — slow, dignified push-in. Sell it straight before undercutting it.
+	{frame: B1_SOUDHA, focusY: -40, scale: 0.86},
+	// Beat 2 — tilt down to the road as it slams in under the monument.
+	{frame: B2_ROAD, focusY: 200, scale: 0.92},
+	// Beat 3 — ride along with the auto, close enough that the bouncing reads.
+	{frame: B3_AUTO, focusY: 330, scale: 1.02},
+	{frame: B4_SIGNAL, focusY: 300, scale: 0.98},
+	// Beat 4 — ease back so the signal towering over the stopped auto fits.
+	{frame: B5_TOWER, focusY: 170, scale: 0.88},
+	// Beat 5 — whip-tilt up chasing the tower, and deliberately fail to hold it.
+	{frame: B5_TOWER + 24, focusY: -330, scale: 0.84},
+	{frame: B6_GARDEN, focusY: -420, scale: 0.82},
+	// Beats 6-8 — keep pulling back, because more keeps arriving than fits.
+	{frame: B7_METRO, focusY: -140, scale: 0.77},
+	{frame: B8_SIGN, focusY: -300, scale: 0.72},
+	{frame: B9_GRIDLOCK, focusY: -110, scale: 0.68},
+	// Beat 9 — frozen wide on the jam.
+	{frame: B10_DOSA, focusY: -110, scale: 0.68},
+	{frame: B11_TITLE, focusY: -90, scale: 0.68},
+	// A last, barely-perceptible drift so the title card isn't dead still.
+	{frame: END, focusY: -90, scale: 0.66},
 ];
 
 const sample = (frame: number, field: 'focusY' | 'scale'): number => {
@@ -53,8 +71,8 @@ export const cameraAt = (frame: number): Camera => ({
 });
 
 /**
- * Impact shake, used when something lands hard (the sign drop, the title
- * stamp). Decays fast so it punctuates rather than wobbles.
+ * Impact shake, used when something lands hard (the road slam, the sign
+ * drop, the title stamp). Decays fast so it punctuates rather than wobbles.
  */
 export const shakeAt = (frame: number, impactFrame: number, amplitude: number): number => {
 	const age = frame - impactFrame;

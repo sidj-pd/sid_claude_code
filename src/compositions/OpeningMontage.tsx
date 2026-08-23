@@ -3,7 +3,7 @@ import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
 import {CollageBackdrop} from '../components/CollageBackdrop';
 import {CityScene} from './montage/CityScene';
 import {TitleFinale} from './montage/TitleFinale';
-import {B2_TURN, B6_SIGN, B7_GRIDLOCK, B8_TITLE, END} from './montage/beats';
+import {B2_ROAD, B8_SIGN, B9_GRIDLOCK, B11_TITLE, END} from './montage/beats';
 import {cameraAt} from './montage/camera';
 
 export const OPENING_MONTAGE_DURATION_IN_FRAMES = END;
@@ -31,13 +31,13 @@ export const OpeningMontage: React.FC = () => {
 
 	// The backdrop escalates with the pile-up: warmer and brighter while the
 	// city is still behaving, dimmer and closing in once it isn't.
-	const chaos = interpolate(frame, [B2_TURN, B6_SIGN, B7_GRIDLOCK], [0, 0.75, 1], {
+	const chaos = interpolate(frame, [B2_ROAD, B8_SIGN, B9_GRIDLOCK], [0, 0.75, 1], {
 		extrapolateLeft: 'clamp',
 		extrapolateRight: 'clamp',
 	});
 	// Snap to the title card late and hard. Ramping it earlier just muddies
 	// the gridlock beat, which should still read as paper.
-	const blackout = interpolate(frame, [B8_TITLE - 3, B8_TITLE + 7], [0, 0.86], {
+	const blackout = interpolate(frame, [B11_TITLE - 3, B11_TITLE + 7], [0, 0.86], {
 		extrapolateLeft: 'clamp',
 		extrapolateRight: 'clamp',
 	});

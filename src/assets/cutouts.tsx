@@ -30,6 +30,9 @@ export const ItParkBuilding = makeCutout('cutouts-alpha/it-park-building.png');
 export const LalbaghGlassHouse = makeCutout('cutouts-alpha/lalbagh-glass-house.png');
 export const NammaMetro = makeCutout('cutouts-alpha/namma-metro.png');
 export const MgRoadSignage = makeCutout('cutouts-alpha/mg-road-signage.png');
+export const PotholeRoad = makeCutout('cutouts-alpha/pothole-road.png');
+export const TrafficSignal = makeCutout('cutouts-alpha/traffic-signal.png');
+export const MasalaDosa = makeCutout('cutouts-alpha/masala-dosa.png');
 
 export type CutoutAsset =
 	| 'vidhana-soudha'
@@ -38,7 +41,10 @@ export type CutoutAsset =
 	| 'it-park-building'
 	| 'lalbagh-glass-house'
 	| 'namma-metro'
-	| 'mg-road-signage';
+	| 'mg-road-signage'
+	| 'pothole-road'
+	| 'traffic-signal'
+	| 'masala-dosa';
 
 export const CUTOUT_REGISTRY: Record<CutoutAsset, React.FC> = {
 	'vidhana-soudha': VidhanaSoudha,
@@ -48,4 +54,7 @@ export const CUTOUT_REGISTRY: Record<CutoutAsset, React.FC> = {
 	'lalbagh-glass-house': LalbaghGlassHouse,
 	'namma-metro': NammaMetro,
 	'mg-road-signage': MgRoadSignage,
+	'pothole-road': PotholeRoad,
+	'traffic-signal': TrafficSignal,
+	'masala-dosa': MasalaDosa,
 };

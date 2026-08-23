@@ -4,10 +4,12 @@ import {CutoutAsset} from '../../assets/cutouts';
  * Where each cutout finally sits in world space, and how big it is there.
  * (0,0) is the centre of the frame at camera scale 1; +Y is down.
  *
- * The layout is a stacked city read bottom-to-top: the auto sits nearest
- * camera and dead centre, deliberately overlapping the assembly building
- * behind it — that occlusion IS the opening joke, so it is a layout
- * decision, not an accident of z-order.
+ * The layout is a stacked city read bottom-to-top. Two placements are
+ * load-bearing for the comedy rather than just composition:
+ *  - the road runs under everything, so the monument is visibly standing on
+ *    broken tarmac;
+ *  - the auto sits nearest camera and dead centre, overlapping the monument,
+ *    stopped at a red light it will never get through.
  */
 export type WorldPlacement = {
 	x: number;
@@ -21,6 +23,9 @@ export type WorldPlacement = {
 	elevation: number;
 };
 
+/** World Y of the road surface the auto's wheels rest on. */
+export const ROAD_SURFACE_Y = 363;
+
 export const WORLD: Record<CutoutAsset, WorldPlacement> = {
 	// Back layer — the metro glides above everything, ignoring the mess below.
 	'namma-metro': {x: -40, y: -880, width: 1500, height: 1125, rotate: -1.5, z: 10, elevation: 0.7},
@@ -28,13 +33,18 @@ export const WORLD: Record<CutoutAsset, WorldPlacement> = {
 	'it-park-building': {x: 320, y: -430, width: 1220, height: 915, rotate: 2.5, z: 20, elevation: 0.85},
 	// Civic centrepiece.
 	'vidhana-soudha': {x: -60, y: -10, width: 1240, height: 930, rotate: 0, z: 30, elevation: 1},
-	// Nearest to camera and dead centre, its roofline cutting across the
-	// monument's steps. It parks here at beat 2 and is still here at the
-	// gridlock freeze — the running gag, so the overlap is deliberate.
-	'auto-rickshaw': {x: -30, y: 230, width: 1010, height: 758, rotate: 0, z: 60, elevation: 1.4},
-	'exhaust-puff': {x: -420, y: 170, width: 380, height: 285, rotate: 0, z: 55, elevation: 0.5},
-	// Garden City, briefly, shouldering in from the lower left.
-	'lalbagh-glass-house': {x: -350, y: 620, width: 1100, height: 825, rotate: -3.5, z: 40, elevation: 1.1},
-	// Signage crowds the lower right.
-	'mg-road-signage': {x: 430, y: 520, width: 760, height: 570, rotate: 4, z: 50, elevation: 1.15},
+	// Garden City, briefly, shouldering in from the left to balance the
+	// tower on the right and fill the void under the metro.
+	'lalbagh-glass-house': {x: -400, y: -330, width: 1100, height: 825, rotate: -3.5, z: 25, elevation: 1.0},
+	// The ground truth, literally: everything above is standing on this.
+	'pothole-road': {x: 0, y: 620, width: 1350, height: 1010, rotate: 0, z: 40, elevation: 0.9},
+	// Signage crowds the right.
+	'mg-road-signage': {x: 470, y: 470, width: 760, height: 570, rotate: 4, z: 45, elevation: 1.15},
+	// Stuck on red, towering over the stopped auto.
+	'traffic-signal': {x: 415, y: 76, width: 900, height: 675, rotate: -1, z: 50, elevation: 1.2},
+	'exhaust-puff': {x: -430, y: 225, width: 380, height: 285, rotate: 0, z: 55, elevation: 0.5},
+	// Nearest to camera, dead centre, blocking the monument. The gag.
+	'auto-rickshaw': {x: -110, y: 155, width: 1010, height: 758, rotate: 0, z: 60, elevation: 1.4},
+	// The one thing this city gets right, arriving calmly amid the wreckage.
+	'masala-dosa': {x: 250, y: 700, width: 820, height: 615, rotate: -2, z: 70, elevation: 1.5},
 };

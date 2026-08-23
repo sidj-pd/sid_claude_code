@@ -37,18 +37,37 @@ const MIN_HOLE_AREA = 400;
 /** Pixels of alpha falloff at the boundary, so edges don't look stair-stepped. */
 const FEATHER = 1.5;
 
-const removeBackground = async (srcPath, outPath) => {
+/**
+ * Per-asset overrides. `inset` (a fraction of the shorter side) ignores a
+ * border region and seeds the fill from inside it instead — needed when the
+ * source art sits on a deckle-edged paper *sheet* that fills the canvas, so
+ * the true backdrop at the very corners is the sheet's edge rather than the
+ * colour surrounding the subject.
+ */
+const OVERRIDES = {
+	'traffic-signal': {inset: 0.1},
+};
+
+const removeBackground = async (srcPath, outPath, options = {}) => {
 	const image = sharp(srcPath).ensureAlpha();
 	const {width, height} = await image.metadata();
 	const raw = await image.raw().toBuffer();
 
-	// Sample the background colour from the four corners (they are reliably
-	// backdrop, never artwork) and average them.
+	// Everything outside this rectangle is treated as background outright,
+	// and the colour sample + flood seeds come from its border.
+	const margin = Math.round(Math.min(width, height) * (options.inset ?? 0));
+	const x0 = margin;
+	const y0 = margin;
+	const x1 = width - 1 - margin;
+	const y1 = height - 1 - margin;
+
+	// Sample the background colour from the four corners of that rectangle
+	// (reliably backdrop, never artwork) and average them.
 	const corners = [
-		[0, 0],
-		[width - 1, 0],
-		[0, height - 1],
-		[width - 1, height - 1],
+		[x0, y0],
+		[x1, y0],
+		[x0, y1],
+		[x1, y1],
 	];
 	let br = 0;
 	let bg = 0;
@@ -74,11 +93,21 @@ const removeBackground = async (srcPath, outPath) => {
 	// are ~4.3M pixels and would blow the call stack).
 	const visited = new Uint8Array(width * height);
 	const stack = [];
-	for (let x = 0; x < width; x++) {
-		stack.push([x, 0], [x, height - 1]);
+	// Anything outside the inset rectangle is background by definition.
+	if (margin > 0) {
+		for (let y = 0; y < height; y++) {
+			for (let x = 0; x < width; x++) {
+				if (x < x0 || x > x1 || y < y0 || y > y1) {
+					visited[y * width + x] = 1;
+				}
+			}
+		}
 	}
-	for (let y = 0; y < height; y++) {
-		stack.push([0, y], [width - 1, y]);
+	for (let x = x0; x <= x1; x++) {
+		stack.push([x, y0], [x, y1]);
+	}
+	for (let y = y0; y <= y1; y++) {
+		stack.push([x0, y], [x1, y]);
 	}
 
 	while (stack.length > 0) {
@@ -168,7 +197,11 @@ const main = async () => {
 	for (const file of files) {
 		const base = file.replace(/\.[^.]+$/, '');
 		const outPath = path.join(OUT_DIR, `${base}.png`);
-		const {width, height, keptRatio} = await removeBackground(path.join(SRC_DIR, file), outPath);
+		const {width, height, keptRatio} = await removeBackground(
+			path.join(SRC_DIR, file),
+			outPath,
+			OVERRIDES[base] ?? {},
+		);
 		console.log(`${base}: ${width}x${height}, kept ${(keptRatio * 100).toFixed(1)}% opaque`);
 	}
 };
