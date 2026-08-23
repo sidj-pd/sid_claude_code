@@ -36,16 +36,16 @@ export const Beat2TheAuto: React.FC = () => {
 
 	return (
 		<PageFlipTransition totalDurationInFrames={DURATION} durationInFrames={FLIP_DURATION}>
-			<AbsoluteFill style={{backgroundColor: '#efe4c8', justifyContent: 'center', alignItems: 'center'}}>
-				<div style={{position: 'relative', width: 420, height: 280, transform: `translateX(${x}px)`}}>
-					<PaperCutout asset="auto-rickshaw" jitter={{stepSize: STEP_SIZE}} />
+			<AbsoluteFill style={{backgroundColor: '#f6f1e6', justifyContent: 'center', alignItems: 'center'}}>
+				<div style={{position: 'relative', width: 520, height: 390, transform: `translateX(${x}px)`}}>
+					<PaperCutout asset="auto-rickshaw" jitter={{stepSize: STEP_SIZE}} textureOpacity={0} />
 					<div
 						style={{
 							position: 'absolute',
-							left: -60,
-							bottom: 40,
-							width: 100,
-							height: 100,
+							left: -80,
+							bottom: 50,
+							width: 130,
+							height: 130,
 							opacity: puffOpacity,
 						}}
 					>

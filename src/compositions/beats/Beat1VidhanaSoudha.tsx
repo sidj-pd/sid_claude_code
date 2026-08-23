@@ -11,11 +11,11 @@ const FLIP_DURATION = 6;
 export const Beat1VidhanaSoudha: React.FC = () => {
 	return (
 		<PageFlipTransition totalDurationInFrames={DURATION} durationInFrames={FLIP_DURATION}>
-			<AbsoluteFill style={{backgroundColor: '#efe4c8', justifyContent: 'center', alignItems: 'center'}}>
-				<div style={{width: 700, height: 580}}>
-					<PaperCutout asset="vidhana-soudha" textureOpacity={0.25} />
+			<AbsoluteFill style={{backgroundColor: '#f6f1e6', justifyContent: 'center', alignItems: 'center'}}>
+				<div style={{width: 920, height: 690}}>
+					<PaperCutout asset="vidhana-soudha" textureOpacity={0} />
 				</div>
-				<NewsprintTexture opacity={0.4} grayscale />
+				<NewsprintTexture opacity={0.08} />
 			</AbsoluteFill>
 		</PageFlipTransition>
 	);

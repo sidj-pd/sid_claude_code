@@ -37,12 +37,13 @@ src/
     RansomHeadlineText.tsx kinetic ransom-note title type
     StampImpact.tsx        title-drop stamp punch effect
   assets/
-    cutouts.tsx             placeholder paper-cutout illustrations (see below)
+    cutouts.tsx             registry mapping each asset key to its image (see below)
   compositions/
     OpeningMontage.tsx       assembles all 5 beats on the timeline
     beats/                   one file per beat from the spec
   Root.tsx                   registers the OpeningMontage composition
 public/
+  cutouts/                   generated paper-cutout art, one JPG per landmark/character
   sfx/                       drop paper-riffle / stamp-thud audio here (see public/sfx/README.md)
 ```
 
@@ -51,13 +52,19 @@ The four reusable primitives (`PaperCutout`, `PageFlipTransition`,
 `NewsprintTexture` are built standalone in `src/components/` so future
 episodes can import them directly.
 
-## Placeholder art
+## Cutout art
 
-`src/assets/cutouts.tsx` currently renders each landmark/character as a flat
-geometric SVG (not the final newsprint-collage art from the asset
-checklist), so the whole montage is playable and timed correctly today.
-To swap in real art: replace a cutout's component body in that file (or
-point `CUTOUT_REGISTRY[key]` at a new component built from layered PNGs) —
+`src/assets/cutouts.tsx` maps each `CutoutAsset` key to a generated image in
+`public/cutouts/` (rendered via Remotion's `<Img>`). Each source image is a
+flat ~4:3 JPG on a plain cream backdrop, no alpha transparency — `PaperCutout`
+displays it with `object-fit: contain` inside whatever box a beat gives it,
+and each beat's own background is picked to closely match the art's backdrop
+so the card reads as a clean torn-paper piece rather than a photo with visible
+edges. Since the art already has its own grain/halftone baked in, every beat
+passes `textureOpacity={0}` to `<PaperCutout>` to avoid double-processing it.
+
+To regenerate or swap an asset: replace the file in `public/cutouts/` (same
+name) or point `CUTOUT_REGISTRY[key]` in `cutouts.tsx` at a new file —
 `<PaperCutout>` and the rest of the pipeline don't need to change.
 
 ## SFX
