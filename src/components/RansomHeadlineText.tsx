@@ -2,6 +2,7 @@ import React from 'react';
 import {interpolate, spring, useCurrentFrame, useVideoConfig} from 'remotion';
 
 export type RansomHeadlineTextProps = {
+	/** Split across multiple lines with "\n". */
 	text: string;
 	/** frames of delay between each letter's entrance */
 	letterStagger?: number;
@@ -39,19 +40,29 @@ export const RansomHeadlineText: React.FC<RansomHeadlineTextProps> = ({
 }) => {
 	const frame = useCurrentFrame();
 	const {fps} = useVideoConfig();
-	const letters = text.split('');
+	const lines = text.split('\n');
+
+	// Stagger runs continuously across lines, so the whole headline reads as
+	// one slam rather than restarting per line.
+	let letterIndex = -1;
 
 	return (
 		<div
 			style={{
 				display: 'flex',
-				flexWrap: 'wrap',
-				justifyContent: 'center',
+				flexDirection: 'column',
 				alignItems: 'center',
 				...style,
 			}}
 		>
-			{letters.map((letter, i) => {
+			{lines.map((line, lineNo) => (
+				<div
+					key={lineNo}
+					style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}
+				>
+					{line.split('').map((letter, colNo) => {
+						letterIndex++;
+						const i = letterIndex;
 				const delay = i * letterStagger;
 				const localFrame = frame - delay;
 
@@ -74,12 +85,12 @@ export const RansomHeadlineText: React.FC<RansomHeadlineTextProps> = ({
 				const translateY = interpolate(entrance, [0, 1], [-60, 0]);
 
 				if (letter === ' ') {
-					return <div key={i} style={{width: fontSize * 0.4}} />;
-				}
+							return <div key={colNo} style={{width: fontSize * 0.4}} />;
+						}
 
 				return (
-					<span
-						key={i}
+							<span
+								key={colNo}
 						style={{
 							display: 'inline-block',
 							fontFamily: font,
@@ -94,11 +105,13 @@ export const RansomHeadlineText: React.FC<RansomHeadlineTextProps> = ({
 							opacity,
 							lineHeight: 1,
 						}}
-					>
-						{letter}
-					</span>
-				);
-			})}
+							>
+								{letter}
+							</span>
+						);
+					})}
+				</div>
+			))}
 		</div>
 	);
 };

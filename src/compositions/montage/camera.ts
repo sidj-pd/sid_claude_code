@@ -38,14 +38,16 @@ const KEYS: CameraKey[] = [
 	{frame: B5_TOWER + 24, focusY: -330, scale: 0.84},
 	{frame: B6_GARDEN, focusY: -420, scale: 0.82},
 	// Beats 6-8 — keep pulling back, because more keeps arriving than fits.
-	{frame: B7_METRO, focusY: -140, scale: 0.77},
-	{frame: B8_BARRICADE, focusY: -300, scale: 0.72},
-	{frame: B9_GRIDLOCK, focusY: -110, scale: 0.68},
+	// It stops short of a full wide: the frame should stay overcrowded to the
+	// end rather than opening up and letting the pile-up breathe.
+	{frame: B7_METRO, focusY: -140, scale: 0.82},
+	{frame: B8_BARRICADE, focusY: -300, scale: 0.79},
+	{frame: B9_GRIDLOCK, focusY: -110, scale: 0.77},
 	// Beat 9 — frozen wide on the jam.
-	{frame: B10_DOSA, focusY: -110, scale: 0.68},
-	{frame: B11_TITLE, focusY: -90, scale: 0.68},
+	{frame: B10_DOSA, focusY: -110, scale: 0.77},
+	{frame: B11_TITLE, focusY: -90, scale: 0.77},
 	// A last, barely-perceptible drift so the title card isn't dead still.
-	{frame: END, focusY: -90, scale: 0.66},
+	{frame: END, focusY: -90, scale: 0.76},
 ];
 
 const sample = (frame: number, field: 'focusY' | 'scale'): number => {
