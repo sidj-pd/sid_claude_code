@@ -3,7 +3,7 @@ import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
 import {CollageBackdrop} from '../components/CollageBackdrop';
 import {CityScene} from './montage/CityScene';
 import {TitleFinale} from './montage/TitleFinale';
-import {B2_ROAD, B8_SIGN, B9_GRIDLOCK, B11_TITLE, END} from './montage/beats';
+import {B2_ROAD, B8_BARRICADE, B9_GRIDLOCK, B11_TITLE, END} from './montage/beats';
 import {cameraAt} from './montage/camera';
 
 export const OPENING_MONTAGE_DURATION_IN_FRAMES = END;
@@ -31,7 +31,7 @@ export const OpeningMontage: React.FC = () => {
 
 	// The backdrop escalates with the pile-up: warmer and brighter while the
 	// city is still behaving, dimmer and closing in once it isn't.
-	const chaos = interpolate(frame, [B2_ROAD, B8_SIGN, B9_GRIDLOCK], [0, 0.75, 1], {
+	const chaos = interpolate(frame, [B2_ROAD, B8_BARRICADE, B9_GRIDLOCK], [0, 0.75, 1], {
 		extrapolateLeft: 'clamp',
 		extrapolateRight: 'clamp',
 	});

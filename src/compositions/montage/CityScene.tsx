@@ -11,6 +11,7 @@ import {
 	B5_TOWER,
 	B6_GARDEN,
 	B7_METRO,
+	B8_BARRICADE,
 	B9_GRIDLOCK,
 	B10_DOSA,
 } from './beats';
@@ -175,10 +176,17 @@ export const CityScene: React.FC<{camera: Camera}> = ({camera}) => {
 		opacity: frame >= B7_METRO ? 1 : 0,
 	};
 
-	// --- Beat 8 is currently an empty slot: the MG Road sign used to drop
-	// here but collided with the signal's pole and read as clutter. The beat
-	// and its camera push are kept so a replacement cutout can drop straight
-	// in at WORLD['mg-road-signage']'s position.
+	// --- Beat 8: roadworks drop in and everything collides. It lands hard
+	// and slightly askew, like it was dumped rather than placed — and then,
+	// like all roadworks here, it simply stays.
+	const barricadePop = usePopIn(frame, {delay: B8_BARRICADE, damping: 8, stiffness: 190});
+	const barricade: Entrance = {
+		dx: interpolate(barricadePop, [0, 1], [180, 0]),
+		dy: interpolate(barricadePop, [0, 1], [-820, 0]),
+		scale: 1,
+		rotate: interpolate(barricadePop, [0, 1], [-9, 0]),
+		opacity: frame >= B8_BARRICADE ? 1 : 0,
+	};
 
 	// --- Beat 10: the dosa. Everything else slammed, erupted or dropped;
 	// this glides in unhurried and lands perfectly. That contrast is the joke.
@@ -195,10 +203,12 @@ export const CityScene: React.FC<{camera: Camera}> = ({camera}) => {
 		opacity: frame >= B10_DOSA ? dosaIn : 0,
 	};
 
-	// Whole-frame impacts: the road landing and the jam locking. (Beat 8's
-	// jolt is parked until a replacement cutout lands there to motivate it —
-	// an unmotivated shake just reads as a glitch.)
-	const jolt = shakeAt(frame, B2_ROAD + 10, 7) + shakeAt(frame, B9_GRIDLOCK, 5.5);
+	// Whole-frame impacts: the road landing, the barricade landing, the jam
+	// locking. Each is motivated by something actually hitting the ground.
+	const jolt =
+		shakeAt(frame, B2_ROAD + 10, 7) +
+		shakeAt(frame, B8_BARRICADE + 7, 6) +
+		shakeAt(frame, B9_GRIDLOCK, 5.5);
 
 	return (
 		<AbsoluteFill style={{transform: `translateY(${jolt}px)`}}>
@@ -207,6 +217,7 @@ export const CityScene: React.FC<{camera: Camera}> = ({camera}) => {
 			<Cutout asset="vidhana-soudha" entrance={soudha} camera={camera} />
 			<Cutout asset="lalbagh-glass-house" entrance={garden} camera={camera} />
 			<Cutout asset="pothole-road" entrance={road} camera={camera} />
+			<Cutout asset="work-barricade" entrance={barricade} camera={camera} />
 			<Cutout asset="traffic-signal" entrance={signal} camera={camera} />
 			<Cutout asset="exhaust-puff" entrance={puff} camera={camera} />
 			<Cutout asset="auto-rickshaw" entrance={auto} camera={camera} />

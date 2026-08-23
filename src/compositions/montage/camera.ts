@@ -7,7 +7,7 @@ import {
 	B5_TOWER,
 	B6_GARDEN,
 	B7_METRO,
-	B8_SIGN,
+	B8_BARRICADE,
 	B9_GRIDLOCK,
 	B10_DOSA,
 	B11_TITLE,
@@ -39,7 +39,7 @@ const KEYS: CameraKey[] = [
 	{frame: B6_GARDEN, focusY: -420, scale: 0.82},
 	// Beats 6-8 — keep pulling back, because more keeps arriving than fits.
 	{frame: B7_METRO, focusY: -140, scale: 0.77},
-	{frame: B8_SIGN, focusY: -300, scale: 0.72},
+	{frame: B8_BARRICADE, focusY: -300, scale: 0.72},
 	{frame: B9_GRIDLOCK, focusY: -110, scale: 0.68},
 	// Beat 9 — frozen wide on the jam.
 	{frame: B10_DOSA, focusY: -110, scale: 0.68},
