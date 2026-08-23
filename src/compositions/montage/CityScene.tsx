@@ -11,7 +11,6 @@ import {
 	B5_TOWER,
 	B6_GARDEN,
 	B7_METRO,
-	B8_SIGN,
 	B9_GRIDLOCK,
 	B10_DOSA,
 } from './beats';
@@ -176,15 +175,10 @@ export const CityScene: React.FC<{camera: Camera}> = ({camera}) => {
 		opacity: frame >= B7_METRO ? 1 : 0,
 	};
 
-	// --- Beat 8: the sign drops hard and everything collides.
-	const signPop = usePopIn(frame, {delay: B8_SIGN, damping: 8, stiffness: 190});
-	const sign: Entrance = {
-		dx: 0,
-		dy: interpolate(signPop, [0, 1], [-1000, 0]),
-		scale: 1,
-		rotate: interpolate(signPop, [0, 1], [-11, 0]),
-		opacity: frame >= B8_SIGN ? 1 : 0,
-	};
+	// --- Beat 8 is currently an empty slot: the MG Road sign used to drop
+	// here but collided with the signal's pole and read as clutter. The beat
+	// and its camera push are kept so a replacement cutout can drop straight
+	// in at WORLD['mg-road-signage']'s position.
 
 	// --- Beat 10: the dosa. Everything else slammed, erupted or dropped;
 	// this glides in unhurried and lands perfectly. That contrast is the joke.
@@ -201,9 +195,10 @@ export const CityScene: React.FC<{camera: Camera}> = ({camera}) => {
 		opacity: frame >= B10_DOSA ? dosaIn : 0,
 	};
 
-	// Whole-frame impacts: the road landing, the sign landing, the jam locking.
-	const jolt =
-		shakeAt(frame, B2_ROAD + 10, 7) + shakeAt(frame, B8_SIGN + 8, 6) + shakeAt(frame, B9_GRIDLOCK, 5.5);
+	// Whole-frame impacts: the road landing and the jam locking. (Beat 8's
+	// jolt is parked until a replacement cutout lands there to motivate it —
+	// an unmotivated shake just reads as a glitch.)
+	const jolt = shakeAt(frame, B2_ROAD + 10, 7) + shakeAt(frame, B9_GRIDLOCK, 5.5);
 
 	return (
 		<AbsoluteFill style={{transform: `translateY(${jolt}px)`}}>
@@ -212,7 +207,6 @@ export const CityScene: React.FC<{camera: Camera}> = ({camera}) => {
 			<Cutout asset="vidhana-soudha" entrance={soudha} camera={camera} />
 			<Cutout asset="lalbagh-glass-house" entrance={garden} camera={camera} />
 			<Cutout asset="pothole-road" entrance={road} camera={camera} />
-			<Cutout asset="mg-road-signage" entrance={sign} camera={camera} />
 			<Cutout asset="traffic-signal" entrance={signal} camera={camera} />
 			<Cutout asset="exhaust-puff" entrance={puff} camera={camera} />
 			<Cutout asset="auto-rickshaw" entrance={auto} camera={camera} />

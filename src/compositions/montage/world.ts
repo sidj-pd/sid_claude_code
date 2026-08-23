@@ -38,7 +38,9 @@ export const WORLD: Record<CutoutAsset, WorldPlacement> = {
 	'lalbagh-glass-house': {x: -400, y: -330, width: 1100, height: 825, rotate: -3.5, z: 25, elevation: 1.0},
 	// The ground truth, literally: everything above is standing on this.
 	'pothole-road': {x: 0, y: 620, width: 1350, height: 1010, rotate: 0, z: 40, elevation: 0.9},
-	// Signage crowds the right.
+	// Retired from the montage - it collided with the signal's pole and read
+	// as clutter rather than a beat. Kept registered so the slot at roughly
+	// (470, 470) can take a replacement cutout.
 	'mg-road-signage': {x: 470, y: 470, width: 760, height: 570, rotate: 4, z: 45, elevation: 1.15},
 	// Stuck on red, towering over the stopped auto.
 	'traffic-signal': {x: 415, y: 76, width: 900, height: 675, rotate: -1, z: 50, elevation: 1.2},
@@ -46,5 +48,6 @@ export const WORLD: Record<CutoutAsset, WorldPlacement> = {
 	// Nearest to camera, dead centre, blocking the monument. The gag.
 	'auto-rickshaw': {x: -110, y: 155, width: 1010, height: 758, rotate: 0, z: 60, elevation: 1.4},
 	// The one thing this city gets right, arriving calmly amid the wreckage.
-	'masala-dosa': {x: 250, y: 700, width: 820, height: 615, rotate: -2, z: 70, elevation: 1.5},
+	// Sits low and left, resting on the broken road.
+	'masala-dosa': {x: -290, y: 690, width: 820, height: 615, rotate: -2, z: 70, elevation: 1.5},
 };
