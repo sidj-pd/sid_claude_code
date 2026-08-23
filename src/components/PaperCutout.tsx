@@ -16,6 +16,12 @@ export type PaperCutoutProps = {
 	 * cutout hops/jitters like an animator nudged it between shots.
 	 */
 	jitter?: {stepSize: number; amplitudeDeg?: number};
+	/**
+	 * Relative shadow strength, used to sell depth when a cutout is layered
+	 * against others — a receded background piece should cast a tighter,
+	 * fainter shadow than one currently in the foreground. 1 = default.
+	 */
+	elevation?: number;
 };
 
 /**
@@ -29,6 +35,7 @@ export const PaperCutout: React.FC<PaperCutoutProps> = ({
 	textureOpacity = 0.35,
 	grayscale = false,
 	jitter,
+	elevation = 1,
 }) => {
 	const frame = useCurrentFrame();
 	const Illustration = CUTOUT_REGISTRY[asset];
@@ -48,7 +55,7 @@ export const PaperCutout: React.FC<PaperCutoutProps> = ({
 			style={{
 				position: 'relative',
 				transform: jitter ? `rotate(${jitterRotation}deg)` : undefined,
-				filter: 'drop-shadow(0 6px 10px rgba(0,0,0,0.25))',
+				filter: `drop-shadow(0 ${6 * elevation}px ${12 * elevation}px rgba(0,0,0,${Math.min(0.45, 0.22 * elevation)}))`,
 				...style,
 			}}
 		>
