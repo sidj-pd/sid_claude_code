@@ -8,6 +8,12 @@ export type RansomHeadlineTextProps = {
 	letterStagger?: number;
 	fontSize?: number;
 	style?: React.CSSProperties;
+	/**
+	 * Overrides the composition frame. Needed when the headline lives inside
+	 * something that appears partway through a shot (a speech bubble, a stat
+	 * card) and its stagger should run from that arrival, not from frame 0.
+	 */
+	frame?: number;
 };
 
 const FONTS = [
@@ -37,8 +43,10 @@ export const RansomHeadlineText: React.FC<RansomHeadlineTextProps> = ({
 	letterStagger = 2,
 	fontSize = 64,
 	style,
+	frame: frameOverride,
 }) => {
-	const frame = useCurrentFrame();
+	const currentFrame = useCurrentFrame();
+	const frame = frameOverride ?? currentFrame;
 	const {fps} = useVideoConfig();
 	const lines = text.split('\n');
 
