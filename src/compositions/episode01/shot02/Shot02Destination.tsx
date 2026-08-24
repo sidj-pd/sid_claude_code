@@ -99,38 +99,41 @@ export const Shot02Destination: React.FC = () => {
 					<PaperCutout asset="passenger-leaning" textureOpacity={0} elevation={1.4} />
 				</div>
 
-				{/* the destination — tail down-left toward the passenger's head */}
+				{/* the destination — sits directly over the passenger's head with
+				    the tail dropping straight down onto it */}
 				{frame >= BUBBLE_IN ? (
 					<div
 						style={{
 							position: 'absolute',
 							left: '50%',
 							top: '50%',
-							marginLeft: -360,
-							transform: `translate(280px, -760px) scale(${bubblePop})`,
-							transformOrigin: '35% 100%',
+							marginLeft: -340,
+							transform: `translate(152px, -600px) scale(${bubblePop})`,
+							transformOrigin: '50% 100%',
 							zIndex: 60,
 						}}
 					>
-						<SpeechBubble text="WHITEFIELD" width={720} height={470} fontSize={76} tailAngle={118} />
+						<SpeechBubble text="WHITEFIELD" width={680} height={400} fontSize={72} tailAngle={90} />
 					</div>
 				) : null}
 
-				{/* the driver's answer — smaller, on his side of frame, tail
-				    leaning the other way so the two read as a exchange */}
+				{/* the driver's answer — in the empty air above the auto, tail
+				    dropping down-left onto him. Sized and lifted to clear the
+				    passenger's bubble entirely; two balloons overlapping reads as
+				    a layout accident rather than an exchange. */}
 				{frame >= OK_IN ? (
 					<div
 						style={{
 							position: 'absolute',
 							left: '50%',
 							top: '50%',
-							marginLeft: -190,
-							transform: `translate(-330px, -430px) scale(${okPop})`,
-							transformOrigin: '65% 100%',
+							marginLeft: -180,
+							transform: `translate(-310px, -850px) scale(${okPop})`,
+							transformOrigin: '50% 100%',
 							zIndex: 60,
 						}}
 					>
-						<SpeechBubble text="OK" width={380} height={300} fontSize={104} tailAngle={62} flip />
+						<SpeechBubble text="OK" width={360} height={290} fontSize={100} tailAngle={118} />
 					</div>
 				) : null}
 			</AbsoluteFill>
