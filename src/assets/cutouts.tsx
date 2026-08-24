@@ -37,6 +37,11 @@ export const WorkBarricade = makeCutout('cutouts-alpha/work-barricade.png');
 export const HailingHand = makeCutout('cutouts-alpha/hailing-hand.png');
 export const AutoDriver34 = makeCutout('cutouts-alpha/auto-driver-34.png');
 export const PassengerLeaning = makeCutout('cutouts-alpha/passenger-leaning.png');
+export const DriverHandReach = makeCutout('cutouts-alpha/driver-hand-reach.png');
+// Derived from auto-meter.jpg by scripts/split-meter.mjs, so the flag lever
+// can rotate independently of the housing.
+export const AutoMeterBody = makeCutout('cutouts-alpha/auto-meter-body.png');
+export const AutoMeterLever = makeCutout('cutouts-alpha/auto-meter-lever.png');
 
 export type CutoutAsset =
 	| 'vidhana-soudha'
@@ -52,7 +57,10 @@ export type CutoutAsset =
 	| 'work-barricade'
 	| 'hailing-hand'
 	| 'auto-driver-34'
-	| 'passenger-leaning';
+	| 'passenger-leaning'
+	| 'driver-hand-reach'
+	| 'auto-meter-body'
+	| 'auto-meter-lever';
 
 export const CUTOUT_REGISTRY: Record<CutoutAsset, React.FC> = {
 	'vidhana-soudha': VidhanaSoudha,
@@ -69,4 +77,7 @@ export const CUTOUT_REGISTRY: Record<CutoutAsset, React.FC> = {
 	'hailing-hand': HailingHand,
 	'auto-driver-34': AutoDriver34,
 	'passenger-leaning': PassengerLeaning,
+	'driver-hand-reach': DriverHandReach,
+	'auto-meter-body': AutoMeterBody,
+	'auto-meter-lever': AutoMeterLever,
 };

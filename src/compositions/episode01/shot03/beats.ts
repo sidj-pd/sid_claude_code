@@ -18,13 +18,23 @@ export const REACH_STARTS = 4;
 export const FLIP_FRAME = 13;
 /** The click lands on contact; the meter reads a fare a beat later. */
 export const FARE_APPEARS = FLIP_FRAME + 7;
-/** The hand withdraws as unremarkably as it arrived. */
-export const HAND_LEAVES = 34;
+/**
+ * The hand withdraws as unremarkably as it arrived, and soon — once the flag
+ * is over, a hand still hovering by a lever it is no longer touching reads as
+ * a mistake rather than as a beat.
+ */
+export const HAND_LEAVES = 22;
 
 /** VO runs from the top and finishes inside the shot. */
 export const VO_STARTS = 0;
 
-export const SHOT_03_DURATION = 110;
+/**
+ * 168 frames = 5.6s. Set by the voice-over, which runs 5.12s: per the TTS
+ * pipeline notes, a line that does not fit means lengthening the shot, never
+ * time-stretching the take. The flip still happens in the first half-second —
+ * everything after it is the narrator catching up to something already done.
+ */
+export const SHOT_03_DURATION = 168;
 
 /** Frames per stepped pose in the reach. Chunky, matching the series. */
 export const REACH_STEP = 4;

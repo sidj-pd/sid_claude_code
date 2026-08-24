@@ -2,11 +2,9 @@ import React from 'react';
 import {AbsoluteFill, Audio, Easing, Sequence, interpolate, staticFile, useCurrentFrame} from 'remotion';
 import {CollageBackdrop} from '../../../components/CollageBackdrop';
 import {PaperCutout} from '../../../components/PaperCutout';
-import {SPEECH_FONT} from '../../../components/fonts';
 import {useStopMotionStep} from '../../../components/useStopMotionStep';
 import {shakeAt} from '../../montage/camera';
 import {
-	FARE_APPEARS,
 	FLIP_FRAME,
 	HAND_LEAVES,
 	REACH_STARTS,
@@ -14,9 +12,23 @@ import {
 	SHOT_03_DURATION,
 	VO_STARTS,
 } from './beats';
-import {PlaceholderDriverHand, PlaceholderLever, PlaceholderMeter} from './placeholders';
 
 const CLAMP = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
+
+/**
+ * Where the lever sits inside the meter cutout, and where its pivot sits
+ * inside the lever crop. Both are reported by scripts/split-meter.mjs when it
+ * cuts the two layers, so if the source art is ever re-keyed these come
+ * straight from its output rather than being re-guessed by eye.
+ */
+const LEVER_BOX = {left: '58.9%', top: '17.6%', width: '38.0%', height: '35.3%'};
+const LEVER_PIVOT = '11.3% 93.2%';
+/**
+ * The arm is drawn pointing up-right at about 71° above horizontal. Swinging
+ * it 95° clockwise brings it to roughly 24° BELOW horizontal — a flag that has
+ * gone properly over its stop, not one merely nudged to level.
+ */
+const LEVER_THROW = 95;
 
 /**
  * Shot 3 — the instant yes.
@@ -25,10 +37,10 @@ const CLAMP = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
  * that the meter is the subject. The hand comes in from the left, on the
  * driver's side of the geography the previous shots established.
  *
- * Nothing here is allowed to look deliberated. The reach is three stepped
- * poses and the lever goes over in two — no easing into contact, no
- * anticipation, no settle. It is done before the audience has finished
- * expecting an argument.
+ * Nothing here is allowed to look deliberated. The reach is stepped and the
+ * lever goes over in two positions — no easing into contact, no anticipation,
+ * no settle. It is done before the audience has finished expecting an
+ * argument, and the rest of the shot is the narrator catching up.
  */
 export const Shot03InstantYes: React.FC = () => {
 	const frame = useCurrentFrame();
@@ -42,25 +54,20 @@ export const Shot03InstantYes: React.FC = () => {
 		CLAMP,
 	);
 	// After the flip the hand simply goes back the way it came.
-	const withdraw = interpolate(frame, [HAND_LEAVES, HAND_LEAVES + 14], [0, 1], {
+	const withdraw = interpolate(frame, [HAND_LEAVES, HAND_LEAVES + 16], [0, 1], {
 		...CLAMP,
 		easing: Easing.in(Easing.quad),
 	});
-	const handX = interpolate(reachIn, [0, 1], [-780, 0]) - withdraw * 820;
+	const handX = interpolate(reachIn, [0, 1], [1000, 0]) + withdraw * 1050;
 	const handVisible = frame >= REACH_STARTS && withdraw < 1;
 
 	// --- The lever: two positions, up then over. Never in between.
-	const leverDown = frame >= FLIP_FRAME;
-	const leverAngle = leverDown ? 78 : 0;
-	// A tiny recoil on the housing as the lever hits its stop.
-	const meterKnock = shakeAt(frame, FLIP_FRAME, 2.6);
-
-	// --- The fare appears in one jump, not a count-up. A meter that rolls
-	// up to a number implies elapsed time; this one was simply started.
-	const fareVisible = frame >= FARE_APPEARS;
+	const leverAngle = frame >= FLIP_FRAME ? LEVER_THROW : 0;
+	// A small recoil on the housing as the flag hits its stop.
+	const meterKnock = shakeAt(frame, FLIP_FRAME, 2.2);
 
 	// --- Barely any camera. The joke is that nothing dramatic happens.
-	const push = interpolate(frame, [0, SHOT_03_DURATION], [1, 1.06], CLAMP);
+	const push = interpolate(frame, [0, SHOT_03_DURATION], [1, 1.07], CLAMP);
 	const jolt = shakeAt(frame, FLIP_FRAME, 3);
 
 	return (
@@ -90,82 +97,65 @@ export const Shot03InstantYes: React.FC = () => {
 					<PaperCutout asset="auto-driver-34" textureOpacity={0} elevation={0.5} />
 				</div>
 
-				{/* the meter housing */}
+				{/* the meter, housing and lever as separate layers */}
 				<div
 					style={{
 						position: 'absolute',
 						left: '50%',
 						top: '50%',
-						width: 720,
-						height: 583,
-						marginLeft: -360,
-						marginTop: -291,
-						transform: `translate(60px, -40px) rotate(${meterKnock}deg)`,
-						transformOrigin: '50% 90%',
-						filter: 'drop-shadow(0 6px 12px rgba(48,34,18,0.4))',
+						width: 760,
+						height: 1362,
+						marginLeft: -380,
+						marginTop: -681,
+						transform: `translate(-120px, 40px) rotate(${meterKnock}deg)`,
+						transformOrigin: '50% 85%',
 						zIndex: 20,
 					}}
 				>
-					<PlaceholderMeter />
+					<PaperCutout asset="auto-meter-body" textureOpacity={0} elevation={1.1} />
 
-					{/* the fare, snapping straight to a base reading */}
-					{fareVisible ? (
-						<div
-							style={{
-								position: 'absolute',
-								left: '26.5%',
-								top: '33%',
-								width: '47%',
-								height: '28%',
-								display: 'flex',
-								alignItems: 'center',
-								justifyContent: 'center',
-								fontFamily: SPEECH_FONT,
-								fontSize: 92,
-								color: '#22201b',
-								letterSpacing: 2,
-							}}
-						>
-							30
-						</div>
-					) : null}
-
-					{/* the flag lever, pivoting about its mount */}
 					<div
 						style={{
 							position: 'absolute',
-							left: '76%',
-							top: '20%',
-							width: 300,
-							height: 75,
-							transform: `rotate(${-42 + leverAngle}deg)`,
-							transformOrigin: '5% 50%',
+							...LEVER_BOX,
+							transform: `rotate(${leverAngle}deg)`,
+							transformOrigin: LEVER_PIVOT,
 						}}
 					>
-						<PlaceholderLever />
+						<PaperCutout asset="auto-meter-lever" textureOpacity={0} elevation={1.2} />
 					</div>
 				</div>
 
-				{/* the driver's hand, in from the left */}
+				{/* The driver's hand, in from the RIGHT and mirrored. The flag sits
+				    on the meter's right side, so a hand entering from the left has
+				    to cross the whole housing to reach it and covers the readout on
+				    the way — the one thing the shot exists to show. Coming from the
+				    flag's own side reaches it directly, and matches where a driver
+				    actually sits relative to the meter. */}
 				{handVisible ? (
 					<div
 						style={{
 							position: 'absolute',
 							left: '50%',
 							top: '50%',
-							width: 940,
-							height: 455,
-							marginLeft: -470,
-							marginTop: -227,
-							transform: `translate(${handX - 300}px, -150px)`,
-							filter: 'drop-shadow(0 8px 16px rgba(48,34,18,0.4))',
-							zIndex: 40,
+							width: 1320,
+							height: 986,
+							marginLeft: -660,
+							marginTop: -493,
+								transform: `translate(${handX + 560}px, -280px) scaleX(-1)`,
+								zIndex: 40,
 						}}
 					>
-						<PlaceholderDriverHand />
+						<PaperCutout asset="driver-hand-reach" textureOpacity={0} elevation={1.5} />
 					</div>
 				) : null}
 			</AbsoluteFill>
+
+			{/* The click lands exactly on contact — synthesised rather than
+			    recorded, see scripts/sfx.py. */}
+			<Sequence from={FLIP_FRAME}>
+				<Audio src={staticFile('sfx/meter-click.wav')} volume={0.85} />
+			</Sequence>
 
 			<Sequence from={VO_STARTS}>
 				<Audio src={staticFile('vo/ep01-shot03.wav')} />
