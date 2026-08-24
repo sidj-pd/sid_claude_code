@@ -2,9 +2,9 @@ import React from 'react';
 import {AbsoluteFill, Easing, interpolate, useCurrentFrame} from 'remotion';
 import {CollageBackdrop} from '../../../components/CollageBackdrop';
 import {PaperCutout} from '../../../components/PaperCutout';
-import {RansomSpeechBubble} from '../../../components/RansomSpeechBubble';
+import {SpeechBubble} from '../../../components/SpeechBubble';
 import {usePopIn} from '../../../components/usePopIn';
-import {BUBBLE_IN, HOLD_BEGINS, LEAN_SETTLES} from './beats';
+import {BUBBLE_IN, HOLD_BEGINS, LEAN_SETTLES, OK_IN, SHOT_02_DURATION} from './beats';
 
 /**
  * Shot 2 — the destination.
@@ -28,13 +28,15 @@ export const Shot02Destination: React.FC = () => {
 	const leanRotate = interpolate(lean, [0, 1], [0, -6]);
 	const leanShift = interpolate(lean, [0, 1], [40, 0]);
 
-	// The bubble tears on with a springy overshoot rather than fading in —
-	// paper arrives, it doesn't dissolve.
+	// Bubbles pop on with a springy overshoot rather than fading in — paper
+	// arrives, it doesn't dissolve. The driver's answer is stiffer and less
+	// damped than the question: it snaps rather than settles.
 	const bubblePop = usePopIn(frame, {delay: BUBBLE_IN, damping: 10, stiffness: 210});
+	const okPop = usePopIn(frame, {delay: OK_IN, damping: 8, stiffness: 320});
 
 	// A very slow creep inward through the hold. Almost subliminal, but a
 	// completely frozen frame reads as a still rather than as tension.
-	const creep = interpolate(frame, [HOLD_BEGINS, 120], [1, 1.035], {
+	const creep = interpolate(frame, [HOLD_BEGINS, SHOT_02_DURATION], [1, 1.04], {
 		extrapolateLeft: 'clamp',
 		extrapolateRight: 'clamp',
 	});
@@ -97,20 +99,38 @@ export const Shot02Destination: React.FC = () => {
 					<PaperCutout asset="passenger-leaning" textureOpacity={0} elevation={1.4} />
 				</div>
 
-				{/* the destination, in clipped newsprint */}
+				{/* the destination — tail down-left toward the passenger's head */}
 				{frame >= BUBBLE_IN ? (
 					<div
 						style={{
 							position: 'absolute',
 							left: '50%',
 							top: '50%',
-							marginLeft: -430,
-							transform: `translate(150px, -650px) scale(${bubblePop})`,
-							transformOrigin: 'bottom left',
+							marginLeft: -360,
+							transform: `translate(280px, -760px) scale(${bubblePop})`,
+							transformOrigin: '35% 100%',
 							zIndex: 60,
 						}}
 					>
-						<RansomSpeechBubble text="WHITEFIELD" frame={frame - BUBBLE_IN} fontSize={78} tailAt={0.62} />
+						<SpeechBubble text="WHITEFIELD" width={720} height={470} fontSize={76} tailAngle={118} />
+					</div>
+				) : null}
+
+				{/* the driver's answer — smaller, on his side of frame, tail
+				    leaning the other way so the two read as a exchange */}
+				{frame >= OK_IN ? (
+					<div
+						style={{
+							position: 'absolute',
+							left: '50%',
+							top: '50%',
+							marginLeft: -190,
+							transform: `translate(-330px, -430px) scale(${okPop})`,
+							transformOrigin: '65% 100%',
+							zIndex: 60,
+						}}
+					>
+						<SpeechBubble text="OK" width={380} height={300} fontSize={104} tailAngle={62} flip />
 					</div>
 				) : null}
 			</AbsoluteFill>

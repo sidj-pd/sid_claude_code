@@ -1,6 +1,6 @@
 import React from 'react';
 import {interpolate, spring, useCurrentFrame, useVideoConfig} from 'remotion';
-import {RANSOM_FONTS, loadRansomFonts} from './ransomFonts';
+import {RANSOM_FONTS} from './fonts';
 
 export type RansomHeadlineTextProps = {
 	/** Split across multiple lines with "\n". */
@@ -40,7 +40,6 @@ export const RansomHeadlineText: React.FC<RansomHeadlineTextProps> = ({
 	style,
 	frame: frameOverride,
 }) => {
-	loadRansomFonts();
 	const currentFrame = useCurrentFrame();
 	const frame = frameOverride ?? currentFrame;
 	const {fps} = useVideoConfig();
