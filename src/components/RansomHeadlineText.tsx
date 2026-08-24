@@ -1,5 +1,6 @@
 import React from 'react';
 import {interpolate, spring, useCurrentFrame, useVideoConfig} from 'remotion';
+import {RANSOM_FONTS, loadRansomFonts} from './ransomFonts';
 
 export type RansomHeadlineTextProps = {
 	/** Split across multiple lines with "\n". */
@@ -16,13 +17,7 @@ export type RansomHeadlineTextProps = {
 	frame?: number;
 };
 
-const FONTS = [
-	'Georgia, serif',
-	'Impact, "Arial Narrow", sans-serif',
-	'"Courier New", monospace',
-	'"Times New Roman", serif',
-	'"Arial Black", sans-serif',
-];
+const FONTS = RANSOM_FONTS;
 
 const TILE_COLORS = ['#efe4c8', '#e7d9b8', '#f3ead2', '#ddcda3'];
 
@@ -45,6 +40,7 @@ export const RansomHeadlineText: React.FC<RansomHeadlineTextProps> = ({
 	style,
 	frame: frameOverride,
 }) => {
+	loadRansomFonts();
 	const currentFrame = useCurrentFrame();
 	const frame = frameOverride ?? currentFrame;
 	const {fps} = useVideoConfig();
@@ -82,7 +78,9 @@ export const RansomHeadlineText: React.FC<RansomHeadlineTextProps> = ({
 
 				const rotation = seededUnit(i + 1) * 4;
 				const sizeJitter = 1 + seededUnit(i + 7) * 0.15;
-				const font = FONTS[i % FONTS.length];
+				// Seeded rather than sequential: a strict cycle through six faces
+				// produces a visible repeating rhythm across a long word.
+				const font = FONTS[Math.abs(Math.round(seededUnit(i + 19) * 1000)) % FONTS.length];
 				const bg = TILE_COLORS[i % TILE_COLORS.length];
 
 				const scale = interpolate(entrance, [0, 1], [2.4, 1]);

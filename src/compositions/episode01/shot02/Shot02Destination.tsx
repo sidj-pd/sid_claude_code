@@ -5,7 +5,6 @@ import {PaperCutout} from '../../../components/PaperCutout';
 import {RansomSpeechBubble} from '../../../components/RansomSpeechBubble';
 import {usePopIn} from '../../../components/usePopIn';
 import {BUBBLE_IN, HOLD_BEGINS, LEAN_SETTLES} from './beats';
-import {PlaceholderPassenger} from './PlaceholderPassenger';
 
 /**
  * Shot 2 — the destination.
@@ -86,17 +85,16 @@ export const Shot02Destination: React.FC = () => {
 						position: 'absolute',
 						left: '50%',
 						top: '50%',
-						width: 620,
-						height: 1215,
-						marginLeft: -310,
-						marginTop: -607,
-						transform: `translate(${300 + leanShift}px, 250px) rotate(${leanRotate}deg)`,
+						width: 1500,
+						height: 1120,
+						marginLeft: -750,
+						marginTop: -560,
+						transform: `translate(${250 + leanShift}px, 235px) rotate(${leanRotate}deg)`,
 						transformOrigin: 'bottom center',
-						filter: 'drop-shadow(0 10px 20px rgba(48,34,18,0.35))',
 						zIndex: 40,
 					}}
 				>
-					<PlaceholderPassenger />
+					<PaperCutout asset="passenger-leaning" textureOpacity={0} elevation={1.4} />
 				</div>
 
 				{/* the destination, in clipped newsprint */}
@@ -107,12 +105,12 @@ export const Shot02Destination: React.FC = () => {
 							left: '50%',
 							top: '50%',
 							marginLeft: -430,
-							transform: `translate(150px, -600px) scale(${bubblePop})`,
+							transform: `translate(150px, -650px) scale(${bubblePop})`,
 							transformOrigin: 'bottom left',
 							zIndex: 60,
 						}}
 					>
-						<RansomSpeechBubble text="WHITEFIELD" frame={frame - BUBBLE_IN} fontSize={78} tailAt={0.3} />
+						<RansomSpeechBubble text="WHITEFIELD" frame={frame - BUBBLE_IN} fontSize={78} tailAt={0.62} />
 					</div>
 				) : null}
 			</AbsoluteFill>

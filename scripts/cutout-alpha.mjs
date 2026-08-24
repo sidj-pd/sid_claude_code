@@ -53,6 +53,11 @@ const OVERRIDES = {
 	// Carries a soft grey drop shadow baked onto the cream; the default
 	// tolerance stops at the shadow's edge and leaves it as a halo.
 	'hailing-hand': {tolerance: 72},
+	// Sits on a paper sheet whose edges leave thin vertical seams, and has a
+	// soft ground shadow under the feet. Both are only just darker than the
+	// backdrop, so a wider tolerance takes them; the figure's own tones
+	// (mustard bag, skin) are far enough off cream to survive it.
+	'passenger-leaning': {tolerance: 60},
 };
 
 const removeBackground = async (srcPath, outPath, options = {}) => {
