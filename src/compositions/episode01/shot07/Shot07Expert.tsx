@@ -5,7 +5,6 @@ import {
 	Freeze,
 	Sequence,
 	interpolate,
-	staticFile,
 	useCurrentFrame,
 } from 'remotion';
 import {Chyron} from '../../../components/Chyron';
@@ -16,11 +15,10 @@ import {
 	A1_STARTS,
 	A2_FRAMES,
 	A2_STARTS,
-	A3_FRAMES,
-	A3_STARTS,
-	A4_FRAMES,
-	A4_STARTS,
 	CHYRON_IN,
+	CORR_CUTAWAY_FRAMES,
+	CORR_CUTAWAY_SRC_IN,
+	CORR_CUTAWAY_STARTS,
 	Q_STARTS,
 	WHITEBOARD_IN,
 	WHITEBOARD_OUT,
@@ -30,17 +28,17 @@ const CLAMP = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
 
 const EXPERT_DESCRIPTION =
 	'Dr. Ramamurthy at his office desk.\nVertical, photoreal, with its own dialogue.';
+const CORR_DESCRIPTION =
+	'Correspondent on the other end of the call.\nVertical, photoreal, with its own dialogue.';
 
 /**
- * Where the background whiteboard sits in frame, as a fraction of it — a
- * GUESS, because the clips do not exist yet. The visual prompt asks the
- * generated footage to include "a whiteboard with a few hand-drawn arrows"
- * behind him, so the cutaway on the kicker line is a punch-in on that
- * existing set dressing rather than a fifth clip. Once a real clip lands,
- * eyeball where the whiteboard actually is and correct this — it is the only
- * number in this shot that cannot be measured off audio.
+ * Where the background whiteboard sits in frame, as a fraction of it —
+ * measured directly off the delivered clip rather than guessed: the board
+ * sits upper-right, roughly 70-100% across and 20-58% down, so the crop
+ * centres a little inside that box to keep it from pushing past the frame's
+ * right edge once scaled up.
  */
-const WHITEBOARD_CROP = {x: 0.72, y: 0.28, zoom: 2.3};
+const WHITEBOARD_CROP = {x: 0.82, y: 0.38, zoom: 2.1};
 
 /**
  * Shot 7 — The Expert.
@@ -50,11 +48,13 @@ const WHITEBOARD_CROP = {x: 0.72, y: 0.28, zoom: 2.3};
  * a change we already made once.
  *
  * The joke is entirely in the gap between his confidence and what is true.
- * Nothing here editorialises against him — no reaction shot, no ironic
- * music cue — because the confidence is funnier played straight. The one
- * thing that undercuts him is diegetic: the punch-in on his own whiteboard
- * mid-kicker, where the arrows connecting his three exhibits demonstrably do
- * not connect to anything.
+ * Nothing here editorialises against him — no ironic music cue, no cutaway
+ * that mocks him — because the confidence is funnier played straight. Two
+ * things quietly undercut him instead: the correspondent's cutaway (a
+ * professional just listening, no reaction either way) breaks up what would
+ * otherwise be one long take of a man convincing himself, and the punch-in on
+ * his own whiteboard mid-kicker, where the arrows connecting his exhibits
+ * demonstrably do not connect to anything.
  */
 export const Shot07Expert: React.FC = () => {
 	const frame = useCurrentFrame();
@@ -66,8 +66,6 @@ export const Shot07Expert: React.FC = () => {
 		{...CLAMP, easing: Easing.inOut(Easing.cubic)},
 	);
 	const scale = interpolate(whiteboardPush, [0, 1], [1, WHITEBOARD_CROP.zoom]);
-	const originX = WHITEBOARD_CROP.x * 100;
-	const originY = WHITEBOARD_CROP.y * 100;
 
 	return (
 		<AbsoluteFill style={{backgroundColor: '#0c0e11'}}>
@@ -80,26 +78,33 @@ export const Shot07Expert: React.FC = () => {
 				</Freeze>
 			</Sequence>
 
-			{/* Four lines, four clips, cut together like a real interview rather
-			    than held as one continuous take. The whiteboard punch-in lives
-			    inside the fourth Sequence, scoped to the kicker alone. */}
+			{/* Clip 1 — both of his first two lines, one continuous take. */}
 			<Sequence from={A1_STARTS} durationInFrames={A1_FRAMES}>
 				<Footage id="ep01-expert-1" description={EXPERT_DESCRIPTION} />
 			</Sequence>
+
+			{/* The correspondent, cut away to mid-answer — a few seconds reused
+			    out of the middle of his own Shot 6 clip, where he is simply
+			    listening rather than speaking. A real second camera on him would
+			    say the same thing at ten times the cost. */}
+			<Sequence from={CORR_CUTAWAY_STARTS} durationInFrames={CORR_CUTAWAY_FRAMES}>
+				<Footage
+					id="ep01-correspondent-q"
+					description={CORR_DESCRIPTION}
+					trimBeforeInFrames={CORR_CUTAWAY_SRC_IN}
+				/>
+			</Sequence>
+
+			{/* Clip 2 — the last two lines, including the kicker. The whiteboard
+			    punch-in is scoped to this Sequence alone. */}
 			<Sequence from={A2_STARTS} durationInFrames={A2_FRAMES}>
-				<Footage id="ep01-expert-2" description={EXPERT_DESCRIPTION} />
-			</Sequence>
-			<Sequence from={A3_STARTS} durationInFrames={A3_FRAMES}>
-				<Footage id="ep01-expert-3" description={EXPERT_DESCRIPTION} />
-			</Sequence>
-			<Sequence from={A4_STARTS} durationInFrames={A4_FRAMES}>
 				<AbsoluteFill
 					style={{
 						transform: `scale(${scale})`,
-						transformOrigin: `${originX}% ${originY}%`,
+						transformOrigin: `${WHITEBOARD_CROP.x * 100}% ${WHITEBOARD_CROP.y * 100}%`,
 					}}
 				>
-					<Footage id="ep01-expert-4" description={EXPERT_DESCRIPTION} />
+					<Footage id="ep01-expert-2" description={EXPERT_DESCRIPTION} />
 				</AbsoluteFill>
 			</Sequence>
 
@@ -114,6 +119,7 @@ export const Shot07Expert: React.FC = () => {
 				footnote="*institute unaccredited"
 				frame={frame}
 				in={CHYRON_IN}
+				out={CORR_CUTAWAY_STARTS}
 				top={1668}
 				width={900}
 				seed={88}

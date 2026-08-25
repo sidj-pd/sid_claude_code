@@ -12,6 +12,13 @@ export type FootageProps = {
 	 * held frozen behind a transition.
 	 */
 	muted?: boolean;
+	/**
+	 * Skips this many frames (at the composition's fps) off the front of the
+	 * source before it starts playing — for reusing a few seconds out of the
+	 * middle of a clip shot for another purpose, rather than always starting
+	 * a Sequence at the source's own beginning.
+	 */
+	trimBeforeInFrames?: number;
 	style?: React.CSSProperties;
 };
 
@@ -24,7 +31,13 @@ export type FootageProps = {
  * slate when it is not — labelled loudly, because the one genuinely dangerous
  * placeholder is the one that could be mistaken for a design decision.
  */
-export const Footage: React.FC<FootageProps> = ({id, description, muted = false, style}) => {
+export const Footage: React.FC<FootageProps> = ({
+	id,
+	description,
+	muted = false,
+	trimBeforeInFrames,
+	style,
+}) => {
 	const path = `footage/${id}.mp4`;
 	const present = getStaticFiles().some((file) => file.name === path);
 
@@ -33,6 +46,7 @@ export const Footage: React.FC<FootageProps> = ({id, description, muted = false,
 			<OffthreadVideo
 				src={staticFile(path)}
 				muted={muted}
+				trimBefore={trimBeforeInFrames}
 				style={{width: '100%', height: '100%', objectFit: 'cover', ...style}}
 			/>
 		);
