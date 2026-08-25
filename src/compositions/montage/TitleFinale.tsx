@@ -1,5 +1,5 @@
 import React from 'react';
-import {AbsoluteFill, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, staticFile, useCurrentFrame} from 'remotion';
 import {RansomHeadlineText} from '../../components/RansomHeadlineText';
 import {StampImpact} from '../../components/StampImpact';
 import {B11_TITLE} from './beats';
@@ -23,7 +23,12 @@ export const TitleFinale: React.FC = () => {
 
 	return (
 		<AbsoluteFill style={{justifyContent: 'center', alignItems: 'center', zIndex: 200}}>
-			<StampImpact triggerFrame={B11_TITLE + STAMP_AT} punchDurationInFrames={4}>
+			<StampImpact
+				triggerFrame={B11_TITLE + STAMP_AT}
+				punchDurationInFrames={4}
+				sfxSrc={staticFile('sfx/stamp-thud.wav')}
+				sfxVolume={0.95}
+			>
 				<RansomHeadlineText text={"BIZZARO\nBANGALORE"} letterStagger={1} fontSize={132} />
 			</StampImpact>
 		</AbsoluteFill>
