@@ -81,6 +81,24 @@
       "speaker": "correspondent",
       "text": "How do you explain what happened?",
       "delivery": "flat and procedural, identical register to the shot 6 question — this is a formula he asks everyone, not a real inquiry"
+    },
+    {
+      "id": "ep01-shot08-union",
+      "speaker": "narrator",
+      "text": "The Auto Drivers' Union has formally petitioned the state government, demanding compensation for members affected by W.T.F. Syndrome.",
+      "delivery": "deadpan, escalating bureaucratic absurdity — read exactly like a news brief, no irony in the voice at all, the driest line in the episode so far; slight emphasis of process on 'formally petitioned' and 'W.T.F. Syndrome' landing completely flat, like an official term"
+    },
+    {
+      "id": "ep01-shot10-committee",
+      "speaker": "narrator",
+      "text": "The government has since formed a committee to study the matter further.",
+      "delivery": "dry and quick, a throwaway closing fact rather than a new development — the whole line said in the tone of an afterthought"
+    },
+    {
+      "id": "ep01-shot11-final",
+      "speaker": "narrator",
+      "text": "As for the driver himself — he's back on the road. Meter running. Rules... intact. For now.",
+      "delivery": "quieter and more ominous than deadpan, unlike every other line in the episode; unhurried, a real pause after 'road' and after 'Rules', the words 'For now' dropped almost to a murmur rather than punched for a laugh"
     }
   ]
 }

@@ -14,6 +14,14 @@ import {Shot06Testimony} from './compositions/episode01/shot06/Shot06Testimony';
 import {SHOT_06_DURATION} from './compositions/episode01/shot06/beats';
 import {Shot07Expert} from './compositions/episode01/shot07/Shot07Expert';
 import {SHOT_07_DURATION} from './compositions/episode01/shot07/beats';
+import {Shot08Fallout} from './compositions/episode01/shot08/Shot08Fallout';
+import {SHOT_08_DURATION} from './compositions/episode01/shot08/beats';
+import {Shot09Psa} from './compositions/episode01/shot09/Shot09Psa';
+import {SHOT_09_DURATION} from './compositions/episode01/shot09/beats';
+import {Shot10Committee} from './compositions/episode01/shot10/Shot10Committee';
+import {SHOT_10_DURATION} from './compositions/episode01/shot10/beats';
+import {Shot11FullCircle} from './compositions/episode01/shot11/Shot11FullCircle';
+import {SHOT_11_DURATION} from './compositions/episode01/shot11/beats';
 import {
 	OPENING_MONTAGE_DURATION_IN_FRAMES,
 	OPENING_MONTAGE_FPS,
@@ -85,6 +93,38 @@ export const Root: React.FC = () => {
 				id="Ep01Shot07Expert"
 				component={Shot07Expert}
 				durationInFrames={SHOT_07_DURATION}
+				fps={OPENING_MONTAGE_FPS}
+				width={OPENING_MONTAGE_WIDTH}
+				height={OPENING_MONTAGE_HEIGHT}
+			/>
+			<Composition
+				id="Ep01Shot08Fallout"
+				component={Shot08Fallout}
+				durationInFrames={SHOT_08_DURATION}
+				fps={OPENING_MONTAGE_FPS}
+				width={OPENING_MONTAGE_WIDTH}
+				height={OPENING_MONTAGE_HEIGHT}
+			/>
+			<Composition
+				id="Ep01Shot09Psa"
+				component={Shot09Psa}
+				durationInFrames={SHOT_09_DURATION}
+				fps={OPENING_MONTAGE_FPS}
+				width={OPENING_MONTAGE_WIDTH}
+				height={OPENING_MONTAGE_HEIGHT}
+			/>
+			<Composition
+				id="Ep01Shot10Committee"
+				component={Shot10Committee}
+				durationInFrames={SHOT_10_DURATION}
+				fps={OPENING_MONTAGE_FPS}
+				width={OPENING_MONTAGE_WIDTH}
+				height={OPENING_MONTAGE_HEIGHT}
+			/>
+			<Composition
+				id="Ep01Shot11FullCircle"
+				component={Shot11FullCircle}
+				durationInFrames={SHOT_11_DURATION}
 				fps={OPENING_MONTAGE_FPS}
 				width={OPENING_MONTAGE_WIDTH}
 				height={OPENING_MONTAGE_HEIGHT}

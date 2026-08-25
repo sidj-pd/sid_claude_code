@@ -42,6 +42,9 @@ export const DriverHandReach = makeCutout('cutouts-alpha/driver-hand-reach.png')
 // can rotate independently of the housing.
 export const AutoMeterBody = makeCutout('cutouts-alpha/auto-meter-body.png');
 export const AutoMeterLever = makeCutout('cutouts-alpha/auto-meter-lever.png');
+export const NewspaperClipAutoUnion = makeCutout('cutouts-alpha/newspaper-clip-autounion.png');
+export const NewspaperClipVictim = makeCutout('cutouts-alpha/newspaper-clip-victim.png');
+export const NewspaperClipCommittee = makeCutout('cutouts-alpha/newspaper-clip-committee.png');
 
 export type CutoutAsset =
 	| 'vidhana-soudha'
@@ -60,7 +63,10 @@ export type CutoutAsset =
 	| 'passenger-leaning'
 	| 'driver-hand-reach'
 	| 'auto-meter-body'
-	| 'auto-meter-lever';
+	| 'auto-meter-lever'
+	| 'newspaper-clip-autounion'
+	| 'newspaper-clip-victim'
+	| 'newspaper-clip-committee';
 
 export const CUTOUT_REGISTRY: Record<CutoutAsset, React.FC> = {
 	'vidhana-soudha': VidhanaSoudha,
@@ -80,4 +86,7 @@ export const CUTOUT_REGISTRY: Record<CutoutAsset, React.FC> = {
 	'driver-hand-reach': DriverHandReach,
 	'auto-meter-body': AutoMeterBody,
 	'auto-meter-lever': AutoMeterLever,
+	'newspaper-clip-autounion': NewspaperClipAutoUnion,
+	'newspaper-clip-victim': NewspaperClipVictim,
+	'newspaper-clip-committee': NewspaperClipCommittee,
 };

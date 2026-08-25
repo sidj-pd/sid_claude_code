@@ -158,6 +158,8 @@ Spoken dialogue, split across clips:
 
 ## Shot 8 — the witness again
 
+**Landed.**
+
 Identical setup, room, wardrobe and framing to Shot 6 — same man, same t-shirt,
 same room, same propped phone — so the two read as the same call on a later
 day. The only change is him: darker under-eye circles, flatter affect, a
@@ -171,20 +173,39 @@ Spoken dialogue:
 
 ## Shot 9 — the correspondent
 
-A photorealistic vertical video, 9:16, of a television correspondent in his
-forties speaking directly to camera in the manner of a news sign-off. Indian,
-clean-shaven, a plain dark jacket over a light shirt, no tie. He stands or
-sits against a neutral studio backdrop — flat mid-grey, evenly lit, no set
-dressing. The framing is centred and formal, chest up, camera locked off.
+**Landed** — as `ep01-correspondent-psa.mp4`, on the same headphones/laptop
+setup as the Shot 6/7 clips rather than the studio broadcast framing this
+section originally asked for. That original prompt (a formal news-anchor
+sign-off delivering a "public health warning") got blocked by the generator
+on reputational-risk grounds — a fake journalist delivering real-sounding
+health guidance reads as impersonation risk even when it's satire. Dropping
+the broadcast/journalist framing and keeping him as an ordinary guy on a
+video call cleared it, and it also means the clip reads as continuous with
+his earlier appearances rather than a jump to a new setup.
 
-Broadcast video rather than a call: correctly exposed, sharp, slightly flat
-contrast. Still no grade and no camera movement.
-
-He delivers a public-health warning with complete sincerity and no wink
-whatsoever. Level, measured, faintly grave.
-
-Spoken dialogue:
+Final dialogue, including the "You are not alone" beat the original prompt
+below was missing:
 
 1. "If you or someone you love has experienced a similar auto ride — do not
    panic. Do not tip extra. This may worsen the condition."
 2. "Please report the incident to your nearest Auto Union office."
+3. — beat — "You are not alone."
+
+## Newspaper clippings (Shots 8 and 10)
+
+**Landed** — three torn-newsprint clippings, generated as images rather than
+video, keyed through `cutout-alpha.mjs` and then cropped to just their photo
+by `scripts/crop-newspaper-clippings.mjs` (the full clippings run nearly a
+full 9:16 frame tall on their own, too tall for two headlines to share a
+page). The real headline text is set in code over each — `NewsHeadline` in
+`src/components/NewsHeadline.tsx` — rather than baked into the generated
+image, the same reasoning as everywhere else: keeping copy in code means it
+stays exactly on the script's wording and can be animated letter-by-letter,
+where a generated headline risks garbled text and can't be art-directed.
+
+- `newspaper-clip-autounion.jpg` — auto drivers standing by their parked
+  autos, for "AUTO UNION WRITES TO GOVERNMENT" (Shot 8).
+- `newspaper-clip-victim.jpg` — a lone figure seen from behind, for "VICTIM
+  FILES OWN CLAIM" (Shot 8).
+- `newspaper-clip-committee.jpg` — an empty meeting room, for "GOVERNMENT
+  FORMS COMMITTEE TO STUDY W.T.F. SYNDROME" (Shot 10).

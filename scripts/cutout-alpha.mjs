@@ -58,6 +58,10 @@ const OVERRIDES = {
 	// backdrop, so a wider tolerance takes them; the figure's own tones
 	// (mustard bag, skin) are far enough off cream to survive it.
 	'passenger-leaning': {tolerance: 60},
+	// Photographed on a wood table rather than a flat backdrop: real grain
+	// and a soft vignette mean the corners are noisier than a studio shot,
+	// so this needs a wider tolerance than the plain-grey clippings.
+	'newspaper-clip-autounion': {tolerance: 46},
 };
 
 const removeBackground = async (srcPath, outPath, options = {}) => {
