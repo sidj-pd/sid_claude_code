@@ -17,6 +17,14 @@
     "narrator": {
       "voiceName": "Fenrir",
       "character": "a documentary narrator in the Vox explainer register — bright, articulate and conversational, speaking clean measured sentences with crisp consonants and a light forward momentum, as though walking the listener through evidence. He is dry rather than jokey, and trusts the material to be funny without selling it. Speak plainly and naturally — no announcer boom, no over-warm radio voice, no sing-song cadence, no theatrical emphasis, no caricature"
+    },
+    "passenger": {
+      "voiceName": "Puck",
+      "character": "a Bangalore software professional in his early thirties, speaking natural Indian English in an educated urban register — unhurried, fairly flat, the way someone talks when they are describing something that unsettled them and have not yet decided how they feel about it. Speak plainly and naturally — no performed or exaggerated accent, no theatrical shakiness, no comic timing, no caricature"
+    },
+    "correspondent": {
+      "voiceName": "Algenib",
+      "character": "a television correspondent in his forties, speaking clean neutral English in the flat professional register of an interviewer who is not the subject of the piece. He asks his questions plainly and does not perform interest in the answers. No announcer boom, no warmth, no sing-song, no emphasis for effect"
     }
   },
   "lines": [
@@ -49,6 +57,24 @@
       "speaker": "narrator",
       "text": "Which means, statistically... this shouldn't have happened at all.",
       "delivery": "slower and quieter, the sentence a narrator says when the evidence has stopped adding up; a real pause after 'statistically', then the last clause flat and unhurried — no build, no emphasis on 'at all'"
+    },
+    {
+      "id": "ep01-shot06-q",
+      "speaker": "correspondent",
+      "text": "Can you walk us through what happened?",
+      "delivery": "flat and procedural, an opening question asked a hundred times before; no curiosity in it at all"
+    },
+    {
+      "id": "ep01-shot06-a",
+      "speaker": "passenger",
+      "text": "He put the meter down. Without even asking. He wasn't honking. He wasn't on the phone. He stopped at every single signal. He followed every rule.",
+      "delivery": "deadpan and even, recounting ordinary things as though each one were evidence of something wrong; a small pause between each item, building only by accumulation and never by rising pitch or emphasis"
+    },
+    {
+      "id": "ep01-shot06-b",
+      "speaker": "passenger",
+      "text": "It almost felt like... I was in a parallel universe.",
+      "delivery": "quieter and drifting, as though replaying it; a real pause after 'It almost felt like', then the last phrase stated plainly as a fact rather than delivered as a punchline"
     }
   ]
 }

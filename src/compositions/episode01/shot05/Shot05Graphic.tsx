@@ -14,7 +14,6 @@ import {
 	CALLOUT_IN,
 	CAP1_IN,
 	CAP2_IN,
-	CUT_TO_BLACK,
 	FOOTNOTE_IN,
 	HEADER_IN,
 	HEADER_STAMP,
@@ -129,7 +128,7 @@ const Caption: React.FC<{text: string; age: number; size?: number; color?: strin
  * about that sliver — so the cliffhanger is on screen as a picture before the
  * narrator finishes saying it.
  */
-export const Shot05Graphic: React.FC = () => {
+export const Shot05Graphic: React.FC<{silent?: boolean}> = ({silent = false}) => {
 	const frame = useCurrentFrame();
 
 	const bar1 = useSteppedGrowth(frame, BAR1_STARTS, BAR_GROW) * REFUSE_ROUTE;
@@ -147,7 +146,7 @@ export const Shot05Graphic: React.FC = () => {
 	// The last 4%: what the whole episode turns out to be about.
 	const remainderX = bar2X + bar2W * REFUSE_METER;
 
-	const blackout = interpolate(frame, [CUT_TO_BLACK, CUT_TO_BLACK + 1], [0, 1], CLAMP);
+
 
 	/**
 	 * The page breathes. Barely — a pixel and a fraction of a degree, on a slow
@@ -353,14 +352,17 @@ export const Shot05Graphic: React.FC = () => {
 				) : null}
 			</AbsoluteFill>
 
-			<VoiceOver id="ep01-shot05a" from={VO_A_STARTS} />
-			<VoiceOver id="ep01-shot05b" from={VO_B_STARTS} />
-			<VoiceOver id="ep01-shot05c" from={VO_C_STARTS} />
+			{/* Shot 6 opens by tearing this page apart, and renders it frozen to
+			    do so. A frozen frame holding audio would fight the shot it is
+			    being torn out of, so the tear asks for it silent. */}
+			{silent ? null : (
+				<>
+					<VoiceOver id="ep01-shot05a" from={VO_A_STARTS} />
+					<VoiceOver id="ep01-shot05b" from={VO_B_STARTS} />
+					<VoiceOver id="ep01-shot05c" from={VO_C_STARTS} />
+				</>
+			)}
 
-			{/* Hard cut to black, then silence. One frame, no fade. */}
-			{blackout > 0 ? (
-				<AbsoluteFill style={{backgroundColor: '#0b0906', opacity: blackout}} />
-			) : null}
 		</AbsoluteFill>
 	);
 };

@@ -78,9 +78,17 @@ export const VO_C_STARTS = VO_B_STARTS + VO_B.frames + 12;
 export const TAG_STAMP = VO_C_STARTS + VO_C.lastClauseAt;
 export const FOOTNOTE_IN = TAG_STAMP + 24;
 
-/** Hard cut to black, then silence, exactly as scripted. */
-export const CUT_TO_BLACK = VO_C_STARTS + VO_C.frames + 18;
-export const SHOT_05_DURATION = CUT_TO_BLACK + 16;
+/**
+ * The page holds to the end rather than cutting to black.
+ *
+ * The script asks Shot 5 for a hard cut to black AND asks the transition that
+ * follows it to rip the frozen stat card apart. Both cannot happen: a card
+ * that has been cut away from is not there to be torn. The transition spec is
+ * the more specific of the two and carries the series rule with it — a tear
+ * means reality intruding on the reenactment — so the tear wins, and Shot 6
+ * opens on this page still standing.
+ */
+export const SHOT_05_DURATION = VO_C_STARTS + VO_C.frames + 22;
 
 /** Frames per stepped chunk anywhere in this shot. */
 export const STEP = 3;

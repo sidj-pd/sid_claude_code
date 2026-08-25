@@ -5,7 +5,11 @@ export type VoiceOverProps = {
 	/** Line id, matching an entry in scripts/vo-lines.json. */
 	id: string;
 	from: number;
-	volume?: number;
+	/**
+	 * A number, or a function of the frame WITHIN the line — which is what
+	 * Remotion passes it — for lines that have to duck or drop out partway.
+	 */
+	volume?: number | ((frame: number) => number);
 };
 
 /**

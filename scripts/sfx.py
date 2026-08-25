@@ -91,7 +91,50 @@ def paper_riffle(dur=0.55, seed=11):
     return out
 
 
+def paper_rip(dur=0.62, seed=23):
+    """
+    Paper being torn — the series' signal that reality is intruding on the
+    reenactment, so it has to be sharper and more violent than the page-flip
+    riffle used between paper scenes.
+
+    A tear is not a swell like a page turn; it is a rapid burst of tiny
+    discrete fibre breaks. So the layers are:
+      - a dense stream of impulses whose rate accelerates and then stops dead
+      - brightly filtered noise riding on them, for the hiss of the fibres
+      - a low thump at the very start: the first grab, before the run
+    """
+    rng = random.Random(seed)
+    n = int(SR * dur)
+    out = []
+    hp = 0.0  # running value for a one-pole high-pass, to keep it bright
+    prev_in = 0.0
+    next_pop = 0.0
+    pop = 0.0
+    for i in range(n):
+        t = i / SR
+        # The run accelerates through the tear, then cuts out rather than
+        # decaying: paper stops making noise the instant it is through.
+        progress = min(1.0, t / dur)
+        rate = 300 + 2600 * progress
+        if t >= next_pop:
+            pop = rng.uniform(-1, 1)
+            next_pop = t + (1.0 / rate) * rng.uniform(0.4, 1.6)
+        pop *= 0.55  # each fibre break is a click, not a tone
+
+        white = rng.uniform(-1, 1)
+        hp = 0.86 * (hp + white - prev_in)
+        prev_in = white
+
+        # Rises fast, peaks past the middle, then stops rather than fading:
+        # paper goes quiet the instant it is through.
+        shape = min(1.0, t / 0.02) * math.sin(math.pi * progress**0.62) ** 0.45
+        grab = math.sin(2 * math.pi * 128 * t) * _env(t, 0.012) * 0.5
+        out.append((pop * 0.85 + hp * 0.5) * shape + grab)
+    return out
+
+
 EFFECTS = {
+    "paper-rip": paper_rip,
     "meter-click": meter_click,
     "stamp-thud": stamp_thud,
     "paper-riffle": paper_riffle,
