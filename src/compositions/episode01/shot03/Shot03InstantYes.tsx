@@ -4,6 +4,7 @@ import {CollageBackdrop} from '../../../components/CollageBackdrop';
 import {PaperCutout} from '../../../components/PaperCutout';
 import {useStopMotionStep} from '../../../components/useStopMotionStep';
 import {shakeAt} from '../../montage/camera';
+import {LEVER_BOX, LEVER_DOWN, LEVER_PIVOT} from '../meter';
 import {
 	FLIP_FRAME,
 	HAND_LEAVES,
@@ -14,21 +15,6 @@ import {
 } from './beats';
 
 const CLAMP = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
-
-/**
- * Where the lever sits inside the meter cutout, and where its pivot sits
- * inside the lever crop. Both are reported by scripts/split-meter.mjs when it
- * cuts the two layers, so if the source art is ever re-keyed these come
- * straight from its output rather than being re-guessed by eye.
- */
-const LEVER_BOX = {left: '58.9%', top: '17.6%', width: '38.0%', height: '35.3%'};
-const LEVER_PIVOT = '11.3% 93.2%';
-/**
- * The arm is drawn pointing up-right at about 71° above horizontal. Swinging
- * it 95° clockwise brings it to roughly 24° BELOW horizontal — a flag that has
- * gone properly over its stop, not one merely nudged to level.
- */
-const LEVER_THROW = 95;
 
 /**
  * Shot 3 — the instant yes.
@@ -62,7 +48,7 @@ export const Shot03InstantYes: React.FC = () => {
 	const handVisible = frame >= REACH_STARTS && withdraw < 1;
 
 	// --- The lever: two positions, up then over. Never in between.
-	const leverAngle = frame >= FLIP_FRAME ? LEVER_THROW : 0;
+	const leverAngle = frame >= FLIP_FRAME ? LEVER_DOWN : 0;
 	// A small recoil on the housing as the flag hits its stop.
 	const meterKnock = shakeAt(frame, FLIP_FRAME, 2.2);
 
