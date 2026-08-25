@@ -156,7 +156,7 @@ const KickerQuote: React.FC<{frame: number}> = ({frame}) => {
 						key={line}
 						style={{
 							fontFamily: 'RansomAnton, sans-serif',
-							fontSize: 66,
+							fontSize: 92,
 							lineHeight: 1,
 							letterSpacing: 1,
 							textAlign: 'right',
