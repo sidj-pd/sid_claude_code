@@ -9,7 +9,9 @@ import {
 } from 'remotion';
 import {Chyron} from '../../../components/Chyron';
 import {Footage} from '../../../components/Footage';
+import {NewsprintTexture} from '../../../components/NewsprintTexture';
 import {VoiceOver} from '../../../components/VoiceOver';
+import {tornPolygon} from '../../../components/tornEdge';
 import {
 	A1_FRAMES,
 	A1_STARTS,
@@ -19,9 +21,14 @@ import {
 	CORR_CUTAWAY_FRAMES,
 	CORR_CUTAWAY_SRC_IN,
 	CORR_CUTAWAY_STARTS,
+	KICKER_QUOTE_IN,
+	KICKER_QUOTE_OUT,
 	Q_STARTS,
 	WHITEBOARD_IN,
 	WHITEBOARD_OUT,
+	WTF_EXPANSION_IN,
+	WTF_OUT,
+	WTF_TERM_IN,
 } from './beats';
 
 const CLAMP = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
@@ -39,6 +46,114 @@ const CORR_DESCRIPTION =
  * right edge once scaled up.
  */
 const WHITEBOARD_CROP = {x: 0.82, y: 0.38, zoom: 2.1};
+
+/**
+ * The term itself, named on screen the moment he names it — the audience
+ * gets the acronym and its (nonsense) expansion at the same time he delivers
+ * them, rather than having to hold the joke in their head from audio alone.
+ * Sits in the clear strip of ceiling and wall above his head, the one part
+ * of the frame with nothing else happening in it.
+ */
+const WtfCard: React.FC<{frame: number}> = ({frame}) => {
+	if (frame < WTF_TERM_IN || frame >= WTF_OUT) return null;
+	const termAge = frame - WTF_TERM_IN;
+	const expansionAge = frame - WTF_EXPANSION_IN;
+	const fadeOut = interpolate(frame, [WTF_OUT - 8, WTF_OUT], [1, 0], CLAMP);
+
+	return (
+		<div style={{position: 'absolute', left: 84, top: 96, opacity: fadeOut}}>
+			<div
+				style={{
+					display: 'inline-block',
+					background: '#efe4c8',
+					padding: '18px 30px 20px',
+					clipPath: tornPolygon({seed: 42, depth: 5, teeth: 14}),
+					boxShadow: '0 10px 22px rgba(12,10,8,0.5)',
+					position: 'relative',
+					// A stamp pop rather than a fade-up: proud of the surface on
+					// its first couple of frames, then settled.
+					transform: `scale(${termAge < 2 ? 1.1 : 1}) rotate(-1.5deg)`,
+				}}
+			>
+				<div
+					style={{
+						fontFamily: 'RansomAnton, sans-serif',
+						fontSize: 58,
+						letterSpacing: 1.5,
+						color: '#241d15',
+						whiteSpace: 'nowrap',
+					}}
+				>
+					W.T.F. SYNDROME
+				</div>
+				{expansionAge >= 0 ? (
+					<div
+						style={{
+							marginTop: 6,
+							fontFamily: 'RansomSpecialElite, monospace',
+							fontSize: 24,
+							color: 'rgba(36,29,21,0.75)',
+							whiteSpace: 'nowrap',
+							opacity: interpolate(expansionAge, [0, 3], [0, 1], CLAMP),
+						}}
+					>
+						WILLFUL TRAFFIC-RULE FOLLOWING
+					</div>
+				) : null}
+				<NewsprintTexture opacity={0.16} />
+			</div>
+		</div>
+	);
+};
+
+/**
+ * The kicker, captioned — arriving once the whiteboard punch-in has settled,
+ * over the one line in the shot that most wants to be read as well as heard.
+ * Same card language as the WTF term, at the bottom rather than the top so
+ * the two never compete for the eye in the same frame.
+ */
+const KickerQuote: React.FC<{frame: number}> = ({frame}) => {
+	if (frame < KICKER_QUOTE_IN || frame >= KICKER_QUOTE_OUT) return null;
+	const age = frame - KICKER_QUOTE_IN;
+	const fadeOut = interpolate(frame, [KICKER_QUOTE_OUT - 8, KICKER_QUOTE_OUT], [1, 0], CLAMP);
+
+	return (
+		<div
+			style={{
+				position: 'absolute',
+				left: 84,
+				top: 1618,
+				width: 900,
+				opacity: fadeOut,
+			}}
+		>
+			<div
+				style={{
+					background: '#efe4c8',
+					padding: '24px 34px 28px',
+					clipPath: tornPolygon({seed: 63, depth: 5, teeth: 16}),
+					boxShadow: '0 10px 22px rgba(12,10,8,0.5)',
+					position: 'relative',
+					transform: `scale(${age < 2 ? 1.05 : 1})`,
+				}}
+			>
+				<div
+					style={{
+						fontFamily: 'RansomAnton, sans-serif',
+						fontSize: 44,
+						lineHeight: 1.15,
+						letterSpacing: 1,
+						color: '#241d15',
+						whiteSpace: 'pre-line',
+					}}
+				>
+					{'"FRANKLY, WE\'RE LUCKY\nHE REMEMBERED HOW TO\nDRIVE AT ALL."'}
+				</div>
+				<NewsprintTexture opacity={0.16} />
+			</div>
+		</div>
+	);
+};
 
 /**
  * Shot 7 — The Expert.
@@ -107,6 +222,9 @@ export const Shot07Expert: React.FC = () => {
 					<Footage id="ep01-expert-2" description={EXPERT_DESCRIPTION} />
 				</AbsoluteFill>
 			</Sequence>
+
+			<WtfCard frame={frame} />
+			<KickerQuote frame={frame} />
 
 			<VoiceOver id="ep01-shot07-q" from={Q_STARTS} />
 
