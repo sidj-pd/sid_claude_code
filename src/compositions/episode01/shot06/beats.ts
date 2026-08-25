@@ -37,6 +37,15 @@ export const CORR_IN = TEAR_DONE;
 export const CORR_SPEECH_ENDS = CORR_IN + Math.round(2.89 * S);
 export const WITNESS_IN = CORR_SPEECH_ENDS + Math.round(0.5 * S);
 
+/**
+ * His chyron. On a beat before he speaks — a name card that only appeared
+ * once someone was already mid-sentence would read as a mistake — and off a
+ * few frames before the cut to the witness, so it never overlaps a caption
+ * that belongs to someone else.
+ */
+export const CORR_LOWER_THIRD_IN = CORR_IN + 8;
+export const CORR_LOWER_THIRD_OUT = WITNESS_IN - 6;
+
 /** 10.01s at 24fps, conformed to the composition's 30. */
 export const WITNESS_FRAMES = 300;
 
@@ -65,6 +74,6 @@ export const ITEMS = [
 	{text: 'FOLLOWED EVERY RULE', in: AT(7.69), tick: AT(9.53)},
 ];
 
-export const LOWER_THIRD_IN = WITNESS_IN + 8;
+export const WITNESS_LOWER_THIRD_IN = WITNESS_IN + 8;
 
 export const SHOT_06_DURATION = WITNESS_IN + WITNESS_FRAMES + 24;

@@ -19,13 +19,15 @@ import {Shot05Graphic} from '../shot05/Shot05Graphic';
 import {ChecklistItem} from './Checklist';
 import {
 	CORR_IN,
+	CORR_LOWER_THIRD_IN,
+	CORR_LOWER_THIRD_OUT,
 	ITEMS,
-	LOWER_THIRD_IN,
 	SLATE_IN,
 	SLATE_OUT,
 	TEAR_FRAMES,
 	TEAR_STARTS,
 	WITNESS_IN,
+	WITNESS_LOWER_THIRD_IN,
 } from './beats';
 
 const CLAMP = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
@@ -42,6 +44,71 @@ const WITNESS_DESCRIPTION =
 	'Passenger on a video call at home.\nVertical, photoreal, with its own dialogue.';
 const CORR_DESCRIPTION =
 	'Correspondent on the other end of the call.\nVertical, photoreal, with its own dialogue.';
+
+/**
+ * A broadcast-style chyron, newsprint rather than a real TV lower third —
+ * same rule as everywhere else in the shot: the caption stays paper even
+ * where the picture behind it does not.
+ *
+ * Fades in and, unlike the witness's (which just holds to the end of the
+ * shot), can fade back out — the correspondent's needs to be gone before the
+ * witness's own caption arrives, so the frame is never claiming two people's
+ * names at once.
+ */
+const Chyron: React.FC<{
+	name: string;
+	title: string;
+	frame: number;
+	in: number;
+	out?: number;
+	top: number;
+	seed: number;
+}> = ({name, title, frame, in: fadeIn, out: fadeOut, top, seed}) => {
+	if (frame < fadeIn) return null;
+	const opacity =
+		fadeOut !== undefined
+			? interpolate(frame, [fadeIn, fadeIn + 3, fadeOut - 4, fadeOut], [0, 1, 1, 0], CLAMP)
+			: interpolate(frame, [fadeIn, fadeIn + 3], [0, 1], CLAMP);
+	if (opacity <= 0) return null;
+
+	return (
+		<div
+			style={{
+				position: 'absolute',
+				left: LIST_X,
+				top,
+				width: 880,
+				background: '#efe4c8',
+				padding: '20px 32px 24px',
+				clipPath: tornPolygon({seed, depth: 5, teeth: 16}),
+				boxShadow: '0 10px 22px rgba(12,10,8,0.5)',
+				opacity,
+			}}
+		>
+			<div
+				style={{
+					fontFamily: 'RansomAnton, sans-serif',
+					fontSize: 52,
+					letterSpacing: 1.5,
+					color: INK,
+				}}
+			>
+				{name}
+			</div>
+			<div
+				style={{
+					marginTop: 6,
+					fontFamily: 'RansomSpecialElite, monospace',
+					fontSize: 27,
+					color: 'rgba(36,29,21,0.75)',
+				}}
+			>
+				{title}
+			</div>
+			<NewsprintTexture opacity={0.16} />
+		</div>
+	);
+};
 
 /**
  * Shot 6 — Webcam Interview.
@@ -150,47 +217,32 @@ export const Shot06Testimony: React.FC = () => {
 				</div>
 			))}
 
-			{/* Lower third — newsprint, despite the photoreal footage. Keeping the
-			    caption in the paper world is what stops Scene 2 reading as a
-			    different film. It arrives with the witness, not the
-			    correspondent: he is the one being identified. */}
-			{frame >= LOWER_THIRD_IN ? (
-				<div
-					style={{
-						position: 'absolute',
-						left: LIST_X,
-						top: 1668,
-						width: 880,
-						background: '#efe4c8',
-						padding: '20px 32px 24px',
-						clipPath: tornPolygon({seed: 77, depth: 5, teeth: 16}),
-						boxShadow: '0 10px 22px rgba(12,10,8,0.5)',
-						opacity: interpolate(frame - LOWER_THIRD_IN, [0, 3], [0, 1], CLAMP),
-					}}
-				>
-					<div
-						style={{
-							fontFamily: 'RansomAnton, sans-serif',
-							fontSize: 52,
-							letterSpacing: 1.5,
-							color: INK,
-						}}
-					>
-						WITNESS — NAME WITHHELD
-					</div>
-					<div
-						style={{
-							marginTop: 6,
-							fontFamily: 'RansomSpecialElite, monospace',
-							fontSize: 27,
-							color: 'rgba(36,29,21,0.75)',
-						}}
-					>
-						SURVIVOR, INCIDENT #0001
-					</div>
-					<NewsprintTexture opacity={0.16} />
-				</div>
-			) : null}
+			{/* The correspondent's chyron — his name and outlet, gone again before
+			    the witness's own caption arrives. Bangalore Vox gets the same
+			    treatment the series gives every credential: stated with total
+			    confidence and quietly undercut, the way Dr. Ramamurthy's
+			    "institute unaccredited" footnote works in Shot 7. */}
+			<Chyron
+				name="KARTHIK MENON"
+				title="CORRESPONDENT, BANGALORE VOX"
+				frame={frame}
+				in={CORR_LOWER_THIRD_IN}
+				out={CORR_LOWER_THIRD_OUT}
+				top={1700}
+				seed={61}
+			/>
+
+			{/* The witness's — newsprint, despite the photoreal footage. Keeping
+			    the caption in the paper world is what stops Scene 2 reading as a
+			    different film. */}
+			<Chyron
+				name="WITNESS — NAME WITHHELD"
+				title="SURVIVOR, INCIDENT #0001"
+				frame={frame}
+				in={WITNESS_LOWER_THIRD_IN}
+				top={1668}
+				seed={77}
+			/>
 		</AbsoluteFill>
 	);
 };
