@@ -18,14 +18,14 @@ import {SHOT_05_DURATION} from '../shot05/beats';
 import {Shot05Graphic} from '../shot05/Shot05Graphic';
 import {ChecklistItem} from './Checklist';
 import {
-	FOOTAGE_IN,
+	CORR_IN,
 	ITEMS,
 	LOWER_THIRD_IN,
 	SLATE_IN,
 	SLATE_OUT,
 	TEAR_FRAMES,
 	TEAR_STARTS,
-	VERDICT_STAMP,
+	WITNESS_IN,
 } from './beats';
 
 const CLAMP = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
@@ -33,15 +33,18 @@ const INK = '#241d15';
 
 const LIST_X = 84;
 const LIST_W = 820;
-const LIST_TOP = 900;
-const ITEM_H = 92;
-const ITEM_GAP = 14;
+/** Well clear of his chin (~41% down the frame) and of the lower third. */
+const LIST_TOP = 1010;
+const ITEM_H = 80;
+const ITEM_GAP = 10;
 
-const FOOTAGE_DESCRIPTION =
+const WITNESS_DESCRIPTION =
 	'Passenger on a video call at home.\nVertical, photoreal, with its own dialogue.';
+const CORR_DESCRIPTION =
+	'Correspondent on the other end of the call.\nVertical, photoreal, with its own dialogue.';
 
 /**
- * Shot 6 — Witness Testimony.
+ * Shot 6 — Webcam Interview.
  *
  * The first photoreal shot in the series, and the transition into it is the
  * point: the survey page from Shot 5 does not cut away, it gets torn in half
@@ -50,10 +53,11 @@ const FOOTAGE_DESCRIPTION =
  * footage, so by the time the audience sees what is underneath they have
  * already been told what kind of thing it is.
  *
- * The clip speaks for itself. It was generated with its dialogue, so this
- * shot adds no audio of any kind and the graphics are cut to the delivery
- * rather than the delivery to the graphics — every checklist beat in
- * beats.ts is measured off the clip's own envelope.
+ * What the tear reveals is the correspondent's question. The witness's
+ * answer is cut in straight after, no transition device — two windows of one
+ * call, the way any two-camera interview is edited. Both clips speak for
+ * themselves: this shot adds no audio beyond the rip, and every graphic is
+ * cut to the delivery rather than the other way round.
  *
  * What survives the change of register is the paper: the caption and the
  * evidence checklist stay newsprint chits over photoreal video, which is what
@@ -77,16 +81,26 @@ export const Shot06Testimony: React.FC = () => {
 
 	return (
 		<AbsoluteFill style={{backgroundColor: '#0c0e11'}}>
-			{/* The clip is held on its first frame while the paper comes off, and
-			    silent while it is held — the reveal should uncover him about to
-			    speak, not catch him mid-sentence behind a sheet. */}
-			<Sequence from={0} durationInFrames={FOOTAGE_IN}>
+			{/* The correspondent, held on his first frame — silent — while the
+			    paper is still coming off him. Playing him from the start would
+			    have him mid-question behind a sheet that hasn't cleared yet. */}
+			<Sequence from={0} durationInFrames={CORR_IN}>
 				<Freeze frame={0}>
-					<Footage id="ep01-witness" description={FOOTAGE_DESCRIPTION} muted />
+					<Footage id="ep01-correspondent-q" description={CORR_DESCRIPTION} muted />
 				</Freeze>
 			</Sequence>
-			<Sequence from={FOOTAGE_IN}>
-				<Footage id="ep01-witness" description={FOOTAGE_DESCRIPTION} />
+			{/* Runs from his own frame zero once revealed, and is cut off shortly
+			    after his question lands — the clip has several seconds of him
+			    just sitting after it that this shot has no use for. */}
+			<Sequence from={CORR_IN} durationInFrames={WITNESS_IN - CORR_IN}>
+				<Footage id="ep01-correspondent-q" description={CORR_DESCRIPTION} />
+			</Sequence>
+
+			{/* The witness. A hard cut, not a reveal — there is no paper left to
+			    clear by this point, so he plays from his own frame zero the
+			    moment he is on screen. */}
+			<Sequence from={WITNESS_IN}>
+				<Footage id="ep01-witness" description={WITNESS_DESCRIPTION} />
 			</Sequence>
 
 			{/* The page from Shot 5, frozen on its last frame and torn apart. */}
@@ -99,7 +113,7 @@ export const Shot06Testimony: React.FC = () => {
 			) : null}
 
 			{/* The rip is the one sound this shot adds, and it belongs to the
-			    paper rather than to the footage. */}
+			    paper rather than to either clip. */}
 			<Sequence from={TEAR_STARTS}>
 				<Audio src={staticFile('sfx/paper-rip.wav')} volume={0.95} />
 			</Sequence>
@@ -118,7 +132,8 @@ export const Shot06Testimony: React.FC = () => {
 				</AbsoluteFill>
 			) : null}
 
-			{/* The evidence checklist, on paper, over the video. */}
+			{/* The evidence checklist, on paper, over the witness's answer —
+			    pulled well clear of his chin so his face reads throughout. */}
 			{ITEMS.map((item, i) => (
 				<div
 					key={item.text}
@@ -135,37 +150,19 @@ export const Shot06Testimony: React.FC = () => {
 				</div>
 			))}
 
-			{/* The verdict, stamped across the finished list — over the chits
-			    rather than after them, the way a form gets stamped once every
-			    line on it has been filled in. */}
-			{frame >= VERDICT_STAMP ? (
-				<AbsoluteFill style={{alignItems: 'center', justifyContent: 'flex-start'}}>
-					<div style={{marginTop: LIST_TOP + 1.15 * (ITEM_H + ITEM_GAP)}}>
-						{/* Stacked on two lines: typewriter is a wide face, and on one
-						    line the stamp runs off both edges of a 1080 frame. */}
-						<EvidenceStamp
-							text={'FOLLOWED\nEVERY RULE'}
-							age={frame - VERDICT_STAMP}
-							fontSize={62}
-							rotate={-8}
-							color="#a8331c"
-						/>
-					</div>
-				</AbsoluteFill>
-			) : null}
-
 			{/* Lower third — newsprint, despite the photoreal footage. Keeping the
 			    caption in the paper world is what stops Scene 2 reading as a
-			    different film. */}
+			    different film. It arrives with the witness, not the
+			    correspondent: he is the one being identified. */}
 			{frame >= LOWER_THIRD_IN ? (
 				<div
 					style={{
 						position: 'absolute',
 						left: LIST_X,
-						top: 1618,
+						top: 1668,
 						width: 880,
 						background: '#efe4c8',
-						padding: '22px 32px 26px',
+						padding: '20px 32px 24px',
 						clipPath: tornPolygon({seed: 77, depth: 5, teeth: 16}),
 						boxShadow: '0 10px 22px rgba(12,10,8,0.5)',
 						opacity: interpolate(frame - LOWER_THIRD_IN, [0, 3], [0, 1], CLAMP),
@@ -174,7 +171,7 @@ export const Shot06Testimony: React.FC = () => {
 					<div
 						style={{
 							fontFamily: 'RansomAnton, sans-serif',
-							fontSize: 58,
+							fontSize: 52,
 							letterSpacing: 1.5,
 							color: INK,
 						}}
@@ -183,9 +180,9 @@ export const Shot06Testimony: React.FC = () => {
 					</div>
 					<div
 						style={{
-							marginTop: 8,
+							marginTop: 6,
 							fontFamily: 'RansomSpecialElite, monospace',
-							fontSize: 30,
+							fontSize: 27,
 							color: 'rgba(36,29,21,0.75)',
 						}}
 					>

@@ -1,5 +1,5 @@
 /**
- * Episode 01 / Scene 2 / Shot 6 — Witness Testimony.
+ * Episode 01 / Scene 2 / Shot 6 — Webcam Interview.
  *
  * The register changes here and the transition has to carry that. The series
  * rule from the script: a paper TEAR means reality intruding on the
@@ -7,9 +7,12 @@
  * reserved for reenactment-to-reenactment. So Shot 6 does not cut — it opens
  * on Shot 5's page still standing and rips it apart.
  *
- * The footage carries its own dialogue, because a talking head cut to
- * synthesised speech does not lip sync. Nothing here adds audio: the sound of
- * this shot is the clip's, and the graphics are cut to it.
+ * What the tear reveals is the correspondent, asking his one question. The
+ * witness's answer is a second, separate clip, cut in straight after —
+ * two windows of the same call, edited the way any two-camera video
+ * interview is. Both clips carry their own dialogue: nothing here adds
+ * audio beyond the tear itself, and every beat below is measured off the
+ * clips' own envelopes rather than off the script.
  */
 
 /** Video frames per second of the composition, for reading seconds below. */
@@ -22,41 +25,46 @@ export const TEAR_DONE = TEAR_STARTS + TEAR_FRAMES;
 /** The stamp beat the script marks optional. Half a second, then gone. */
 export const SLATE_IN = TEAR_STARTS + 16;
 export const SLATE_OUT = SLATE_IN + 15;
-export const LOWER_THIRD_IN = TEAR_DONE + 8;
 
 /**
- * The clip is held on its first frame until the paper is off, then runs.
- * Otherwise his opening line plays behind the sheet that is still covering
- * him, and the shot throws away its first sentence.
+ * The correspondent. Held on his first frame — silent — while the paper is
+ * still coming off him, then plays from his own frame zero once revealed.
+ * His one line sits at 1.49-2.89s in the clip; the cut to the witness comes
+ * half a second after he finishes, which is enough of a beat to read as a
+ * question landing rather than an edit.
  */
-export const FOOTAGE_IN = TEAR_DONE;
+export const CORR_IN = TEAR_DONE;
+export const CORR_SPEECH_ENDS = CORR_IN + Math.round(2.89 * S);
+export const WITNESS_IN = CORR_SPEECH_ENDS + Math.round(0.5 * S);
+
 /** 10.01s at 24fps, conformed to the composition's 30. */
-export const FOOTAGE_FRAMES = 300;
+export const WITNESS_FRAMES = 300;
 
 /**
- * The checklist, cut to the delivery in the clip rather than to a script.
+ * The checklist, cut to the delivery in the witness clip rather than to a
+ * script. Measured off its own RMS envelope: `in` is where an utterance
+ * starts, `tick` is where it ends and the silence begins.
  *
- * These are measured off the clip's own RMS envelope: `in` is where an
- * utterance starts, `tick` is where it ends and the silence begins. Five
- * groups, with the boundaries the audio actually gives —
- *
- *   0.22-0.90   1.56-2.36   2.92-4.17   4.29-5.62   5.71-6.99   7.69-9.53
- *
- * — the last of which gets no tick. Under one reading it is "he followed
- * every rule" and under another it is the parallel-universe line, and a tick
- * landing on the wrong one is worse than a tick landing nowhere. So the
- * summary stamps across the finished list instead, which works either way and
- * is the better graphic regardless: five findings, then the verdict over them.
+ * The clip runs the full six-sentence list from vo-lines.json's ep01-shot06-a
+ * ("He put the meter down... He followed every rule"), and its five gaps of
+ * silence land almost exactly on the six sentence boundaries — the third gap
+ * is short enough that two short sentences ("wasn't honking" / "wasn't on the
+ * phone") share one utterance either side of it. The last segment's duration
+ * and syllable count both fit "he followed every rule" at the same rate as
+ * every other line in the clip, with no room left in the 10s take for the
+ * longer parallel-universe sentence to also be in here — that line is
+ * scripted as a distinct beat and wants its own clip.
  */
-const AT = (seconds: number) => FOOTAGE_IN + Math.round(seconds * S);
+const AT = (seconds: number) => WITNESS_IN + Math.round(seconds * S);
 export const ITEMS = [
 	{text: 'PUT THE METER DOWN', in: AT(0.22), tick: AT(0.9)},
 	{text: 'DID NOT ASK', in: AT(1.56), tick: AT(2.36)},
 	{text: 'NO HORN', in: AT(2.92), tick: AT(4.17)},
 	{text: 'NOT ON THE PHONE', in: AT(4.29), tick: AT(5.62)},
 	{text: 'STOPPED AT EVERY SIGNAL', in: AT(5.71), tick: AT(6.99)},
+	{text: 'FOLLOWED EVERY RULE', in: AT(7.69), tick: AT(9.53)},
 ];
-/** Over the whole list, on the last thing he says. */
-export const VERDICT_STAMP = AT(7.85);
 
-export const SHOT_06_DURATION = FOOTAGE_IN + FOOTAGE_FRAMES + 24;
+export const LOWER_THIRD_IN = WITNESS_IN + 8;
+
+export const SHOT_06_DURATION = WITNESS_IN + WITNESS_FRAMES + 24;

@@ -9,7 +9,7 @@ a file is still missing, so the shots build and preview without it.
 | File | Shot | Length needed |
 |---|---|---|
 | `ep01-witness.mp4` | 6 — Witness Testimony | landed, 10s |
-| `ep01-correspondent-q.mp4` | 6 — the question that opens it | ~4s |
+| `ep01-correspondent-q.mp4` | 6 — the question that opens it | landed, 6s |
 | `ep01-expert.mp4` | 7 — The Expert | ~14s |
 | `ep01-witness-2.mp4` | 8 — the passenger again, more haggard | ~10s |
 | `ep01-correspondent.mp4` | 9 — Correspondent PSA | ~12s |
@@ -38,7 +38,7 @@ busy background, no hands coming up into it.
 
 ## Shot 6 — the correspondent's question
 
-Cuts in before the witness answers. He is the other end of the same video
+**Landed.** Cuts in before the witness answers. He is the other end of the same video
 call, so this matches the witness's register rather than the studio look of
 Shot 9 — a call, not a broadcast.
 
