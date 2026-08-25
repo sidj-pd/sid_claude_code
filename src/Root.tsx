@@ -8,6 +8,8 @@ import {Shot03InstantYes} from './compositions/episode01/shot03/Shot03InstantYes
 import {SHOT_03_DURATION} from './compositions/episode01/shot03/beats';
 import {Shot04MeterDown} from './compositions/episode01/shot04/Shot04MeterDown';
 import {SHOT_04_DURATION} from './compositions/episode01/shot04/beats';
+import {Shot05Graphic} from './compositions/episode01/shot05/Shot05Graphic';
+import {SHOT_05_DURATION} from './compositions/episode01/shot05/beats';
 import {
 	OPENING_MONTAGE_DURATION_IN_FRAMES,
 	OPENING_MONTAGE_FPS,
@@ -55,6 +57,14 @@ export const Root: React.FC = () => {
 				id="Ep01Shot04MeterDown"
 				component={Shot04MeterDown}
 				durationInFrames={SHOT_04_DURATION}
+				fps={OPENING_MONTAGE_FPS}
+				width={OPENING_MONTAGE_WIDTH}
+				height={OPENING_MONTAGE_HEIGHT}
+			/>
+			<Composition
+				id="Ep01Shot05Graphic"
+				component={Shot05Graphic}
+				durationInFrames={SHOT_05_DURATION}
 				fps={OPENING_MONTAGE_FPS}
 				width={OPENING_MONTAGE_WIDTH}
 				height={OPENING_MONTAGE_HEIGHT}
