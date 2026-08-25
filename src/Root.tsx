@@ -29,6 +29,7 @@ import {
 	OPENING_MONTAGE_WIDTH,
 	OpeningMontage,
 } from './compositions/OpeningMontage';
+import {Ep01CoverCard} from './compositions/covers/Ep01CoverCard';
 
 export const Root: React.FC = () => {
 	return (
@@ -36,6 +37,14 @@ export const Root: React.FC = () => {
 			<Composition
 				id="OpeningMontage"
 				component={OpeningMontage}
+				durationInFrames={OPENING_MONTAGE_DURATION_IN_FRAMES}
+				fps={OPENING_MONTAGE_FPS}
+				width={OPENING_MONTAGE_WIDTH}
+				height={OPENING_MONTAGE_HEIGHT}
+			/>
+			<Composition
+				id="Ep01CoverCard"
+				component={Ep01CoverCard}
 				durationInFrames={OPENING_MONTAGE_DURATION_IN_FRAMES}
 				fps={OPENING_MONTAGE_FPS}
 				width={OPENING_MONTAGE_WIDTH}
