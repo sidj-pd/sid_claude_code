@@ -7,14 +7,13 @@
  * reserved for reenactment-to-reenactment. So Shot 6 does not cut — it opens
  * on Shot 5's page still standing and rips it apart.
  *
- * Everything after that is cut to the takes, measured off their RMS envelopes
- * rather than estimated. The passenger's account is six flat sentences with a
- * beat between each, and each one puts a line on an evidence checklist and
- * then ticks it — which is the shot's whole joke: nothing he describes is
- * remarkable, and the list of unremarkable things is damning.
+ * The footage carries its own dialogue, because a talking head cut to
+ * synthesised speech does not lip sync. Nothing here adds audio: the sound of
+ * this shot is the clip's, and the graphics are cut to it.
  */
 
-const S = 30; // frames per second, for reading the numbers below as seconds
+/** Video frames per second of the composition, for reading seconds below. */
+const S = 30;
 
 /** A few frames of the intact page, so the cut into this shot is invisible. */
 export const TEAR_STARTS = 4;
@@ -25,46 +24,39 @@ export const SLATE_IN = TEAR_STARTS + 16;
 export const SLATE_OUT = SLATE_IN + 15;
 export const LOWER_THIRD_IN = TEAR_DONE + 8;
 
-/** Correspondent, off screen. 2.88s; speech from 0.28 to 2.06. */
-export const VO_Q_STARTS = 34;
-export const VO_Q_FRAMES = 87;
+/**
+ * The clip is held on its first frame until the paper is off, then runs.
+ * Otherwise his opening line plays behind the sheet that is still covering
+ * him, and the shot throws away its first sentence.
+ */
+export const FOOTAGE_IN = TEAR_DONE;
+/** 10.01s at 24fps, conformed to the composition's 30. */
+export const FOOTAGE_FRAMES = 300;
 
 /**
- * The testimony. 15.36s, six sentences, measured start and end of each.
- * The checklist line appears as he begins an item and is ticked as he
- * finishes it, so the frame is always one beat behind him rather than
- * announcing what he is about to say.
+ * The checklist, cut to the delivery in the clip rather than to a script.
+ *
+ * These are measured off the clip's own RMS envelope: `in` is where an
+ * utterance starts, `tick` is where it ends and the silence begins. Five
+ * groups, with the boundaries the audio actually gives —
+ *
+ *   0.22-0.90   1.56-2.36   2.92-4.17   4.29-5.62   5.71-6.99   7.69-9.53
+ *
+ * — the last of which gets no tick. Under one reading it is "he followed
+ * every rule" and under another it is the parallel-universe line, and a tick
+ * landing on the wrong one is worse than a tick landing nowhere. So the
+ * summary stamps across the finished list instead, which works either way and
+ * is the better graphic regardless: five findings, then the verdict over them.
  */
-export const VO_A_STARTS = VO_Q_STARTS + VO_Q_FRAMES + 12;
-export const VO_A_FRAMES = 461;
+const AT = (seconds: number) => FOOTAGE_IN + Math.round(seconds * S);
 export const ITEMS = [
-	{text: 'PUT THE METER DOWN', start: 0.34, end: 2.32},
-	{text: 'DID NOT ASK', start: 3.1, end: 4.3},
-	{text: 'NO HORN', start: 5.22, end: 6.74},
-	{text: 'NOT ON THE PHONE', start: 7.36, end: 8.94},
-	{text: 'STOPPED AT EVERY SIGNAL', start: 9.8, end: 12.34},
-	{text: 'FOLLOWED EVERY RULE', start: 13.2, end: 14.8},
-].map((item) => ({
-	text: item.text,
-	in: VO_A_STARTS + Math.round(item.start * S),
-	tick: VO_A_STARTS + Math.round(item.end * S),
-}));
-
-/**
- * "It almost felt like... I was in a parallel universe." 6.88s, with a real
- * 1.5s pause at the ellipsis — the last phrase runs from 4.06s.
- */
-export const VO_B_STARTS = VO_A_STARTS + VO_A_FRAMES + 14;
-export const VO_B_FRAMES = 207;
-/**
- * The dropout the script asks for, on "parallel universe". Two of them, short
- * and irregular, because a single tidy gap reads as an edit rather than as a
- * connection failing. The picture tears on the same frames.
- */
-export const GLITCHES = [
-	{at: VO_B_STARTS + Math.round(5.32 * S), frames: 4},
-	{at: VO_B_STARTS + Math.round(5.78 * S), frames: 3},
-	{at: VO_B_STARTS + Math.round(6.16 * S), frames: 5},
+	{text: 'PUT THE METER DOWN', in: AT(0.22), tick: AT(0.9)},
+	{text: 'DID NOT ASK', in: AT(1.56), tick: AT(2.36)},
+	{text: 'NO HORN', in: AT(2.92), tick: AT(4.17)},
+	{text: 'NOT ON THE PHONE', in: AT(4.29), tick: AT(5.62)},
+	{text: 'STOPPED AT EVERY SIGNAL', in: AT(5.71), tick: AT(6.99)},
 ];
+/** Over the whole list, on the last thing he says. */
+export const VERDICT_STAMP = AT(7.85);
 
-export const SHOT_06_DURATION = VO_B_STARTS + VO_B_FRAMES + 30;
+export const SHOT_06_DURATION = FOOTAGE_IN + FOOTAGE_FRAMES + 24;

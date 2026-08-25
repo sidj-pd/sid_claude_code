@@ -12,39 +12,33 @@ import {EvidenceStamp} from '../../../components/EvidenceStamp';
 import {Footage} from '../../../components/Footage';
 import {NewsprintTexture} from '../../../components/NewsprintTexture';
 import {PaperTear} from '../../../components/PaperTear';
-import {VoiceOver} from '../../../components/VoiceOver';
 import {tornPolygon} from '../../../components/tornEdge';
 import {useStopMotionStep} from '../../../components/useStopMotionStep';
 import {SHOT_05_DURATION} from '../shot05/beats';
 import {Shot05Graphic} from '../shot05/Shot05Graphic';
 import {ChecklistItem} from './Checklist';
 import {
-	GLITCHES,
+	FOOTAGE_IN,
 	ITEMS,
 	LOWER_THIRD_IN,
 	SLATE_IN,
 	SLATE_OUT,
 	TEAR_FRAMES,
 	TEAR_STARTS,
-	VO_A_STARTS,
-	VO_B_STARTS,
-	VO_Q_STARTS,
+	VERDICT_STAMP,
 } from './beats';
 
 const CLAMP = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
 const INK = '#241d15';
 
 const LIST_X = 84;
-const LIST_W = 800;
-const LIST_TOP = 880;
+const LIST_W = 820;
+const LIST_TOP = 900;
 const ITEM_H = 92;
 const ITEM_GAP = 14;
 
-/** Frames on which the picture breaks up along with the sound. */
-const glitchAt = (frame: number): number => {
-	const hit = GLITCHES.find((g) => frame >= g.at && frame < g.at + g.frames);
-	return hit ? 1 : 0;
-};
+const FOOTAGE_DESCRIPTION =
+	'Passenger on a video call at home.\nVertical, photoreal, with its own dialogue.';
 
 /**
  * Shot 6 — Witness Testimony.
@@ -56,12 +50,16 @@ const glitchAt = (frame: number): number => {
  * footage, so by the time the audience sees what is underneath they have
  * already been told what kind of thing it is.
  *
+ * The clip speaks for itself. It was generated with its dialogue, so this
+ * shot adds no audio of any kind and the graphics are cut to the delivery
+ * rather than the delivery to the graphics — every checklist beat in
+ * beats.ts is measured off the clip's own envelope.
+ *
  * What survives the change of register is the paper: the caption and the
  * evidence checklist stay newsprint chits over photoreal video, which is what
- * ties the two halves of the episode into one piece rather than two.
- *
- * The joke is in the checklist. Every item on it is something an auto driver
- * is simply supposed to do, and each one gets written down and ticked like a
+ * ties the two halves of the episode into one piece rather than two. The
+ * checklist is the joke — every item on it is something an auto driver is
+ * simply supposed to do, and each one gets written down and ticked like a
  * finding. Nothing he describes is remarkable. The list is damning anyway.
  */
 export const Shot06Testimony: React.FC = () => {
@@ -77,44 +75,19 @@ export const Shot06Testimony: React.FC = () => {
 		CLAMP,
 	);
 
-	const broken = glitchAt(frame);
-
 	return (
 		<AbsoluteFill style={{backgroundColor: '#0c0e11'}}>
-			{/* The footage runs from frame zero, behind the paper — it is being
-			    uncovered, not switched on. */}
-			<AbsoluteFill
-				style={{
-					transform: broken ? 'translateX(-14px) scaleY(1.012)' : undefined,
-					filter: broken ? 'saturate(1.5) contrast(1.2)' : undefined,
-				}}
-			>
-				<Footage
-					id="ep01-witness"
-					description={`Passenger on a video call at home.\nVertical, photoreal, low-bitrate webcam look.`}
-				/>
-				{/* Low-bitrate video-call texture: a faint macroblock grid and a
-				    cool cast, so the photoreal material reads as a compressed call
-				    rather than as cinema. */}
-				<AbsoluteFill
-					style={{
-						backgroundImage:
-							'repeating-linear-gradient(0deg, rgba(0,0,0,0.05) 0 1px, transparent 1px 8px),' +
-							'repeating-linear-gradient(90deg, rgba(0,0,0,0.05) 0 1px, transparent 1px 8px)',
-						mixBlendMode: 'multiply',
-						opacity: 0.55,
-					}}
-				/>
-				{broken ? (
-					<AbsoluteFill
-						style={{
-							background:
-								'repeating-linear-gradient(0deg, rgba(120,190,255,0.16) 0 6px, rgba(255,90,60,0.14) 6px 14px)',
-							mixBlendMode: 'screen',
-						}}
-					/>
-				) : null}
-			</AbsoluteFill>
+			{/* The clip is held on its first frame while the paper comes off, and
+			    silent while it is held — the reveal should uncover him about to
+			    speak, not catch him mid-sentence behind a sheet. */}
+			<Sequence from={0} durationInFrames={FOOTAGE_IN}>
+				<Freeze frame={0}>
+					<Footage id="ep01-witness" description={FOOTAGE_DESCRIPTION} muted />
+				</Freeze>
+			</Sequence>
+			<Sequence from={FOOTAGE_IN}>
+				<Footage id="ep01-witness" description={FOOTAGE_DESCRIPTION} />
+			</Sequence>
 
 			{/* The page from Shot 5, frozen on its last frame and torn apart. */}
 			{tear < 1 ? (
@@ -125,6 +98,8 @@ export const Shot06Testimony: React.FC = () => {
 				</PaperTear>
 			) : null}
 
+			{/* The rip is the one sound this shot adds, and it belongs to the
+			    paper rather than to the footage. */}
 			<Sequence from={TEAR_STARTS}>
 				<Audio src={staticFile('sfx/paper-rip.wav')} volume={0.95} />
 			</Sequence>
@@ -137,8 +112,8 @@ export const Shot06Testimony: React.FC = () => {
 						age={frame - SLATE_IN}
 						fontSize={56}
 						rotate={-5}
-						color="#c04a34"
-						style={{background: 'rgba(12,10,8,0.55)'}}
+						color="#d8563a"
+						style={{background: 'rgba(12,10,8,0.62)'}}
 					/>
 				</AbsoluteFill>
 			) : null}
@@ -160,6 +135,25 @@ export const Shot06Testimony: React.FC = () => {
 				</div>
 			))}
 
+			{/* The verdict, stamped across the finished list — over the chits
+			    rather than after them, the way a form gets stamped once every
+			    line on it has been filled in. */}
+			{frame >= VERDICT_STAMP ? (
+				<AbsoluteFill style={{alignItems: 'center', justifyContent: 'flex-start'}}>
+					<div style={{marginTop: LIST_TOP + 1.15 * (ITEM_H + ITEM_GAP)}}>
+						{/* Stacked on two lines: typewriter is a wide face, and on one
+						    line the stamp runs off both edges of a 1080 frame. */}
+						<EvidenceStamp
+							text={'FOLLOWED\nEVERY RULE'}
+							age={frame - VERDICT_STAMP}
+							fontSize={62}
+							rotate={-8}
+							color="#a8331c"
+						/>
+					</div>
+				</AbsoluteFill>
+			) : null}
+
 			{/* Lower third — newsprint, despite the photoreal footage. Keeping the
 			    caption in the paper world is what stops Scene 2 reading as a
 			    different film. */}
@@ -168,7 +162,7 @@ export const Shot06Testimony: React.FC = () => {
 					style={{
 						position: 'absolute',
 						left: LIST_X,
-						top: 1610,
+						top: 1618,
 						width: 880,
 						background: '#efe4c8',
 						padding: '22px 32px 26px',
@@ -200,13 +194,6 @@ export const Shot06Testimony: React.FC = () => {
 					<NewsprintTexture opacity={0.16} />
 				</div>
 			) : null}
-
-			<VoiceOver id="ep01-shot06-q" from={VO_Q_STARTS} />
-			<VoiceOver id="ep01-shot06-a" from={VO_A_STARTS} />
-			{/* The dropout the script asks for: the sound goes with the picture on
-			    the same frames, so it reads as the call failing rather than as an
-			    effect applied to one of them. */}
-			<VoiceOver id="ep01-shot06-b" from={VO_B_STARTS} volume={(f) => (glitchAt(f + VO_B_STARTS) ? 0 : 1)} />
 		</AbsoluteFill>
 	);
 };

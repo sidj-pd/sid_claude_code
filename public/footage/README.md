@@ -8,7 +8,8 @@ a file is still missing, so the shots build and preview without it.
 
 | File | Shot | Length needed |
 |---|---|---|
-| `ep01-witness.mp4` | 6 — Witness Testimony | ~28s |
+| `ep01-witness.mp4` | 6 — Witness Testimony | landed, 10s |
+| `ep01-correspondent-q.mp4` | 6 — the question that opens it | ~4s |
 | `ep01-expert.mp4` | 7 — The Expert | ~14s |
 | `ep01-witness-2.mp4` | 8 — the passenger again, more haggard | ~10s |
 | `ep01-correspondent.mp4` | 9 — Correspondent PSA | ~12s |
@@ -34,6 +35,33 @@ the bottom 45% of the frame, so keep that area to plain torso and room — no
 busy background, no hands coming up into it.
 
 ---
+
+## Shot 6 — the correspondent's question
+
+Cuts in before the witness answers. He is the other end of the same video
+call, so this matches the witness's register rather than the studio look of
+Shot 9 — a call, not a broadcast.
+
+A photorealistic vertical video, 9:16, of an Indian television correspondent
+in his forties on a video call from a work desk. Clean-shaven, a plain dark
+shirt or a jacket over a light shirt, over-ear headphones with a small boom
+mic. Behind him a plain office wall, a shelf edge, a closed laptop — tidy and
+anonymous. Even indoor light from a window off to one side, slightly cooler
+than the witness's room.
+
+Framed on a laptop webcam, so slightly high and level with his eyes, dead
+still, no camera movement. Head and shoulders in the upper half; the lower
+half stays plain torso and desk, for the caption. The look is the same
+compressed video call: soft focus, sensor noise in the shadows, no grade, no
+shallow depth of field, no music.
+
+He is professionally uninterested. He is not the subject of this piece and
+knows it. No warmth, no leaning in, no encouraging nod — he asks and then
+waits, blinking, one small notepad glance.
+
+Spoken dialogue:
+
+1. "Can you walk us through what happened?"
 
 ## Shot 6 — the witness
 
@@ -66,6 +94,11 @@ Spoken dialogue, split across clips:
 3. "He stopped at every single signal. He followed every rule."
 4. — his eyes drift off camera, as though replaying it — "It almost felt
    like... I was in a parallel universe."
+
+**Landed as one 10s clip** covering the list. The checklist in
+`shot06/beats.ts` is cut to its measured envelope. The parallel-universe beat
+is the shot's punchline and still wants its own clip — same setup, same
+wardrobe, eyes drifting off camera.
 
 ## Shot 7 — the expert
 

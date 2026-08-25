@@ -6,6 +6,12 @@ export type FootageProps = {
 	id: string;
 	/** What the missing file should say it is, on the placeholder card. */
 	description: string;
+	/**
+	 * These clips are generated with their dialogue, so the sound is the
+	 * performance and not a bed under one — mute only the copy that is being
+	 * held frozen behind a transition.
+	 */
+	muted?: boolean;
 	style?: React.CSSProperties;
 };
 
@@ -18,7 +24,7 @@ export type FootageProps = {
  * slate when it is not — labelled loudly, because the one genuinely dangerous
  * placeholder is the one that could be mistaken for a design decision.
  */
-export const Footage: React.FC<FootageProps> = ({id, description, style}) => {
+export const Footage: React.FC<FootageProps> = ({id, description, muted = false, style}) => {
 	const path = `footage/${id}.mp4`;
 	const present = getStaticFiles().some((file) => file.name === path);
 
@@ -26,6 +32,7 @@ export const Footage: React.FC<FootageProps> = ({id, description, style}) => {
 		return (
 			<OffthreadVideo
 				src={staticFile(path)}
+				muted={muted}
 				style={{width: '100%', height: '100%', objectFit: 'cover', ...style}}
 			/>
 		);
