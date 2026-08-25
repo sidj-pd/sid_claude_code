@@ -106,51 +106,79 @@ const WtfCard: React.FC<{frame: number}> = ({frame}) => {
 	);
 };
 
+/** The kicker, broken into short phrases so each can take its own line. */
+const KICKER_LINES = ['FRANKLY,', "WE'RE LUCKY", 'HE REMEMBERED', 'HOW TO DRIVE', 'AT ALL.'];
+/** Frames between one line arriving and the next — a read-down, not a pop. */
+const KICKER_STAGGER = 6;
+
 /**
- * The kicker, captioned — arriving once the whiteboard punch-in has settled,
- * over the one line in the shot that most wants to be read as well as heard.
- * Same card language as the WTF term, at the bottom rather than the top so
- * the two never compete for the eye in the same frame.
+ * The kicker, as text rather than a caption card — arriving once the
+ * whiteboard punch-in has settled, over the one line in the shot that most
+ * wants to be read as well as heard.
+ *
+ * No newsprint chit this time: the line is spoken by a man who is on camera
+ * and fully audible, not a piece of evidence being entered into the record,
+ * so it does not need the show's paper-world packaging the way a caption or
+ * a term card does. Set instead as bold type straight over the picture, kept
+ * legible by a stroke rather than a backing panel so it never dims the
+ * whiteboard it is sitting beside.
+ *
+ * Run down the right edge, one phrase per line with real space between them,
+ * because the whole point of the punch-in is the whiteboard on that side of
+ * frame — cramming five phrases into one dense block would put a wall of
+ * type directly over the thing the shot is trying to show.
  */
 const KickerQuote: React.FC<{frame: number}> = ({frame}) => {
 	if (frame < KICKER_QUOTE_IN || frame >= KICKER_QUOTE_OUT) return null;
-	const age = frame - KICKER_QUOTE_IN;
 	const fadeOut = interpolate(frame, [KICKER_QUOTE_OUT - 8, KICKER_QUOTE_OUT], [1, 0], CLAMP);
 
 	return (
 		<div
 			style={{
 				position: 'absolute',
-				left: 84,
-				top: 1618,
-				width: 900,
+				right: 56,
+				top: 430,
+				bottom: 560,
+				display: 'flex',
+				flexDirection: 'column',
+				justifyContent: 'space-between',
+				alignItems: 'flex-end',
 				opacity: fadeOut,
 			}}
 		>
-			<div
-				style={{
-					background: '#efe4c8',
-					padding: '24px 34px 28px',
-					clipPath: tornPolygon({seed: 63, depth: 5, teeth: 16}),
-					boxShadow: '0 10px 22px rgba(12,10,8,0.5)',
-					position: 'relative',
-					transform: `scale(${age < 2 ? 1.05 : 1})`,
-				}}
-			>
-				<div
-					style={{
-						fontFamily: 'RansomAnton, sans-serif',
-						fontSize: 44,
-						lineHeight: 1.15,
-						letterSpacing: 1,
-						color: '#241d15',
-						whiteSpace: 'pre-line',
-					}}
-				>
-					{'"FRANKLY, WE\'RE LUCKY\nHE REMEMBERED HOW TO\nDRIVE AT ALL."'}
-				</div>
-				<NewsprintTexture opacity={0.16} />
-			</div>
+			{KICKER_LINES.map((line, i) => {
+				const lineIn = KICKER_QUOTE_IN + i * KICKER_STAGGER;
+				const age = frame - lineIn;
+				if (age < 0) return <div key={line} />;
+
+				return (
+					<div
+						key={line}
+						style={{
+							fontFamily: 'RansomAnton, sans-serif',
+							fontSize: 66,
+							lineHeight: 1,
+							letterSpacing: 1,
+							textAlign: 'right',
+							color: '#f2e9d3',
+							// A stroke rather than a card: legible over the pale
+							// whiteboard and the dark shelf behind it alike, where a
+							// single fill colour could not be.
+							textShadow: [
+								'0 0 10px rgba(20,14,8,0.9)',
+								'2px 2px 0 #1b140d',
+								'-2px 2px 0 #1b140d',
+								'2px -2px 0 #1b140d',
+								'-2px -2px 0 #1b140d',
+							].join(', '),
+							opacity: interpolate(age, [0, 3], [0, 1], CLAMP),
+							transform: `translateX(${interpolate(age, [0, 4], [30, 0], CLAMP)}px)`,
+						}}
+					>
+						{line}
+					</div>
+				);
+			})}
 		</div>
 	);
 };
