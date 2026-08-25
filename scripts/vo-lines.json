@@ -75,6 +75,12 @@
       "speaker": "passenger",
       "text": "It almost felt like... I was in a parallel universe.",
       "delivery": "quieter and drifting, as though replaying it; a real pause after 'It almost felt like', then the last phrase stated plainly as a fact rather than delivered as a punchline"
+    },
+    {
+      "id": "ep01-shot07-q",
+      "speaker": "correspondent",
+      "text": "How do you explain what happened?",
+      "delivery": "flat and procedural, identical register to the shot 6 question — this is a formula he asks everyone, not a real inquiry"
     }
   ]
 }

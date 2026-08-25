@@ -10,6 +10,7 @@ a file is still missing, so the shots build and preview without it.
 |---|---|---|
 | `ep01-witness.mp4` | 6 — Witness Testimony | landed, 10s |
 | `ep01-correspondent-q.mp4` | 6 — the question that opens it | landed, 6s |
+| `ep01-expert-1.mp4` … `ep01-expert-4.mp4` | 7 — The Expert, one file per line | ~5s / ~5s / ~4s / ~3s |
 | `ep01-expert.mp4` | 7 — The Expert | ~14s |
 | `ep01-witness-2.mp4` | 8 — the passenger again, more haggard | ~10s |
 | `ep01-correspondent.mp4` | 9 — Correspondent PSA | ~12s |
@@ -101,6 +102,24 @@ is the shot's punchline and still wants its own clip — same setup, same
 wardrobe, eyes drifting off camera.
 
 ## Shot 7 — the expert
+
+**Correspondent's question stays off-screen here**, per the script — no clip
+needed for it. It plays as a TTS line (`ep01-shot07-q`, already generated)
+under a held, silent frame of Dr. Ramamurthy about to answer, the same way
+the script originally had Shot 6 staged before you sent that clip on-screen.
+Say the word if you'd rather show him again for visual variety.
+
+**No fifth clip for the whiteboard cutaway.** The prompt below already asks
+the generated footage to include "a whiteboard with a few hand-drawn arrows"
+as set dressing behind him — Shot07Expert.tsx punches the camera into that
+existing part of the frame during the kicker line rather than requesting a
+separate shot of it. `WHITEBOARD_CROP` in that file is a guess at where the
+whiteboard sits and wants correcting by eye once a real clip lands.
+
+**Four separate clips, not one continuous take** — same reasoning as the
+witness: interviews are cut anyway, and jump cuts between takes read as
+edited evidence. Land them as `ep01-expert-1.mp4` through `-4.mp4`, one per
+numbered line below.
 
 The same photoreal register but a more formal setup, which is the joke: he
 believes he is the credible one. A photorealistic vertical video, 9:16, of an

@@ -8,11 +8,10 @@ import {
 	staticFile,
 	useCurrentFrame,
 } from 'remotion';
+import {Chyron} from '../../../components/Chyron';
 import {EvidenceStamp} from '../../../components/EvidenceStamp';
 import {Footage} from '../../../components/Footage';
-import {NewsprintTexture} from '../../../components/NewsprintTexture';
 import {PaperTear} from '../../../components/PaperTear';
-import {tornPolygon} from '../../../components/tornEdge';
 import {useStopMotionStep} from '../../../components/useStopMotionStep';
 import {SHOT_05_DURATION} from '../shot05/beats';
 import {Shot05Graphic} from '../shot05/Shot05Graphic';
@@ -31,7 +30,6 @@ import {
 } from './beats';
 
 const CLAMP = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
-const INK = '#241d15';
 
 const LIST_X = 84;
 const LIST_W = 820;
@@ -44,71 +42,6 @@ const WITNESS_DESCRIPTION =
 	'Passenger on a video call at home.\nVertical, photoreal, with its own dialogue.';
 const CORR_DESCRIPTION =
 	'Correspondent on the other end of the call.\nVertical, photoreal, with its own dialogue.';
-
-/**
- * A broadcast-style chyron, newsprint rather than a real TV lower third —
- * same rule as everywhere else in the shot: the caption stays paper even
- * where the picture behind it does not.
- *
- * Fades in and, unlike the witness's (which just holds to the end of the
- * shot), can fade back out — the correspondent's needs to be gone before the
- * witness's own caption arrives, so the frame is never claiming two people's
- * names at once.
- */
-const Chyron: React.FC<{
-	name: string;
-	title: string;
-	frame: number;
-	in: number;
-	out?: number;
-	top: number;
-	seed: number;
-}> = ({name, title, frame, in: fadeIn, out: fadeOut, top, seed}) => {
-	if (frame < fadeIn) return null;
-	const opacity =
-		fadeOut !== undefined
-			? interpolate(frame, [fadeIn, fadeIn + 3, fadeOut - 4, fadeOut], [0, 1, 1, 0], CLAMP)
-			: interpolate(frame, [fadeIn, fadeIn + 3], [0, 1], CLAMP);
-	if (opacity <= 0) return null;
-
-	return (
-		<div
-			style={{
-				position: 'absolute',
-				left: LIST_X,
-				top,
-				width: 880,
-				background: '#efe4c8',
-				padding: '20px 32px 24px',
-				clipPath: tornPolygon({seed, depth: 5, teeth: 16}),
-				boxShadow: '0 10px 22px rgba(12,10,8,0.5)',
-				opacity,
-			}}
-		>
-			<div
-				style={{
-					fontFamily: 'RansomAnton, sans-serif',
-					fontSize: 52,
-					letterSpacing: 1.5,
-					color: INK,
-				}}
-			>
-				{name}
-			</div>
-			<div
-				style={{
-					marginTop: 6,
-					fontFamily: 'RansomSpecialElite, monospace',
-					fontSize: 27,
-					color: 'rgba(36,29,21,0.75)',
-				}}
-			>
-				{title}
-			</div>
-			<NewsprintTexture opacity={0.16} />
-		</div>
-	);
-};
 
 /**
  * Shot 6 — Webcam Interview.
