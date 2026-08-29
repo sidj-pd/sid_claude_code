@@ -141,10 +141,10 @@ export const Shot01LeaveRequest: React.FC = () => {
 	// here and never in the art (§5): a generator garbles lettering, and baked
 	// text cannot be re-worded or animated. It is also why the cutout was
 	// commissioned with an empty screen.
-	const sheetX = screenX + screenW * 0.055;
-	const sheetY = screenY + screenH * 0.075;
-	const sheetW = screenW * 0.89;
-	const sheetH = screenH * 0.85;
+	const sheetX = screenX + screenW * 0.07;
+	const sheetY = screenY + screenH * 0.09;
+	const sheetW = screenW * 0.86;
+	const sheetH = screenH * 0.82;
 
 	// The SEND chit sits low-right on the sheet, where a compose window puts it.
 	const sendW = sheetW * 0.26;
@@ -278,20 +278,19 @@ export const Shot01LeaveRequest: React.FC = () => {
 						>
 							<div
 								style={{
-									fontSize: sheetH * 0.088,
+									fontSize: sheetH * 0.072,
 									letterSpacing: 1.5,
 									borderBottom: '2px solid #26292f',
 									paddingBottom: sheetH * 0.035,
 								}}
 							>
-								LEAVE REQUEST — 12–16 SEPTEMBER
+								LEAVE REQUEST — 12–16 SEPT
 							</div>
-							<div style={{fontSize: sheetH * 0.062, lineHeight: 1.65, opacity: 0.88}}>
+							<div style={{fontSize: sheetH * 0.05, lineHeight: 1.5, opacity: 0.88, paddingRight: sheetW * 0.02}}>
 								Wanted to check if I could take leave from the 12th to the 16th.
 								<br />
 								Happy to hand over anything pending before I go — and I&apos;ll keep
 								an eye on Teams if anything urgent comes up.
-								<br />
 								<br />
 								Thanks.
 							</div>
