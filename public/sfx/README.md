@@ -1,14 +1,19 @@
-# SFX assets
+# SFX
 
-Drop the two cues from the asset checklist here, then wire them up:
+All four cues are synthesised from scratch by `scripts/sfx.py` — no binary
+source assets, no licensing, deterministic output, tunable by a number.
 
-- `paper-riffle.wav` (or `.mp3`) — pitch-shiftable, used by `<PageFlipTransition>`
-  on every flip. Pass it via `sfxSrc={staticFile('sfx/paper-riffle.wav')}`, and
-  bump `sfxPlaybackRate` per flip for the Beat 4 heartbeat-speedup effect
-  (already wired in `src/compositions/beats/Beat4IconGrabBag.tsx`).
-- `stamp-thud.wav` (or `.mp3`) — used once by `<StampImpact>` in
-  `src/compositions/beats/Beat5TitleDrop.tsx`. Pass it via
-  `sfxSrc={staticFile('sfx/stamp-thud.wav')}`.
+```bash
+python3 scripts/sfx.py            # write any missing effects
+python3 scripts/sfx.py --force    # rebuild everything
+python3 scripts/sfx.py paper-rip  # just one
+```
 
-Until these files exist, both components render silently — `sfxSrc` is
-optional and simply skips mounting `<Audio>` when omitted.
+| File | Used by |
+|---|---|
+| `meter-click.wav` | Shot 3 and Shot 4, on the flag hitting its stop |
+| `stamp-thud.wav` | `StampImpact` (montage title), every headline landing in Shots 8 and 10, the closing CASE CLOSED stamp |
+| `paper-riffle.wav` | `PageFlipTransition` — reenactment-to-reenactment cuts only |
+| `paper-rip.wav` | `PaperTear` — every crossing of the reality/reenactment boundary |
+
+See `docs/PRODUCTION-NOTES.md` §7 for how each is constructed and why.
