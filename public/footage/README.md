@@ -209,3 +209,82 @@ where a generated headline risks garbled text and can't be art-directed.
   FILES OWN CLAIM" (Shot 8).
 - `newspaper-clip-committee.jpg` — an empty meeting room, for "GOVERNMENT
   FORMS COMMITTEE TO STUDY W.T.F. SYNDROME" (Shot 10).
+
+---
+
+# Photoreal footage — Episode 02
+
+Same three rules as Episode 01, and one new one.
+
+**Generate the dialogue with the video.** These are talking heads and TTS over
+a generated performance will not lip sync, ever. The correspondent is the
+exception again: his question in Shot 4 is off screen, so it stays TTS
+(`ep02-shot04-q`) and he is never on camera in that shot at all.
+
+**Several short clips, not one long one.** The models top out near eight
+seconds and cut testimony is the native grammar anyway — jump cuts read as
+edited evidence.
+
+**Leave the lower half of the frame quiet.** Vertical 9:16, head and shoulders
+in the upper half, plain torso and room below. The evidence checklist sits over
+roughly y 940–1290 and the lower third at 1340–1480.
+
+**New: nothing important below 80% of the frame height.** Instagram and YouTube
+Shorts cover the bottom fifth with their own UI (production notes §15). A face
+or a gesture down there is hidden behind someone else's caption.
+
+## Shot 4 — the witness, two clips
+
+The same man, same setup, same wardrobe, in both. He is the employee from the
+paper world, but this is the first time he is photoreal — a different actor
+from Episode 01's passenger, since they are different people.
+
+### `ep02-witness-1.mp4` — the list (~6s)
+
+> A photorealistic vertical video, 9:16, of a South Indian man in his early
+> thirties on a video call from home, late in the evening. Plain t-shirt,
+> slightly rumpled, sitting at a desk against a plain wall with a bookshelf
+> edge just visible. Warm domestic lamplight from one side, dimmer than an
+> office.
+>
+> Framed on a laptop webcam, so slightly low and level with his eyes, dead
+> still, no camera movement. Head and shoulders in the upper half of the frame;
+> the lower half stays plain torso and desk. The look is a compressed video
+> call: soft focus, sensor noise in the shadows, no grade, no shallow depth of
+> field, no music.
+>
+> He speaks these words, and only these words:
+> "I sent the request at 11:47 PM. Expecting silence. Maybe a reply Monday, if
+> I was lucky. He replied in under a minute. No questions. No 'let's discuss in
+> standup.' Just... approved."
+>
+> He is deadpan and slightly hollowed out — describing something that unsettled
+> him and that he has not decided how to feel about. He builds very slightly
+> through the list, and lands "approved" flat rather than as a punchline. No
+> performed accent, no comic timing, no mugging, no smiling at the camera.
+
+### `ep02-witness-2.mp4` — the Teams beat (~4.5s)
+
+Cut in as a hard jump cut after the first. Same framing, same light, so the
+edit reads as two takes of one call.
+
+> A photorealistic vertical video, 9:16, of the same South Indian man in his
+> early thirties on a video call from home, late evening — identical framing,
+> wardrobe, lighting and background to the previous clip. Plain t-shirt, desk,
+> plain wall with a bookshelf edge. Laptop webcam angle, dead still, no camera
+> movement. Head and shoulders in the upper half; plain torso and desk below.
+> Compressed video-call look with sensor noise, no grade, no music.
+>
+> He begins with his eyes drifting off camera for a moment, as though replaying
+> the memory, then speaks these words and only these words:
+> "He even said don't check Teams. I've never not checked Teams on leave. I
+> didn't know what to do with myself."
+>
+> Quieter than the previous take and genuinely disoriented rather than funny.
+> The last sentence trails slightly. No performed accent, no comic timing, no
+> mugging, no smiling at the camera.
+
+**When both land:** measure their RMS envelopes and replace the provisional
+`AT()` and `AT2()` values in `src/compositions/episode02/shot04/beats.ts`.
+Every checklist cue and the audio dropout in that file is currently a guess at
+a performance nobody has recorded, and the file says so at the top.

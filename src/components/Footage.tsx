@@ -19,6 +19,13 @@ export type FootageProps = {
 	 * a Sequence at the source's own beginning.
 	 */
 	trimBeforeInFrames?: number;
+	/**
+	 * A number, or a function of the frame WITHIN the clip. The function form
+	 * is for a deliberate audio dropout — the script asks for one on a line in
+	 * Episode 02 Beat 4, and production notes §13 lists the mechanism as
+	 * written but never shot because Episode 01 had no line to land it on.
+	 */
+	volume?: number | ((frame: number) => number);
 	style?: React.CSSProperties;
 };
 
@@ -36,6 +43,7 @@ export const Footage: React.FC<FootageProps> = ({
 	description,
 	muted = false,
 	trimBeforeInFrames,
+	volume = 1,
 	style,
 }) => {
 	const path = `footage/${id}.mp4`;
@@ -46,6 +54,7 @@ export const Footage: React.FC<FootageProps> = ({
 			<OffthreadVideo
 				src={staticFile(path)}
 				muted={muted}
+				volume={volume}
 				trimBefore={trimBeforeInFrames}
 				style={{width: '100%', height: '100%', objectFit: 'cover', ...style}}
 			/>
