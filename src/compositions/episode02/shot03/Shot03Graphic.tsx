@@ -53,8 +53,11 @@ const BAR_H = 196;
 const HEADER_Y = 150;
 const BAR1_Y = 520;
 const BAR2_Y = 980;
-const TAG_Y = 1300;
-const FOOTNOTE_Y = 1408;
+const TAG_Y = 1272;
+// The footnote sits to the LEFT of the stamp rather than under it. Raising the
+// page to clear the platform chrome left these two sharing a band, and a
+// stamp is a stamp — it cannot be nudged around a line of type.
+const FOOTNOTE_Y = 1345;
 /** Page furniture, pinned to the last legible line in the frame. */
 const SOURCE_H = 64;
 const SOURCE_Y = safeTop(SOURCE_H) - 12;
@@ -321,7 +324,7 @@ export const Shot03Graphic: React.FC<{silent?: boolean}> = ({silent = false}) =>
 						<div style={{position: 'absolute', left: remainderX - 132, top: BAR2_Y + BAR_H + 18}}>
 							<ArrowTag age={frame - TAG_STAMP} length={148} />
 						</div>
-						<div style={{position: 'absolute', left: 430, top: TAG_Y}}>
+						<div style={{position: 'absolute', left: 560, top: TAG_Y}}>
 							<EvidenceStamp
 								text="THIS REQUEST"
 								age={frame - TAG_STAMP - 6}
@@ -333,7 +336,7 @@ export const Shot03Graphic: React.FC<{silent?: boolean}> = ({silent = false}) =>
 							<div
 								style={{
 									position: 'absolute',
-									right: BAR_X,
+									left: BAR_X,
 									top: FOOTNOTE_Y,
 									fontFamily: 'RansomSpecialElite, monospace',
 									fontSize: 32,
