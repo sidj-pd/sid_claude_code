@@ -48,6 +48,10 @@ export const NewspaperClipCommittee = makeCutout('cutouts-alpha/newspaper-clip-c
 
 // Episode 02, Shot 1 — the leave request, late at night.
 export const EmployeeDesk34 = makeCutout('cutouts-alpha/employee-desk-34.png');
+// The same pose, smiling, for the beat after the reply lands. Registered
+// against the original: head top at y=40 and right edge at x=632 in both, so
+// a hard swap reads as a stop-motion pose change rather than a jump.
+export const EmployeeDesk34Happy = makeCutout('cutouts-alpha/employee-desk-34-happy.png');
 // Screen arrives empty: the form and the cursor are set in code, per the
 // standing rule that no copy is ever baked into generated art.
 export const LaptopScreen = makeCutout('cutouts-alpha/laptop-screen.png');
@@ -83,6 +87,7 @@ export type CutoutAsset =
 	| 'newspaper-clip-victim'
 	| 'newspaper-clip-committee'
 	| 'employee-desk-34'
+	| 'employee-desk-34-happy'
 	| 'laptop-screen'
 	| 'wall-clock-face'
 	| 'desk-lamp'
@@ -110,6 +115,7 @@ export const CUTOUT_REGISTRY: Record<CutoutAsset, React.FC> = {
 	'newspaper-clip-victim': NewspaperClipVictim,
 	'newspaper-clip-committee': NewspaperClipCommittee,
 	'employee-desk-34': EmployeeDesk34,
+	'employee-desk-34-happy': EmployeeDesk34Happy,
 	'laptop-screen': LaptopScreen,
 	'wall-clock-face': WallClockFace,
 	'desk-lamp': DeskLamp,

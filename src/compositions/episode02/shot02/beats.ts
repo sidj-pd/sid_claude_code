@@ -40,7 +40,16 @@ export const PAUSE_OUT = Math.round(9.67 * S) - VO_TRIM_BEFORE;
 /** 10.66s. */
 export const SPEECH_OUT = Math.round(10.66 * S) - VO_TRIM_BEFORE;
 
-export const SHOT_02_DURATION = SPEECH_OUT + 36;
+/**
+ * He breaks into a smile four frames after the narrator stops — not on the
+ * punchline and not during it. The delay is the joke: he takes a moment to
+ * believe it, and the line is allowed to land before his face agrees with it.
+ * A hard swap between two registered poses, the way a paper puppet changes.
+ */
+export const SMILE_IN = SPEECH_OUT + 4;
+
+/** Long enough after the smile to read it, and no longer. */
+export const SHOT_02_DURATION = SPEECH_OUT + 56;
 
 /**
  * Shot 1 runs 261 frames — 8.7 seconds, so nine ticks of its second hand.

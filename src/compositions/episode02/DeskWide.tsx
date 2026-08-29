@@ -67,6 +67,12 @@ export type DeskWideProps = {
 	 */
 	startTick?: number;
 	scale?: number;
+	/**
+	 * Swaps in the smiling pose. A hard cut, never a blend — paper cutouts do
+	 * not cross-fade, and the two poses are registered so the swap reads as an
+	 * animator changing the puppet between frames.
+	 */
+	happy?: boolean;
 };
 
 /**
@@ -77,7 +83,7 @@ export type DeskWideProps = {
  * and its return is a continuity bug the audience will feel without naming.
  * Shot 9 returns here too, from the manager's side.
  */
-export const DeskWide: React.FC<DeskWideProps> = ({startTick = 0, scale = 1}) => {
+export const DeskWide: React.FC<DeskWideProps> = ({startTick = 0, scale = 1, happy = false}) => {
 	const frame = useCurrentFrame();
 	const {stepIndex: breath} = useStopMotionStep(frame, BREATH_STEP);
 	const breathY = breath % 2 === 0 ? -1 : 1;
@@ -138,7 +144,11 @@ export const DeskWide: React.FC<DeskWideProps> = ({startTick = 0, scale = 1}) =>
 					zIndex: 30,
 				}}
 			>
-				<PaperCutout asset="employee-desk-34" textureOpacity={0} elevation={1.2} />
+				<PaperCutout
+					asset={happy ? 'employee-desk-34-happy' : 'employee-desk-34'}
+					textureOpacity={0}
+					elevation={1.2}
+				/>
 			</div>
 		</AbsoluteFill>
 	);

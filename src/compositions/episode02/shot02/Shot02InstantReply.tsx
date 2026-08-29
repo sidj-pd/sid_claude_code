@@ -11,6 +11,7 @@ import {
 	CUT_TO_WIDE,
 	PING,
 	REPLY_IN,
+	SMILE_IN,
 	VO_TRIM_BEFORE,
 } from './beats';
 
@@ -67,10 +68,9 @@ export const Shot02InstantReply: React.FC = () => {
 					</LaptopMessage>
 				</AbsoluteFill>
 			) : (
-				// Back to the room for the punchline. He does not react — the joke
-				// is that nothing happens, and a reaction would be the shot telling
-				// the audience it was funny.
-				<DeskWide startTick={CLOCK_START_TICK} />
+				// Back to the room for the punchline, and he holds still through it —
+				// the smile comes after the line, not under it.
+				<DeskWide startTick={CLOCK_START_TICK} happy={frame >= SMILE_IN} />
 			)}
 
 			<Audio src={staticFile('sfx/room-hum.wav')} volume={0.16} />
