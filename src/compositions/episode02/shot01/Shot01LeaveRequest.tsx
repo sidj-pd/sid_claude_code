@@ -137,15 +137,24 @@ export const Shot01LeaveRequest: React.FC = () => {
 	const screenW = SCREEN_WIDTH * cutoutW;
 	const screenH = SCREEN_HEIGHT * cutoutH;
 
-	// The SEND chit sits low-right on the panel, where a form's submit lives.
-	const sendW = screenW * 0.3;
-	const sendH = screenH * 0.15;
-	const sendX = screenX + screenW * 0.62;
-	const sendY = screenY + screenH * 0.66;
+	// The message itself — a pale sheet laid on the dark panel. Copy is set
+	// here and never in the art (§5): a generator garbles lettering, and baked
+	// text cannot be re-worded or animated. It is also why the cutout was
+	// commissioned with an empty screen.
+	const sheetX = screenX + screenW * 0.055;
+	const sheetY = screenY + screenH * 0.075;
+	const sheetW = screenW * 0.89;
+	const sheetH = screenH * 0.85;
+
+	// The SEND chit sits low-right on the sheet, where a compose window puts it.
+	const sendW = sheetW * 0.26;
+	const sendH = sheetH * 0.15;
+	const sendX = sheetX + sheetW - sendW - sheetW * 0.05;
+	const sendY = sheetY + sheetH - sendH - sheetH * 0.07;
 
 	const cursorSize = screenW * 0.075;
-	const cursorFromX = screenX + screenW * 0.12;
-	const cursorFromY = screenY + screenH * 0.18;
+	const cursorFromX = screenX + screenW * 0.16;
+	const cursorFromY = screenY + screenH * 0.24;
 	const cursorToX = sendX + sendW * 0.42;
 	const cursorToY = sendY + sendH * 0.34;
 	const cursorX = interpolate(eased, [0, 1], [cursorFromX, cursorToX]) + hoverX;
@@ -239,6 +248,54 @@ export const Shot01LeaveRequest: React.FC = () => {
 						}}
 					>
 						<PaperCutout asset="laptop-screen" textureOpacity={0} elevation={1.3} />
+
+						{/* The leave request itself. A pale sheet on the dark panel —
+						    a document, not software chrome, which keeps the paper
+						    world intact at the exact moment the incident is being
+						    established. The wording matters: he volunteers to keep
+						    an eye on Teams, which is what makes the manager's reply
+						    in Shot 2 land. Neither man is named — Beats 4 and 6 both
+						    caption him NAME WITHHELD, and a name on screen here
+						    would contradict the testimony. */}
+						<div
+							style={{
+								position: 'absolute',
+								left: sheetX,
+								top: sheetY,
+								width: sheetW,
+								height: sheetH,
+								background: '#ece4cf',
+								border: '2px solid #1b1e24',
+								padding: sheetH * 0.07,
+								boxSizing: 'border-box',
+								display: 'flex',
+								flexDirection: 'column',
+								gap: sheetH * 0.05,
+								fontFamily: 'RansomSpecialElite, monospace',
+								color: '#26292f',
+								transform: 'rotate(-0.4deg)',
+							}}
+						>
+							<div
+								style={{
+									fontSize: sheetH * 0.088,
+									letterSpacing: 1.5,
+									borderBottom: '2px solid #26292f',
+									paddingBottom: sheetH * 0.035,
+								}}
+							>
+								LEAVE REQUEST — 12–16 SEPTEMBER
+							</div>
+							<div style={{fontSize: sheetH * 0.062, lineHeight: 1.65, opacity: 0.88}}>
+								Wanted to check if I could take leave from the 12th to the 16th.
+								<br />
+								Happy to hand over anything pending before I go — and I&apos;ll keep
+								an eye on Teams if anything urgent comes up.
+								<br />
+								<br />
+								Thanks.
+							</div>
+						</div>
 
 						{/* The submit control, as a paper chit pinned to the screen
 						    rather than drawn software chrome. Everything that happened
