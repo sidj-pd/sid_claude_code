@@ -12,6 +12,7 @@ import {CollageBackdrop} from '../../../components/CollageBackdrop';
 import {PaperCutout} from '../../../components/PaperCutout';
 import {StampImpact} from '../../../components/StampImpact';
 import {useStopMotionStep} from '../../../components/useStopMotionStep';
+import {SAFE_BOTTOM_Y} from '../../../components/safeArea';
 import {shakeAt} from '../../montage/camera';
 import {DeskWide} from '../DeskWide';
 import {LaptopMessage, sendChitBox} from '../LaptopMessage';
@@ -119,10 +120,13 @@ export const Shot01LeaveRequest: React.FC = () => {
 							sfxSrc={staticFile('sfx/stamp-thud.wav')}
 							sfxVolume={0.7}
 						>
+							{/* Sits clear of the platform chrome: the bottom fifth of a
+							    vertical frame belongs to Instagram and YouTube, and a
+							    stamp read through someone else's caption is not read. */}
 							<AbsoluteFill style={{alignItems: 'center', justifyContent: 'flex-end'}}>
 								<div
 									style={{
-										marginBottom: 300,
+										marginBottom: 1920 - SAFE_BOTTOM_Y + 40,
 										padding: '26px 46px',
 										background: '#ece2c8',
 										border: '3px solid #2b2f36',

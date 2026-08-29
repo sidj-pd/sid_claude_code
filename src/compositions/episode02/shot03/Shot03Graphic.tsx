@@ -4,6 +4,7 @@ import {CollageBackdrop} from '../../../components/CollageBackdrop';
 import {ArrowTag, EvidenceStamp} from '../../../components/EvidenceStamp';
 import {NewsprintTexture} from '../../../components/NewsprintTexture';
 import {tornPolygon} from '../../../components/tornEdge';
+import {SAFE_BOTTOM_Y, safeTop} from '../../../components/safeArea';
 import {useStopMotionStep} from '../../../components/useStopMotionStep';
 import {VoiceOver} from '../../../components/VoiceOver';
 import {INK, MARK, StatBar} from '../../episode01/shot05/StatBar';
@@ -44,8 +45,19 @@ const FOLLOW_UP = 0.94;
 const BAR_X = 84;
 const BAR_W = 912;
 const BAR_H = 196;
-const BAR1_Y = 640;
-const BAR2_Y = 1200;
+
+// The whole page sits higher than Episode 01's did. Nothing here may be set
+// below SAFE_BOTTOM_Y (1536): the platforms cover the bottom fifth with the
+// handle, caption and action rail, and a footnote under that is a footnote
+// nobody reads. See components/safeArea.ts.
+const HEADER_Y = 150;
+const BAR1_Y = 520;
+const BAR2_Y = 980;
+const TAG_Y = 1300;
+const FOOTNOTE_Y = 1408;
+/** Page furniture, pinned to the last legible line in the frame. */
+const SOURCE_H = 64;
+const SOURCE_Y = safeTop(SOURCE_H) - 12;
 
 /** Where the leftover 11% of the first bar sits, before it becomes the second. */
 const SLIVER_X = BAR_X + UNANSWERED * BAR_W;
@@ -167,7 +179,7 @@ export const Shot03Graphic: React.FC<{silent?: boolean}> = ({silent = false}) =>
 
 			<AbsoluteFill style={{transform: drift}}>
 				{frame >= HEADER_IN ? (
-					<div style={{position: 'absolute', left: BAR_X, top: 196, width: BAR_W}}>
+					<div style={{position: 'absolute', left: BAR_X, top: HEADER_Y, width: BAR_W}}>
 						<div
 							style={{
 								background: '#efe4c8',
@@ -309,7 +321,7 @@ export const Shot03Graphic: React.FC<{silent?: boolean}> = ({silent = false}) =>
 						<div style={{position: 'absolute', left: remainderX - 132, top: BAR2_Y + BAR_H + 18}}>
 							<ArrowTag age={frame - TAG_STAMP} length={148} />
 						</div>
-						<div style={{position: 'absolute', left: 430, top: BAR2_Y + BAR_H + 186}}>
+						<div style={{position: 'absolute', left: 430, top: TAG_Y}}>
 							<EvidenceStamp
 								text="THIS REQUEST"
 								age={frame - TAG_STAMP - 6}
@@ -322,7 +334,7 @@ export const Shot03Graphic: React.FC<{silent?: boolean}> = ({silent = false}) =>
 								style={{
 									position: 'absolute',
 									right: BAR_X,
-									top: BAR2_Y + BAR_H + 346,
+									top: FOOTNOTE_Y,
 									fontFamily: 'RansomSpecialElite, monospace',
 									fontSize: 32,
 									letterSpacing: 1,
@@ -340,7 +352,7 @@ export const Shot03Graphic: React.FC<{silent?: boolean}> = ({silent = false}) =>
 						style={{
 							position: 'absolute',
 							left: BAR_X,
-							top: 1830,
+							top: SOURCE_Y,
 							width: BAR_W,
 							background: '#e6dabb',
 							padding: '16px 28px',

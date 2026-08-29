@@ -691,3 +691,36 @@ npx remotion still Ep01CoverCard out/ep01-cover.png --frame=359
 
 `--crf 30` keeps deliverables small enough to move around without visible
 degradation at this resolution.
+
+---
+
+## 15. Delivery — the bottom of the frame is not ours
+
+Added 2026-08-29, during Episode 02.
+
+These go out as Instagram Reels and YouTube Shorts, and both platforms cover
+**the lower 20% of the frame** with their own furniture: handle, caption,
+follow button, audio credit, and the vertical rail of action icons. At
+1080×1920 that is everything below **y = 1536**.
+
+**The rule: no text below y = 1536.** Ever, in any shot, in any episode.
+
+Picture may run to the bottom edge and generally should — a desk that stops
+short of the frame looks like a mistake, and platform chrome sitting over paper
+is fine. It is only *copy* that has to stay clear, because copy that cannot be
+read is the same as copy that was never set.
+
+This is a delivery constraint, not a taste one, so it outranks composition. If
+a caption will not fit above the line the layout moves up, the type gets
+smaller, or the words get cut — in that order.
+
+`src/components/safeArea.ts` holds `SAFE_BOTTOM_Y` and a `safeTop(height)`
+helper. Use them instead of eyeballing a number: `top: safeTop(blockHeight)`
+pins an element to the lowest legible line in the frame.
+
+**Episode 01 predates this and violates it.** `Shot05Graphic` sets its
+`0.36% OF ALL AUTO RIDES` footnote at y = 1742 and its `SOURCE: …` strip at
+y = 1830, both of which are under the caption on a phone. Episode 02's stat
+card was rebuilt to the rule — the whole page moved up, bars at 520 and 980
+rather than 640 and 1200 — and Episode 01's Shot 5 wants the same treatment
+before it is posted anywhere.
