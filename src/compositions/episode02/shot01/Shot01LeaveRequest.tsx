@@ -155,8 +155,10 @@ export const Shot01LeaveRequest: React.FC = () => {
 	const cursorSize = screenW * 0.075;
 	const cursorFromX = screenX + screenW * 0.16;
 	const cursorFromY = screenY + screenH * 0.24;
-	const cursorToX = sendX + sendW * 0.42;
-	const cursorToY = sendY + sendH * 0.34;
+	// Sits on the lower half of the chit: an arrow tip parked over the first
+	// letter turns SEND into END on screen.
+	const cursorToX = sendX + sendW * 0.36;
+	const cursorToY = sendY + sendH * 0.5;
 	const cursorX = interpolate(eased, [0, 1], [cursorFromX, cursorToX]) + hoverX;
 	const cursorY = interpolate(eased, [0, 1], [cursorFromY, cursorToY]) + hoverY;
 
