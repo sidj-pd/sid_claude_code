@@ -12,6 +12,11 @@ on:
         required: true
         default: 'Ep02Shot01LeaveRequest'
         type: string
+      frames:
+        description: 'Frame numbers to also export as stills, space separated'
+        required: false
+        default: '20 120 200 255'
+        type: string
       crf:
         description: 'Quality — lower is better and bigger. 30 is the project default.'
         required: false
@@ -80,12 +85,24 @@ jobs:
             "out/${{ steps.what.outputs.composition }}.mp4" \
             --crf "${{ steps.what.outputs.crf }}"
 
+      # Stills as well as the movie. Audio cannot be heard and motion cannot
+      # be watched while reviewing from a phone, so a few key frames are the
+      # only way to actually look at a shot — §12 rule 20.
+      - name: Render key frames
+        run: |
+          for F in ${{ github.event.inputs.frames || '20 120 200 255' }}; do
+            npx remotion still "${{ steps.what.outputs.composition }}" \
+              "out/${{ steps.what.outputs.composition }}-f${F}.png" --frame="$F" || true
+          done
+
       - name: Report what landed
         run: ls -lh out/
 
       - uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.what.outputs.composition }}
-          path: out/*.mp4
+          path: |
+            out/*.mp4
+            out/*.png
           retention-days: 30
           if-no-files-found: error
