@@ -53,11 +53,17 @@ const BAR_H = 196;
 const HEADER_Y = 150;
 const BAR1_Y = 520;
 const BAR2_Y = 980;
-const TAG_Y = 1272;
-// The footnote sits to the LEFT of the stamp rather than under it. Raising the
-// page to clear the platform chrome left these two sharing a band, and a
-// stamp is a stamp — it cannot be nudged around a line of type.
-const FOOTNOTE_Y = 1345;
+// The arrow is an SVG box `length` on a side, drawn corner to corner: at
+// left 809 / top 1194 with length 148 its tail lands at (821, 1330) and the
+// head at (942, 1209). The stamp goes UNDER that tail — it labels what the
+// arrow points at, so it has to stay near it — and the footnote sits to its
+// left, clear in x rather than in y.
+const TAG_Y = 1340;
+const TAG_X = 545;
+/** 46, not 62: at 62 the stamp ran out of frame width and wrapped to two
+ *  lines, which is what grew it into the arrow in the first place. */
+const TAG_SIZE = 46;
+const FOOTNOTE_Y = 1352;
 /** Page furniture, pinned to the last legible line in the frame. */
 const SOURCE_H = 64;
 const SOURCE_Y = safeTop(SOURCE_H) - 12;
@@ -324,11 +330,11 @@ export const Shot03Graphic: React.FC<{silent?: boolean}> = ({silent = false}) =>
 						<div style={{position: 'absolute', left: remainderX - 132, top: BAR2_Y + BAR_H + 18}}>
 							<ArrowTag age={frame - TAG_STAMP} length={148} />
 						</div>
-						<div style={{position: 'absolute', left: 560, top: TAG_Y}}>
+						<div style={{position: 'absolute', left: TAG_X, top: TAG_Y}}>
 							<EvidenceStamp
 								text="THIS REQUEST"
 								age={frame - TAG_STAMP - 6}
-								fontSize={62}
+								fontSize={TAG_SIZE}
 								rotate={-4}
 							/>
 						</div>
