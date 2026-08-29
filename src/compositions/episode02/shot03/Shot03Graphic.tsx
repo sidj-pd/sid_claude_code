@@ -59,7 +59,7 @@ const BAR2_Y = 980;
 // arrow points at, so it has to stay near it — and the footnote sits to its
 // left, clear in x rather than in y.
 const TAG_Y = 1340;
-const TAG_X = 545;
+const TAG_X = 640;
 /** 46, not 62: at 62 the stamp ran out of frame width and wrapped to two
  *  lines, which is what grew it into the arrow in the first place. */
 const TAG_SIZE = 46;
@@ -345,7 +345,9 @@ export const Shot03Graphic: React.FC<{silent?: boolean}> = ({silent = false}) =>
 									left: BAR_X,
 									top: FOOTNOTE_Y,
 									fontFamily: 'RansomSpecialElite, monospace',
-									fontSize: 32,
+									// 28, sized so 27 characters of typewriter face end at
+									// x 565 and stay clear of the stamp at 640.
+									fontSize: 28,
 									letterSpacing: 1,
 									color: 'rgba(36,29,21,0.78)',
 								}}
