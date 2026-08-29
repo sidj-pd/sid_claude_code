@@ -11,10 +11,16 @@
  * take (ep02-shot04-q) laid over the witness already sitting there, rather
  * than a second clip of him on a call. One camera, not two.
  *
- * Clip one has landed and is measured. Clip two has not.
+ * Both clips have landed and both are measured.
  *
  *   ep02-witness-1.mp4  10.01s  speech 0.16-9.62
  *   gaps  2.04-2.47  3.37-3.57  5.18-5.59  8.72-8.90  9.13-9.31
+ *
+ *   ep02-witness-2.mp4   8.00s  speech 0.86-6.65
+ *   gaps  2.22-3.02  4.57-5.52   -> the beats between his three sentences
+ *     0.86-2.22  he even said don't check Teams
+ *     3.02-4.57  I've never not checked Teams on leave
+ *     5.52-6.65  I didn't know what to do with myself
  *
  * The gaps are the sentence boundaries:
  *   0.16-2.04  "I sent the request at 11:47 PM."
@@ -59,8 +65,12 @@ export const WITNESS_ANSWERS = CORR_Q_ENDS + 15;
  */
 export const WITNESS_1_FRAMES = Math.round(10.01 * S);
 export const WITNESS_2_IN = WITNESS_ANSWERS + WITNESS_1_FRAMES;
-/** STILL PROVISIONAL — ep02-witness-2.mp4 does not exist. */
-export const WITNESS_2_FRAMES = Math.round(4.5 * S);
+/**
+ * The clip runs 8.00s but he stops at 6.65 and the last tick lands at 6.9,
+ * so it is cut at 7.5 - the remaining second of him sitting is the take's
+ * tail, not a beat this shot has any use for.
+ */
+export const WITNESS_2_FRAMES = Math.round(7.5 * S);
 
 /** Offsets into clip one. */
 const AT = (seconds: number) => WITNESS_ANSWERS + Math.round(seconds * S);
@@ -83,21 +93,27 @@ export const ITEMS = [
 	{text: 'NO FOLLOW-UP QUESTIONS', in: AT(7.07), tick: AT(7.57)},
 	{text: 'NO "LET’S DISCUSS" DEFLECTION', in: AT(7.57), tick: AT(8.72)},
 	/**
-	 * The last one belongs to clip two, and lands late on purpose — the script
-	 * asks for it "slightly delayed from the others for comic timing". It is
-	 * the tick that arrives after the audience has stopped expecting one.
+	 * The last one belongs to clip two, and the gap between writing it and
+	 * ticking it is the joke. The box goes up at 2.3, as he finishes the line
+	 * about being told not to check Teams, then sits there empty through two
+	 * more sentences and ticks at 6.9 - after he has stopped talking. The
+	 * script asks for it slightly delayed for comic timing; four and a half
+	 * seconds is more than slightly, and better.
 	 */
-	{text: 'TOLD ME TO LOG OFF', in: AT2(1.4), tick: AT2(3.3)},
+	{text: 'TOLD ME TO LOG OFF', in: AT2(2.3), tick: AT2(6.9)},
 ];
 
 /**
- * The audio dropout, on the line about not knowing what to do with himself.
- * PROVISIONAL: it is a window into clip two, which does not exist. Production
- * notes §13 records the mechanism as written but never shot; this is the line
- * it was written for.
+ * The audio dropout. Measured: his last line runs 5.52-6.65 in clip two, and
+ * the glitch takes a quarter-second out of the middle of it rather than
+ * muting the line. The script asks for a small dropout, and a whole missing
+ * sentence would read as a fault rather than as a joke.
+ *
+ * Production notes 13 records this mechanism as written but never shot,
+ * because Episode 01 had no line to land it on. This is that line.
  */
-export const DROPOUT_IN = Math.round(2.6 * S);
-export const DROPOUT_OUT = Math.round(3.4 * S);
+export const DROPOUT_IN = Math.round(5.95 * S);
+export const DROPOUT_OUT = Math.round(6.2 * S);
 
 export const WITNESS_LOWER_THIRD_IN = WITNESS_ANSWERS + 8;
 
