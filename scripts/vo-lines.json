@@ -99,6 +99,54 @@
       "speaker": "narrator",
       "text": "As for the driver himself — he's back on the road. Meter running. Rules... intact. For now.",
       "delivery": "quieter and more ominous than deadpan, unlike every other line in the episode; unhurried, a real pause after 'road' and after 'Rules', the words 'For now' dropped almost to a murmur rather than punched for a laugh"
+    },
+    {
+      "id": "ep02-shot02",
+      "speaker": "narrator",
+      "text": "Every day, thousands of leave requests are submitted in Bangalore. This is the story of the one that got approved without a follow-up call.",
+      "delivery": "the episode's opening line, and the twin of ep01-shot01 — take it at the same pace and the same flatness so the series has a recognisable way of starting. First sentence entirely ordinary, a small beat at the full stop, then 'without a follow-up call' landed as plain fact rather than as the joke it is"
+    },
+    {
+      "id": "ep02-shot03a",
+      "speaker": "narrator",
+      "text": "According to our survey, 89% of leave requests in Bangalore go unanswered for at least 48 hours.",
+      "delivery": "brisk explainer register, the way a number is read off a chart that is already on screen; no lift on the statistic, no emphasis on 'our survey' — the absurdity is in the sourcing and must not be pointed at"
+    },
+    {
+      "id": "ep02-shot03b",
+      "speaker": "narrator",
+      "text": "Of the 11% that get approved — 94% come with a passive-aggressive follow-up call anyway.",
+      "delivery": "continuous with the line before it, slightly faster; a real beat at the dash while the graphic subdivides, then 'passive-aggressive follow-up call' said in exactly the same neutral tone as the rest, with 'anyway' allowed to fall off the end rather than being punched"
+    },
+    {
+      "id": "ep02-shot03c",
+      "speaker": "narrator",
+      "text": "Which means, statistically... this approval should never have happened — let alone in under a minute.",
+      "delivery": "the cliffhanger, held on a frozen card. Slower and quieter than the two lines before it, a genuine pause on the ellipsis rather than a rhetorical one, and 'let alone in under a minute' delivered almost as an afterthought — the same register ep01-shot05c ends on"
+    },
+    {
+      "id": "ep02-shot04-q",
+      "speaker": "correspondent",
+      "text": "Can you walk us through what happened?",
+      "delivery": "off-screen, flat and procedural, a question he has asked a hundred times; no warmth and no curiosity, and no rise at the end beyond what the grammar requires"
+    },
+    {
+      "id": "ep02-shot06-assoc",
+      "speaker": "narrator",
+      "text": "The Bangalore Managers' Association has formally petitioned HR leadership, demanding compensation for members affected by S.T.F.U. Syndrome.",
+      "delivery": "straight news-desk delivery, the twin of ep01-shot08-union — institutional language read without a flicker of doubt. 'S.T.F.U. Syndrome' pronounced letter by letter as a clinical acronym, given no more weight than 'Association' or 'leadership'"
+    },
+    {
+      "id": "ep02-shot08-committee",
+      "speaker": "narrator",
+      "text": "HR has since formed a committee to study the matter further.",
+      "delivery": "dry and quick, a throwaway closing fact rather than a new development — the whole line said in the tone of an afterthought, matching ep01-shot10-committee exactly"
+    },
+    {
+      "id": "ep02-shot09-final",
+      "speaker": "narrator",
+      "text": "As for the manager himself — still at his desk most nights. Still responding fast. Boundaries... intact. For now.",
+      "delivery": "the episode's closing line and the deliberate echo of ep01-shot11-final; quieter and more ominous than deadpan, unhurried, a real pause after 'nights' and after 'Boundaries', with 'For now' dropped almost to a murmur rather than punched for a laugh"
     }
   ]
 }

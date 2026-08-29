@@ -11,7 +11,7 @@
  *
  * Usage: node scripts/cutout-alpha.mjs
  */
-import {readdir} from 'node:fs/promises';
+import {mkdir, readdir} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import sharp from 'sharp';
@@ -62,6 +62,11 @@ const OVERRIDES = {
 	// and a soft vignette mean the corners are noisier than a studio shot,
 	// so this needs a wider tolerance than the plain-grey clippings.
 	'newspaper-clip-autounion': {tolerance: 46},
+	// Episode 02. Arrived mounted on a paper sheet with a visible edge about
+	// 20px in from the frame, so a border-seeded fill starts in the outer
+	// margin and stops at that line, leaving a speckled frame of surviving
+	// paper all round. Seeding inside the sheet skips it.
+	'laptop-screen': {inset: 0.06},
 };
 
 const removeBackground = async (srcPath, outPath, options = {}) => {
@@ -212,6 +217,10 @@ const removeBackground = async (srcPath, outPath, options = {}) => {
 };
 
 const main = async () => {
+	// cutouts-alpha/ is gitignored, so it is absent on a fresh clone and vips
+	// then fails with an opaque 'wbuffer_write: write failed' rather than ENOENT.
+	await mkdir(OUT_DIR, {recursive: true});
+
 	const only = process.argv.slice(2);
 	const files = (await readdir(SRC_DIR))
 		.filter((f) => /\.(jpe?g|png)$/i.test(f))

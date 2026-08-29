@@ -1,0 +1,91 @@
+name: Render
+
+# Nothing in this project can be watched on the phone it is authored on:
+# remotion render needs a headless Chrome, and Android has neither an aarch64
+# chromium nor a glibc to run the one Remotion downloads. So rendering happens
+# here, and the MP4 comes back as a run artifact.
+on:
+  workflow_dispatch:
+    inputs:
+      composition:
+        description: 'Composition id to render (see src/Root.tsx)'
+        required: true
+        default: 'Ep02Shot01LeaveRequest'
+        type: string
+      crf:
+        description: 'Quality — lower is better and bigger. 30 is the project default.'
+        required: false
+        default: '30'
+        type: string
+  push:
+    branches: ['claude/**']
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'scripts/**'
+      - '.github/workflows/render.yml'
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: npm ci
+
+      # public/cutouts-alpha/ is gitignored and regenerated from the source
+      # art, so it does not exist on a fresh checkout. Without this the render
+      # paints every cutout as a missing image.
+      - name: Key the cutouts
+        run: |
+          node scripts/cutout-alpha.mjs
+          node scripts/split-meter.mjs
+          node scripts/crop-newspaper-clippings.mjs
+
+      # Deterministic and free — no API key needed, unlike the voice-over,
+      # whose takes are committed under public/vo/.
+      - name: Synthesise sound effects
+        run: python3 scripts/sfx.py
+
+      - name: Typecheck
+        run: npx tsc --noEmit
+
+      - name: Resolve what to render
+        id: what
+        run: |
+          COMP="${{ github.event.inputs.composition }}"
+          CRF="${{ github.event.inputs.crf }}"
+          echo "composition=${COMP:-Ep02Shot01LeaveRequest}" >> "$GITHUB_OUTPUT"
+          echo "crf=${CRF:-30}" >> "$GITHUB_OUTPUT"
+
+      # Remotion downloads its own Chrome Headless Shell on first render.
+      # (There is no `remotion browser ensure` in 4.0.515 — that subcommand
+      # arrived later, and calling it here would fail the run.)
+      - name: Render
+        run: |
+          mkdir -p out
+          npx remotion render "${{ steps.what.outputs.composition }}" \
+            "out/${{ steps.what.outputs.composition }}.mp4" \
+            --crf "${{ steps.what.outputs.crf }}"
+
+      - name: Report what landed
+        run: ls -lh out/
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.what.outputs.composition }}
+          path: out/*.mp4
+          retention-days: 30
+          if-no-files-found: error

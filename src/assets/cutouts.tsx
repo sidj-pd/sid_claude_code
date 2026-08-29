@@ -46,6 +46,21 @@ export const NewspaperClipAutoUnion = makeCutout('cutouts-alpha/newspaper-clip-a
 export const NewspaperClipVictim = makeCutout('cutouts-alpha/newspaper-clip-victim.png');
 export const NewspaperClipCommittee = makeCutout('cutouts-alpha/newspaper-clip-committee.png');
 
+// Episode 02, Shot 1 — the leave request, late at night.
+export const EmployeeDesk34 = makeCutout('cutouts-alpha/employee-desk-34.png');
+// Screen arrives empty: the form and the cursor are set in code, per the
+// standing rule that no copy is ever baked into generated art.
+export const LaptopScreen = makeCutout('cutouts-alpha/laptop-screen.png');
+// Deliberately handless — the hands are drawn in code so the clock can tick.
+// Measured off the keyed PNG: centre 0.5021/0.5017 of the frame, face radius
+// 0.2267 of width, rim radius 0.3279.
+export const WallClockFace = makeCutout('cutouts-alpha/wall-clock-face.png');
+export const DeskLamp = makeCutout('cutouts-alpha/desk-lamp.png');
+// Sits furthest back at elevation 0.4. Arrived more saturated than the rest
+// (0.390 vs 0.327 for the figure), so the shot desaturates it at depth rather
+// than competing with the man in front of it.
+export const OfficeWindowNight = makeCutout('cutouts-alpha/office-window-night.png');
+
 export type CutoutAsset =
 	| 'vidhana-soudha'
 	| 'auto-rickshaw'
@@ -66,7 +81,12 @@ export type CutoutAsset =
 	| 'auto-meter-lever'
 	| 'newspaper-clip-autounion'
 	| 'newspaper-clip-victim'
-	| 'newspaper-clip-committee';
+	| 'newspaper-clip-committee'
+	| 'employee-desk-34'
+	| 'laptop-screen'
+	| 'wall-clock-face'
+	| 'desk-lamp'
+	| 'office-window-night';
 
 export const CUTOUT_REGISTRY: Record<CutoutAsset, React.FC> = {
 	'vidhana-soudha': VidhanaSoudha,
@@ -89,4 +109,9 @@ export const CUTOUT_REGISTRY: Record<CutoutAsset, React.FC> = {
 	'newspaper-clip-autounion': NewspaperClipAutoUnion,
 	'newspaper-clip-victim': NewspaperClipVictim,
 	'newspaper-clip-committee': NewspaperClipCommittee,
+	'employee-desk-34': EmployeeDesk34,
+	'laptop-screen': LaptopScreen,
+	'wall-clock-face': WallClockFace,
+	'desk-lamp': DeskLamp,
+	'office-window-night': OfficeWindowNight,
 };

@@ -133,11 +133,70 @@ def paper_rip(dur=0.62, seed=23):
     return out
 
 
+def key_click(dur=0.11, seed=17):
+    """
+    A laptop key being pressed — the Send that starts the whole case.
+
+    Deliberately smaller than meter_click: this is plastic on plastic in a
+    quiet room, not a metal lever hitting its stop. The resonance sits high
+    and dies almost immediately, because a keycap has no body to ring, and
+    the bottom-out is an octave under the meter's thud and far shorter — a
+    key travels two millimetres, not twenty.
+    """
+    rng = random.Random(seed)
+    n = int(SR * dur)
+    out = []
+    for i in range(n):
+        t = i / SR
+        contact = rng.uniform(-1, 1) * _env(t, 0.0018) * 0.85
+        shell = (
+            math.sin(2 * math.pi * 3120 * t) * _env(t, 0.0060) * 0.22
+            + math.sin(2 * math.pi * 4650 * t) * _env(t, 0.0040) * 0.12
+        )
+        bottom = math.sin(2 * math.pi * 95 * t) * _env(t, 0.014) * 0.30
+        out.append(contact + shell + bottom)
+    return out
+
+
+def room_hum(dur=10.0, seed=41):
+    """
+    The series' first ambience bed: a fan or an AC in a flat at midnight.
+
+    Production notes §13 lists "no ambience beds" as an open gap — every
+    Episode 01 shot is dry. This closes it, because Episode 02 opens on held
+    tension and true digital silence reads as a dropout rather than as quiet.
+    The notification also needs something to cut through.
+
+    Two-pole low-passed noise for the moving air, plus two low tones for the
+    motor. The tones are deliberately not harmonically related, and neither
+    sits at 50Hz, so the bed never resolves into a note the ear can name and
+    start listening to. A very slow drift keeps it from sitting dead still.
+    """
+    rng = random.Random(seed)
+    n = int(SR * dur)
+    out = []
+    lp = 0.0
+    lp2 = 0.0
+    for i in range(n):
+        t = i / SR
+        lp += (rng.uniform(-1, 1) - lp) * 0.0045
+        lp2 += (lp - lp2) * 0.0045
+        motor = (
+            math.sin(2 * math.pi * 71.3 * t) * 0.10
+            + math.sin(2 * math.pi * 108.7 * t) * 0.055
+        )
+        drift = 1.0 + 0.06 * math.sin(2 * math.pi * 0.07 * t)
+        out.append((lp2 * 30.0 + motor) * drift)
+    return out
+
+
 EFFECTS = {
     "paper-rip": paper_rip,
     "meter-click": meter_click,
     "stamp-thud": stamp_thud,
     "paper-riffle": paper_riffle,
+    "key-click": key_click,
+    "room-hum": room_hum,
 }
 
 
