@@ -20,6 +20,14 @@ export type StatBarProps = {
 	remainderAge?: number;
 	/** Draws the leftover as an empty outline — it has been taken elsewhere. */
 	remainderTaken?: boolean;
+	/**
+	 * Whether the figure may also sit INSIDE the leftover block when it is wide
+	 * enough to hold it. Episode 01 never had to think about this: its leftover
+	 * was 9% of the bar, under the width cutoff, so only the label above it ever
+	 * drew. At 11% both fire and the block shows its figure twice. Off means the
+	 * caller is labelling it above and wants exactly one number.
+	 */
+	remainderLabelInside?: boolean;
 	seed?: number;
 };
 
@@ -50,6 +58,7 @@ export const StatBar: React.FC<StatBarProps> = ({
 	remainderLabel,
 	remainderAge = 0,
 	remainderTaken = false,
+	remainderLabelInside = true,
 	seed = 1,
 }) => {
 	const clamped = Math.max(0, Math.min(1, fill));
@@ -125,7 +134,7 @@ export const StatBar: React.FC<StatBarProps> = ({
 						opacity: remainderAge < 1 ? 0.5 : 1,
 					}}
 				>
-					{remainderWidth > height * 0.5 ? (
+					{remainderLabelInside && remainderWidth > height * 0.5 ? (
 						<span
 							style={{
 								fontFamily: 'RansomArchivoBlack, sans-serif',

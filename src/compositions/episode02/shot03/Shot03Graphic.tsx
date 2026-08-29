@@ -258,6 +258,7 @@ export const Shot03Graphic: React.FC<{silent?: boolean}> = ({silent = false}) =>
 							remainderLabel="11%"
 							remainderAge={frame - REMAINDER1_IN}
 							remainderTaken={moving}
+							remainderLabelInside={false}
 							seed={5}
 						/>
 					</div>
