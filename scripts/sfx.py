@@ -190,6 +190,43 @@ def room_hum(dur=10.0, seed=41):
     return out
 
 
+def notification_ping(dur=0.62, seed=29):
+    """
+    The manager's reply arriving, at 11:47 at night.
+
+    Two struck partials rather than one, the second entering a beat after the
+    first and a fifth above it — that stagger is what makes a notification
+    read as a notification rather than as a bell. Both are given a long tail
+    relative to their attack because the room is silent and the thing has to
+    hang in it; this cue is the loudest event in the cold open and the only
+    sound in the episode so far that is not the room itself.
+
+    Deliberately not a round interval and not tuned to any scale: it should
+    sit on top of room_hum without the two agreeing on a key.
+    """
+    rng = random.Random(seed)
+    n = int(SR * dur)
+    out = []
+    second_in = 0.085
+    for i in range(n):
+        t = i / SR
+        # A hair of noise on the leading edge: a real alert has a click of
+        # onset before the tone, and without it this reads as synthesised.
+        onset = rng.uniform(-1, 1) * _env(t, 0.0016) * 0.22
+        first = math.sin(2 * math.pi * 1318.0 * t) * _env(t, 0.115) * 0.62
+        t2 = t - second_in
+        second = 0.0
+        if t2 > 0:
+            second = math.sin(2 * math.pi * 1975.0 * t2) * _env(t2, 0.155) * 0.5
+        # A faint high partial on each, so the tone has an edge rather than
+        # sounding like a test sine.
+        shimmer = (
+            math.sin(2 * math.pi * 3960.0 * t) * _env(t, 0.038) * 0.09
+        )
+        out.append(onset + first + second + shimmer)
+    return out
+
+
 EFFECTS = {
     "paper-rip": paper_rip,
     "meter-click": meter_click,
@@ -197,6 +234,7 @@ EFFECTS = {
     "paper-riffle": paper_riffle,
     "key-click": key_click,
     "room-hum": room_hum,
+    "notification-ping": notification_ping,
 }
 
 

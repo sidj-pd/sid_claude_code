@@ -75,3 +75,27 @@ export const CLOCK_CENTRE_X = 0.5021;
 export const CLOCK_CENTRE_Y = 0.5017;
 /** Fraction of the clock cutout's width. Hands must not overrun the face. */
 export const CLOCK_FACE_RADIUS = 0.2267;
+
+/**
+ * The narration, split across Shots 1 and 2.
+ *
+ * The script starts the line as the notification lands, but the take runs
+ * 11.36s and Shot 2 is a punch-in the script itself calls "no dramatic wait" —
+ * so the whole line cannot live there without overrunning into the stat card,
+ * which has three lines of its own.
+ *
+ * The envelope settles it. The longest internal gap in ep02-shot02.wav is
+ * 1.22s at 4.33-5.55, which is the full stop between the two sentences:
+ *
+ *   "Every day, thousands of leave requests are submitted in Bangalore."
+ *      0.41 - 4.33   -> here, over the hesitation
+ *   "This is the story of the one that got approved without a follow-up call."
+ *      5.55 - 10.66  -> Shot 2, landing as the reply arrives
+ *
+ * Both shots play the same file, cut at 5.00s — inside that gap, so neither
+ * end clips a word. Episode 01's Shot 1 splits its two sentences the same way
+ * across the hail and the arrival.
+ */
+export const VO_IN = 30;
+/** 4.90s. Ends inside the gap, a beat before the click at 180. */
+export const VO_TRIM_AFTER = 147;

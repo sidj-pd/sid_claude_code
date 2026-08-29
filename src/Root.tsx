@@ -31,6 +31,8 @@ import {
 } from './compositions/OpeningMontage';
 import {Shot01LeaveRequest} from './compositions/episode02/shot01/Shot01LeaveRequest';
 import {SHOT_01_DURATION as EP02_SHOT_01_DURATION} from './compositions/episode02/shot01/beats';
+import {Shot02InstantReply} from './compositions/episode02/shot02/Shot02InstantReply';
+import {SHOT_02_DURATION as EP02_SHOT_02_DURATION} from './compositions/episode02/shot02/beats';
 import {Ep01CoverCard} from './compositions/covers/Ep01CoverCard';
 
 export const Root: React.FC = () => {
@@ -136,6 +138,14 @@ export const Root: React.FC = () => {
 				id="Ep02Shot01LeaveRequest"
 				component={Shot01LeaveRequest}
 				durationInFrames={EP02_SHOT_01_DURATION}
+				fps={OPENING_MONTAGE_FPS}
+				width={OPENING_MONTAGE_WIDTH}
+				height={OPENING_MONTAGE_HEIGHT}
+			/>
+			<Composition
+				id="Ep02Shot02InstantReply"
+				component={Shot02InstantReply}
+				durationInFrames={EP02_SHOT_02_DURATION}
 				fps={OPENING_MONTAGE_FPS}
 				width={OPENING_MONTAGE_WIDTH}
 				height={OPENING_MONTAGE_HEIGHT}
