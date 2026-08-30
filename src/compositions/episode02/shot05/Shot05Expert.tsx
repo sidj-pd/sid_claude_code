@@ -20,6 +20,7 @@ import {
 	A3_FRAMES,
 	A3_STARTS,
 	CHYRON_IN,
+	CHYRON_OUT,
 	KICKER_IN,
 	KICKER_OUT,
 	KICKER_STAGGER,
@@ -244,6 +245,7 @@ export const Shot05Expert: React.FC = () => {
 				footnote="*institute unaccredited"
 				frame={frame}
 				in={CHYRON_IN}
+				out={CHYRON_OUT}
 				top={SAFE_BOTTOM_Y - 230}
 				seed={53}
 			/>

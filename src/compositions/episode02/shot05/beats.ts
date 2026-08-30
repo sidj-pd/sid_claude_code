@@ -65,5 +65,13 @@ export const KICKER_OUT = WHITEBOARD_OUT;
 export const KICKER_STAGGER = 7;
 
 export const CHYRON_IN = A1_STARTS + 10;
+/**
+ * Out before the kicker, and well before it. Raising the lower third to clear
+ * the platform chrome (§15) put it in the same band the kicker type runs
+ * through, and the chyron was covering NOW — the one word in the shot that
+ * has to land. A name card has no business staying up for twenty-six seconds
+ * anyway: it identifies him once, early, and goes.
+ */
+export const CHYRON_OUT = A1_STARTS + A1_FRAMES - 20;
 
 export const SHOT_05_DURATION = A3_STARTS + A3_FRAMES + 20;
