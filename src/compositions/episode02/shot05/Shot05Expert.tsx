@@ -14,11 +14,17 @@ import {SAFE_BOTTOM_Y} from '../../../components/safeArea';
 import {tornPolygon} from '../../../components/tornEdge';
 import {
 	A1_FRAMES,
+	A1_SRC_IN,
 	A1_STARTS,
 	A2_FRAMES,
+	A2_SRC_IN,
 	A2_STARTS,
 	A3_FRAMES,
+	A3_SRC_IN,
 	A3_STARTS,
+	A4_FRAMES,
+	A4_SRC_IN,
+	A4_STARTS,
 	CHYRON_IN,
 	CHYRON_OUT,
 	KICKER_IN,
@@ -198,25 +204,48 @@ export const Shot05Expert: React.FC = () => {
 
 	return (
 		<AbsoluteFill style={{backgroundColor: '#0c0e11'}}>
+			{/* Four takes, joins tightened by trimming each lead — four clips with
+			    half a second of silence at every seam would read as four separate
+			    interviews rather than one man talking. */}
 			<Sequence from={A1_STARTS} durationInFrames={A1_FRAMES}>
-				<Footage id="ep02-expert-1" description={EXPERT_DESCRIPTION} />
+				<Footage
+					id="ep02-expert-1"
+					description={EXPERT_DESCRIPTION}
+					trimBeforeInFrames={A1_SRC_IN}
+				/>
 			</Sequence>
 
 			<Sequence from={A2_STARTS} durationInFrames={A2_FRAMES}>
-				<Footage id="ep02-expert-2" description={EXPERT_DESCRIPTION} />
+				<Footage
+					id="ep02-expert-2"
+					description={EXPERT_DESCRIPTION}
+					trimBeforeInFrames={A2_SRC_IN}
+				/>
 			</Sequence>
 
-			{/* Clip 3, with the punch-in scaled about the whiteboard rather than
-			    about the frame centre — otherwise the zoom would push the board
-			    off the edge it sits against. */}
 			<Sequence from={A3_STARTS} durationInFrames={A3_FRAMES}>
+				<Footage
+					id="ep02-expert-3"
+					description={EXPERT_DESCRIPTION}
+					trimBeforeInFrames={A3_SRC_IN}
+				/>
+			</Sequence>
+
+			{/* Clip 4, with the punch-in scaled about the whiteboard rather than the
+			    frame centre — otherwise the zoom would push the board off the edge it
+			    sits against. */}
+			<Sequence from={A4_STARTS} durationInFrames={A4_FRAMES}>
 				<AbsoluteFill
 					style={{
 						transform: `scale(${scale})`,
 						transformOrigin: `${WHITEBOARD_CROP.x * 100}% ${WHITEBOARD_CROP.y * 100}%`,
 					}}
 				>
-					<Footage id="ep02-expert-3" description={EXPERT_DESCRIPTION} />
+					<Footage
+						id="ep02-expert-4"
+						description={EXPERT_DESCRIPTION}
+						trimBeforeInFrames={A4_SRC_IN}
+					/>
 				</AbsoluteFill>
 			</Sequence>
 

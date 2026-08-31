@@ -290,111 +290,27 @@ Every checklist cue and the audio dropout in that file is currently a guess at
 a performance nobody has recorded, and the file says so at the top.
 
 
-## Shot 5 — the expert, three clips
+## Shot 5 — the expert
 
-**Dr. Nagesh Ramamurthy returns from Episode 01, so this is a continuity job
-before it is anything else.** Everything below is described from
-`ep01-expert-1.mp4` rather than from memory.
+**Landed, as four clips rather than three.** The generator split his speech its
+own way and condensed it — "It's rare. It's poorly understood. Some don't
+recover." and "This... this progressed." are in no take. What arrived, transcribed:
 
-**The whiteboard is not set dressing — it is the joke.** Shot 5 punches into
-it during his kicker, so the arrows have to visibly connect boxes to nothing.
+| File | Says |
+|---|---|
+| `ep02-expert-1.mp4` | "This is a classic case of STFU syndrome. Suddenly transparent, fair, and understanding." |
+| `ep02-expert-2.mp4` | "Under prolonged exposure to healthy work-life boundaries, a manager's brain can spontaneously begin to communicating clearly." |
+| `ep02-expert-3.mp4` | "We've seen early symptoms before. A manager saying good point in a meeting without adding a but. These are usually isolated incidents." |
+| `ep02-expert-4.mp4` | "In advanced cases, like this one, the manager may even apologize first. If anything, he's the one who needs the leave now." |
 
-### `ep02-expert-1.mp4` — the diagnosis (~9s)
+Continuity with Episode 01 holds: same man, rimless glasses, cream short-sleeved
+shirt, binder shelf left, desk lamp, fluorescent strip, whiteboard right. The
+board reads `SMC -> AF-SC`, `ASK -> F&F`, arrows fanning into `RSVR/MR/RM` under
+`SCM = ?` and `EoR = 100%` — boxes connected to nothing, which is what the
+punch-in exists to show. It sits identically in all four takes.
 
-Opens mid-sentence: the shot cuts to him already talking.
-
-> A photorealistic vertical video, 9:16, of an Indian man in his fifties with
-> salt-and-pepper hair swept back and rimless glasses, wearing a short-sleeved
-> cream button-up shirt with a chest pocket. He is seated at a desk in a small
-> institutional office. Behind him on the left is a bookshelf of white
-> lever-arch binders and a desk lamp; on the right is a whiteboard covered in
-> hand-drawn boxes, arrows and abbreviations that do not clearly connect to one
-> another. A fluorescent strip light runs across the ceiling. The colour is
-> slightly green and institutional, the light flat and overhead.
->
-> Framed head and shoulders, slightly low, dead still, no camera movement. The
-> whiteboard stays visible in the upper right of frame throughout, roughly 70 to
-> 100 percent across and 20 to 58 percent down — a later shot punches into it,
-> so it must not drift. Head in the upper half of frame; plain shirt and desk
-> below, and nothing important in the bottom fifth. No grade, no shallow depth
-> of field, no music.
->
-> He speaks with total academic confidence and is completely wrong. He is not in
-> on the joke and never winks at it. No performed accent, no comic timing, no
-> mugging.
->
-> He is mid-sentence, and says these words and only these words:
-> "—this is a classic case of S.T.F.U. Syndrome. Suddenly Transparent, Fair
-> and Understanding. Under prolonged exposure to healthy work-life
-> boundaries, a manager's brain can spontaneously begin... communicating
-> clearly. It's rare. It's poorly understood. Some don't recover."
->
-> He delivers the last sentence with quiet professional gravity, as a
-> clinician noting a poor prognosis.
-
-### `ep02-expert-2.mp4` — the precedent (~8s)
-
-> A photorealistic vertical video, 9:16, of an Indian man in his fifties with
-> salt-and-pepper hair swept back and rimless glasses, wearing a short-sleeved
-> cream button-up shirt with a chest pocket. He is seated at a desk in a small
-> institutional office. Behind him on the left is a bookshelf of white
-> lever-arch binders and a desk lamp; on the right is a whiteboard covered in
-> hand-drawn boxes, arrows and abbreviations that do not clearly connect to one
-> another. A fluorescent strip light runs across the ceiling. The colour is
-> slightly green and institutional, the light flat and overhead.
->
-> Framed head and shoulders, slightly low, dead still, no camera movement. The
-> whiteboard stays visible in the upper right of frame throughout, roughly 70 to
-> 100 percent across and 20 to 58 percent down — a later shot punches into it,
-> so it must not drift. Head in the upper half of frame; plain shirt and desk
-> below, and nothing important in the bottom fifth. No grade, no shallow depth
-> of field, no music.
->
-> He speaks with total academic confidence and is completely wrong. He is not in
-> on the joke and never winks at it. No performed accent, no comic timing, no
-> mugging.
->
-> He says these words and only these words:
-> "We've seen early symptoms before — a manager saying 'good point' in a
-> meeting without adding a 'but.' Giving credit without being asked twice.
-> These are usually contained. This... this progressed."
->
-> The examples are listed as clinical precedent, not as jokes. A real pause
-> before the last three words, delivered as the grave part.
-
-### `ep02-expert-3.mp4` — the kicker (~9s)
-
-The whiteboard punch-in happens over the end of this clip, so his framing
-must not drift.
-
-> A photorealistic vertical video, 9:16, of an Indian man in his fifties with
-> salt-and-pepper hair swept back and rimless glasses, wearing a short-sleeved
-> cream button-up shirt with a chest pocket. He is seated at a desk in a small
-> institutional office. Behind him on the left is a bookshelf of white
-> lever-arch binders and a desk lamp; on the right is a whiteboard covered in
-> hand-drawn boxes, arrows and abbreviations that do not clearly connect to one
-> another. A fluorescent strip light runs across the ceiling. The colour is
-> slightly green and institutional, the light flat and overhead.
->
-> Framed head and shoulders, slightly low, dead still, no camera movement. The
-> whiteboard stays visible in the upper right of frame throughout, roughly 70 to
-> 100 percent across and 20 to 58 percent down — a later shot punches into it,
-> so it must not drift. Head in the upper half of frame; plain shirt and desk
-> below, and nothing important in the bottom fifth. No grade, no shallow depth
-> of field, no music.
->
-> He speaks with total academic confidence and is completely wrong. He is not in
-> on the joke and never winks at it. No performed accent, no comic timing, no
-> mugging.
->
-> He says these words and only these words:
-> "In advanced cases, like this one, the subject may even apologize first —
-> before being asked to. If anything, he's the one who needs the leave now."
->
-> A beat before the last sentence, and he leans very slightly toward the
-> camera to deliver it — with complete sincerity, as a clinical
-> recommendation rather than as a punchline.
-
-**When all three land:** measure their envelopes and replace the provisional
-values in `src/compositions/episode02/shot05/beats.ts`, which currently
-guesses ~9s, ~8s and ~9s.
+**Identifying which clip is which cannot be done by ear here.** Duration, gap
+count and voiced time all cluster, and the end frames are indistinguishable —
+the generator gave him no lean-in. They were transcribed through the Gemini API
+using the key already in `.env`, which is the reliable way to do this and took
+one call per clip. Do that first next time rather than guessing from envelopes.
