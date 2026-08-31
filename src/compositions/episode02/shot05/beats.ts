@@ -16,36 +16,42 @@
  * away to him mid-answer. There is no question here and no cutaway — his three
  * clips run back to back, and what breaks up the take is the punch-in.
  *
- * ---------------------------------------------------------------------------
- * PROVISIONAL: none of the three clips exist yet.
+ * Clip one has landed and is measured. Clips two and three have not.
  *
- * The lengths below are the ~9s / ~8s / ~9s the prompts ask for, and every cue
- * inside them is a guess at a performance nobody has recorded. §8 requires
- * these to be offsets into a measured envelope. When the clips land, measure
- * them, replace these values, and delete this warning.
- * ---------------------------------------------------------------------------
+ *   ep02-expert-1.mp4  8.00s  speech 0.23-7.14
+ *   gaps  1.65-2.04  3.34-4.06  5.28-5.86  6.19-6.40
+ *     0.23-1.65  "...a classic case of S.T.F.U. Syndrome"
+ *     2.04-3.34  "Suddenly Transparent, Fair and Understanding"
+ *
+ * He runs about 0.105 s/syllable — considerably faster than the narrator's
+ * 0.17, which matters: his cues cannot be placed off the narrator's rate, and
+ * the term card lands nearly a second earlier than Episode 01's did.
+ *
+ * A2 and A3 below are still the ~8s and ~9s the prompts ask for, and every cue
+ * inside them is a guess. Measure and replace when those clips land.
  */
 
 const S = 30;
 
 /** Clip 1 — the diagnosis. He is already talking when the shot starts. */
 export const A1_STARTS = 0;
-export const A1_FRAMES = Math.round(9 * S);
+/** Measured: 8.00s. */
+export const A1_FRAMES = Math.round(8 * S);
 
 /**
  * The term, named on screen the moment he names it, so the audience gets the
  * acronym and its nonsense expansion at the same time he delivers them rather
  * than having to hold the joke in their head from audio alone.
  */
-export const TERM_IN = A1_STARTS + Math.round(1.2 * S);
-export const TERM_EXPANSION_IN = A1_STARTS + Math.round(2.6 * S);
-export const TERM_OUT = A1_STARTS + Math.round(6.5 * S);
+export const TERM_IN = A1_STARTS + Math.round(1.1 * S);
+export const TERM_EXPANSION_IN = A1_STARTS + Math.round(2.04 * S);
+export const TERM_OUT = A1_STARTS + Math.round(5.3 * S);
 
-/** Clip 2 — the precedent. */
+/** Clip 2 — the precedent. STILL PROVISIONAL. */
 export const A2_STARTS = A1_STARTS + A1_FRAMES;
 export const A2_FRAMES = Math.round(8 * S);
 
-/** Clip 3 — the apology beat and the kicker. */
+/** Clip 3 — the apology beat and the kicker. STILL PROVISIONAL. */
 export const A3_STARTS = A2_STARTS + A2_FRAMES;
 export const A3_FRAMES = Math.round(9 * S);
 
