@@ -75,6 +75,10 @@ export const NewspaperClipHrCommittee = makeCutout('cutouts-alpha/newspaper-clip
 
 // Episode 02, Beat 9 — the manager at his own desk, mirroring Beat 1.
 export const ManagerDeskNight = makeCutout('cutouts-alpha/manager-desk-night.png');
+// The same pose with the lid down and his hand resting on it. Registered
+// against the open pose: head top and right edge identical, and the 5.5% mass
+// difference is the laptop being closed. A hard swap, never a blend.
+export const ManagerDeskClosed = makeCutout('cutouts-alpha/manager-desk-closed.png');
 
 export type CutoutAsset =
 	| 'vidhana-soudha'
@@ -106,7 +110,8 @@ export type CutoutAsset =
 	| 'newspaper-clip-managers'
 	| 'newspaper-clip-ownclaim'
 	| 'newspaper-clip-hrcommittee'
-	| 'manager-desk-night';
+	| 'manager-desk-night'
+	| 'manager-desk-closed';
 
 export const CUTOUT_REGISTRY: Record<CutoutAsset, React.FC> = {
 	'vidhana-soudha': VidhanaSoudha,
@@ -139,4 +144,5 @@ export const CUTOUT_REGISTRY: Record<CutoutAsset, React.FC> = {
 	'newspaper-clip-ownclaim': NewspaperClipOwnClaim,
 	'newspaper-clip-hrcommittee': NewspaperClipHrCommittee,
 	'manager-desk-night': ManagerDeskNight,
+	'manager-desk-closed': ManagerDeskClosed,
 };

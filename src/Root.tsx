@@ -45,6 +45,8 @@ import {Shot08Committee} from './compositions/episode02/shot08/Shot08Committee';
 import {SHOT_08_DURATION as EP02_SHOT_08_DURATION} from './compositions/episode02/shot08/beats';
 import {Shot07Psa} from './compositions/episode02/shot07/Shot07Psa';
 import {SHOT_07_DURATION as EP02_SHOT_07_DURATION} from './compositions/episode02/shot07/beats';
+import {Shot09FullCircle} from './compositions/episode02/shot09/Shot09FullCircle';
+import {SHOT_09_DURATION as EP02_SHOT_09_DURATION} from './compositions/episode02/shot09/beats';
 import {Ep01CoverCard} from './compositions/covers/Ep01CoverCard';
 
 export const Root: React.FC = () => {
@@ -206,6 +208,14 @@ export const Root: React.FC = () => {
 				id="Ep02Shot07Psa"
 				component={Shot07Psa}
 				durationInFrames={EP02_SHOT_07_DURATION}
+				fps={OPENING_MONTAGE_FPS}
+				width={OPENING_MONTAGE_WIDTH}
+				height={OPENING_MONTAGE_HEIGHT}
+			/>
+			<Composition
+				id="Ep02Shot09FullCircle"
+				component={Shot09FullCircle}
+				durationInFrames={EP02_SHOT_09_DURATION}
 				fps={OPENING_MONTAGE_FPS}
 				width={OPENING_MONTAGE_WIDTH}
 				height={OPENING_MONTAGE_HEIGHT}

@@ -22,15 +22,21 @@ const CLOCK_SIZE = 390;
  * Centre and radii are measured off the keyed alpha, so the hands pivot on the
  * face rather than on a guess at where the face is.
  */
-const ClockHands: React.FC<{size: number; startTick: number}> = ({size, startTick}) => {
+export const ClockHands: React.FC<{
+	size: number;
+	startTick?: number;
+	/** Defaults to Beat 1's 11:47 — Shot 9 is another night, so it sets its own. */
+	hour?: number;
+	minute?: number;
+}> = ({size, startTick = 0, hour = CLOCK_HOUR, minute = CLOCK_MINUTE}) => {
 	const frame = useCurrentFrame();
 	const cx = CLOCK_CENTRE_X * size;
 	const cy = CLOCK_CENTRE_Y * size;
 	const r = CLOCK_FACE_RADIUS * size;
 
 	const {stepIndex: tick} = useStopMotionStep(frame, TICK_FRAMES);
-	const hourAngle = (CLOCK_HOUR % 12) * 30 + CLOCK_MINUTE * 0.5;
-	const minuteAngle = CLOCK_MINUTE * 6;
+	const hourAngle = (hour % 12) * 30 + minute * 0.5;
+	const minuteAngle = minute * 6;
 	const secondAngle = ((tick + startTick) % 60) * 6;
 
 	const hand = (angle: number, length: number, width: number, color: string) => (
