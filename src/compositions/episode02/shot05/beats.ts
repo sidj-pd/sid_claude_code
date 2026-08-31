@@ -94,6 +94,43 @@ export const KICKER_OUT = WHITEBOARD_OUT;
 /** Frames between one line arriving and the next — a read-down, not a pop. */
 export const KICKER_STAGGER = 7;
 
+/**
+ * His clinical claims, written down as findings while he makes them.
+ *
+ * Clips 2 and 3 are seventeen seconds of a talking head with nothing over it —
+ * Episode 01 broke its equivalent up with a cutaway to the correspondent and
+ * there is none here, so the middle of this shot was simply empty. These fill
+ * it with the device the series already owns: the same newsprint chit the
+ * witness's checklist uses in Shot 4, which also ties the two photoreal shots
+ * to each other.
+ *
+ * Each is cut to the segment where he actually says it, off the transcripts.
+ * The wording is his, turned into case-note register — that is the joke the
+ * checklist made in Shot 4 too: nothing described is remarkable, and writing it
+ * down as a finding is what makes it damning.
+ */
+const IN_A2 = (seconds: number) => A2_STARTS + Math.round(seconds * S) - A2_SRC_IN;
+const IN_A3 = (seconds: number) => A3_STARTS + Math.round(seconds * S) - A3_SRC_IN;
+
+export const FINDINGS = [
+	// Clip 2, segment one: "Under prolonged exposure to healthy work-life boundaries,"
+	{text: 'ONSET: PROLONGED HEALTHY BOUNDARIES', in: IN_A2(0.6), tick: IN_A2(3.32)},
+	// Clip 2, segment two: "...can spontaneously begin to communicating clearly."
+	{text: 'SYMPTOM: COMMUNICATING CLEARLY', in: IN_A2(3.9), tick: IN_A2(7.21)},
+	// Clip 3, segments two and three: "A manager saying good point... without adding a but."
+	{text: 'PRECEDENT: "GOOD POINT", NO "BUT"', in: IN_A3(2.9), tick: IN_A3(6.68)},
+	// Clip 3, segment four: "These are usually isolated incidents."
+	{text: 'PROGNOSIS: USUALLY ISOLATED', in: IN_A3(7.9), tick: IN_A3(9.47)},
+];
+
+/** The header chit above the list. */
+export const FINDINGS_HEADER_IN = FINDINGS[0].in - 8;
+/**
+ * Gone before the punch-in. The kicker wants the frame to itself, and a list of
+ * findings still on screen would compete with the one line that has to land.
+ */
+export const FINDINGS_OUT = WHITEBOARD_IN - 26;
+
 export const CHYRON_IN = A1_STARTS + 10;
 /**
  * Out well before the kicker. Raising the lower third to clear the platform

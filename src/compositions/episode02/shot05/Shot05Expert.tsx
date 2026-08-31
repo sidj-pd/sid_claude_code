@@ -10,6 +10,8 @@ import {
 import {Chyron} from '../../../components/Chyron';
 import {Footage} from '../../../components/Footage';
 import {NewsprintTexture} from '../../../components/NewsprintTexture';
+import {EvidenceStamp} from '../../../components/EvidenceStamp';
+import {ChecklistItem} from '../../episode01/shot06/Checklist';
 import {SAFE_BOTTOM_Y} from '../../../components/safeArea';
 import {tornPolygon} from '../../../components/tornEdge';
 import {
@@ -27,6 +29,9 @@ import {
 	A4_STARTS,
 	CHYRON_IN,
 	CHYRON_OUT,
+	FINDINGS,
+	FINDINGS_HEADER_IN,
+	FINDINGS_OUT,
 	KICKER_IN,
 	KICKER_OUT,
 	KICKER_STAGGER,
@@ -202,6 +207,16 @@ export const Shot05Expert: React.FC = () => {
 	);
 	const scale = interpolate(push, [0, 1], [1, WHITEBOARD_CROP.zoom]);
 
+	// The findings list. Left column, below his face and clear of both the
+	// chyron's band and the platform chrome.
+	const LIST_X = 84;
+	const LIST_W = 840;
+	const LIST_TOP = 1010;
+	const ITEM_H = 74;
+	const ITEM_GAP = 8;
+	const listLive = frame >= FINDINGS_HEADER_IN && frame < FINDINGS_OUT;
+	const listFade = interpolate(frame, [FINDINGS_OUT - 10, FINDINGS_OUT], [1, 0], CLAMP);
+
 	return (
 		<AbsoluteFill style={{backgroundColor: '#0c0e11'}}>
 			{/* Four takes, joins tightened by trimming each lead — four clips with
@@ -249,6 +264,38 @@ export const Shot05Expert: React.FC = () => {
 				</AbsoluteFill>
 			</Sequence>
 
+			{/* His claims, entered into the record as he makes them. Same chit the
+			    witness's checklist uses in Shot 4, which ties the two photoreal shots
+			    together — and fills seventeen seconds that were previously nothing
+			    but a talking head. */}
+			{listLive ? (
+				<AbsoluteFill style={{opacity: listFade}}>
+					<div style={{position: 'absolute', left: LIST_X, top: LIST_TOP - 66}}>
+						<EvidenceStamp
+							text="CLINICAL FINDINGS"
+							age={frame - FINDINGS_HEADER_IN}
+							fontSize={30}
+							rotate={-1.5}
+						/>
+					</div>
+					{FINDINGS.map((f, i) => (
+						<div
+							key={f.text}
+							style={{position: 'absolute', left: LIST_X, top: LIST_TOP + i * (ITEM_H + ITEM_GAP)}}
+						>
+							<ChecklistItem
+								text={f.text}
+								age={frame - f.in}
+								tickAge={frame - f.tick}
+								width={LIST_W}
+								height={ITEM_H}
+								seed={70 + i * 5}
+							/>
+						</div>
+					))}
+				</AbsoluteFill>
+			) : null}
+
 			<TermCard frame={frame} />
 			<Kicker frame={frame} />
 
@@ -265,12 +312,15 @@ export const Shot05Expert: React.FC = () => {
 			))}
 
 			{/* Name, title and institution, plus the footnote that undoes them.
-			    He is promoted from Episode 01's URBAN MOBILITY BEHAVIOURIST to
-			    ORGANIZATIONAL — same man, same unaccredited institute,
-			    credentialed to whatever the week requires. */}
+			    Episode 01 had him as URBAN MOBILITY BEHAVIOURIST at the Institute
+			    of TRANSIT Studies; here he is a CORPORATE EXPERT at the Institute
+			    of BEHAVIOURAL Studies. The institute changing costs the running
+			    joke that it was always the same unaccredited place regardless of
+			    the subject — worth knowing if it is ever reverted. The footnote
+			    survives either way, and it is the footnote doing the work. */}
 			<Chyron
 				name="DR. NAGESH RAMAMURTHY"
-				title={'ORGANIZATIONAL BEHAVIOURIST\nBANGALORE INSTITUTE OF TRANSIT STUDIES*'}
+				title={'CORPORATE EXPERT\nBANGALORE INSTITUTE OF BEHAVIOURAL STUDIES*'}
 				footnote="*institute unaccredited"
 				frame={frame}
 				in={CHYRON_IN}
