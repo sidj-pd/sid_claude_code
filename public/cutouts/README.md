@@ -176,18 +176,19 @@ are cheaper to fix by regenerating the art.
 
 ## The three newspaper clippings
 
-**Clippings are the ONE exception to the cream-backdrop rule.** The rule exists
-because the keyer flood-fills from the frame edge and normal cutout art is
-coloured, so cream is safely "not the artwork". A newspaper clipping IS cream
-paper, and a cream backdrop makes it unkeyable: measured, the first attempt put
-paper only 4-10 values from its backdrop, against a default tolerance of 38. The
-fill walked straight through the paper. Dropping the tolerance to 3 does not
-help — then the backdrop survives instead. There is no value that separates them.
-Episode 01's clippings were photographed on wood, which put paper 77 values from
-backdrop; that needed a `tolerance: 46` override for the grain but it did key.
+**Clippings are never keyed, so their backdrop does not matter.** `NewsHeadline`
+shows a clipping in a box with `overflow: hidden` and `object-fit: cover`, so its
+outline is the box rather than a silhouette — the alpha channel is unused.
+`crop-newspaper-clippings.mjs` therefore crops Episode 02's clippings straight
+from the source JPG.
 
-So: clippings go on a **plain flat dark charcoal surface** — as much separation
-as wood, without the grain that forced the override.
+That was worth discovering the hard way. Episode 02's clippings arrived on cream,
+which the keyer cannot separate from cream paper at all: measured 4-10 values
+apart against a tolerance of 38, so the fill walked through the paper and punched
+it full of holes. Tolerance 3 does not help either — then the backdrop survives.
+Cropping from source skips the question, and cream around a clipping is invisible
+on a cream page anyway. Episode 01's still key first, because those were
+photographed on wood and the alpha is what removes it.
 
 **No readable headline in the art.** `NewsHeadline` sets the headline and quote
 in code, over the clipping — that is what keeps the copy exactly on the script's
@@ -217,13 +218,10 @@ afterwards, so the clipping can be generous — but two headlines have to share 
 > photo, three narrow columns of small newspaper body text in unreadable
 > greeked latin filler, slightly blurred and broken as old newsprint is.
 >
-> The clipping lies on a plain flat DARK CHARCOAL-GREY surface, smooth and
-> even, which runs to all four edges of the frame with clear margin all round.
-> The dark surround is deliberate and required: the clipping's own paper is
-> cream, and it can only be cut out if the surface behind it is nothing like
-> cream. No wood grain, no texture in the surface, no desk, no hands, no drop
-> shadow, no cast shadow. Nothing touches the edge of the frame. No legible
-> headline text anywhere in the image.
+> The clipping lies on a plain flat even surface with clear margin all round —
+> cream is fine, since these are cropped from the source rather than keyed. No
+> wood grain, no desk, no hands, no drop shadow, no cast shadow. Nothing touches
+> the edge of the frame. No legible headline text anywhere in the image.
 
 ### `newspaper-clip-ownclaim.jpg`
 
@@ -239,13 +237,10 @@ afterwards, so the clipping can be generous — but two headlines have to share 
 > narrow columns of small newspaper body text in unreadable greeked latin
 > filler, slightly blurred and broken as old newsprint is.
 >
-> The clipping lies on a plain flat DARK CHARCOAL-GREY surface, smooth and
-> even, which runs to all four edges of the frame with clear margin all round.
-> The dark surround is deliberate and required: the clipping's own paper is
-> cream, and it can only be cut out if the surface behind it is nothing like
-> cream. No wood grain, no texture in the surface, no desk, no hands, no drop
-> shadow, no cast shadow. Nothing touches the edge of the frame. No legible
-> headline text anywhere in the image.
+> The clipping lies on a plain flat even surface with clear margin all round —
+> cream is fine, since these are cropped from the source rather than keyed. No
+> wood grain, no desk, no hands, no drop shadow, no cast shadow. Nothing touches
+> the edge of the frame. No legible headline text anywhere in the image.
 
 ### `newspaper-clip-hrcommittee.jpg`
 
@@ -264,13 +259,10 @@ government committee and this is HR — a different room.
 > the photo, three narrow columns of small newspaper body text in unreadable
 > greeked latin filler, slightly blurred and broken as old newsprint is.
 >
-> The clipping lies on a plain flat DARK CHARCOAL-GREY surface, smooth and
-> even, which runs to all four edges of the frame with clear margin all round.
-> The dark surround is deliberate and required: the clipping's own paper is
-> cream, and it can only be cut out if the surface behind it is nothing like
-> cream. No wood grain, no texture in the surface, no desk, no hands, no drop
-> shadow, no cast shadow. Nothing touches the edge of the frame. No legible
-> headline text anywhere in the image.
+> The clipping lies on a plain flat even surface with clear margin all round —
+> cream is fine, since these are cropped from the source rather than keyed. No
+> wood grain, no desk, no hands, no drop shadow, no cast shadow. Nothing touches
+> the edge of the frame. No legible headline text anywhere in the image.
 
 ## The manager at his desk — two poses
 
