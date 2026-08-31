@@ -227,6 +227,49 @@ def notification_ping(dur=0.62, seed=29):
     return out
 
 
+def laptop_close(dur=0.46, seed=53):
+    """
+    A laptop lid coming down, gently.
+
+    Two parts and the order matters: a hinge sweep, then the lid arriving. The
+    sweep is low-passed noise that rises as the lid gains speed and thins as it
+    slows, because a hinge is quietest at both ends of its travel. The arrival
+    is a soft damped clack at 0.30 — two low body tones and almost no transient,
+    since the whole point of Beat 9 is that he closes it rather than slamming it.
+
+    Deliberately smaller than stamp_thud. That cue is a decision being recorded;
+    this one is a man going to bed.
+    """
+    rng = random.Random(seed)
+    n = int(SR * dur)
+    out = []
+    lp = 0.0
+    contact_at = 0.30
+    for i in range(n):
+        t = i / SR
+        # Hinge: a bell-shaped swell over the travel, low-passed hard so it
+        # reads as air and felt rather than as hiss.
+        if t < contact_at:
+            travel = t / contact_at
+            swell = math.sin(math.pi * travel) ** 1.4
+            lp += (rng.uniform(-1, 1) - lp) * 0.020
+            hinge = lp * 3.2 * swell * 0.5
+        else:
+            hinge = 0.0
+        # The lid arriving: barely any click, mostly body.
+        arrival = 0.0
+        t2 = t - contact_at
+        if t2 > 0:
+            tap = rng.uniform(-1, 1) * _env(t2, 0.0022) * 0.28
+            body = (
+                math.sin(2 * math.pi * 118 * t2) * _env(t2, 0.030) * 0.5
+                + math.sin(2 * math.pi * 74 * t2) * _env(t2, 0.052) * 0.38
+            )
+            arrival = tap + body
+        out.append(hinge + arrival)
+    return out
+
+
 EFFECTS = {
     "paper-rip": paper_rip,
     "meter-click": meter_click,
@@ -235,6 +278,7 @@ EFFECTS = {
     "key-click": key_click,
     "room-hum": room_hum,
     "notification-ping": notification_ping,
+    "laptop-close": laptop_close,
 }
 
 
