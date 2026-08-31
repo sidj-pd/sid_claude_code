@@ -23,6 +23,12 @@ const CROPS = {
 	'newspaper-clip-autounion': {top: 440, height: 660},
 	'newspaper-clip-victim': {top: 0, height: 780},
 	'newspaper-clip-committee': {top: 0, height: 680},
+	// Episode 02. Photo bands located by scanning each keyed clipping for rows
+	// that are mid-grey heavy: paper sits near 225-240 and body text is thin
+	// strokes on paper, so only a press photo fills a row with mid tones.
+	'newspaper-clip-managers': {top: 600, height: 430},
+	'newspaper-clip-ownclaim': {top: 431, height: 549},
+	'newspaper-clip-hrcommittee': {top: 403, height: 611},
 };
 
 const main = async () => {
