@@ -169,3 +169,146 @@ Then check each keyed PNG before building anything on it. A halo means the
 source carried a shadow; holes through the artwork mean a tone sat too close to
 cream. Both are per-asset `OVERRIDES` in `scripts/cutout-alpha.mjs`, but both
 are cheaper to fix by regenerating the art.
+
+---
+
+# Episode 02 — Beats 6, 8 and 9
+
+## The three newspaper clippings
+
+**No readable headline in the art.** `NewsHeadline` sets the headline and quote
+in code, over the clipping — that is what keeps the copy exactly on the script's
+wording and animatable. The clipping supplies the photo and the greeked body
+text, which a generator renders better than CSS can fake. Leave clear space
+across the top third for the code-set headline to sit in.
+
+**On a flat cream backdrop, not a table.** Episode 01's `newspaper-clip-autounion`
+was photographed on wood grain and needed a `tolerance: 46` override to key.
+
+`scripts/crop-newspaper-clippings.mjs` crops each one down to its photo
+afterwards, so the clipping can be generous — but two headlines have to share a
+9:16 frame, so keep the photo roughly landscape rather than tall.
+
+### `newspaper-clip-managers.jpg`
+
+> A photograph of a single torn clipping from an old newspaper, lying flat and
+> square-on. The paper is aged to a yellowish cream, softly foxed, with one
+> ragged torn edge down the right side and small tears at the corners.
+>
+> Across the top third the paper is EMPTY — no headline, no display type, just
+> blank newsprint with a couple of faint horizontal rules. Below that sits a
+> single black-and-white press photograph, roughly landscape, of a group of
+> Indian office managers in their forties standing together outside a corporate
+> building in shirts and lanyards, mid-discussion, looking organised and mildly
+> aggrieved — the look of people who have just formed a committee. Under the
+> photo, three narrow columns of small newspaper body text in unreadable
+> greeked latin filler, slightly blurred and broken as old newsprint is.
+>
+> The clipping sits centred on a plain flat cream backdrop that runs to all four
+> edges of the frame, with clear empty margin all round. No wood table, no desk,
+> no hands, no drop shadow, no cast shadow. Nothing touches the edge of the
+> frame. No legible headline text anywhere in the image.
+
+### `newspaper-clip-ownclaim.jpg`
+
+> A photograph of a single torn clipping from an old newspaper, lying flat and
+> square-on. The paper is aged to a yellowish cream, softly foxed, with one
+> ragged torn edge down the left side and small tears at the corners.
+>
+> Across the top third the paper is EMPTY — no headline, no display type, just
+> blank newsprint with a couple of faint horizontal rules. Below that sits a
+> single black-and-white press photograph, roughly landscape, of one Indian man
+> in his late forties in a plain office shirt sitting alone at a desk, looking
+> lost and slightly hollowed out, staring at nothing. Under the photo, three
+> narrow columns of small newspaper body text in unreadable greeked latin
+> filler, slightly blurred and broken as old newsprint is.
+>
+> The clipping sits centred on a plain flat cream backdrop that runs to all four
+> edges of the frame, with clear empty margin all round. No wood table, no desk,
+> no hands, no drop shadow, no cast shadow. Nothing touches the edge of the
+> frame. No legible headline text anywhere in the image.
+
+### `newspaper-clip-hrcommittee.jpg`
+
+For Beat 8. Episode 01 has a `newspaper-clip-committee`, but that one is a
+government committee and this is HR — a different room.
+
+> A photograph of a single torn clipping from an old newspaper, lying flat and
+> square-on. The paper is aged to a yellowish cream, softly foxed, with one
+> ragged torn edge along the bottom and small tears at the corners.
+>
+> Across the top third the paper is EMPTY — no headline, no display type, just
+> blank newsprint with a couple of faint horizontal rules. Below that sits a
+> single black-and-white press photograph, roughly landscape, of an empty
+> corporate meeting room in India: a long table, eight stacking chairs pushed
+> in, a blank flip chart, fluorescent light, nobody in the room at all. Under
+> the photo, three narrow columns of small newspaper body text in unreadable
+> greeked latin filler, slightly blurred and broken as old newsprint is.
+>
+> The clipping sits centred on a plain flat cream backdrop that runs to all four
+> edges of the frame, with clear empty margin all round. No wood table, no desk,
+> no hands, no drop shadow, no cast shadow. Nothing touches the edge of the
+> frame. No legible headline text anywhere in the image.
+
+## The manager at his desk — two poses
+
+Beat 9 mirrors Beat 1 from the manager's side, and he closes his laptop instead
+of replying. **That is a two-pose swap, not a moving lid** — the same trick the
+employee's smile uses, which is registered and works. So: the same drawing
+twice, identical framing, differing only in the laptop.
+
+Generate them as a pair. If the framing drifts between them the swap will jump
+rather than reading as a paper puppet changing pose.
+
+### `manager-desk-night.jpg` — laptop open
+
+> Hand-cut paper collage illustration in the style of a printed mid-century
+> explainer: layered construction and craft paper, matte and slightly
+> desaturated, with visible scissor-cut and torn edges and a fine halftone grain
+> over the whole piece. Flatly lit from above — no rendering, no gloss, no
+> gradient lighting.
+>
+> Subject: an Indian man in his late forties sitting at a plain desk, seen from
+> a three-quarter angle from his RIGHT — mirroring a younger man drawn from his
+> left, so the two read as opposite sides of the same situation. Short greying
+> hair, a plain collared shirt with the sleeves rolled. His posture is heavy and
+> settled, one hand flat on the desk, shoulders low. In front of him an OPEN
+> laptop, its screen a completely empty flat dark rectangle: no text, no icons,
+> no lettering, no glow. Beside it a small dark phone, face up, screen also
+> completely empty.
+>
+> It is late at night, and that is carried entirely by the palette — deep indigo,
+> slate and charcoal papers for his clothing and the desk, warm muted paper for
+> skin — never by lighting. The piece stays flatly lit.
+>
+> The figure sits centred on a plain flat cream craft-paper backdrop that runs
+> to all four edges with clear empty margin all round. No drop shadow, no cast
+> shadow, no shading painted onto the backdrop. No deckle edge, no torn-page
+> border, no frame, no mount, no table or wood grain. Nothing touches the edge
+> of the frame. No text anywhere in the image.
+
+### `manager-desk-closed.jpg` — laptop closed, hand still on it
+
+> The SAME illustration as the previous one, in the same style, with the same
+> man in the same position, the same clothes, the same desk, the same phone, the
+> same framing and the same scale — identical in every respect except one.
+>
+> Hand-cut paper collage illustration in the style of a printed mid-century
+> explainer: layered construction and craft paper, matte and slightly
+> desaturated, with visible scissor-cut and torn edges and a fine halftone grain
+> over the whole piece. Flatly lit from above — no rendering, no gloss, no
+> gradient lighting.
+>
+> Subject: an Indian man in his late forties sitting at a plain desk, seen from
+> a three-quarter angle from his RIGHT. Short greying hair, plain collared shirt
+> with the sleeves rolled. The laptop in front of him is now CLOSED — a flat
+> slate slab — and his hand rests on top of the closed lid. Beside it the same
+> small dark phone, face up, screen completely empty. His expression is calm and
+> unreadable. Night is carried by the palette, not by lighting: deep indigo,
+> slate and charcoal papers, warm muted paper for skin.
+>
+> Centred on a plain flat cream craft-paper backdrop running to all four edges
+> with clear empty margin all round. No drop shadow, no cast shadow, no shading
+> painted onto the backdrop. No deckle edge, no torn-page border, no frame, no
+> mount, no table or wood grain. Nothing touches the edge of the frame. No text
+> anywhere in the image.

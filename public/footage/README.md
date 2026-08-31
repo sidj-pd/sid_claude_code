@@ -314,3 +314,74 @@ count and voiced time all cluster, and the end frames are indistinguishable —
 the generator gave him no lean-in. They were transcribed through the Gemini API
 using the key already in `.env`, which is the reliable way to do this and took
 one call per clip. Do that first next time rather than guessing from envelopes.
+
+## Shot 6 — the manager, one clip
+
+**First time the manager is on camera, and he is a different man from the
+witness.**
+
+The witness is the employee in his early thirties; this is his manager, late
+forties. Same webcam-testimony register as the witness clips so the two read as
+the same programme — but not the same room, because they are not in the same
+room.
+
+### `ep02-manager-1.mp4`
+
+> A photorealistic vertical video, 9:16, of an Indian man in his late forties on
+> a video call from a home study in the evening. Short greying hair, a plain
+> collared shirt with the top button open, slightly rumpled. Behind him a plain
+> wall, the edge of a bookshelf, a closed door. Warm domestic lamplight from one
+> side, dimmer than an office.
+>
+> Framed on a laptop webcam, so slightly low and level with his eyes, dead
+> still, no camera movement. Head and shoulders in the upper half of the frame;
+> the lower half stays plain torso and desk, and nothing important sits in the
+> bottom fifth. The look is a compressed video call: soft focus, sensor noise in
+> the shadows, no grade, no shallow depth of field, no music.
+>
+> He speaks these words and only these words:
+> "This week alone, I said 'no worries' four times. Genuinely. No worries. I
+> don't even know who I am anymore."
+>
+> He is flat, aggrieved and completely sincere — a man reporting a symptom, not
+> making a joke. He believes he is the injured party. A real pause before the
+> last sentence, delivered quietly rather than for effect. No performed accent,
+> no comic timing, no mugging, no smiling at the camera.
+
+## Shot 7 — the correspondent PSA, one clip
+
+He has been off screen all episode, asking one question in Shot 4. This is the
+first and only time he is seen, and the register changes: a studio sign-off, not
+a video call. Episode 01's `ep01-correspondent-psa.mp4` is the reference for the
+look.
+
+### `ep02-correspondent-psa.mp4`
+
+> A photorealistic vertical video, 9:16, of an Indian television correspondent
+> in his forties addressing the camera directly from a small broadcast studio.
+> Clean-shaven, a plain dark jacket over a light shirt. Behind him a neutral
+> studio backdrop, evenly lit, with no signage or branding. The light is clean
+> and even and clearly professional — brighter and flatter than the domestic
+> video calls elsewhere in this episode, because this is a broadcast rather than
+> a call.
+>
+> Framed head and shoulders, straight on and level, dead still, no camera
+> movement. Head in the upper half of the frame; the lower half stays plain
+> jacket and backdrop, and nothing important sits in the bottom fifth. No grade,
+> no shallow depth of field, no music.
+>
+> He speaks these words and only these words:
+> "If your manager has approved a request without a follow-up call — or said 'no
+> worries' and meant it — do not panic. This is likely a mild case. Monitor for
+> further symptoms. You are not alone."
+>
+> Deadpan and entirely serious, in the register of a public-health advisory. A
+> beat before the final sentence, delivered with false gravity — reassurance
+> that is not reassuring. No performed accent, no comic timing, no mugging, no
+> warmth.
+
+**Note on the generator:** Episode 01 records that a "TV correspondent
+delivering a public-health warning" prompt was refused as an impersonation risk,
+and that the identical dialogue from "a guy with headphones on a video call"
+passed. If this one is blocked, strip the institutional framing — drop
+"television correspondent" and "broadcast studio", keep the words.
