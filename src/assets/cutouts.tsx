@@ -65,6 +65,17 @@ export const DeskLamp = makeCutout('cutouts-alpha/desk-lamp.png');
 // than competing with the man in front of it.
 export const OfficeWindowNight = makeCutout('cutouts-alpha/office-window-night.png');
 
+// Episode 02, Beat 6 and Beat 8. These three are cropped from source by
+// scripts/crop-newspaper-clippings.mjs rather than keyed: NewsHeadline shows a
+// clipping in a box with overflow hidden, so its outline is the box and the
+// alpha is never used.
+export const NewspaperClipManagers = makeCutout('cutouts-alpha/newspaper-clip-managers.png');
+export const NewspaperClipOwnClaim = makeCutout('cutouts-alpha/newspaper-clip-ownclaim.png');
+export const NewspaperClipHrCommittee = makeCutout('cutouts-alpha/newspaper-clip-hrcommittee.png');
+
+// Episode 02, Beat 9 — the manager at his own desk, mirroring Beat 1.
+export const ManagerDeskNight = makeCutout('cutouts-alpha/manager-desk-night.png');
+
 export type CutoutAsset =
 	| 'vidhana-soudha'
 	| 'auto-rickshaw'
@@ -91,7 +102,11 @@ export type CutoutAsset =
 	| 'laptop-screen'
 	| 'wall-clock-face'
 	| 'desk-lamp'
-	| 'office-window-night';
+	| 'office-window-night'
+	| 'newspaper-clip-managers'
+	| 'newspaper-clip-ownclaim'
+	| 'newspaper-clip-hrcommittee'
+	| 'manager-desk-night';
 
 export const CUTOUT_REGISTRY: Record<CutoutAsset, React.FC> = {
 	'vidhana-soudha': VidhanaSoudha,
@@ -120,4 +135,8 @@ export const CUTOUT_REGISTRY: Record<CutoutAsset, React.FC> = {
 	'wall-clock-face': WallClockFace,
 	'desk-lamp': DeskLamp,
 	'office-window-night': OfficeWindowNight,
+	'newspaper-clip-managers': NewspaperClipManagers,
+	'newspaper-clip-ownclaim': NewspaperClipOwnClaim,
+	'newspaper-clip-hrcommittee': NewspaperClipHrCommittee,
+	'manager-desk-night': ManagerDeskNight,
 };
