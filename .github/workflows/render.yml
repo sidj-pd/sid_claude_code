@@ -10,12 +10,12 @@ on:
       composition:
         description: 'Composition id to render (see src/Root.tsx)'
         required: true
-        default: 'Ep02Shot01LeaveRequest'
+        default: 'Ep03Shot01EmptyFlat'
         type: string
       frames:
         description: 'Frame numbers to also export as stills, space separated'
         required: false
-        default: '20 120 200 255'
+        default: '12 34 75 130 290 430'
         type: string
       crf:
         description: 'Quality — lower is better and bigger. 30 is the project default.'
@@ -72,7 +72,7 @@ jobs:
         run: |
           COMP="${{ github.event.inputs.composition }}"
           CRF="${{ github.event.inputs.crf }}"
-          echo "composition=${COMP:-Ep02Shot01LeaveRequest}" >> "$GITHUB_OUTPUT"
+          echo "composition=${COMP:-Ep03Shot01EmptyFlat}" >> "$GITHUB_OUTPUT"
           echo "crf=${CRF:-30}" >> "$GITHUB_OUTPUT"
 
       # Remotion downloads its own Chrome Headless Shell on first render.
@@ -90,7 +90,7 @@ jobs:
       # only way to actually look at a shot — §12 rule 20.
       - name: Render key frames
         run: |
-          for F in ${{ github.event.inputs.frames || '20 120 200 255' }}; do
+          for F in ${{ github.event.inputs.frames || '12 34 75 130 290 430' }}; do
             npx remotion still "${{ steps.what.outputs.composition }}" \
               "out/${{ steps.what.outputs.composition }}-f${F}.png" --frame="$F" || true
           done
