@@ -70,7 +70,26 @@ const OVERRIDES = {
 	'wall-stain': {trim: true},
 	'flat-floor': {trim: true},
 	'floor-tile-cracked': {trim: true},
-	'tenant-tense': {trim: true},
+	/*
+	 * His key-ring is drawn as cream shapes with dark outlines, measured at
+	 * delta 7 from the backdrop — the bodies are the same tone as the ground
+	 * they sit on. The enclosed-hole pass punched them out and left an outline
+	 * skeleton with the wall showing through, which read as a ragged pale blob
+	 * in his hand.
+	 *
+	 * interior:false keeps the keys but fills the enclosed gaps between his arm
+	 * and torso and between his legs with cream, which reads as a keying error.
+	 * Neither tolerance nor hole area separates the two cases: measured, the
+	 * keys and the leg gap are both cream at delta 3-20, and the keys' area is
+	 * the larger of the two. So the pass runs everywhere except the box his
+	 * hand occupies. Tolerance 60 also clears the cream fringe along his arm;
+	 * his nearest real tone is skin at 122.
+	 */
+	'tenant-tense': {
+		trim: true,
+		tolerance: 60,
+		interiorExclude: [0.17, 0.52, 0.32, 0.66],
+	},
 	// A putty kurta on a cream backdrop looked like the Episode 02 clipping
 	// problem, so this started at tolerance 22 out of caution. Measured, the
 	// kurta's lightest tone is 54 off the backdrop, so the default 38 was never
@@ -108,6 +127,19 @@ const removeBackground = async (srcPath, outPath, options = {}) => {
 	const image = sharp(srcPath).ensureAlpha();
 	const {width, height} = await image.metadata();
 	const raw = await image.raw().toBuffer();
+
+	/*
+	 * A region of the canvas the enclosed-hole pass must leave alone, given as
+	 * [x0, y0, x1, y1] fractions of the source.
+	 */
+	const exclude = options.interiorExclude
+		? {
+				x0: Math.round(options.interiorExclude[0] * width),
+				y0: Math.round(options.interiorExclude[1] * height),
+				x1: Math.round(options.interiorExclude[2] * width),
+				y1: Math.round(options.interiorExclude[3] * height),
+			}
+		: null;
 
 	// Everything outside this rectangle is treated as background outright,
 	// and the colour sample + flood seeds come from its border.
@@ -214,7 +246,18 @@ const removeBackground = async (srcPath, outPath, options = {}) => {
 			}
 		}
 
-		if (component.length >= MIN_HOLE_AREA) {
+		// An enclosed region inside an excluded box is cream *artwork*, not
+		// backdrop showing through, and must survive the pass. See the
+		// interiorExclude note in OVERRIDES.
+		const excluded =
+			exclude !== null &&
+			component.some((q) => {
+				const qx = q % width;
+				const qy = (q - qx) / width;
+				return qx >= exclude.x0 && qx <= exclude.x1 && qy >= exclude.y0 && qy <= exclude.y1;
+			});
+
+		if (!excluded && component.length >= MIN_HOLE_AREA) {
 			for (const p of component) {
 				visited[p] = 1;
 			}
