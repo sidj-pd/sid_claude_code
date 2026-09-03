@@ -299,6 +299,13 @@ export const Shot02Graphic: React.FC<{silent?: boolean}> = ({silent = false}) =>
 								labelAge={frame - NUM2_STAMP}
 								remainderLabel={move >= 1 ? '15%' : undefined}
 								remainderAge={frame - REMAINDER2_IN}
+								// 15% of BAR_W is 137px, over the height*0.5 cutoff
+								// StatBar uses to decide whether the figure also fits
+								// inside the block — the exact case remainderLabelInside
+								// was added for at Episode 01's 11%. Without this the
+								// render showed "15%" twice: once above, once inside the
+								// pink block.
+								remainderLabelInside={false}
 								seed={11}
 							/>
 						</div>
