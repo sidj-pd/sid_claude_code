@@ -41,13 +41,13 @@ const WALL_BOTTOM = WALL_TOP + WALL_H;
  * the pixel sizes the placeholders used he came out at 82% and the room read
  * like a doll's house.
  */
-const TENANT_H = Math.round(WALL_H * 0.68);
+const TENANT_H = Math.round(WALL_H * 0.82);
 const TENANT_W = Math.round(TENANT_H * 0.329);
-const LANDLORD_H = Math.round(WALL_H * 0.72);
-const LANDLORD_W = Math.round(LANDLORD_H * 0.416);
+const LANDLORD_H = Math.round(WALL_H * 0.86);
+const LANDLORD_W = Math.round(LANDLORD_H * 0.385);
 /** Both stand on the floor, a little in front of its top edge. */
-const TENANT_TOP = WALL_BOTTOM + 314 - TENANT_H;
-const LANDLORD_TOP = WALL_BOTTOM + 334 - LANDLORD_H;
+const TENANT_TOP = WALL_BOTTOM + 300 - TENANT_H;
+const LANDLORD_TOP = WALL_BOTTOM + 320 - LANDLORD_H;
 const TENANT_LEFT = 290;
 const LANDLORD_LEFT = 600;
 
@@ -67,10 +67,13 @@ const FLOOR_H = Math.round(FLOOR_W / 0.574);
  * at 0.32 across and 0.26 down his own bounding box, not guessed — and ends by
  * the tenant's free hand.
  */
-const CASH_W = 180;
+const CASH_W = 115;
 const CASH_H = Math.round(CASH_W / 1.623);
-const PALM_X = LANDLORD_LEFT + Math.round(LANDLORD_W * 0.32);
-const PALM_Y = LANDLORD_TOP + Math.round(LANDLORD_H * 0.26);
+const PALM_X = LANDLORD_LEFT + Math.round(LANDLORD_W * 0.25);
+const PALM_Y = LANDLORD_TOP + Math.round(LANDLORD_H * 0.32);
+/** The tenant's free hand, the other end of the travel. */
+const HAND_X = TENANT_LEFT + Math.round(TENANT_W * 0.85);
+const HAND_Y = TENANT_TOP + Math.round(TENANT_H * 0.62);
 import {
 	ACCENT_BEAT,
 	CASH_AT,
@@ -167,8 +170,8 @@ export const Shot01EmptyFlat: React.FC = () => {
 	const cashAge = frame - CASH_AT;
 	const {stepIndex: cashStep} = useStopMotionStep(Math.max(0, cashAge), 3);
 	const cashHeld = Math.min(cashStep, 2) / 2;
-	const cashX = interpolate(cashHeld, [0, 1], [PALM_X - CASH_W / 2, TENANT_LEFT + 110]);
-	const cashY = interpolate(cashHeld, [0, 1], [PALM_Y - CASH_H / 2, TENANT_TOP + Math.round(TENANT_H * 0.48)]);
+	const cashX = interpolate(cashHeld, [0, 1], [PALM_X - CASH_W / 2, HAND_X - CASH_W / 2]);
+	const cashY = interpolate(cashHeld, [0, 1], [PALM_Y - CASH_H / 2, HAND_Y - CASH_H / 2]);
 
 	return (
 		<AbsoluteFill>
@@ -209,7 +212,7 @@ export const Shot01EmptyFlat: React.FC = () => {
 					</Arrive>
 				</div>
 
-				<div style={{position: 'absolute', left: 430, top: 380, zIndex: 16}}>
+				<div style={{position: 'absolute', left: 400, top: 300, zIndex: 16}}>
 					<Arrive at={STAIN_AT} tilt={6} rotate={-3}>
 						<PaperCutout
 							asset="wall-stain"

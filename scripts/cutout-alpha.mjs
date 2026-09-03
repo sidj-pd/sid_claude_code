@@ -71,10 +71,14 @@ const OVERRIDES = {
 	'flat-floor': {trim: true},
 	'floor-tile-cracked': {trim: true},
 	'tenant-tense': {trim: true},
-	// A putty kurta on a cream backdrop is the Episode 02 clipping problem: the
-	// garment is the closest thing in the shot to the ground it sits on. A
-	// narrower tolerance keeps it, and nothing else in the figure is near cream.
-	'landlord-offer': {trim: true, tolerance: 22},
+	// A putty kurta on a cream backdrop looked like the Episode 02 clipping
+	// problem, so this started at tolerance 22 out of caution. Measured, the
+	// kurta's lightest tone is 54 off the backdrop, so the default 38 was never
+	// a risk and 22 was too tight: it left a ring of un-keyed cream edge pixels
+	// which was invisible on the field but showed as white speckle once the
+	// figure stood on the grey floor. 42 clears the fringe and stays clear of
+	// the garment.
+	'landlord-offer': {trim: true, tolerance: 42},
 	'cash-stack': {trim: true},
 	'traffic-signal': {inset: 0.1},
 	// Its windscreen is a large enclosed cream area that IS artwork (glass),
