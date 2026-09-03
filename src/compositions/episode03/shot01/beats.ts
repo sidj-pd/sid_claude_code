@@ -8,45 +8,46 @@
  * drag — Episodes 01 and 02's grammar, and the slowest thing in the series.
  *
  * ---------------------------------------------------------------------------
- * The spec's 360 frames cannot hold this shot's audio.
+ * WHY THIS SHOT WAS 23.4s, AND WHY IT IS NOW 15.6s
  *
- * It puts the VO at frame ~330 of 360, which leaves 30 frames for a line that
- * measures 8.52s (256 frames). That number was set before any audio existed.
- * Measured, the shot's three takes total 16.96s of speech before a single pause
- * between them:
+ * The first cut ran 702 frames and read slow. It was not a pacing fault. The
+ * three takes came to 16.96s carrying 11.10s of speech — 35% of the audio was
+ * silence, and the landlord's take was 3.72s to say 1.21s of words. That is
+ * generator padding, not performance, so scripts/tighten-vo.py cuts it: every
+ * cut lands inside measured silence, nothing is sped up, no word is lost.
+ * Each cut take transcribes identically to its source (scripts/transcribe.py).
  *
- *   ep03-shot01-tenant    4.72s  speech 0.27-4.36
- *     0.27-1.16  "About the deposit, sir —"
- *     1.43-3.00  "the wall, that stain,"
- *     3.19-4.36  "that was already like that when I—"
+ *   tenant    4.72 -> 4.50s   landlord  3.72 -> 2.60s   vo  8.52 -> 4.36 + 3.27s
  *
- *   ep03-shot01-landlord  3.72s  speech 0.32-3.34
- *     0.32-0.91  "Forget it."      then 0.89s of nothing
- *     1.80-2.19  "Full amount."    then 0.69s of nothing
- *     3.11-3.34  "Here."
+ * The bigger saving was structural. The VO used to run at the end, after
+ * everything, adding its whole length to the shot. Split at its own mid-line
+ * silence, the first half now opens the shot and plays UNDER the assembly —
+ * documentary grammar, and how the reference works, since its audio bed runs
+ * continuously while pieces arrive. That is 131 frames that cost nothing.
  *
- *   ep03-shot01-vo        8.52s  speech 0.33-8.03
- *     0.33-0.98  "Every day,"
- *     1.43-4.35  "thousands of security deposits are settled in Bangalore."
- *     5.14-7.69  "This is the story of the one that was"
- *     7.89-8.03  "returned in full."
- *
- * So this runs 702 frames, 23.4s. A line that does not fit means a longer shot,
- * never a faster take. If twelve seconds is a hard requirement instead, the
- * dialogue has to become silent speech bubbles and the VO has to move to Shot 2.
+ * What is left is 468 frames of which ~400 carry speech. Below that, words
+ * have to go: the floor is the dialogue itself, not the edit.
  * ---------------------------------------------------------------------------
  */
 
 const S = 30;
 
 /**
- * The assembly pulse. The reference runs at 91 BPM — 19.8 frames a beat — and
- * while its music is not being used, that rate is a good upper bound on how
- * long the frame may sit unchanged before the style stops reading. Nineteen
- * frames, eight arrivals, and the flat is built before anyone speaks.
+ * The assembly pulse. The reference runs at 91 BPM — 19.8 frames a beat — so
+ * nineteen is its measured tempo, not a guess. It survived the retime because
+ * the build now underlays the opening narration almost exactly: the last piece
+ * lands at 128, the narration ends at 135. Subdividing to 13 or 10 finished the
+ * room early and left it waiting, which is slower to watch, not faster. Density
+ * comes from the accent layer instead, which is how the reference does it.
  */
 export const PULSE = 19;
 const BEAT = (n: number) => 6 + n * PULSE;
+/** Half-beat, for accents that punctuate between arrivals. */
+export const OFFBEAT = Math.round(PULSE / 2);
+
+/** The narration opens the shot and the room builds underneath it. */
+export const VO_A_AT = 4;
+export const VO_A_FRAMES = 131;
 
 export const WALL_AT = BEAT(0);
 export const CRACK_AT = BEAT(1);
@@ -62,9 +63,9 @@ export const TENANT_AT = BEAT(6);
  */
 export const ACCENT_BEAT = BEAT(6) + 8;
 
-/** He starts talking once the room he is standing in exists. */
-export const TENANT_SPEAKS = BEAT(7) + 11;
-export const TENANT_FRAMES = Math.round(4.72 * S);
+/** He starts talking once the room exists and the narration has stopped. */
+export const TENANT_SPEAKS = VO_A_AT + VO_A_FRAMES + 3;
+export const TENANT_FRAMES = 135;
 
 /**
  * The landlord steps in before the tenant has finished — the tenant's line is
@@ -73,13 +74,16 @@ export const TENANT_FRAMES = Math.round(4.72 * S);
  */
 export const LANDLORD_ENTERS = TENANT_SPEAKS + TENANT_FRAMES - 16;
 export const LANDLORD_SPEAKS = TENANT_SPEAKS + TENANT_FRAMES + 4;
-export const LANDLORD_FRAMES = Math.round(3.72 * S);
+export const LANDLORD_FRAMES = 78;
 
-/** The cash moves on "Here." — 3.11s into his take. */
-export const CASH_AT = LANDLORD_SPEAKS + Math.round(3.11 * S);
+/**
+ * The cash moves on "Here." — 2.16s into the cut take, measured, not scripted.
+ * His three phrases sit at 0.15, 1.14 and 2.16s.
+ */
+export const CASH_AT = LANDLORD_SPEAKS + Math.round(2.16 * S);
 
-/** And the narration closes it, over the aftermath. */
-export const VO_AT = CASH_AT + 31;
-export const VO_FRAMES = Math.round(8.52 * S);
+/** And the second narration line closes it, over the handover. */
+export const VO_B_AT = CASH_AT + 12;
+export const VO_B_FRAMES = 98;
 
-export const SHOT_01_DURATION = VO_AT + VO_FRAMES + 26;
+export const SHOT_01_DURATION = VO_B_AT + VO_B_FRAMES + 16;

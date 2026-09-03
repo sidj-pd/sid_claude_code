@@ -21,12 +21,14 @@ import {
 	FLOOR_AT,
 	LANDLORD_ENTERS,
 	LANDLORD_SPEAKS,
+	OFFBEAT,
 	POSTER_AT,
 	STAIN_AT,
 	TENANT_AT,
 	TENANT_SPEAKS,
 	TILE_AT,
-	VO_AT,
+	VO_A_AT,
+	VO_B_AT,
 	WALL_AT,
 } from './beats';
 
@@ -64,6 +66,19 @@ const ACCENTS: Accent[] = [
 	{kind: 'burst', x: 0.63, y: 0.55, size: 150, at: CASH_AT + 2},
 	{kind: 'circle', x: 0.2, y: 0.3, size: 30, at: CASH_AT + 6},
 	{kind: 'squiggle', x: 0.3, y: 0.7, size: 100, at: CASH_AT + 9, rotate: 8},
+
+	/*
+	 * Off-beat marks. The pulse stayed at the reference's measured 19 frames,
+	 * so the extra energy the brief asked for is bought here instead — a small
+	 * accent on the half-beat between arrivals doubles the event rate without
+	 * moving the tempo the assembly is locked to.
+	 */
+	{kind: 'square', x: 0.78, y: 0.08, size: 22, at: CRACK_AT + OFFBEAT, rotate: 12},
+	{kind: 'circle', x: 0.28, y: 0.13, size: 20, at: POSTER_AT + OFFBEAT, color: '#2c3752'},
+	{kind: 'triangle', x: 0.94, y: 0.29, size: 28, at: STAIN_AT + OFFBEAT, rotate: -30},
+	{kind: 'square', x: 0.07, y: 0.34, size: 24, at: FLOOR_AT + OFFBEAT, rotate: -8},
+	{kind: 'circle', x: 0.83, y: 0.44, size: 18, at: TILE_AT + OFFBEAT},
+	{kind: 'triangle', x: 0.17, y: 0.55, size: 26, at: TENANT_AT + OFFBEAT, rotate: 8, color: '#2c3752'},
 ];
 
 /**
@@ -222,9 +237,14 @@ export const Shot01EmptyFlat: React.FC = () => {
 			{/* An empty flat has its own acoustics; the room is the bed. */}
 			<Audio src={staticFile('sfx/room-hum.wav')} volume={0.13} />
 
-			<VoiceOver id="ep03-shot01-tenant" from={TENANT_SPEAKS} />
-			<VoiceOver id="ep03-shot01-landlord" from={LANDLORD_SPEAKS} />
-			<VoiceOver id="ep03-shot01-vo" from={VO_AT} />
+			{/* The -cut takes are the sources with their dead air removed by
+			    scripts/tighten-vo.py; each transcribes identically to its
+			    source. The narration is split at its own mid-line silence so
+			    the first half can open the shot under the assembly. */}
+			<VoiceOver id="ep03-shot01-vo-a" from={VO_A_AT} />
+			<VoiceOver id="ep03-shot01-tenant-cut" from={TENANT_SPEAKS} />
+			<VoiceOver id="ep03-shot01-landlord-cut" from={LANDLORD_SPEAKS} />
+			<VoiceOver id="ep03-shot01-vo-b" from={VO_B_AT} />
 		</AbsoluteFill>
 	);
 };
