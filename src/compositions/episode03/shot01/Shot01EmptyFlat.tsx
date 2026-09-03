@@ -95,8 +95,8 @@ export const Shot01EmptyFlat: React.FC = () => {
 	const cashAge = frame - CASH_AT;
 	const {stepIndex: cashStep} = useStopMotionStep(Math.max(0, cashAge), 3);
 	const cashHeld = Math.min(cashStep, 2) / 2;
-	const cashX = interpolate(cashHeld, [0, 1], [648, 470]);
-	const cashY = interpolate(cashHeld, [0, 1], [1004, 1048]);
+	const cashX = interpolate(cashHeld, [0, 1], [672, 486]);
+	const cashY = interpolate(cashHeld, [0, 1], [930, 986]);
 
 	return (
 		<AbsoluteFill>
@@ -104,58 +104,58 @@ export const Shot01EmptyFlat: React.FC = () => {
 
 			<AbsoluteFill style={{transform: `translate(${driftX}px, ${driftY}px)`}}>
 				{/* The room, built. Placeholders until the art lands. */}
-				<div style={{position: 'absolute', left: 60, top: 210, zIndex: 10}}>
+				<div style={{position: 'absolute', left: 60, top: 170, zIndex: 10}}>
 					<Arrive at={WALL_AT} from="top" distance={30} tilt={1.2}>
-						<Placeholder label="BARE WALL" file="flat-wall.jpg" width={960} height={620} seed={3} />
+						<Placeholder label="BARE WALL" file="flat-wall.jpg" width={960} height={700} seed={3} />
 					</Arrive>
 				</div>
 
-				<div style={{position: 'absolute', left: 250, top: 268, zIndex: 14}}>
+				<div style={{position: 'absolute', left: 250, top: 232, zIndex: 14}}>
 					<Arrive at={CRACK_AT} tilt={5} rotate={-2}>
-						<Placeholder label="CRACK" file="wall-crack.jpg" width={132} height={430} seed={11} />
+						<Placeholder label="CRACK" file="wall-crack.jpg" width={132} height={480} seed={11} />
 					</Arrive>
 				</div>
 
-				<div style={{position: 'absolute', left: 620, top: 300, zIndex: 14}}>
+				<div style={{position: 'absolute', left: 620, top: 268, zIndex: 14}}>
 					<Arrive at={POSTER_AT} from="right" tilt={4} rotate={2.5}>
-						<Placeholder label="POSTER PATCH" file="poster-patch.jpg" width={230} height={280} seed={19} />
+						<Placeholder label="POSTER PATCH" file="poster-patch.jpg" width={230} height={300} seed={19} />
 					</Arrive>
 				</div>
 
-				<div style={{position: 'absolute', left: 400, top: 530, zIndex: 16}}>
+				<div style={{position: 'absolute', left: 400, top: 516, zIndex: 16}}>
 					<Arrive at={STAIN_AT} tilt={6} rotate={-3}>
 						<Placeholder label="STAIN" file="wall-stain.jpg" width={330} height={270} seed={23} />
 					</Arrive>
 				</div>
 
-				<div style={{position: 'absolute', left: 0, top: 1010, zIndex: 8}}>
+				<div style={{position: 'absolute', left: 0, top: 842, zIndex: 8}}>
 					<Arrive at={FLOOR_AT} from="bottom" distance={40} tilt={0.8}>
-						<Placeholder label="TILED FLOOR" file="flat-floor.jpg" width={1080} height={430} seed={31} />
+						<Placeholder label="TILED FLOOR" file="flat-floor.jpg" width={1080} height={520} seed={31} />
 					</Arrive>
 				</div>
 
-				<div style={{position: 'absolute', left: 150, top: 1120, zIndex: 12}}>
+				<div style={{position: 'absolute', left: 150, top: 1020, zIndex: 12}}>
 					<Arrive at={TILE_AT} tilt={7} rotate={4}>
-						<Placeholder label="BROKEN TILE" file="floor-tile-cracked.jpg" width={280} height={210} seed={37} />
+						<Placeholder label="BROKEN TILE" file="floor-tile-cracked.jpg" width={280} height={230} seed={37} />
 					</Arrive>
 				</div>
 
 				{/* The tenant, last of the room and first of the people. */}
-				<div style={{position: 'absolute', left: 330, top: 700, zIndex: 30}}>
+				<div style={{position: 'absolute', left: 300, top: 600, zIndex: 30}}>
 					<Arrive at={TENANT_AT} from="bottom" distance={36} tilt={2.5} rotate={-1}>
-						<Placeholder label="TENANT" file="tenant-tense.jpg" width={340} height={620} seed={41} />
+						<Placeholder label="TENANT" file="tenant-tense.jpg" width={360} height={700} seed={41} />
 					</Arrive>
 				</div>
-				<div style={{position: 'absolute', left: 300, top: 1030, zIndex: 34}}>
+				<div style={{position: 'absolute', left: 268, top: 1000, zIndex: 34}}>
 					<Arrive at={KEYS_AT} tilt={9} rotate={-8}>
 						<Placeholder label="KEYS" file="keys.jpg" width={110} height={90} seed={43} />
 					</Arrive>
 				</div>
 
 				{/* The landlord, stepping in from the edge, cutting him off. */}
-				<div style={{position: 'absolute', left: 640, top: 690, zIndex: 32}}>
+				<div style={{position: 'absolute', left: 646, top: 590, zIndex: 32}}>
 					<Arrive at={LANDLORD_ENTERS} from="right" distance={210} tilt={2} rotate={1}>
-						<Placeholder label="LANDLORD" file="landlord-cash.jpg" width={360} height={640} seed={47} />
+						<Placeholder label="LANDLORD" file="landlord-cash.jpg" width={380} height={740} seed={47} />
 					</Arrive>
 				</div>
 
