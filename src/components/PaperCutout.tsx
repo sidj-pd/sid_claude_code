@@ -33,20 +33,23 @@ export type PaperCutoutProps = {
 };
 
 /**
- * Approximates an SVG-style outline using nothing but drop-shadow(): stack
- * copies of the source offset in N directions around a circle at 0 blur, so
- * every direction gets a solid, unblurred duplicate the same colour. Because
- * every copy is fully opaque, overlapping copies from adjacent directions
- * cost nothing — there is no visible seam, just a ring roughly `width` thick.
+ * A true single-pass outline via an SVG filter, not a CSS approximation.
+ *
+ * The first version stacked 16 chained drop-shadow() filters — one offset
+ * copy per direction around a circle — to fake an outline without SVG. It
+ * rendered fine locally but hung the render workflow: each drop-shadow in a
+ * chain re-composites the ENTIRE accumulated result of the ones before it,
+ * so 16 of them is 16 sequential full-image composites per frame, not a
+ * fixed cost. Chromium timed out waiting for the first frame that used it
+ * (30s+ on a single frame, headless).
+ *
+ * feMorphology dilates the source's alpha mask directly — one operation,
+ * not sixteen — then feFlood + feComposite recolour just the dilated ring,
+ * and feMerge stacks it under the original art so only the ring shows past
+ * the art's own edge. Same visual result, a fraction of the cost.
  */
-const OUTLINE_DIRECTIONS = 16;
-const outlineFilter = (color: string, width: number): string =>
-	Array.from({length: OUTLINE_DIRECTIONS}, (_, i) => {
-		const angle = (i / OUTLINE_DIRECTIONS) * Math.PI * 2;
-		const dx = (Math.cos(angle) * width).toFixed(2);
-		const dy = (Math.sin(angle) * width).toFixed(2);
-		return `drop-shadow(${dx}px ${dy}px 0 ${color})`;
-	}).join(' ');
+const outlineFilterId = (asset: string, color: string, width: number): string =>
+	`outline-${asset}-${color.replace('#', '')}-${width}`;
 
 /**
  * Base wrapper for any landmark/character cutout. Looks the illustration up
@@ -93,16 +96,32 @@ export const PaperCutout: React.FC<PaperCutoutProps> = ({
 			}}
 		>
 			<div
-				style={
-					outline
-						? {
-								width: '100%',
-								height: '100%',
-								filter: outlineFilter(outline.color ?? '#ffffff', outline.width ?? 6),
-							}
-						: {width: '100%', height: '100%'}
-				}
+				style={{
+					width: '100%',
+					height: '100%',
+					filter: outline
+						? `url(#${outlineFilterId(asset, outline.color ?? '#ffffff', outline.width ?? 6)})`
+						: undefined,
+				}}
 			>
+				{outline ? (
+					<svg width={0} height={0} style={{position: 'absolute'}}>
+						<filter id={outlineFilterId(asset, outline.color ?? '#ffffff', outline.width ?? 6)}>
+							<feMorphology
+								operator="dilate"
+								radius={outline.width ?? 6}
+								in="SourceAlpha"
+								result="dilated"
+							/>
+							<feFlood floodColor={outline.color ?? '#ffffff'} result="flood" />
+							<feComposite in="flood" in2="dilated" operator="in" result="ring" />
+							<feMerge>
+								<feMergeNode in="ring" />
+								<feMergeNode in="SourceGraphic" />
+							</feMerge>
+						</filter>
+					</svg>
+				) : null}
 				<Illustration />
 			</div>
 			{textureOpacity > 0 ? (
