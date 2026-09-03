@@ -1,5 +1,5 @@
 import React from 'react';
-import {useCurrentFrame} from 'remotion';
+import {Img, staticFile, useCurrentFrame} from 'remotion';
 import {CUTOUT_REGISTRY, CutoutAsset} from '../assets/cutouts';
 import {NewsprintTexture} from './NewsprintTexture';
 import {useStopMotionStep} from './useStopMotionStep';
@@ -23,33 +23,26 @@ export type PaperCutoutProps = {
 	 */
 	elevation?: number;
 	/**
-	 * A solid outline traced around the artwork's own alpha silhouette — a
-	 * sticker-style ring, for pulling a character forward off a busy field.
-	 * Applied to the illustration only, underneath the elevation shadow, so
-	 * the shadow is cast from the (slightly larger) outlined shape rather
-	 * than outlining the shadow itself.
+	 * A solid white (by default) ring traced around the artwork's own
+	 * silhouette — a sticker-style outline, for pulling a character forward
+	 * off a busy field. `width` only; colour is fixed at build time (see
+	 * scripts/cutout-alpha.mjs) since the ring is a pre-baked second PNG,
+	 * not a runtime effect — two things were tried and both failed before
+	 * landing here. Sixteen chained CSS drop-shadow()s (one offset copy per
+	 * direction) worked visually but hung the render: each drop-shadow in a
+	 * filter chain re-composites the ENTIRE result of the ones before it, so
+	 * 16 of them is 16 full-image composites a frame, and Chromium timed out
+	 * on the first frame that needed it. An SVG feMorphology dilate filter
+	 * replaced it — one filter operation instead of sixteen — but produced
+	 * visible tiling seams in headless Chromium's software rasteriser.
+	 * `<asset>-outline.png`, generated once at build time by dilating the
+	 * art's own binarized alpha mask, has no per-frame cost at all: it is
+	 * just an <img>, stacked directly beneath the original art so only the
+	 * grown ring shows past the art's own edge. Present only for assets
+	 * whose OVERRIDES entry set `outline`; anything else renders unchanged.
 	 */
-	outline?: {color?: string; width?: number};
+	outline?: boolean;
 };
-
-/**
- * A true single-pass outline via an SVG filter, not a CSS approximation.
- *
- * The first version stacked 16 chained drop-shadow() filters — one offset
- * copy per direction around a circle — to fake an outline without SVG. It
- * rendered fine locally but hung the render workflow: each drop-shadow in a
- * chain re-composites the ENTIRE accumulated result of the ones before it,
- * so 16 of them is 16 sequential full-image composites per frame, not a
- * fixed cost. Chromium timed out waiting for the first frame that used it
- * (30s+ on a single frame, headless).
- *
- * feMorphology dilates the source's alpha mask directly — one operation,
- * not sixteen — then feFlood + feComposite recolour just the dilated ring,
- * and feMerge stacks it under the original art so only the ring shows past
- * the art's own edge. Same visual result, a fraction of the cost.
- */
-const outlineFilterId = (asset: string, color: string, width: number): string =>
-	`outline-${asset}-${color.replace('#', '')}-${width}`;
 
 /**
  * Base wrapper for any landmark/character cutout. Looks the illustration up
@@ -95,35 +88,17 @@ export const PaperCutout: React.FC<PaperCutoutProps> = ({
 				...style,
 			}}
 		>
-			<div
-				style={{
-					width: '100%',
-					height: '100%',
-					filter: outline
-						? `url(#${outlineFilterId(asset, outline.color ?? '#ffffff', outline.width ?? 6)})`
-						: undefined,
-				}}
-			>
-				{outline ? (
-					<svg width={0} height={0} style={{position: 'absolute'}}>
-						<filter id={outlineFilterId(asset, outline.color ?? '#ffffff', outline.width ?? 6)}>
-							<feMorphology
-								operator="dilate"
-								radius={outline.width ?? 6}
-								in="SourceAlpha"
-								result="dilated"
-							/>
-							<feFlood floodColor={outline.color ?? '#ffffff'} result="flood" />
-							<feComposite in="flood" in2="dilated" operator="in" result="ring" />
-							<feMerge>
-								<feMergeNode in="ring" />
-								<feMergeNode in="SourceGraphic" />
-							</feMerge>
-						</filter>
-					</svg>
-				) : null}
-				<Illustration />
-			</div>
+			{outline ? (
+				// The registry's asset key equals its file's basename
+				// throughout (checked before relying on this), so the
+				// pre-baked outline sits at "<asset>-outline.png" with no
+				// extra lookup table needed.
+				<Img
+					src={staticFile(`cutouts-alpha/${asset}-outline.png`)}
+					style={{position: 'absolute', inset: 0, width: '100%', height: '100%'}}
+				/>
+			) : null}
+			<Illustration />
 			{textureOpacity > 0 ? (
 				<NewsprintTexture opacity={textureOpacity} grayscale={grayscale} />
 			) : null}

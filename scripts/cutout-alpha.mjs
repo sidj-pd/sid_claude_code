@@ -44,6 +44,116 @@ const FEATHER = 1.5;
  * the true backdrop at the very corners is the sheet's edge rather than the
  * colour surrounding the subject.
  */
+/**
+ * A true morphological dilate via a separable max-filter (horizontal pass,
+ * then vertical), radius R. Used to build a white outline PNG for a cutout:
+ * grow its own binarized alpha mask by R pixels, colour it white, and the
+ * renderer stacks it directly beneath the original art with no per-frame
+ * cost — this used to be a runtime CSS/SVG filter (both were tried and both
+ * failed: 16 chained drop-shadow()s hung the render, and an SVG feMorphology
+ * filter produced tiling artefacts in headless Chromium's software
+ * rasteriser). Baking the ring into a second PNG at build time sidesteps
+ * both — it is just an <img>, the same as the art it outlines.
+ */
+const dilate = (buf, width, height, radius) => {
+	const h = new Uint8Array(width * height);
+	for (let y = 0; y < height; y++) {
+		const row = y * width;
+		for (let x = 0; x < width; x++) {
+			let m = 0;
+			const lo = Math.max(0, x - radius);
+			const hi = Math.min(width - 1, x + radius);
+			for (let i = lo; i <= hi; i++) {
+				const v = buf[row + i];
+				if (v > m) m = v;
+			}
+			h[row + x] = m;
+		}
+	}
+	const out = new Uint8Array(width * height);
+	for (let x = 0; x < width; x++) {
+		for (let y = 0; y < height; y++) {
+			let m = 0;
+			const lo = Math.max(0, y - radius);
+			const hi = Math.min(height - 1, y + radius);
+			for (let i = lo; i <= hi; i++) {
+				const v = h[i * width + x];
+				if (v > m) m = v;
+			}
+			out[y * width + x] = m;
+		}
+	}
+	return Buffer.from(out);
+};
+
+/**
+ * Drops any connected component smaller than `minArea` from a binary mask.
+ * The keyed art carries a handful of 1-4px alpha specks — leftover keying
+ * noise, invisible at their native size against the backdrop — and dilating
+ * them the same as the real silhouette balloons each into a small visible
+ * white square. Landlord-offer had 13 of them once checked for directly.
+ */
+const dropSpecks = (buf, width, height, minArea) => {
+	const visited = new Uint8Array(width * height);
+	const out = new Uint8Array(buf.length);
+	const stack = [];
+	for (let start = 0; start < buf.length; start++) {
+		if (visited[start] || buf[start] === 0) continue;
+		stack.length = 0;
+		stack.push(start);
+		visited[start] = 1;
+		const component = [start];
+		while (stack.length) {
+			const p = stack.pop();
+			const x = p % width;
+			const y = (p - x) / width;
+			const neighbours = [
+				x + 1 < width ? p + 1 : -1,
+				x - 1 >= 0 ? p - 1 : -1,
+				y + 1 < height ? p + width : -1,
+				y - 1 >= 0 ? p - width : -1,
+			];
+			for (const n of neighbours) {
+				if (n < 0 || visited[n] || buf[n] === 0) continue;
+				visited[n] = 1;
+				stack.push(n);
+				component.push(n);
+			}
+		}
+		if (component.length >= minArea) {
+			for (const p of component) out[p] = 255;
+		}
+	}
+	return Buffer.from(out);
+};
+
+/** A real silhouette feature is at minimum a finger-width, tens of pixels
+ *  across; keying noise is 1-4px. Anything under this is debris. */
+const MIN_SPECK_AREA = 24;
+
+/**
+ * Writes `<base>-outline.png` next to the keyed cutout: a solid white copy
+ * of its silhouette, dilated by `radius`. Binarizes the real alpha first
+ * (threshold 128) before dilating — dilating the raw feathered alpha directly
+ * picks up antialiasing noise at the edge as scattered flecks once grown, so
+ * the mask is cleaned to a hard silhouette first, then grown from that.
+ */
+const writeOutline = async (sourceImage, width, height, radius, outPath) => {
+	const rawClean = await sourceImage
+		.clone()
+		.extractChannel(3)
+		.threshold(128)
+		.raw()
+		.toBuffer();
+	const clean = dropSpecks(rawClean, width, height, MIN_SPECK_AREA);
+	const grown = dilate(clean, width, height, radius);
+	const white = Buffer.alloc(width * height * 3, 255);
+	await sharp(white, {raw: {width, height, channels: 3}})
+		.joinChannel(grown, {raw: {width, height, channels: 1}})
+		.png({compressionLevel: 9})
+		.toFile(outPath);
+};
+
 /** Alpha above which a pixel counts as artwork when trimming. */
 const TRIM_ALPHA = 24;
 /** A couple of pixels of margin, so the feathered edge is not clipped. */
@@ -89,6 +199,7 @@ const OVERRIDES = {
 		trim: true,
 		tolerance: 60,
 		interiorExclude: [0.17, 0.52, 0.32, 0.66],
+		outline: {width: 8},
 	},
 	// A putty kurta on a cream backdrop looked like the Episode 02 clipping
 	// problem, so this started at tolerance 22 out of caution. Measured, the
@@ -97,7 +208,7 @@ const OVERRIDES = {
 	// which was invisible on the field but showed as white speckle once the
 	// figure stood on the grey floor. 42 clears the fringe and stays clear of
 	// the garment.
-	'landlord-offer': {trim: true, tolerance: 42},
+	'landlord-offer': {trim: true, tolerance: 42, outline: {width: 8}},
 	'cash-stack': {trim: true},
 	'traffic-signal': {inset: 0.1},
 	// Its windscreen is a large enclosed cream area that IS artwork (glass),
@@ -344,6 +455,11 @@ const removeBackground = async (srcPath, outPath, options = {}) => {
 	}
 
 	await out.png({compressionLevel: 9}).toFile(outPath);
+
+	if (options.outline) {
+		const outlinePath = outPath.replace(/\.png$/, '-outline.png');
+		await writeOutline(out, outW, outH, options.outline.width ?? 8, outlinePath);
+	}
 
 	const kept = visited.reduce((acc, v) => acc + (v ? 0 : 1), 0);
 	return {width: outW, height: outH, keptRatio: kept / (width * height)};

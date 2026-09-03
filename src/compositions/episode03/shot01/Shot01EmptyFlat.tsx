@@ -242,7 +242,7 @@ export const Shot01EmptyFlat: React.FC = () => {
 								asset="tenant-tense"
 								elevation={0.85}
 								textureOpacity={0}
-								outline={{width: 7}}
+								outline
 								style={{width: TENANT_W, height: TENANT_H, ...TENANT_FLIP}}
 							/>
 						</TalkSway>
@@ -259,7 +259,7 @@ export const Shot01EmptyFlat: React.FC = () => {
 								asset="landlord-offer"
 								elevation={1}
 								textureOpacity={0}
-								outline={{width: 7}}
+								outline
 								style={{width: LANDLORD_W, height: LANDLORD_H}}
 							/>
 						</TalkSway>
