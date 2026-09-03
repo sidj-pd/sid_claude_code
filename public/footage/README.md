@@ -395,3 +395,107 @@ The words are unchanged. The content was never the problem.
 framing — "monitor for further symptoms" and "do not panic" are the advisory
 phrases. Try "keep an eye on it" and "there is no need to worry", which keep the
 beat, and re-record the on-screen wording to match.
+
+# Photoreal footage — Episode 03
+
+Same three rules as Episodes 01 and 02, and no new ones this time.
+
+**Generate the dialogue with the video.** These are talking heads; TTS over a
+generated performance will not lip sync.
+
+**Several short clips, not one long one.** The models top out near eight
+seconds and cut testimony is the native grammar anyway — jump cuts read as
+edited evidence, not as a limitation.
+
+**Nothing important below 80% of the frame height.** Instagram and YouTube
+Shorts cover the bottom fifth with their own UI (production notes §15). The
+evidence checklist and the lower third both sit in that lower half, so keep
+it to plain torso and room — no busy background, no hands coming up into it.
+
+## Shot 4 — the witness, three clips
+
+A different actor from the paper-cutout tenant — the cutout and the photoreal
+witness are two different mediums for the same character throughout this
+series, never the same casting. Same man, same setup, same wardrobe, across
+all three clips, so the edit reads as one call cut for time rather than three
+different calls.
+
+### `ep03-witness-1.mp4` — the rehearsed defense (~6s)
+
+> A photorealistic vertical video, 9:16, of an Indian man in his late
+> twenties on a video call from home. Plain t-shirt, sitting at a small desk
+> or table against a plain wall, ordinary domestic evening light from one
+> side — a lamp or an overhead bulb, not daylight. A ceiling fan or a window
+> may be visible out of focus behind him.
+>
+> Framed on a laptop webcam, so slightly low and level with his eyes, dead
+> still, no camera movement at all. Head and shoulders in the upper half of
+> the frame; the lower half stays plain torso and desk, for the caption and
+> checklist that go over it later. The look is a compressed, low-bitrate
+> video call: soft focus, visible sensor noise in the shadows, mild
+> low-bitrate blocking around fast edges when he moves, no colour grading, no
+> shallow depth of field, no lens flare, no music.
+>
+> He speaks these words, and only these words:
+> "I had my whole defense ready. I'd rehearsed it in the mirror. That stain
+> was there before I moved in."
+>
+> Deadpan and faintly traumatized — a man describing his own rehearsed
+> speech the way someone describes a plan that never got used. The middle
+> sentence ("I'd rehearsed it in the mirror") lands a touch drier, almost
+> embarrassed at himself. The last sentence — quoting his own prepared
+> line back — shifts very slightly into a flatter, more recitative register,
+> as though reciting something memorised, then drops back to normal for
+> nothing (this is the end of the clip). No performed accent, no comic
+> timing, no mugging or smiling at the camera.
+
+### `ep03-witness-2.mp4` — the checklist (~6s)
+
+Cut in as a hard jump cut after the first — same framing, same light, so the
+edit reads as one call, not two.
+
+> A photorealistic vertical video, 9:16, of the same Indian man in his late
+> twenties on a video call from home — identical framing, wardrobe, lighting
+> and background to the previous clip. Laptop webcam angle, dead still, no
+> camera movement. Head and shoulders in the upper half; plain torso and desk
+> below. Same compressed, low-bitrate video-call look: soft focus, sensor
+> noise, no grade, no music.
+>
+> He speaks these words, and only these words:
+> "No inspection. No deduction. No lecture. He just handed it over. Full
+> amount."
+>
+> Deadpan, building very slightly through the list — each short item
+> ("No inspection", "No deduction", "No lecture") gets a small, distinct pause
+> after it, almost ticking something off, but his face does not change; the
+> flatness is the joke. "He just handed it over" softens fractionally, and
+> "Full amount" lands last and quietest, almost disbelieving rather than
+> triumphant. No performed accent, no comic timing, no mugging, no smiling at
+> the camera.
+
+### `ep03-witness-3.mp4` — the notes app beat (~5s)
+
+Cut in as a hard jump cut after the second — same framing, same light.
+
+> A photorealistic vertical video, 9:16, of the same Indian man in his late
+> twenties on a video call from home — identical framing, wardrobe, lighting
+> and background to the previous two clips. Laptop webcam angle, dead still,
+> no camera movement. Head and shoulders in the upper half; plain torso and
+> desk below. Same compressed, low-bitrate video-call look: soft focus,
+> sensor noise, no grade, no music.
+>
+> He begins with his eyes drifting off camera for a moment, as though
+> replaying the memory, then speaks these words and only these words:
+> "I still have the speech saved in my notes app. I don't know what to do
+> with it now."
+>
+> Quieter and more hollowed out than the previous two clips — genuinely at a
+> loss rather than delivering a punchline. The last sentence trails very
+> slightly rather than landing hard. No performed accent, no comic timing, no
+> mugging, no smiling at the camera.
+
+**When these land:** measure their RMS envelopes with `scripts/measure-vo.py`
+and derive `src/compositions/episode03/shot04/beats.ts` from the real
+timings, the same as every other shot in this series — the checklist ticks,
+the chyron-in point, and the audio-dropout window on "I don't know what to do
+with it now" are all real cues to hit, not decoration to place by eye.
