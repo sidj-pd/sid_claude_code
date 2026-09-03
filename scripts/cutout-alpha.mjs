@@ -44,7 +44,19 @@ const FEATHER = 1.5;
  * the true backdrop at the very corners is the sheet's edge rather than the
  * colour surrounding the subject.
  */
+/** Alpha above which a pixel counts as artwork when trimming. */
+const TRIM_ALPHA = 24;
+/** A couple of pixels of margin, so the feathered edge is not clipped. */
+const TRIM_PAD = 2;
+
 const OVERRIDES = {
+	// Episode 03's flat. Trimmed so each piece can be positioned by its own
+	// artwork: the wall is a base layer and the other three are overlays laid
+	// on top of it in code, which only works if a box places the art itself.
+	'flat-wall': {trim: true},
+	'wall-crack': {trim: true},
+	'poster-patch': {trim: true},
+	'wall-stain': {trim: true},
 	'traffic-signal': {inset: 0.1},
 	// Its windscreen is a large enclosed cream area that IS artwork (glass),
 	// not backdrop showing through, so the enclosed-hole pass must be off or
@@ -208,12 +220,56 @@ const removeBackground = async (srcPath, outPath, options = {}) => {
 		}
 	}
 
-	await sharp(raw, {raw: {width, height, channels: 4}})
-		.png({compressionLevel: 9})
-		.toFile(outPath);
+	let out = sharp(raw, {raw: {width, height, channels: 4}});
+	let outW = width;
+	let outH = height;
+
+	/*
+	 * Optionally crop the transparent margin away, so the PNG's own bounds ARE
+	 * the artwork's bounds.
+	 *
+	 * Without this, a keyed cutout is the artwork floating in whatever canvas
+	 * the generator produced — typically 768x1376 around a subject half that
+	 * size. The renderer draws it with objectFit:contain, which fits the padded
+	 * canvas rather than the art, so a box positioned in code places the
+	 * padding and the artwork lands somewhere inside it at an unpredictable
+	 * size. Episode 03's wall came out 540px wide in a 1000px box, with its
+	 * three overlays sitting off the wall entirely. PaperCutout's texture
+	 * overlay also paints the whole div, so the padding showed as a pale
+	 * rectangle around every piece.
+	 *
+	 * It is opt-in rather than the default because Episodes 01 and 02 have
+	 * every position tuned against the padded canvases; trimming those now
+	 * would silently move and resize art in shots that are already finished.
+	 */
+	if (options.trim) {
+		let tx0 = width;
+		let ty0 = height;
+		let tx1 = -1;
+		let ty1 = -1;
+		for (let y = 0; y < height; y++) {
+			for (let x = 0; x < width; x++) {
+				if (raw[(y * width + x) * 4 + 3] > TRIM_ALPHA) {
+					if (x < tx0) tx0 = x;
+					if (x > tx1) tx1 = x;
+					if (y < ty0) ty0 = y;
+					if (y > ty1) ty1 = y;
+				}
+			}
+		}
+		if (tx1 >= tx0 && ty1 >= ty0) {
+			const left = Math.max(0, tx0 - TRIM_PAD);
+			const top = Math.max(0, ty0 - TRIM_PAD);
+			outW = Math.min(width - left, tx1 - tx0 + 1 + TRIM_PAD * 2);
+			outH = Math.min(height - top, ty1 - ty0 + 1 + TRIM_PAD * 2);
+			out = out.extract({left, top, width: outW, height: outH});
+		}
+	}
+
+	await out.png({compressionLevel: 9}).toFile(outPath);
 
 	const kept = visited.reduce((acc, v) => acc + (v ? 0 : 1), 0);
-	return {width, height, keptRatio: kept / (width * height)};
+	return {width: outW, height: outH, keptRatio: kept / (width * height)};
 };
 
 const main = async () => {

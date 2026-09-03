@@ -21,6 +21,13 @@ import {Placeholder} from '../Placeholder';
  * prompt asked for. The box follows the art rather than stretching it, which
  * makes the wall taller and moves the floor down to meet its own skirting band.
  */
+/*
+ * These four carry textureOpacity={0}. PaperCutout's grain overlay is an
+ * AbsoluteFill with mix-blend-mode:multiply, so it paints the whole div rather
+ * than the artwork's silhouette — with a thin piece like the crack, 12% opaque
+ * inside its own bounds, that reads as a rectangle of tinted field around it.
+ * The delivered art already has halftone grain baked in, so nothing is lost.
+ */
 const WALL_W = 1000;
 const WALL_H = Math.round(WALL_W / 0.94);
 const WALL_BOTTOM = 120 + WALL_H;
@@ -134,7 +141,7 @@ export const Shot01EmptyFlat: React.FC = () => {
 						<PaperCutout
 							asset="flat-wall"
 							elevation={0.45}
-							textureOpacity={0.22}
+							textureOpacity={0}
 							style={{width: WALL_W, height: WALL_H}}
 						/>
 					</Arrive>
@@ -145,7 +152,7 @@ export const Shot01EmptyFlat: React.FC = () => {
 						<PaperCutout
 							asset="wall-crack"
 							elevation={0.3}
-							textureOpacity={0.18}
+							textureOpacity={0}
 							style={{width: 132, height: 508}}
 						/>
 					</Arrive>
@@ -156,7 +163,7 @@ export const Shot01EmptyFlat: React.FC = () => {
 						<PaperCutout
 							asset="poster-patch"
 							elevation={0.35}
-							textureOpacity={0.18}
+							textureOpacity={0}
 							style={{width: 230, height: 354}}
 						/>
 					</Arrive>
@@ -167,7 +174,7 @@ export const Shot01EmptyFlat: React.FC = () => {
 						<PaperCutout
 							asset="wall-stain"
 							elevation={0.4}
-							textureOpacity={0.2}
+							textureOpacity={0}
 							style={{width: 300, height: 330}}
 						/>
 					</Arrive>
