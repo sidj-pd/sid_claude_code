@@ -25,6 +25,14 @@
     "correspondent": {
       "voiceName": "Algenib",
       "character": "a television correspondent in his forties, speaking clean neutral English in the flat professional register of an interviewer who is not the subject of the piece. He asks his questions plainly and does not perform interest in the answers. No announcer boom, no warmth, no sing-song, no emphasis for effect"
+    },
+    "tenant": {
+      "voiceName": "Puck",
+      "character": "a Bangalore renter in his late twenties, speaking natural Indian English in an educated urban register. He is braced for an argument he has already had in his head several times, so the words come slightly too fast and slightly too rehearsed. Speak plainly and naturally — no performed or exaggerated accent, no theatrical panic, no comic timing, no caricature"
+    },
+    "landlord": {
+      "voiceName": "Zubenelgenubi",
+      "character": "a Bangalore landlord in his late fifties, speaking unhurried Indian English in a low flat register. He is not being generous and does not think he is doing anyone a favour; he is closing a matter. Speak plainly and naturally — no warmth, no gruffness, no performed accent, no sing-song, no caricature"
     }
   },
   "lines": [
@@ -147,6 +155,24 @@
       "speaker": "narrator",
       "text": "As for the manager himself — still at his desk most nights. Still responding fast. Boundaries... intact. For now.",
       "delivery": "the episode's closing line and the deliberate echo of ep01-shot11-final; quieter and more ominous than deadpan, unhurried, a real pause after 'nights' and after 'Boundaries', with 'For now' dropped almost to a murmur rather than punched for a laugh"
+    },
+    {
+      "id": "ep03-shot01-tenant",
+      "speaker": "tenant",
+      "text": "About the deposit, sir — the wall, that stain, that was already like that when I—",
+      "delivery": "rushed and pre-emptively defensive, the sentence of a man who rehearsed it on the stairs; slightly too fast, listing the damage before anyone accuses him of it, and cut off dead on the last word rather than trailing away"
+    },
+    {
+      "id": "ep03-shot01-landlord",
+      "speaker": "landlord",
+      "text": "Forget it. Full amount. Here.",
+      "delivery": "three flat statements, each a complete thought, with a real stop between them; utterly unbothered and slightly bored, as though returning a deposit in full were administrative rather than remarkable. No warmth and no emphasis — the absence of either is the joke"
+    },
+    {
+      "id": "ep03-shot01-vo",
+      "speaker": "narrator",
+      "text": "Every day, thousands of security deposits are settled in Bangalore. This is the story of the one that was returned in full.",
+      "delivery": "the episode opening line and the third of its kind, so take it at exactly the pace and flatness of ep01-shot01 and ep02-shot02 — the series has a recognisable way of starting. First sentence entirely ordinary, a small beat at the full stop, then \"returned in full\" landed as plain fact rather than as the joke it is"
     }
   ]
 }
