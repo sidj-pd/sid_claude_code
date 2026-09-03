@@ -28,9 +28,26 @@ import {Placeholder} from '../Placeholder';
  * inside its own bounds, that reads as a rectangle of tinted field around it.
  * The delivered art already has halftone grain baked in, so nothing is lost.
  */
+const WALL_LEFT = 40;
+const WALL_TOP = 150;
 const WALL_W = 1000;
-const WALL_H = Math.round(WALL_W / 0.94);
-const WALL_BOTTOM = 120 + WALL_H;
+/** Measured off the trimmed PNG, not asked for: 704x602. */
+const WALL_H = Math.round(WALL_W / 1.169);
+const WALL_BOTTOM = WALL_TOP + WALL_H;
+
+/**
+ * Figures are sized as a fraction of the wall rather than in absolute pixels.
+ * A standing man against a domestic wall is about two thirds of its height; at
+ * the pixel sizes the placeholders used he came out at 82% and the room read
+ * like a doll's house.
+ */
+const TENANT_H = Math.round(WALL_H * 0.68);
+const TENANT_W = Math.round(TENANT_H * 0.514);
+const LANDLORD_H = Math.round(WALL_H * 0.72);
+const LANDLORD_W = Math.round(LANDLORD_H * 0.514);
+/** Both stand on the floor, a little in front of its top edge. */
+const TENANT_TOP = WALL_BOTTOM + 314 - TENANT_H;
+const LANDLORD_TOP = WALL_BOTTOM + 334 - LANDLORD_H;
 import {
 	ACCENT_BEAT,
 	CASH_AT,
@@ -127,8 +144,8 @@ export const Shot01EmptyFlat: React.FC = () => {
 	const cashAge = frame - CASH_AT;
 	const {stepIndex: cashStep} = useStopMotionStep(Math.max(0, cashAge), 3);
 	const cashHeld = Math.min(cashStep, 2) / 2;
-	const cashX = interpolate(cashHeld, [0, 1], [672, 486]);
-	const cashY = interpolate(cashHeld, [0, 1], [930, 986]);
+	const cashX = interpolate(cashHeld, [0, 1], [655, 520]);
+	const cashY = interpolate(cashHeld, [0, 1], [995, 1035]);
 
 	return (
 		<AbsoluteFill>
@@ -136,7 +153,7 @@ export const Shot01EmptyFlat: React.FC = () => {
 
 			<AbsoluteFill style={{transform: `translate(${driftX}px, ${driftY}px)`}}>
 				{/* The room, built. Placeholders until the art lands. */}
-				<div style={{position: 'absolute', left: 40, top: 120, zIndex: 10}}>
+				<div style={{position: 'absolute', left: WALL_LEFT, top: WALL_TOP, zIndex: 10}}>
 					<Arrive at={WALL_AT} from="top" distance={30} tilt={1.2}>
 						<PaperCutout
 							asset="flat-wall"
@@ -147,35 +164,35 @@ export const Shot01EmptyFlat: React.FC = () => {
 					</Arrive>
 				</div>
 
-				<div style={{position: 'absolute', left: 118, top: 180, zIndex: 14}}>
+				<div style={{position: 'absolute', left: 110, top: 200, zIndex: 14}}>
 					<Arrive at={CRACK_AT} tilt={5} rotate={-2}>
 						<PaperCutout
 							asset="wall-crack"
 							elevation={0.3}
 							textureOpacity={0}
-							style={{width: 132, height: 508}}
+							style={{width: 132, height: Math.round(132 / 0.277)}}
 						/>
 					</Arrive>
 				</div>
 
-				<div style={{position: 'absolute', left: 762, top: 206, zIndex: 14}}>
+				<div style={{position: 'absolute', left: 792, top: 210, zIndex: 14}}>
 					<Arrive at={POSTER_AT} from="right" tilt={4} rotate={2.5}>
 						<PaperCutout
 							asset="poster-patch"
 							elevation={0.35}
 							textureOpacity={0}
-							style={{width: 230, height: 354}}
+							style={{width: 210, height: Math.round(210 / 0.653)}}
 						/>
 					</Arrive>
 				</div>
 
-				<div style={{position: 'absolute', left: 392, top: 244, zIndex: 16}}>
+				<div style={{position: 'absolute', left: 430, top: 380, zIndex: 16}}>
 					<Arrive at={STAIN_AT} tilt={6} rotate={-3}>
 						<PaperCutout
 							asset="wall-stain"
 							elevation={0.4}
 							textureOpacity={0}
-							style={{width: 300, height: 330}}
+							style={{width: 260, height: Math.round(260 / 0.904)}}
 						/>
 					</Arrive>
 				</div>
@@ -186,23 +203,23 @@ export const Shot01EmptyFlat: React.FC = () => {
 					</Arrive>
 				</div>
 
-				<div style={{position: 'absolute', left: 150, top: WALL_BOTTOM + 96, zIndex: 12}}>
+				<div style={{position: 'absolute', left: 150, top: WALL_BOTTOM + 120, zIndex: 12}}>
 					<Arrive at={TILE_AT} tilt={7} rotate={4}>
 						<Placeholder label="BROKEN TILE" file="floor-tile-cracked.jpg" width={280} height={230} seed={37} />
 					</Arrive>
 				</div>
 
 				{/* The tenant, last of the room and first of the people. */}
-				<div style={{position: 'absolute', left: 336, top: 600, zIndex: 30}}>
+				<div style={{position: 'absolute', left: 250, top: TENANT_TOP, zIndex: 30}}>
 					<Arrive at={TENANT_AT} from="bottom" distance={36} tilt={2.5} rotate={-1}>
-						<Placeholder label="TENANT" file="tenant-tense.jpg" width={360} height={700} seed={41} />
+						<Placeholder label="TENANT" file="tenant-tense.jpg" width={TENANT_W} height={TENANT_H} seed={41} />
 					</Arrive>
 				</div>
 
 				{/* The landlord, stepping in from the edge, cutting him off. */}
-				<div style={{position: 'absolute', left: 646, top: 590, zIndex: 32}}>
+				<div style={{position: 'absolute', left: 640, top: LANDLORD_TOP, zIndex: 32}}>
 					<Arrive at={LANDLORD_ENTERS} from="right" distance={210} tilt={2} rotate={1}>
-						<Placeholder label="LANDLORD" file="landlord-offer.jpg" width={380} height={740} seed={47} />
+						<Placeholder label="LANDLORD" file="landlord-offer.jpg" width={LANDLORD_W} height={LANDLORD_H} seed={47} />
 					</Arrive>
 				</div>
 

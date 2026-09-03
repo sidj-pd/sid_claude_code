@@ -48,6 +48,17 @@ const FEATHER = 1.5;
 const TRIM_ALPHA = 24;
 /** A couple of pixels of margin, so the feathered edge is not clipped. */
 const TRIM_PAD = 2;
+/**
+ * Fraction of a row (or column) that must be opaque for it to count as
+ * artwork. A plain bounding box is too eager: flat-wall had roughly 200
+ * scattered opaque pixels in a sparse strip below its skirting, which stretched
+ * the box 150px past the wall and left the piece rendering at 1.18 wide when
+ * the layout had been told 0.94. Requiring real coverage ignores debris while
+ * still keeping the crack's detached flakes, which are dense where they exist.
+ */
+const TRIM_COVERAGE = 0.02;
+/** ...but never demand more than a few pixels, for genuinely thin pieces. */
+const TRIM_MIN_PIXELS = 3;
 
 const OVERRIDES = {
 	// Episode 03's flat. Trimmed so each piece can be positioned by its own
@@ -243,20 +254,31 @@ const removeBackground = async (srcPath, outPath, options = {}) => {
 	 * would silently move and resize art in shots that are already finished.
 	 */
 	if (options.trim) {
-		let tx0 = width;
-		let ty0 = height;
-		let tx1 = -1;
-		let ty1 = -1;
+		const rows = new Int32Array(height);
+		const cols = new Int32Array(width);
 		for (let y = 0; y < height; y++) {
 			for (let x = 0; x < width; x++) {
 				if (raw[(y * width + x) * 4 + 3] > TRIM_ALPHA) {
-					if (x < tx0) tx0 = x;
-					if (x > tx1) tx1 = x;
-					if (y < ty0) ty0 = y;
-					if (y > ty1) ty1 = y;
+					rows[y]++;
+					cols[x]++;
 				}
 			}
 		}
+		const rowMin = Math.max(TRIM_MIN_PIXELS, Math.round(width * TRIM_COVERAGE));
+		const colMin = Math.max(TRIM_MIN_PIXELS, Math.round(height * TRIM_COVERAGE));
+		const span = (counts, min) => {
+			let lo = -1;
+			let hi = -1;
+			for (let i = 0; i < counts.length; i++) {
+				if (counts[i] >= min) {
+					if (lo < 0) lo = i;
+					hi = i;
+				}
+			}
+			return [lo, hi];
+		};
+		const [ty0, ty1] = span(rows, rowMin);
+		const [tx0, tx1] = span(cols, colMin);
 		if (tx1 >= tx0 && ty1 >= ty0) {
 			const left = Math.max(0, tx0 - TRIM_PAD);
 			const top = Math.max(0, ty0 - TRIM_PAD);
