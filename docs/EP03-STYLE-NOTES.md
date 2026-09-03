@@ -1,7 +1,13 @@
 # Episode 03 — the collage-assembly style
 
-Measured off `EP03-STYLE-REFERENCE.mp4`, the reference supplied 2026-09-03.
-26.4s, 720x1280, 24fps.
+Measured off the reference supplied 2026-09-03 — 26.4s, 720x1280, 24fps. The
+video itself is third-party and deliberately not committed; these measurements
+are the part worth keeping.
+
+**Its audio is not being used.** The tempo below is recorded because it explains
+where the reference's energy comes from, not because Episode 03 imports a music
+bed. Episode 03 keeps the series' audio: measured narration plus synthesised
+effects.
 
 ## What it actually is
 
@@ -72,6 +78,17 @@ and become **assembly beats**: the wall arrives, then the crack, then the poster
 patch, then the stain, then the floor, then the tenant, then the landlord, then
 the cash — each on a beat of the grid, into a frame that starts empty.
 
-Its 360 frames is also 4.55 bars, which is not a musical length. 8 bars is 632
-frames (21.1s); 6 bars is 474 (15.8s). A beat grid wants the shot length chosen
-from the grid rather than rounded to twelve seconds.
+## Where the assembly timing comes from instead
+
+Since the music is not being imported, the beat grid cannot be the spine. The
+narration is, exactly as in Episodes 01 and 02 (§8): generate the line, measure
+its envelope, and land the assembly beats on its stresses and its silences.
+
+That keeps the reference's signature — things arriving, constantly, into a frame
+that started empty — while the rhythm comes from our own audio rather than
+someone else's track. The spec's own sound cues already support this: a paper
+rustle on every arrival is what makes an assembly audible.
+
+The reference's ~20-frame pulse is still a useful upper bound on how long a
+frame should sit unchanged. Longer than about two-thirds of a second with
+nothing arriving and the style stops reading.

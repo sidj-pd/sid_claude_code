@@ -11,3 +11,7 @@ public/cutouts-alpha
 .env
 .env.*
 *.key
+
+# Third-party style reference, kept out of the repo. Its measurements are
+# written up in docs/EP03-STYLE-NOTES.md.
+docs/EP03-STYLE-REFERENCE.mp4
