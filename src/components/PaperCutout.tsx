@@ -93,12 +93,20 @@ export const PaperCutout: React.FC<PaperCutoutProps> = ({
 				// throughout (checked before relying on this), so the
 				// pre-baked outline sits at "<asset>-outline.png" with no
 				// extra lookup table needed.
+				//
+				// A position:absolute element paints ABOVE any static
+				// sibling regardless of DOM order — a plain CSS rule, not
+				// specific to this filter/img — so without an explicit
+				// z-index below, this solid white fill painted over the
+				// whole character instead of peeking out from behind it.
 				<Img
 					src={staticFile(`cutouts-alpha/${asset}-outline.png`)}
-					style={{position: 'absolute', inset: 0, width: '100%', height: '100%'}}
+					style={{position: 'absolute', inset: 0, width: '100%', height: '100%', zIndex: 0}}
 				/>
 			) : null}
-			<Illustration />
+			<div style={{position: 'relative', zIndex: 1, width: '100%', height: '100%'}}>
+				<Illustration />
+			</div>
 			{textureOpacity > 0 ? (
 				<NewsprintTexture opacity={textureOpacity} grayscale={grayscale} />
 			) : null}
