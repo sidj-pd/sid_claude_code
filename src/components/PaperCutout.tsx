@@ -22,7 +22,31 @@ export type PaperCutoutProps = {
 	 * fainter shadow than one currently in the foreground. 1 = default.
 	 */
 	elevation?: number;
+	/**
+	 * A solid outline traced around the artwork's own alpha silhouette — a
+	 * sticker-style ring, for pulling a character forward off a busy field.
+	 * Applied to the illustration only, underneath the elevation shadow, so
+	 * the shadow is cast from the (slightly larger) outlined shape rather
+	 * than outlining the shadow itself.
+	 */
+	outline?: {color?: string; width?: number};
 };
+
+/**
+ * Approximates an SVG-style outline using nothing but drop-shadow(): stack
+ * copies of the source offset in N directions around a circle at 0 blur, so
+ * every direction gets a solid, unblurred duplicate the same colour. Because
+ * every copy is fully opaque, overlapping copies from adjacent directions
+ * cost nothing — there is no visible seam, just a ring roughly `width` thick.
+ */
+const OUTLINE_DIRECTIONS = 16;
+const outlineFilter = (color: string, width: number): string =>
+	Array.from({length: OUTLINE_DIRECTIONS}, (_, i) => {
+		const angle = (i / OUTLINE_DIRECTIONS) * Math.PI * 2;
+		const dx = (Math.cos(angle) * width).toFixed(2);
+		const dy = (Math.sin(angle) * width).toFixed(2);
+		return `drop-shadow(${dx}px ${dy}px 0 ${color})`;
+	}).join(' ');
 
 /**
  * Base wrapper for any landmark/character cutout. Looks the illustration up
@@ -36,6 +60,7 @@ export const PaperCutout: React.FC<PaperCutoutProps> = ({
 	grayscale = false,
 	jitter,
 	elevation = 1,
+	outline,
 }) => {
 	const frame = useCurrentFrame();
 	const Illustration = CUTOUT_REGISTRY[asset];
@@ -67,7 +92,19 @@ export const PaperCutout: React.FC<PaperCutoutProps> = ({
 				...style,
 			}}
 		>
-			<Illustration />
+			<div
+				style={
+					outline
+						? {
+								width: '100%',
+								height: '100%',
+								filter: outlineFilter(outline.color ?? '#ffffff', outline.width ?? 6),
+							}
+						: {width: '100%', height: '100%'}
+				}
+			>
+				<Illustration />
+			</div>
 			{textureOpacity > 0 ? (
 				<NewsprintTexture opacity={textureOpacity} grayscale={grayscale} />
 			) : null}

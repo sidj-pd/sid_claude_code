@@ -15,6 +15,7 @@ import {MARK} from '../Accents';
 import {Arrive} from '../Arrive';
 import {PaperCutout} from '../../../components/PaperCutout';
 import {Placeholder} from '../Placeholder';
+import {TalkSway} from '../TalkSway';
 
 /**
  * The wall's measured content ratio is 0.94 — nearly square, not the 1.37 the
@@ -91,10 +92,12 @@ import {
 	CRACK_AT,
 	FLOOR_AT,
 	LANDLORD_ENTERS,
+	LANDLORD_FRAMES,
 	LANDLORD_SPEAKS,
 	POSTER_AT,
 	STAIN_AT,
 	TENANT_AT,
+	TENANT_FRAMES,
 	TENANT_SPEAKS,
 	TILE_AT,
 	VO_A_AT,
@@ -228,27 +231,38 @@ export const Shot01EmptyFlat: React.FC = () => {
 					</Arrive>
 				</div>
 
-				{/* The tenant, last of the room and first of the people. */}
+				{/* The tenant, last of the room and first of the people. A white
+				    outline sells him as a sticker-style cutout against the busy
+				    wall, and he sways while his own line plays — standing in for
+				    a mouth the art doesn't have. */}
 				<div style={{position: 'absolute', left: TENANT_LEFT, top: TENANT_TOP, zIndex: 30}}>
 					<Arrive at={TENANT_AT} from="bottom" distance={36} tilt={2.5} rotate={-1}>
-						<PaperCutout
-							asset="tenant-tense"
-							elevation={0.85}
-							textureOpacity={0}
-							style={{width: TENANT_W, height: TENANT_H, ...TENANT_FLIP}}
-						/>
+						<TalkSway from={TENANT_SPEAKS} frames={TENANT_FRAMES}>
+							<PaperCutout
+								asset="tenant-tense"
+								elevation={0.85}
+								textureOpacity={0}
+								outline={{width: 7}}
+								style={{width: TENANT_W, height: TENANT_H, ...TENANT_FLIP}}
+							/>
+						</TalkSway>
 					</Arrive>
 				</div>
 
-				{/* The landlord, stepping in from the edge, cutting him off. */}
+				{/* The landlord, stepping in from the edge, cutting him off. Same
+				    outline treatment as the tenant, and the same talk-sway while
+				    his own line plays. */}
 				<div style={{position: 'absolute', left: LANDLORD_LEFT, top: LANDLORD_TOP, zIndex: 32}}>
 					<Arrive at={LANDLORD_ENTERS} from="right" distance={210} tilt={2} rotate={1}>
-						<PaperCutout
-							asset="landlord-offer"
-							elevation={1}
-							textureOpacity={0}
-							style={{width: LANDLORD_W, height: LANDLORD_H}}
-						/>
+						<TalkSway from={LANDLORD_SPEAKS} frames={LANDLORD_FRAMES}>
+							<PaperCutout
+								asset="landlord-offer"
+								elevation={1}
+								textureOpacity={0}
+								outline={{width: 7}}
+								style={{width: LANDLORD_W, height: LANDLORD_H}}
+							/>
+						</TalkSway>
 					</Arrive>
 				</div>
 

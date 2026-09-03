@@ -87,13 +87,26 @@ export const TENANT_FRAMES = 135;
  */
 export const LANDLORD_ENTERS = TENANT_SPEAKS + TENANT_FRAMES - 16;
 export const LANDLORD_SPEAKS = TENANT_SPEAKS + TENANT_FRAMES + PAUSE;
-export const LANDLORD_FRAMES = 78;
+/**
+ * His line changed from three clipped phrases ("Forget it. Full amount.
+ * Here.") to one sentence ("Here is the full deposit amount."), so this is
+ * the new take's own measured length, not the old one's: 3.00s raw, 2.54s
+ * (76 frames) after tighten-vo.py.
+ */
+export const LANDLORD_FRAMES = 76;
 
 /**
- * The cash moves on "Here." — 2.16s into the cut take, measured, not scripted.
- * His three phrases sit at 0.15, 1.14 and 2.16s.
+ * The cash used to move on the isolated word "Here." — its own clean gap in
+ * the old three-phrase take made that trivial to anchor to. The new line is
+ * one continuous phrase with no internal silence (measured: 0 gaps), so
+ * there is no gap to anchor to any more. Estimated instead by syllable share,
+ * the same cross-check the production notes use for gapless segments:
+ * "Here(1) is(1) the(1) full(1) de-pos-it(3) a-mount(2)" is 9 syllables, and
+ * 7 of them land before "amount" — 77.8% of the take's 2.18s of measured
+ * speech (0.15s-2.33s), landing the cash at the START of the last word, so
+ * the two-step hop finishes as "amount" does.
  */
-export const CASH_AT = LANDLORD_SPEAKS + Math.round(2.16 * S);
+export const CASH_AT = LANDLORD_SPEAKS + 55;
 
 /** And the second narration line closes it, over the handover, with its own
  *  breath after the landlord's line ends rather than overlapping it. */
@@ -101,3 +114,4 @@ export const VO_B_AT = LANDLORD_SPEAKS + LANDLORD_FRAMES + PAUSE;
 export const VO_B_FRAMES = 98;
 
 export const SHOT_01_DURATION = VO_B_AT + VO_B_FRAMES + 16;
+
