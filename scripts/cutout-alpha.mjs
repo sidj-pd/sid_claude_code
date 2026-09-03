@@ -68,6 +68,14 @@ const OVERRIDES = {
 	'wall-crack': {trim: true},
 	'poster-patch': {trim: true},
 	'wall-stain': {trim: true},
+	'flat-floor': {trim: true},
+	'floor-tile-cracked': {trim: true},
+	'tenant-tense': {trim: true},
+	// A putty kurta on a cream backdrop is the Episode 02 clipping problem: the
+	// garment is the closest thing in the shot to the ground it sits on. A
+	// narrower tolerance keeps it, and nothing else in the figure is near cream.
+	'landlord-offer': {trim: true, tolerance: 22},
+	'cash-stack': {trim: true},
 	'traffic-signal': {inset: 0.1},
 	// Its windscreen is a large enclosed cream area that IS artwork (glass),
 	// not backdrop showing through, so the enclosed-hole pass must be off or

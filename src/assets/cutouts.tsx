@@ -115,7 +115,12 @@ export type CutoutAsset =
 	| 'flat-wall'
 	| 'wall-crack'
 	| 'poster-patch'
-	| 'wall-stain';
+	| 'wall-stain'
+	| 'flat-floor'
+	| 'floor-tile-cracked'
+	| 'tenant-tense'
+	| 'landlord-offer'
+	| 'cash-stack';
 
 /**
  * Episode 03 — the empty flat. The wall and its three defects are separate
@@ -129,6 +134,11 @@ export const FlatWall = makeCutout('cutouts-alpha/flat-wall.png');
 export const WallCrack = makeCutout('cutouts-alpha/wall-crack.png');
 export const PosterPatch = makeCutout('cutouts-alpha/poster-patch.png');
 export const WallStain = makeCutout('cutouts-alpha/wall-stain.png');
+export const FlatFloor = makeCutout('cutouts-alpha/flat-floor.png');
+export const FloorTileCracked = makeCutout('cutouts-alpha/floor-tile-cracked.png');
+export const TenantTense = makeCutout('cutouts-alpha/tenant-tense.png');
+export const LandlordOffer = makeCutout('cutouts-alpha/landlord-offer.png');
+export const CashStack = makeCutout('cutouts-alpha/cash-stack.png');
 
 export const CUTOUT_REGISTRY: Record<CutoutAsset, React.FC> = {
 	'vidhana-soudha': VidhanaSoudha,
@@ -166,4 +176,9 @@ export const CUTOUT_REGISTRY: Record<CutoutAsset, React.FC> = {
 	'wall-crack': WallCrack,
 	'poster-patch': PosterPatch,
 	'wall-stain': WallStain,
+	'flat-floor': FlatFloor,
+	'floor-tile-cracked': FloorTileCracked,
+	'tenant-tense': TenantTense,
+	'landlord-offer': LandlordOffer,
+	'cash-stack': CashStack,
 };

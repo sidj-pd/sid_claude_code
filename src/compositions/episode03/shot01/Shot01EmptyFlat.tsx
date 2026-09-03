@@ -42,12 +42,35 @@ const WALL_BOTTOM = WALL_TOP + WALL_H;
  * like a doll's house.
  */
 const TENANT_H = Math.round(WALL_H * 0.68);
-const TENANT_W = Math.round(TENANT_H * 0.514);
+const TENANT_W = Math.round(TENANT_H * 0.329);
 const LANDLORD_H = Math.round(WALL_H * 0.72);
-const LANDLORD_W = Math.round(LANDLORD_H * 0.514);
+const LANDLORD_W = Math.round(LANDLORD_H * 0.416);
 /** Both stand on the floor, a little in front of its top edge. */
 const TENANT_TOP = WALL_BOTTOM + 314 - TENANT_H;
 const LANDLORD_TOP = WALL_BOTTOM + 334 - LANDLORD_H;
+const TENANT_LEFT = 290;
+const LANDLORD_LEFT = 600;
+
+/**
+ * The floor's measured ratio is 0.574 — a tall receding grid, not the wide
+ * letterbox the prompt asked for. That turns out to be the more useful shape:
+ * laid from the wall's base at full frame width it runs off the bottom of the
+ * frame, and because the art has its small far rows at the top and its large
+ * near rows at the bottom, the perspective lands the right way round with no
+ * cropping. Only the far half is ever on screen.
+ */
+const FLOOR_W = 1080;
+const FLOOR_H = Math.round(FLOOR_W / 0.574);
+
+/**
+ * The cash starts in the landlord's upturned palm — measured off his artwork
+ * at 0.32 across and 0.26 down his own bounding box, not guessed — and ends by
+ * the tenant's free hand.
+ */
+const CASH_W = 180;
+const CASH_H = Math.round(CASH_W / 1.623);
+const PALM_X = LANDLORD_LEFT + Math.round(LANDLORD_W * 0.32);
+const PALM_Y = LANDLORD_TOP + Math.round(LANDLORD_H * 0.26);
 import {
 	ACCENT_BEAT,
 	CASH_AT,
@@ -144,8 +167,8 @@ export const Shot01EmptyFlat: React.FC = () => {
 	const cashAge = frame - CASH_AT;
 	const {stepIndex: cashStep} = useStopMotionStep(Math.max(0, cashAge), 3);
 	const cashHeld = Math.min(cashStep, 2) / 2;
-	const cashX = interpolate(cashHeld, [0, 1], [655, 520]);
-	const cashY = interpolate(cashHeld, [0, 1], [995, 1035]);
+	const cashX = interpolate(cashHeld, [0, 1], [PALM_X - CASH_W / 2, TENANT_LEFT + 110]);
+	const cashY = interpolate(cashHeld, [0, 1], [PALM_Y - CASH_H / 2, TENANT_TOP + Math.round(TENANT_H * 0.48)]);
 
 	return (
 		<AbsoluteFill>
@@ -199,34 +222,59 @@ export const Shot01EmptyFlat: React.FC = () => {
 
 				<div style={{position: 'absolute', left: 0, top: WALL_BOTTOM, zIndex: 8}}>
 					<Arrive at={FLOOR_AT} from="bottom" distance={40} tilt={0.8}>
-						<Placeholder label="TILED FLOOR" file="flat-floor.jpg" width={1080} height={520} seed={31} />
+						<PaperCutout
+							asset="flat-floor"
+							elevation={0.4}
+							textureOpacity={0}
+							style={{width: FLOOR_W, height: FLOOR_H}}
+						/>
 					</Arrive>
 				</div>
 
-				<div style={{position: 'absolute', left: 150, top: WALL_BOTTOM + 120, zIndex: 12}}>
+				<div style={{position: 'absolute', left: 60, top: WALL_BOTTOM + 115, zIndex: 12}}>
 					<Arrive at={TILE_AT} tilt={7} rotate={4}>
-						<Placeholder label="BROKEN TILE" file="floor-tile-cracked.jpg" width={280} height={230} seed={37} />
+						<PaperCutout
+							asset="floor-tile-cracked"
+							elevation={0.6}
+							textureOpacity={0}
+							style={{width: 200, height: Math.round(200 / 0.965)}}
+						/>
 					</Arrive>
 				</div>
 
 				{/* The tenant, last of the room and first of the people. */}
-				<div style={{position: 'absolute', left: 250, top: TENANT_TOP, zIndex: 30}}>
+				<div style={{position: 'absolute', left: TENANT_LEFT, top: TENANT_TOP, zIndex: 30}}>
 					<Arrive at={TENANT_AT} from="bottom" distance={36} tilt={2.5} rotate={-1}>
-						<Placeholder label="TENANT" file="tenant-tense.jpg" width={TENANT_W} height={TENANT_H} seed={41} />
+						<PaperCutout
+							asset="tenant-tense"
+							elevation={0.85}
+							textureOpacity={0}
+							style={{width: TENANT_W, height: TENANT_H}}
+						/>
 					</Arrive>
 				</div>
 
 				{/* The landlord, stepping in from the edge, cutting him off. */}
-				<div style={{position: 'absolute', left: 640, top: LANDLORD_TOP, zIndex: 32}}>
+				<div style={{position: 'absolute', left: LANDLORD_LEFT, top: LANDLORD_TOP, zIndex: 32}}>
 					<Arrive at={LANDLORD_ENTERS} from="right" distance={210} tilt={2} rotate={1}>
-						<Placeholder label="LANDLORD" file="landlord-offer.jpg" width={LANDLORD_W} height={LANDLORD_H} seed={47} />
+						<PaperCutout
+							asset="landlord-offer"
+							elevation={1}
+							textureOpacity={0}
+							style={{width: LANDLORD_W, height: LANDLORD_H}}
+						/>
 					</Arrive>
 				</div>
 
 				{/* The cash, which is the only thing in the shot that moves twice. */}
 				{frame >= LANDLORD_ENTERS ? (
 					<div style={{position: 'absolute', left: cashX, top: cashY, zIndex: 40}}>
-						<Placeholder label="CASH" file="cash-stack.jpg" width={150} height={100} seed={53} />
+						<PaperCutout
+							asset="cash-stack"
+							elevation={1.15}
+							textureOpacity={0}
+							style={{width: CASH_W, height: CASH_H}}
+						/>
 					</div>
 				) : null}
 
