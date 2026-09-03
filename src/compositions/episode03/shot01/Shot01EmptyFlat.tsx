@@ -13,7 +13,17 @@ import {useStopMotionStep} from '../../../components/useStopMotionStep';
 import {VoiceOver} from '../../../components/VoiceOver';
 import {Accent, Accents, MARK} from '../Accents';
 import {Arrive} from '../Arrive';
+import {PaperCutout} from '../../../components/PaperCutout';
 import {Placeholder} from '../Placeholder';
+
+/**
+ * The wall's measured content ratio is 0.94 — nearly square, not the 1.37 the
+ * prompt asked for. The box follows the art rather than stretching it, which
+ * makes the wall taller and moves the floor down to meet its own skirting band.
+ */
+const WALL_W = 1000;
+const WALL_H = Math.round(WALL_W / 0.94);
+const WALL_BOTTOM = 120 + WALL_H;
 import {
 	ACCENT_BEAT,
 	CASH_AT,
@@ -119,44 +129,64 @@ export const Shot01EmptyFlat: React.FC = () => {
 
 			<AbsoluteFill style={{transform: `translate(${driftX}px, ${driftY}px)`}}>
 				{/* The room, built. Placeholders until the art lands. */}
-				<div style={{position: 'absolute', left: 60, top: 170, zIndex: 10}}>
+				<div style={{position: 'absolute', left: 40, top: 120, zIndex: 10}}>
 					<Arrive at={WALL_AT} from="top" distance={30} tilt={1.2}>
-						<Placeholder label="BARE WALL" file="flat-wall.jpg" width={960} height={700} seed={3} />
+						<PaperCutout
+							asset="flat-wall"
+							elevation={0.45}
+							textureOpacity={0.22}
+							style={{width: WALL_W, height: WALL_H}}
+						/>
 					</Arrive>
 				</div>
 
-				<div style={{position: 'absolute', left: 250, top: 232, zIndex: 14}}>
+				<div style={{position: 'absolute', left: 118, top: 180, zIndex: 14}}>
 					<Arrive at={CRACK_AT} tilt={5} rotate={-2}>
-						<Placeholder label="CRACK" file="wall-crack.jpg" width={132} height={480} seed={11} />
+						<PaperCutout
+							asset="wall-crack"
+							elevation={0.3}
+							textureOpacity={0.18}
+							style={{width: 132, height: 508}}
+						/>
 					</Arrive>
 				</div>
 
-				<div style={{position: 'absolute', left: 620, top: 268, zIndex: 14}}>
+				<div style={{position: 'absolute', left: 762, top: 206, zIndex: 14}}>
 					<Arrive at={POSTER_AT} from="right" tilt={4} rotate={2.5}>
-						<Placeholder label="POSTER PATCH" file="poster-patch.jpg" width={230} height={300} seed={19} />
+						<PaperCutout
+							asset="poster-patch"
+							elevation={0.35}
+							textureOpacity={0.18}
+							style={{width: 230, height: 354}}
+						/>
 					</Arrive>
 				</div>
 
-				<div style={{position: 'absolute', left: 400, top: 516, zIndex: 16}}>
+				<div style={{position: 'absolute', left: 392, top: 244, zIndex: 16}}>
 					<Arrive at={STAIN_AT} tilt={6} rotate={-3}>
-						<Placeholder label="STAIN" file="wall-stain.jpg" width={330} height={270} seed={23} />
+						<PaperCutout
+							asset="wall-stain"
+							elevation={0.4}
+							textureOpacity={0.2}
+							style={{width: 300, height: 330}}
+						/>
 					</Arrive>
 				</div>
 
-				<div style={{position: 'absolute', left: 0, top: 842, zIndex: 8}}>
+				<div style={{position: 'absolute', left: 0, top: WALL_BOTTOM, zIndex: 8}}>
 					<Arrive at={FLOOR_AT} from="bottom" distance={40} tilt={0.8}>
 						<Placeholder label="TILED FLOOR" file="flat-floor.jpg" width={1080} height={520} seed={31} />
 					</Arrive>
 				</div>
 
-				<div style={{position: 'absolute', left: 150, top: 1020, zIndex: 12}}>
+				<div style={{position: 'absolute', left: 150, top: WALL_BOTTOM + 96, zIndex: 12}}>
 					<Arrive at={TILE_AT} tilt={7} rotate={4}>
 						<Placeholder label="BROKEN TILE" file="floor-tile-cracked.jpg" width={280} height={230} seed={37} />
 					</Arrive>
 				</div>
 
 				{/* The tenant, last of the room and first of the people. */}
-				<div style={{position: 'absolute', left: 300, top: 600, zIndex: 30}}>
+				<div style={{position: 'absolute', left: 336, top: 600, zIndex: 30}}>
 					<Arrive at={TENANT_AT} from="bottom" distance={36} tilt={2.5} rotate={-1}>
 						<Placeholder label="TENANT" file="tenant-tense.jpg" width={360} height={700} seed={41} />
 					</Arrive>

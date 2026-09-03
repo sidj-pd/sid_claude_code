@@ -111,7 +111,24 @@ export type CutoutAsset =
 	| 'newspaper-clip-ownclaim'
 	| 'newspaper-clip-hrcommittee'
 	| 'manager-desk-night'
-	| 'manager-desk-closed';
+	| 'manager-desk-closed'
+	| 'flat-wall'
+	| 'wall-crack'
+	| 'poster-patch'
+	| 'wall-stain';
+
+/**
+ * Episode 03 — the empty flat. The wall and its three defects are separate
+ * pieces because the flat assembles itself on a beat; the defects are laid
+ * over the wall in code, so each arrived as an isolated shape with no wall
+ * attached. Measured content ratios, which the layout is built against rather
+ * than the ratios the prompts asked for: wall 0.94, crack 0.26, patch 0.65,
+ * stain 0.91.
+ */
+export const FlatWall = makeCutout('cutouts-alpha/flat-wall.png');
+export const WallCrack = makeCutout('cutouts-alpha/wall-crack.png');
+export const PosterPatch = makeCutout('cutouts-alpha/poster-patch.png');
+export const WallStain = makeCutout('cutouts-alpha/wall-stain.png');
 
 export const CUTOUT_REGISTRY: Record<CutoutAsset, React.FC> = {
 	'vidhana-soudha': VidhanaSoudha,
@@ -145,4 +162,8 @@ export const CUTOUT_REGISTRY: Record<CutoutAsset, React.FC> = {
 	'newspaper-clip-hrcommittee': NewspaperClipHrCommittee,
 	'manager-desk-night': ManagerDeskNight,
 	'manager-desk-closed': ManagerDeskClosed,
+	'flat-wall': FlatWall,
+	'wall-crack': WallCrack,
+	'poster-patch': PosterPatch,
+	'wall-stain': WallStain,
 };
