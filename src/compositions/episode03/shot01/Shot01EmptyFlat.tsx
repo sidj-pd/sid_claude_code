@@ -11,7 +11,7 @@ import {NewsprintTexture} from '../../../components/NewsprintTexture';
 import {SAFE_BOTTOM_Y} from '../../../components/safeArea';
 import {useStopMotionStep} from '../../../components/useStopMotionStep';
 import {VoiceOver} from '../../../components/VoiceOver';
-import {Accent, Accents, MARK} from '../Accents';
+import {MARK} from '../Accents';
 import {Arrive} from '../Arrive';
 import {PaperCutout} from '../../../components/PaperCutout';
 import {Placeholder} from '../Placeholder';
@@ -41,9 +41,9 @@ const WALL_BOTTOM = WALL_TOP + WALL_H;
  * the pixel sizes the placeholders used he came out at 82% and the room read
  * like a doll's house.
  */
-const TENANT_H = Math.round(WALL_H * 0.82);
+const TENANT_H = Math.round(WALL_H * 0.9);
 const TENANT_W = Math.round(TENANT_H * 0.329);
-const LANDLORD_H = Math.round(WALL_H * 0.86);
+const LANDLORD_H = Math.round(WALL_H * 0.94);
 const LANDLORD_W = Math.round(LANDLORD_H * 0.385);
 /** Both stand on the floor, a little in front of its top edge. */
 const TENANT_TOP = WALL_BOTTOM + 300 - TENANT_H;
@@ -64,24 +64,34 @@ const FLOOR_H = Math.round(FLOOR_W / 0.574);
 
 /**
  * The cash starts in the landlord's upturned palm — measured off his artwork
- * at 0.32 across and 0.26 down his own bounding box, not guessed — and ends by
+ * at 0.25 across and 0.32 down his own bounding box, not guessed — and ends by
  * the tenant's free hand.
  */
 const CASH_W = 115;
 const CASH_H = Math.round(CASH_W / 1.623);
 const PALM_X = LANDLORD_LEFT + Math.round(LANDLORD_W * 0.25);
 const PALM_Y = LANDLORD_TOP + Math.round(LANDLORD_H * 0.32);
-/** The tenant's free hand, the other end of the travel. */
-const HAND_X = TENANT_LEFT + Math.round(TENANT_W * 0.85);
+/**
+ * The tenant's free hand, the other end of the travel. His art was measured
+ * at 0.85 across his own box — but he is now mirrored (see TENANT_FLIP below)
+ * to face the landlord, and a horizontal flip reflects every x-fraction about
+ * the box's centre, so the free hand that was at 0.85 is now at 1-0.85=0.15.
+ */
+const HAND_X = TENANT_LEFT + Math.round(TENANT_W * 0.15);
 const HAND_Y = TENANT_TOP + Math.round(TENANT_H * 0.62);
+/**
+ * His artwork was generated facing camera-left, away from the landlord. The
+ * confrontation reads backwards with him turned away from the man he is
+ * talking to, so he is mirrored to face right, toward the landlord — a plain
+ * CSS flip, not a re-generation, since nothing about his pose needs to change.
+ */
+const TENANT_FLIP = {transform: 'scaleX(-1)'} as const;
 import {
-	ACCENT_BEAT,
 	CASH_AT,
 	CRACK_AT,
 	FLOOR_AT,
 	LANDLORD_ENTERS,
 	LANDLORD_SPEAKS,
-	OFFBEAT,
 	POSTER_AT,
 	STAIN_AT,
 	TENANT_AT,
@@ -111,35 +121,6 @@ const Field: React.FC = () => (
 		<NewsprintTexture opacity={0.16} />
 	</AbsoluteFill>
 );
-
-/**
- * The accent set. Sparse during the build so the evidence reads, then a burst
- * at the handover — the one moment in the shot that wants punctuation.
- */
-const ACCENTS: Accent[] = [
-	{kind: 'triangle', x: 0.09, y: 0.2, size: 66, at: CRACK_AT + 6, rotate: -12},
-	{kind: 'circle', x: 0.86, y: 0.15, size: 44, at: POSTER_AT + 5, color: '#2c3752'},
-	{kind: 'squiggle', x: 0.72, y: 0.33, size: 120, at: STAIN_AT + 7, rotate: -6},
-	{kind: 'eye', x: 0.13, y: 0.42, size: 78, at: STAIN_AT + 14},
-	{kind: 'square', x: 0.9, y: 0.52, size: 38, at: TILE_AT + 6, rotate: 18, color: '#2c3752'},
-	{kind: 'triangle', x: 0.05, y: 0.62, size: 52, at: ACCENT_BEAT, rotate: 24},
-	{kind: 'burst', x: 0.63, y: 0.55, size: 150, at: CASH_AT + 2},
-	{kind: 'circle', x: 0.2, y: 0.3, size: 30, at: CASH_AT + 6},
-	{kind: 'squiggle', x: 0.3, y: 0.7, size: 100, at: CASH_AT + 9, rotate: 8},
-
-	/*
-	 * Off-beat marks. The pulse stayed at the reference's measured 19 frames,
-	 * so the extra energy the brief asked for is bought here instead — a small
-	 * accent on the half-beat between arrivals doubles the event rate without
-	 * moving the tempo the assembly is locked to.
-	 */
-	{kind: 'square', x: 0.78, y: 0.08, size: 22, at: CRACK_AT + OFFBEAT, rotate: 12},
-	{kind: 'circle', x: 0.28, y: 0.13, size: 20, at: POSTER_AT + OFFBEAT, color: '#2c3752'},
-	{kind: 'triangle', x: 0.94, y: 0.29, size: 28, at: STAIN_AT + OFFBEAT, rotate: -30},
-	{kind: 'square', x: 0.07, y: 0.34, size: 24, at: FLOOR_AT + OFFBEAT, rotate: -8},
-	{kind: 'circle', x: 0.83, y: 0.44, size: 18, at: TILE_AT + OFFBEAT},
-	{kind: 'triangle', x: 0.17, y: 0.55, size: 26, at: TENANT_AT + OFFBEAT, rotate: 8, color: '#2c3752'},
-];
 
 /**
  * Shot 1 — The Empty Flat.
@@ -201,7 +182,7 @@ export const Shot01EmptyFlat: React.FC = () => {
 					</Arrive>
 				</div>
 
-				<div style={{position: 'absolute', left: 792, top: 210, zIndex: 14}}>
+				<div style={{position: 'absolute', left: 762, top: 170, zIndex: 14}}>
 					<Arrive at={POSTER_AT} from="right" tilt={4} rotate={2.5}>
 						<PaperCutout
 							asset="poster-patch"
@@ -212,7 +193,9 @@ export const Shot01EmptyFlat: React.FC = () => {
 					</Arrive>
 				</div>
 
-				<div style={{position: 'absolute', left: 400, top: 300, zIndex: 16}}>
+				{/* Moved up and toward centre for the bigger figures below: at the
+				    old y=300 it sat in the tenant's now-taller head and shoulders. */}
+				<div style={{position: 'absolute', left: 450, top: 180, zIndex: 16}}>
 					<Arrive at={STAIN_AT} tilt={6} rotate={-3}>
 						<PaperCutout
 							asset="wall-stain"
@@ -252,7 +235,7 @@ export const Shot01EmptyFlat: React.FC = () => {
 							asset="tenant-tense"
 							elevation={0.85}
 							textureOpacity={0}
-							style={{width: TENANT_W, height: TENANT_H}}
+							style={{width: TENANT_W, height: TENANT_H, ...TENANT_FLIP}}
 						/>
 					</Arrive>
 				</div>
@@ -281,7 +264,6 @@ export const Shot01EmptyFlat: React.FC = () => {
 					</div>
 				) : null}
 
-				<Accents accents={ACCENTS} />
 			</AbsoluteFill>
 
 			{/* A label strip, the reference's other recurring device — one or two

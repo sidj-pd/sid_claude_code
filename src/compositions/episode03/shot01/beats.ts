@@ -25,8 +25,12 @@
  * documentary grammar, and how the reference works, since its audio bed runs
  * continuously while pieces arrive. That is 131 frames that cost nothing.
  *
- * What is left is 468 frames of which ~400 carry speech. Below that, words
- * have to go: the floor is the dialogue itself, not the edit.
+ * What is left is 492 frames (16.4s), of which ~400 carry speech and 30 are a
+ * deliberate ten-frame breath before each of the four lines — VO into
+ * tenant, tenant into landlord, landlord into the closing VO — so voices
+ * don't cut into each other even though nothing in the audio forced that.
+ * Below the ~400 frames of speech, words have to go: the floor is the
+ * dialogue itself, not the edit.
  * ---------------------------------------------------------------------------
  */
 
@@ -37,13 +41,15 @@ const S = 30;
  * nineteen is its measured tempo, not a guess. It survived the retime because
  * the build now underlays the opening narration almost exactly: the last piece
  * lands at 128, the narration ends at 135. Subdividing to 13 or 10 finished the
- * room early and left it waiting, which is slower to watch, not faster. Density
- * comes from the accent layer instead, which is how the reference does it.
+ * room early and left it waiting, which is slower to watch, not faster.
+ *
+ * The reference's own accent shapes (the triangles, circles, squiggles) were
+ * dropped from this shot — they read as belonging to the reference video
+ * rather than to this series, once seen against real art instead of
+ * placeholders.
  */
 export const PULSE = 19;
 const BEAT = (n: number) => 6 + n * PULSE;
-/** Half-beat, for accents that punctuate between arrivals. */
-export const OFFBEAT = Math.round(PULSE / 2);
 
 /** The narration opens the shot and the room builds underneath it. */
 export const VO_A_AT = 4;
@@ -59,21 +65,28 @@ export const TENANT_AT = BEAT(6);
 /**
  * Not an asset any more — the keys are in the tenant's hand in his own artwork,
  * which is one fewer cutout and one fewer thing that can drift out of register.
- * The slot is kept because an accent lands on it.
  */
-export const ACCENT_BEAT = BEAT(6) + 8;
+
+/**
+ * A breath before each voice starts, rather than a hard cut into it. Ten
+ * frames — a third of a second — is audible as a pause without reading as a
+ * dropped line. Applied going into the tenant's dialogue, going into the
+ * landlord's, and going into the closing narration.
+ */
+const PAUSE = 10;
 
 /** He starts talking once the room exists and the narration has stopped. */
-export const TENANT_SPEAKS = VO_A_AT + VO_A_FRAMES + 3;
+export const TENANT_SPEAKS = VO_A_AT + VO_A_FRAMES + PAUSE;
 export const TENANT_FRAMES = 135;
 
 /**
  * The landlord steps in before the tenant has finished — the tenant's line is
  * written to be cut off ("...when I—") and the take delivers it cut off, so the
- * interruption has to be visible before it is audible.
+ * interruption has to be visible before it is audible. His own line still
+ * gets its own breath before it starts, once the tenant's has actually ended.
  */
 export const LANDLORD_ENTERS = TENANT_SPEAKS + TENANT_FRAMES - 16;
-export const LANDLORD_SPEAKS = TENANT_SPEAKS + TENANT_FRAMES + 4;
+export const LANDLORD_SPEAKS = TENANT_SPEAKS + TENANT_FRAMES + PAUSE;
 export const LANDLORD_FRAMES = 78;
 
 /**
@@ -82,8 +95,9 @@ export const LANDLORD_FRAMES = 78;
  */
 export const CASH_AT = LANDLORD_SPEAKS + Math.round(2.16 * S);
 
-/** And the second narration line closes it, over the handover. */
-export const VO_B_AT = CASH_AT + 12;
+/** And the second narration line closes it, over the handover, with its own
+ *  breath after the landlord's line ends rather than overlapping it. */
+export const VO_B_AT = LANDLORD_SPEAKS + LANDLORD_FRAMES + PAUSE;
 export const VO_B_FRAMES = 98;
 
 export const SHOT_01_DURATION = VO_B_AT + VO_B_FRAMES + 16;
