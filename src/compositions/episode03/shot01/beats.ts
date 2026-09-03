@@ -55,7 +55,12 @@ export const STAIN_AT = BEAT(3);
 export const FLOOR_AT = BEAT(4);
 export const TILE_AT = BEAT(5);
 export const TENANT_AT = BEAT(6);
-export const KEYS_AT = BEAT(6) + 8;
+/**
+ * Not an asset any more — the keys are in the tenant's hand in his own artwork,
+ * which is one fewer cutout and one fewer thing that can drift out of register.
+ * The slot is kept because an accent lands on it.
+ */
+export const ACCENT_BEAT = BEAT(6) + 8;
 
 /** He starts talking once the room he is standing in exists. */
 export const TENANT_SPEAKS = BEAT(7) + 11;

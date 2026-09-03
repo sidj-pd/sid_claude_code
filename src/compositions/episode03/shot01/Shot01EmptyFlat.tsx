@@ -15,10 +15,10 @@ import {Accent, Accents, MARK} from '../Accents';
 import {Arrive} from '../Arrive';
 import {Placeholder} from '../Placeholder';
 import {
+	ACCENT_BEAT,
 	CASH_AT,
 	CRACK_AT,
 	FLOOR_AT,
-	KEYS_AT,
 	LANDLORD_ENTERS,
 	LANDLORD_SPEAKS,
 	POSTER_AT,
@@ -60,7 +60,7 @@ const ACCENTS: Accent[] = [
 	{kind: 'squiggle', x: 0.72, y: 0.33, size: 120, at: STAIN_AT + 7, rotate: -6},
 	{kind: 'eye', x: 0.13, y: 0.42, size: 78, at: STAIN_AT + 14},
 	{kind: 'square', x: 0.9, y: 0.52, size: 38, at: TILE_AT + 6, rotate: 18, color: '#2c3752'},
-	{kind: 'triangle', x: 0.05, y: 0.62, size: 52, at: TENANT_AT + 8, rotate: 24},
+	{kind: 'triangle', x: 0.05, y: 0.62, size: 52, at: ACCENT_BEAT, rotate: 24},
 	{kind: 'burst', x: 0.63, y: 0.55, size: 150, at: CASH_AT + 2},
 	{kind: 'circle', x: 0.2, y: 0.3, size: 30, at: CASH_AT + 6},
 	{kind: 'squiggle', x: 0.3, y: 0.7, size: 100, at: CASH_AT + 9, rotate: 8},
@@ -146,16 +146,11 @@ export const Shot01EmptyFlat: React.FC = () => {
 						<Placeholder label="TENANT" file="tenant-tense.jpg" width={360} height={700} seed={41} />
 					</Arrive>
 				</div>
-				<div style={{position: 'absolute', left: 268, top: 1000, zIndex: 34}}>
-					<Arrive at={KEYS_AT} tilt={9} rotate={-8}>
-						<Placeholder label="KEYS" file="keys.jpg" width={110} height={90} seed={43} />
-					</Arrive>
-				</div>
 
 				{/* The landlord, stepping in from the edge, cutting him off. */}
 				<div style={{position: 'absolute', left: 646, top: 590, zIndex: 32}}>
 					<Arrive at={LANDLORD_ENTERS} from="right" distance={210} tilt={2} rotate={1}>
-						<Placeholder label="LANDLORD" file="landlord-cash.jpg" width={380} height={740} seed={47} />
+						<Placeholder label="LANDLORD" file="landlord-offer.jpg" width={380} height={740} seed={47} />
 					</Arrive>
 				</div>
 
@@ -202,7 +197,7 @@ export const Shot01EmptyFlat: React.FC = () => {
 
 			{/* Every arrival gets a rustle, so the assembly is heard as well as
 			    seen. The spec asks for exactly this. */}
-			{[WALL_AT, CRACK_AT, POSTER_AT, STAIN_AT, FLOOR_AT, TILE_AT, TENANT_AT, KEYS_AT].map(
+			{[WALL_AT, CRACK_AT, POSTER_AT, STAIN_AT, FLOOR_AT, TILE_AT, TENANT_AT].map(
 				(at, i) => (
 					<Sequence key={at} from={at} durationInFrames={20}>
 						<Audio

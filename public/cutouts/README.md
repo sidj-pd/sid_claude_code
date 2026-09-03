@@ -326,3 +326,227 @@ rather than reading as a paper puppet changing pose.
 > painted onto the backdrop. No deckle edge, no torn-page border, no frame, no
 > mount, no table or wood grain. Nothing touches the edge of the frame. No text
 > anywhere in the image.
+
+---
+
+# Episode 03 — Shot 1, "The Empty Flat"
+
+The flat assembles itself piece by piece on a 19-frame pulse, so every layer
+arrives as a **separate cutout**. Nine assets.
+
+Two constraints specific to this shot:
+
+- **The wall and floor are large near-uniform fields.** That is the exact shape
+  of the Episode 02 clipping failure — a pale flat area sitting on a cream
+  backdrop has nothing for the keyer to separate, and tightening tolerance far
+  enough to catch it leaves the backdrop 92% opaque. Both prompts therefore
+  name a firmly off-cream tone. Do not lighten them.
+- **Four of these are overlays**, laid on top of the wall and floor in code.
+  They must arrive as isolated shapes on cream, *not* painted onto a wall — if
+  the crack comes attached to its own patch of wall, that patch keys as artwork
+  and lands as a visible rectangle.
+
+The keys are in the tenant's hand in his own artwork, and the landlord's hand
+is deliberately **empty** — the cash is a separate prop that travels between
+them, so it cannot be baked into either figure.
+
+## `flat-wall.jpg`
+
+> Hand-cut paper collage illustration in the style of a printed mid-century
+> explainer: layered construction and craft paper, matte and slightly
+> desaturated, with visible scissor-cut and torn edges and a fine halftone grain
+> over the whole piece. Flatly lit from above — no rendering, no gloss, no
+> gradient lighting.
+>
+> Subject: a bare interior wall of a cheap rented flat, seen straight on, filling
+> a wide landscape shape roughly 1.4 times wider than it is tall. Flat, plain and
+> completely empty — no window, no door, no fittings, no pictures. The paper is a
+> dull institutional grey-green, clearly darker and cooler than cream, with faint
+> mottling and a few scissor-cut seams where sheets of the same tone butt
+> together. A narrow band of slightly darker skirting runs along the very bottom
+> edge. Nothing else on it — the wall's damage arrives separately.
+>
+> Centred on a plain flat cream craft-paper backdrop running to all four edges
+> with clear empty margin all round. No drop shadow, no cast shadow, no shading
+> painted onto the backdrop. No deckle edge, no torn-page border, no frame, no
+> mount, no table or wood grain. Nothing touches the edge of the frame. No text
+> anywhere in the image.
+
+## `wall-crack.jpg`
+
+> Hand-cut paper collage illustration in the style of a printed mid-century
+> explainer: layered construction and craft paper, matte and slightly
+> desaturated, with visible scissor-cut and torn edges and a fine halftone grain
+> over the whole piece. Flatly lit from above — no rendering, no gloss, no
+> gradient lighting.
+>
+> Subject: a single jagged crack, cut from very dark charcoal-brown paper, as an
+> ISOLATED SHAPE ON ITS OWN — no wall behind it, no patch or rectangle of
+> background attached. It runs top to bottom in a tall narrow portrait shape
+> roughly three and a half times taller than it is wide, wandering and forking
+> once near the middle, wider at the top and tapering to a hairline at the
+> bottom. Torn paper edges give it a rough, slightly furry outline. A few tiny
+> separate flakes of the same dark paper sit clear of the main crack.
+>
+> Centred on a plain flat cream craft-paper backdrop running to all four edges
+> with clear empty margin all round. No drop shadow, no cast shadow, no shading
+> painted onto the backdrop. No deckle edge, no torn-page border, no frame, no
+> mount, no table or wood grain. Nothing touches the edge of the frame. No text
+> anywhere in the image.
+
+## `poster-patch.jpg`
+
+> Hand-cut paper collage illustration in the style of a printed mid-century
+> explainer: layered construction and craft paper, matte and slightly
+> desaturated, with visible scissor-cut and torn edges and a fine halftone grain
+> over the whole piece. Flatly lit from above — no rendering, no gloss, no
+> gradient lighting.
+>
+> Subject: the rectangular ghost left on a wall where a poster hung for years,
+> as an ISOLATED SHAPE ON ITS OWN — no wall around it, just the patch itself, in
+> an upright portrait shape a little taller than wide. Cut from grubby
+> yellow-ochre paper, clearly darker and warmer than cream, with one corner torn
+> away raggedly and a short strip of greyed tape still stuck across the top edge.
+> Two small torn scraps of the old poster remain attached inside the patch,
+> blank. The edges are soft and irregular where the paper lifted.
+>
+> Centred on a plain flat cream craft-paper backdrop running to all four edges
+> with clear empty margin all round. No drop shadow, no cast shadow, no shading
+> painted onto the backdrop. No deckle edge, no torn-page border, no frame, no
+> mount, no table or wood grain. Nothing touches the edge of the frame. No text
+> anywhere in the image.
+
+## `wall-stain.jpg`
+
+> Hand-cut paper collage illustration in the style of a printed mid-century
+> explainer: layered construction and craft paper, matte and slightly
+> desaturated, with visible scissor-cut and torn edges and a fine halftone grain
+> over the whole piece. Flatly lit from above — no rendering, no gloss, no
+> gradient lighting.
+>
+> Subject: a water-damage stain, as an ISOLATED SHAPE ON ITS OWN — no wall
+> behind it, no rectangle of background attached. A single irregular blotch in a
+> slightly wide landscape shape, built from three nested torn layers of paper in
+> deepening muddy tones: a mid grey-brown outer shape, a darker umber inside it,
+> and a small near-black core low down. Torn, feathered edges on every layer, the
+> outline lumpy and organic with one drip running down from the lowest point.
+> Clearly darker than cream throughout.
+>
+> Centred on a plain flat cream craft-paper backdrop running to all four edges
+> with clear empty margin all round. No drop shadow, no cast shadow, no shading
+> painted onto the backdrop. No deckle edge, no torn-page border, no frame, no
+> mount, no table or wood grain. Nothing touches the edge of the frame. No text
+> anywhere in the image.
+
+## `flat-floor.jpg`
+
+> Hand-cut paper collage illustration in the style of a printed mid-century
+> explainer: layered construction and craft paper, matte and slightly
+> desaturated, with visible scissor-cut and torn edges and a fine halftone grain
+> over the whole piece. Flatly lit from above — no rendering, no gloss, no
+> gradient lighting.
+>
+> Subject: the tiled floor of a cheap rented flat, seen from slightly above in a
+> very wide letterbox shape roughly twice as wide as it is tall. A grid of square
+> mosaic floor tiles in dull grey-brown paper, clearly darker than cream,
+> receding gently with the rows growing shorter towards the top. Each tile is cut
+> separately so the grid is a little uneven, with visible scissor edges and thin
+> darker grout lines between them, and the tiles vary slightly in tone from one
+> to the next. Worn, plain and empty — no furniture, no objects, no damage.
+>
+> Centred on a plain flat cream craft-paper backdrop running to all four edges
+> with clear empty margin all round. No drop shadow, no cast shadow, no shading
+> painted onto the backdrop. No deckle edge, no torn-page border, no frame, no
+> mount, no table or wood grain. Nothing touches the edge of the frame. No text
+> anywhere in the image.
+
+## `floor-tile-cracked.jpg`
+
+> Hand-cut paper collage illustration in the style of a printed mid-century
+> explainer: layered construction and craft paper, matte and slightly
+> desaturated, with visible scissor-cut and torn edges and a fine halftone grain
+> over the whole piece. Flatly lit from above — no rendering, no gloss, no
+> gradient lighting.
+>
+> Subject: a small cluster of broken floor tiles, as an ISOLATED SHAPE ON ITS
+> OWN — no surrounding floor, no background rectangle. Three or four square
+> mosaic tiles in dull grey-brown paper, seen from slightly above in a mildly
+> wide shape, one of them split clean across by a dark jagged tear and a corner
+> missing entirely to show a patch of near-black paper beneath. Two loose
+> triangular shards of tile lie clear of the cluster. Clearly darker than cream.
+>
+> Centred on a plain flat cream craft-paper backdrop running to all four edges
+> with clear empty margin all round. No drop shadow, no cast shadow, no shading
+> painted onto the backdrop. No deckle edge, no torn-page border, no frame, no
+> mount, no table or wood grain. Nothing touches the edge of the frame. No text
+> anywhere in the image.
+
+## `tenant-tense.jpg`
+
+> Hand-cut paper collage illustration in the style of a printed mid-century
+> explainer: layered construction and craft paper, matte and slightly
+> desaturated, with visible scissor-cut and torn edges and a fine halftone grain
+> over the whole piece. Flatly lit from above — no rendering, no gloss, no
+> gradient lighting.
+>
+> Subject: a young Indian man in his late twenties standing FULL LENGTH facing
+> the viewer, seen slightly from his left, in a tall narrow portrait shape about
+> twice as tall as it is wide. Plain t-shirt and jeans in muted teal and indigo
+> paper, warm muted paper for skin, short dark hair. His posture is tense and
+> braced — shoulders slightly raised, weight on one leg, one arm held stiffly at
+> his side. In his other hand, held down and a little away from his body, he
+> grips a small ring of keys cut from pale grey paper. His expression is guarded
+> and unhappy, mouth a flat closed line, brows drawn slightly in.
+>
+> Centred on a plain flat cream craft-paper backdrop running to all four edges
+> with clear empty margin all round. No drop shadow, no cast shadow, no shading
+> painted onto the backdrop. No deckle edge, no torn-page border, no frame, no
+> mount, no table or wood grain. Nothing touches the edge of the frame. No text
+> anywhere in the image.
+
+## `landlord-offer.jpg`
+
+> Hand-cut paper collage illustration in the style of a printed mid-century
+> explainer: layered construction and craft paper, matte and slightly
+> desaturated, with visible scissor-cut and torn edges and a fine halftone grain
+> over the whole piece. Flatly lit from above — no rendering, no gloss, no
+> gradient lighting.
+>
+> Subject: a heavy-set Indian man in his fifties standing FULL LENGTH facing the
+> viewer, seen slightly from his right, in a tall narrow portrait shape about
+> twice as tall as it is wide. He wears a plain cream-white kurta over a
+> comfortable belly — use a warm putty and oatmeal paper for it so it stays
+> clearly darker than the backdrop — with dark trousers and sandals. Thinning
+> grey hair, thick moustache, a bland untroubled smile. One hand rests on his
+> hip. The other arm is extended forward towards the viewer with the palm turned
+> UP and the fingers slightly cupped, and that hand is COMPLETELY EMPTY —
+> holding nothing at all, no money, no paper, no object of any kind.
+>
+> Centred on a plain flat cream craft-paper backdrop running to all four edges
+> with clear empty margin all round. No drop shadow, no cast shadow, no shading
+> painted onto the backdrop. No deckle edge, no torn-page border, no frame, no
+> mount, no table or wood grain. Nothing touches the edge of the frame. No text
+> anywhere in the image.
+
+## `cash-stack.jpg`
+
+> Hand-cut paper collage illustration in the style of a printed mid-century
+> explainer: layered construction and craft paper, matte and slightly
+> desaturated, with visible scissor-cut and torn edges and a fine halftone grain
+> over the whole piece. Flatly lit from above — no rendering, no gloss, no
+> gradient lighting.
+>
+> Subject: a thick bundle of banknotes lying flat, seen straight on from above,
+> in a landscape shape half again as wide as it is tall, with nothing holding it
+> and no hand anywhere in the image. The notes are cut from muted olive-green and
+> dusty pink paper, clearly darker than cream, stacked so that a dozen individual
+> scissor-cut edges show along the sides and the top note sits very slightly
+> askew. A plain paper band runs around the middle of the bundle. The note faces
+> are BLANK — no numerals, no portraits, no lettering, no printed pattern of any
+> kind.
+>
+> Centred on a plain flat cream craft-paper backdrop running to all four edges
+> with clear empty margin all round. No drop shadow, no cast shadow, no shading
+> painted onto the backdrop. No deckle edge, no torn-page border, no frame, no
+> mount, no table or wood grain. Nothing touches the edge of the frame. No text
+> anywhere in the image.
