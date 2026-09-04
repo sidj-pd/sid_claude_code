@@ -116,7 +116,57 @@ export const KICKER_OUT = WHITEBOARD_OUT;
 export const KICKER_STAGGER = 8;
 
 export const CHYRON_IN = A1_STARTS + 10;
-/** Out well before the punch-in, same as both previous episodes' expert shots. */
-export const CHYRON_OUT = A1_STARTS + A1_FRAMES - 20;
+/**
+ * Held across clips 1 AND 2 — about 17s, where both previous episodes' expert
+ * shots dropped theirs after ~6s. Forty-five seconds of a man talking with
+ * nothing else on screen reads as empty, and the lower third is the cheapest
+ * thing in the frame that fixes it. It still has to be gone before the
+ * findings list below arrives, because at the height §15 forces the chyron to
+ * (SAFE_BOTTOM_Y - 230) the two occupy the same band.
+ */
+export const CHYRON_OUT = A3_STARTS - 12;
+
+/** Source seconds inside clips 3, 4 and 5 -> frame in this shot. */
+const IN_A3 = (seconds: number) => A3_STARTS + Math.round(seconds * S) - A3_SRC_IN;
+const IN_A4 = (seconds: number) => A4_STARTS + Math.round(seconds * S) - A4_SRC_IN;
+const IN_A5 = (seconds: number) => A5_STARTS + Math.round(seconds * S) - A5_SRC_IN;
+
+/**
+ * His claims, written down as findings while he makes them.
+ *
+ * Clips 3 to 5 are nineteen seconds of a talking head with nothing over them
+ * — the same hole Episode 02's expert shot had and filled the same way, with
+ * the newsprint chit the witness's checklist already uses. It ties the two
+ * photoreal shots of this episode to each other as well.
+ *
+ * Each is cut to the segment where he actually says it, off the measured
+ * envelopes above. The wording is his, turned into case-note register: that
+ * is the joke the checklist made in Shot 4 too — nothing he describes is
+ * remarkable, and writing it down as a clinical finding is what makes it
+ * absurd.
+ *
+ * `in` is where the line is written, `tick` where it is ticked, and the gap
+ * between them is what makes it read as a record being kept rather than a
+ * subtitle.
+ */
+export const FINDINGS = [
+	// Clip 3, second segment: "maybe four, five times in recorded history."
+	{text: 'PRECEDENT: 4-5 CASES ON RECORD', in: IN_A3(2.84), tick: IN_A3(6.13)},
+	// Clip 4, second segment: "not raising rent by 20% at renewal,"
+	{text: 'EARLY SIGN: NO 20% HIKE AT RENEWAL', in: IN_A4(3.46), tick: IN_A4(6.17)},
+	// Clip 4, third segment: "replying to a maintenance request within the week."
+	{text: 'EARLY SIGN: REPLIED WITHIN A WEEK', in: IN_A4(7.1), tick: IN_A4(9.12)},
+	// Clip 5, third segment: "Full deposit, same day, no fuss."
+	{text: 'ADVANCED: FULL DEPOSIT, SAME DAY', in: IN_A5(4.59), tick: IN_A5(6.93)},
+];
+
+/** The header chit above the list. */
+export const FINDINGS_HEADER_IN = FINDINGS[0].in - 8;
+/**
+ * Gone before the punch-in. The kicker wants the frame to itself, and a list
+ * of findings still on screen would compete with the one line that has to
+ * land.
+ */
+export const FINDINGS_OUT = WHITEBOARD_IN - 26;
 
 export const SHOT_05_DURATION = A6_STARTS + A6_FRAMES + 18;
