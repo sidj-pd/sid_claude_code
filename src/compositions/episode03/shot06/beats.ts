@@ -81,17 +81,18 @@ export const HEADLINE2_STAMP = REV2_DONE + 6;
  * landing on block one, and it is a computable risk rather than a matter of
  * taste: a block's height is
  *   headlineLines*(w*0.098) + w*0.02 + quoteLines*(w*0.0525) + w*0.04 + clipHeight
- * Block one is 630 tall at width 800 (two headline lines, and its quote
- * wraps to two at 47 characters); block two is 437 at width 600. Landing
- * punches each to 1.08 for three frames, which pushes block one's foot to
- * about 755. Block two starts at 810 — 55px of clear paper between them,
- * and its own foot lands at 1265, inside the 1536 text limit (§15).
+ * Block one is 701 tall at width 800 (two headline lines, and its quote
+ * wraps to two at 47 characters); block two is 556 at width 660. Block one's
+ * static foot lands at 781 and block two's top at 852, so there is ~49px of
+ * clear paper between them even allowing for the landing punch, and block
+ * two's own foot reaches 1430 — inside the 1536 text limit (§15).
  *
- * The clip heights are set to the crops' real aspect (2.02 and 2.05) rather
- * than picked, so object-fit: cover has nothing to crop away and the whole
- * press photo is visible in both.
+ * These are larger than the first pass, which left 270px of dead paper below
+ * the second headline on a page that had nothing else on it. The clip heights
+ * are set to the crops' real aspects (1.671 and 1.613) rather than picked, so
+ * object-fit: cover has nothing to trim and the whole press photo shows.
  */
-export const BLOCK1 = {left: 104, top: 100, width: 800, clipHeight: 341, rotate: -1.5};
-export const BLOCK2 = {left: 168, top: 810, width: 600, clipHeight: 252, rotate: 2};
+export const BLOCK1 = {left: 104, top: 80, width: 800, clipHeight: 412, rotate: -1.5};
+export const BLOCK2 = {left: 150, top: 852, width: 660, clipHeight: 352, rotate: 2};
 
 export const SHOT_06_DURATION = HEADLINE2_STAMP + 78;

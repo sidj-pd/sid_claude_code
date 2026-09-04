@@ -55,17 +55,23 @@ const CROPS = {
 	 * The generator's watermark sits low-right in both sources, well below
 	 * these bands, so the crop excludes it for free.
 	 */
-	'newspaper-clip-landlords': {top: 510, height: 380, fromSource: true},
-	'newspaper-clip-tenantclaim': {top: 515, height: 375, fromSource: true},
+	'newspaper-clip-landlords': {left: 60, top: 510, width: 635, height: 380, fromSource: true},
+	'newspaper-clip-tenantclaim': {left: 110, top: 515, width: 605, height: 375, fromSource: true},
 };
 
 const main = async () => {
-	for (const [name, {top, height, fromSource}] of Object.entries(CROPS)) {
+	for (const [name, {left, top, width: cropW, height, fromSource}] of Object.entries(CROPS)) {
 		const out = path.join(DIR, `${name}.png`);
 		const src = fromSource ? path.join(SRC_DIR, `${name}.jpg`) : out;
-		const {width} = await sharp(src).metadata();
+		const meta = await sharp(src).metadata();
+		// Episode 03's two crop horizontally as well. Cropping only vertically
+		// leaves the surface the clipping was photographed ON inside the box —
+		// it rendered as grey bands down both sides of the newsprint, since
+		// NewsHeadline's object-fit: cover has nothing to trim when the box
+		// matches the crop's aspect.
+		const width = cropW ?? meta.width;
 		const cropped = await sharp(src)
-			.extract({left: 0, top, width, height})
+			.extract({left: left ?? 0, top, width, height})
 			.png({compressionLevel: 9})
 			.toBuffer();
 		await sharp(cropped).toFile(out);
