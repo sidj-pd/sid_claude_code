@@ -531,9 +531,10 @@ to whatever actually arrives the same way those did.
 > punches into it later. Lit by an overhead fluorescent tube and a desk
 > lamp, even and slightly green.
 >
-> Framing is straight-on, chest up, still — a fixed camera on a tripod, not
-> a propped phone. Cleaner and better exposed than a video call: no shallow
-> focus, no grade, no camera movement.
+> Framing is straight-on, chest up, and completely static throughout — no
+> handheld sway, no drift, no movement at all, the way a formal sit-down
+> interview is shot rather than a phone call. Cleaner and better exposed
+> than a video call too: no shallow focus, no colour grading.
 >
 > He speaks these words, and only these words, starting already mid-sentence
 > — the dash is not punctuation to skip, it is the performance: he is picked
@@ -556,8 +557,8 @@ interview, cut for time.
 > fifties — DR. NAGESH RAMAMURTHY — in the same small office: neat
 > side-parted grey hair, rimless glasses, cream short-sleeved shirt, binder
 > shelf left, whiteboard with the "ON-TIME RENT" arrow and paintbrush doodle
-> right, fluorescent-and-desk-lamp light. Same fixed tripod framing, chest
-> up, still — no camera movement.
+> right, fluorescent-and-desk-lamp light. Same straight-on framing, chest
+> up, completely static — no movement at all.
 >
 > He speaks these words, and only these words:
 > "What we're seeing is a rare psychological reflex: when a tenant causes
@@ -576,8 +577,8 @@ Same framing, wardrobe, office and light.
 
 > A photorealistic vertical video, 9:16, of the same Indian man in his late
 > fifties — DR. NAGESH RAMAMURTHY — same office, same wardrobe, same
-> whiteboard and lighting as the previous two clips. Same fixed tripod
-> framing, chest up, still.
+> whiteboard and lighting as the previous two clips. Same straight-on
+> framing, chest up, completely static.
 >
 > He speaks these words, and only these words:
 > "It's been observed maybe four, five times in recorded history."
@@ -593,8 +594,8 @@ Same framing, wardrobe, office and light.
 
 > A photorealistic vertical video, 9:16, of the same Indian man in his late
 > fifties — DR. NAGESH RAMAMURTHY — same office, same wardrobe, same
-> whiteboard and lighting as the previous three clips. Same fixed tripod
-> framing, chest up, still.
+> whiteboard and lighting as the previous three clips. Same straight-on
+> framing, chest up, completely static.
 >
 > He speaks these words, and only these words:
 > "Early signs are subtle — a landlord not raising rent by 20% at renewal,
@@ -610,8 +611,8 @@ Same framing, wardrobe, office and light.
 
 > A photorealistic vertical video, 9:16, of the same Indian man in his late
 > fifties — DR. NAGESH RAMAMURTHY — same office, same wardrobe, same
-> whiteboard and lighting as the previous four clips. Same fixed tripod
-> framing, chest up, still.
+> whiteboard and lighting as the previous four clips. Same straight-on
+> framing, chest up, completely static.
 >
 > He speaks these words, and only these words:
 > "Left unchecked, it can progress to this: full deposit, same day, no
@@ -628,8 +629,8 @@ interview.
 
 > A photorealistic vertical video, 9:16, of the same Indian man in his late
 > fifties — DR. NAGESH RAMAMURTHY — same office, same wardrobe, same
-> whiteboard and lighting as the previous five clips. Same fixed tripod
-> framing, chest up.
+> whiteboard and lighting as the previous five clips. Same straight-on
+> framing, chest up, completely static.
 >
 > He leans slightly toward the camera and speaks these words, and only
 > these words:
