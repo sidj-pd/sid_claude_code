@@ -521,7 +521,7 @@ to whatever actually arrives the same way those did.
 ### `ep03-expert-1.mp4` — the diagnosis (~4s)
 
 > A photorealistic vertical video, 9:16, of an Indian man in his late
-> fifties — DR. NAGESH RAMAMURTHY — seated in a small office. Neat
+> fifties, seated in a small office. Neat
 > side-parted grey hair, rimless glasses, a cream short-sleeved shirt.
 > Behind him a bookshelf of identical unlabelled binders on the left, and on
 > the right a whiteboard covered in idle doodles rather than anything that
@@ -563,7 +563,7 @@ Same framing, wardrobe, office and light as the previous clip — a continuous
 interview, cut for time.
 
 > A photorealistic vertical video, 9:16, of the same Indian man in his late
-> fifties — DR. NAGESH RAMAMURTHY — in the same small office: neat
+> fifties, in the same small office: neat
 > side-parted grey hair, rimless glasses, cream short-sleeved shirt, binder
 > shelf left, whiteboard with the "ON-TIME RENT" arrow and paintbrush doodle
 > right, fluorescent-and-desk-lamp light. Same straight-on framing, chest
@@ -585,7 +585,7 @@ interview, cut for time.
 Same framing, wardrobe, office and light.
 
 > A photorealistic vertical video, 9:16, of the same Indian man in his late
-> fifties — DR. NAGESH RAMAMURTHY — same office, same wardrobe, same
+> fifties, same office, same wardrobe, same
 > whiteboard and lighting as the previous two clips. Same straight-on
 > framing, chest up, completely static.
 >
@@ -603,7 +603,7 @@ Same framing, wardrobe, office and light.
 Same framing, wardrobe, office and light.
 
 > A photorealistic vertical video, 9:16, of the same Indian man in his late
-> fifties — DR. NAGESH RAMAMURTHY — same office, same wardrobe, same
+> fifties, same office, same wardrobe, same
 > whiteboard and lighting as the previous three clips. Same straight-on
 > framing, chest up, completely static.
 >
@@ -621,7 +621,7 @@ Same framing, wardrobe, office and light.
 Same framing, wardrobe, office and light.
 
 > A photorealistic vertical video, 9:16, of the same Indian man in his late
-> fifties — DR. NAGESH RAMAMURTHY — same office, same wardrobe, same
+> fifties, same office, same wardrobe, same
 > whiteboard and lighting as the previous four clips. Same straight-on
 > framing, chest up, completely static.
 >
@@ -639,7 +639,7 @@ Same framing, wardrobe, office and light. Cut in as the last clip of the
 interview.
 
 > A photorealistic vertical video, 9:16, of the same Indian man in his late
-> fifties — DR. NAGESH RAMAMURTHY — same office, same wardrobe, same
+> fifties, same office, same wardrobe, same
 > whiteboard and lighting as the previous five clips. Same straight-on
 > framing, chest up, completely static.
 >
