@@ -15,3 +15,6 @@ public/cutouts-alpha
 # Third-party style reference, kept out of the repo. Its measurements are
 # written up in docs/EP03-STYLE-NOTES.md.
 docs/EP03-STYLE-REFERENCE.mp4
+
+# Python bytecode cache from running the scripts/ tools directly.
+__pycache__
