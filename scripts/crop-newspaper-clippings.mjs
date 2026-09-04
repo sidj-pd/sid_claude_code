@@ -43,6 +43,20 @@ const CROPS = {
 	'newspaper-clip-managers': {top: 600, height: 430, fromSource: true},
 	'newspaper-clip-ownclaim': {top: 431, height: 549, fromSource: true},
 	'newspaper-clip-hrcommittee': {top: 403, height: 611, fromSource: true},
+	/*
+	 * Episode 03. Both cropped tight to the photo band and nothing else, which
+	 * is what keeps the code-set headline visibly separate from the picture:
+	 * a crop that also carries the clipping's own empty top third puts a band
+	 * of blank newsprint between the headline and the photo, and one that
+	 * reaches the body text puts small print under it. Bands found by
+	 * rendering candidate crops and looking at them — the row-scan heuristics
+	 * this file's notes describe kept locking onto the grey backdrop instead.
+	 *
+	 * The generator's watermark sits low-right in both sources, well below
+	 * these bands, so the crop excludes it for free.
+	 */
+	'newspaper-clip-landlords': {top: 510, height: 380, fromSource: true},
+	'newspaper-clip-tenantclaim': {top: 515, height: 375, fromSource: true},
 };
 
 const main = async () => {

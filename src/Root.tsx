@@ -55,6 +55,8 @@ import {Shot04Testimony as Ep03Shot04Testimony} from './compositions/episode03/s
 import {SHOT_04_DURATION as EP03_SHOT_04_DURATION} from './compositions/episode03/shot04/beats';
 import {Shot05Expert as Ep03Shot05Expert} from './compositions/episode03/shot05/Shot05Expert';
 import {SHOT_05_DURATION as EP03_SHOT_05_DURATION} from './compositions/episode03/shot05/beats';
+import {Shot06Fallout as Ep03Shot06Fallout} from './compositions/episode03/shot06/Shot06Fallout';
+import {SHOT_06_DURATION as EP03_SHOT_06_DURATION} from './compositions/episode03/shot06/beats';
 import {Ep01CoverCard} from './compositions/covers/Ep01CoverCard';
 
 export const Root: React.FC = () => {
@@ -256,6 +258,14 @@ export const Root: React.FC = () => {
 				id="Ep03Shot05Expert"
 				component={Ep03Shot05Expert}
 				durationInFrames={EP03_SHOT_05_DURATION}
+				fps={OPENING_MONTAGE_FPS}
+				width={OPENING_MONTAGE_WIDTH}
+				height={OPENING_MONTAGE_HEIGHT}
+			/>
+			<Composition
+				id="Ep03Shot06Fallout"
+				component={Ep03Shot06Fallout}
+				durationInFrames={EP03_SHOT_06_DURATION}
 				fps={OPENING_MONTAGE_FPS}
 				width={OPENING_MONTAGE_WIDTH}
 				height={OPENING_MONTAGE_HEIGHT}
