@@ -108,6 +108,26 @@ export const Shot04Testimony: React.FC = () => {
 				/>
 			</Sequence>
 
+			{/*
+			 * All three clips carry the generator's own watermark, baked into the
+			 * pixels at the same corner every time: measured at x 873-942,
+			 * y 1724-1781 of this 1080x1920 frame. That is inside the zone
+			 * SAFE_BOTTOM_Y already exists to describe as covered by the
+			 * platform's own UI on delivery, so it is likely invisible where
+			 * this actually gets watched — but it is plainly visible in the raw
+			 * file, which is what gets reviewed here. The corner is
+			 * consistently the desk or laptop lid throughout all three clips
+			 * (checked before relying on it, not assumed), so a soft dark fade
+			 * anchored there blends rather than reading as an obvious patch.
+			 */}
+			<AbsoluteFill
+				style={{
+					background:
+						'radial-gradient(circle at 84% 91%, rgba(8,6,4,0.92) 0%, rgba(8,6,4,0.6) 45%, transparent 75%)',
+					pointerEvents: 'none',
+				}}
+			/>
+
 			{/* The page from Shot 2, frozen on its last frame and torn apart. */}
 			{tear < 1 ? (
 				<PaperTear progress={tearProgress} at={46} lean={26} seed={9}>
