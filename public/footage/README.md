@@ -524,18 +524,19 @@ to whatever actually arrives the same way those did.
 > fifties — DR. NAGESH RAMAMURTHY — seated in a small office. Neat
 > side-parted grey hair, rimless glasses, a cream short-sleeved shirt.
 > Behind him a bookshelf of identical unlabelled binders on the left, and on
-> the right a whiteboard busy with a full academic's worth of hand-drawn
-> clutter: a rough bar graph with several unlabeled rising bars, a small
-> line chart trending nowhere in particular, an arrow running from
-> "ON-TIME RENT" to "NO 2AM CALLS", a few scribbled words and phrases
-> tucked into the corners ("BASELINE", "CONTROL GROUP?", "FOLLOW-UP"), and
-> off to one side a small doodle of a paintbrush. None of it should read as
-> logically connected to anything else on the board, or to anything he is
-> saying. The board is purely background set dressing, visible but never
-> the focus: it sits there, static, for the entire clip, and the shot never
-> moves toward it, zooms into it, or refocuses onto it at any point — it is
-> office clutter behind him, not a prop the camera visits. Lit by an
-> overhead fluorescent tube and a desk lamp, even and slightly green.
+> the right a whiteboard covered in idle doodles rather than anything that
+> looks like real data: a wobbly bar chart with a few uneven, unlabeled
+> bars, a squiggly line doodled across the board for no reason, an arrow
+> running from "ON-TIME RENT" to "NO 2AM CALLS", a few unrelated words
+> scribbled in the corners as though jotted down mid-thought ("LUNCH?",
+> "CALL BACK", "LEFTOVER PAINT"), and off to one side a small doodle of a
+> paintbrush. Everything on the board reads as a bored doodle, never as a
+> chart of real figures or a real study — nothing on it should look like
+> genuine research or data of any kind. It is purely background office
+> clutter, visible but never the focus: it sits there, static, for the
+> entire clip, and the shot never moves toward it, zooms into it, or
+> refocuses onto it at any point. Lit by an overhead fluorescent tube and a
+> desk lamp, even and slightly green.
 >
 > Framing is straight-on, chest up, and completely static throughout — no
 > handheld sway, no drift, no movement at all, the way a formal sit-down
