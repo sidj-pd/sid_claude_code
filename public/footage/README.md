@@ -499,3 +499,151 @@ and derive `src/compositions/episode03/shot04/beats.ts` from the real
 timings, the same as every other shot in this series — the checklist ticks,
 the chyron-in point, and the audio-dropout window on "I don't know what to do
 with it now" are all real cues to hit, not decoration to place by eye.
+
+
+## Shot 5 — the expert, six clips
+
+The same Dr. Nagesh Ramamurthy from Episodes 01 and 02 — same actor, same
+office, same continuity the last two episodes established; only the
+whiteboard content and the acronym change. No correspondent question this
+time: the script's own dialogue starts on an em-dash, mid-sentence, so the
+cut lands straight on him already talking — no off-screen line needed to
+justify it.
+
+Same office, same wardrobe, same lighting across every clip below.
+
+**Six clips**, matching the script's own beats. Say the word if you would
+rather generate them as fewer, longer takes and let a real pause fall
+wherever the model puts one — both previous episodes' expert shots landed
+with a different split than asked for, and that was fine; this shot adapts
+to whatever actually arrives the same way those did.
+
+### `ep03-expert-1.mp4` — the diagnosis (~4s)
+
+> A photorealistic vertical video, 9:16, of an Indian man in his late
+> fifties — DR. NAGESH RAMAMURTHY — seated in a small office. Neat
+> side-parted grey hair, rimless glasses, a cream short-sleeved shirt.
+> Behind him a bookshelf of identical unlabelled binders on the left, and on
+> the right a whiteboard with a few hand-drawn marks: an arrow from
+> "ON-TIME RENT" to "NO 2AM CALLS", and off to one side a small doodle of a
+> paintbrush, connected to nothing. Nothing on the board should read as
+> logically connected — that disconnect is the whole joke of a cutaway that
+> punches into it later. Lit by an overhead fluorescent tube and a desk
+> lamp, even and slightly green.
+>
+> Framing is straight-on, chest up, still — a fixed camera on a tripod, not
+> a propped phone. Cleaner and better exposed than a video call: no shallow
+> focus, no grade, no camera movement.
+>
+> He speaks these words, and only these words, starting already mid-sentence
+> — the dash is not punctuation to skip, it is the performance: he is picked
+> up partway through a thought that started before the camera did:
+> "—this is a textbook case of F.A.Q. Syndrome. Full Amount, Questions-free."
+>
+> Total academic confidence, unhurried, faintly pleased with himself, one
+> small precise gesture per sentence, hands otherwise folded. He never
+> smiles at his own material and never signals that any of it is absurd —
+> that he is completely wrong is for the audience to notice, not for him to
+> hint at. No performed accent, no comic timing, no mugging.
+
+### `ep03-expert-2.mp4` — the reflex (~9s)
+
+Same framing, wardrobe, office and light as the previous clip — a continuous
+interview, cut for time.
+
+> A photorealistic vertical video, 9:16, of the same Indian man in his late
+> fifties — DR. NAGESH RAMAMURTHY — in the same small office: neat
+> side-parted grey hair, rimless glasses, cream short-sleeved shirt, binder
+> shelf left, whiteboard with the "ON-TIME RENT" arrow and paintbrush doodle
+> right, fluorescent-and-desk-lamp light. Same fixed tripod framing, chest
+> up, still — no camera movement.
+>
+> He speaks these words, and only these words:
+> "What we're seeing is a rare psychological reflex: when a tenant causes
+> zero disturbances for the full lease term, some landlords experience a
+> kind of involuntary... gratitude response."
+>
+> One continuous take. The colon and the ellipsis are real pauses inside it
+> — the second one longer and slightly wondering, as though he is choosing
+> the term carefully rather than reciting it. Same total academic
+> confidence as the previous clip, no smiling, no hint that any of it is
+> absurd.
+
+### `ep03-expert-3.mp4` — the citation (~4s)
+
+Same framing, wardrobe, office and light.
+
+> A photorealistic vertical video, 9:16, of the same Indian man in his late
+> fifties — DR. NAGESH RAMAMURTHY — same office, same wardrobe, same
+> whiteboard and lighting as the previous two clips. Same fixed tripod
+> framing, chest up, still.
+>
+> He speaks these words, and only these words:
+> "It's been observed maybe four, five times in recorded history."
+>
+> Flat and citational, the way a real number would land — the smallest
+> possible pause before "four, five", as though genuinely recalling a
+> figure rather than inventing one on the spot. Same academic confidence, no
+> smiling.
+
+### `ep03-expert-4.mp4` — the early signs (~8s)
+
+Same framing, wardrobe, office and light.
+
+> A photorealistic vertical video, 9:16, of the same Indian man in his late
+> fifties — DR. NAGESH RAMAMURTHY — same office, same wardrobe, same
+> whiteboard and lighting as the previous three clips. Same fixed tripod
+> framing, chest up, still.
+>
+> He speaks these words, and only these words:
+> "Early signs are subtle — a landlord not raising rent by 20% at renewal,
+> replying to a maintenance request within the week."
+>
+> The dash is a real beat. The two examples that follow it are listed
+> evenly, neither treated as more remarkable than the other to him. Same
+> academic confidence, no smiling.
+
+### `ep03-expert-5.mp4` — the progression (~5s)
+
+Same framing, wardrobe, office and light.
+
+> A photorealistic vertical video, 9:16, of the same Indian man in his late
+> fifties — DR. NAGESH RAMAMURTHY — same office, same wardrobe, same
+> whiteboard and lighting as the previous four clips. Same fixed tripod
+> framing, chest up, still.
+>
+> He speaks these words, and only these words:
+> "Left unchecked, it can progress to this: full deposit, same day, no
+> fuss."
+>
+> "This" gets the tiniest lift, as though gesturing at a slide that is not
+> actually there. Same academic confidence, no smiling.
+
+### `ep03-expert-6.mp4` — the kicker (~5s)
+
+Same framing, wardrobe, office and light. Cut in as the last clip of the
+interview.
+
+> A photorealistic vertical video, 9:16, of the same Indian man in his late
+> fifties — DR. NAGESH RAMAMURTHY — same office, same wardrobe, same
+> whiteboard and lighting as the previous five clips. Same fixed tripod
+> framing, chest up.
+>
+> He leans slightly toward the camera and speaks these words, and only
+> these words:
+> "Frankly, we're lucky he didn't offer to repaint it himself."
+>
+> Completely sincere — the same device both previous episodes' expert shots
+> used for their own kicker line: he delivers it as the single most
+> reasonable sentence he has said all interview, with no wink, no smile, no
+> pause for effect beyond the lean itself.
+
+**When these land:** measure each with `scripts/measure-vo.py` against its
+extracted audio track, transcribe with `scripts/transcribe.py` first if
+which-clip-is-which is not obvious by ear (Episode 02's landed
+indistinguishable by duration and had to be identified this way), and derive
+`src/compositions/episode03/shot05/beats.ts` from the real timings. The
+whiteboard punch-in crop (`WHITEBOARD_CROP` in that file, once it exists)
+also wants re-measuring against the real clip rather than assumed to match
+Episode 02's numbers — the board sits in roughly the same part of the frame
+by construction, but "roughly" is not "identically."
