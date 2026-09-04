@@ -279,6 +279,12 @@ export const Shot05Expert: React.FC = () => {
 							age={frame - FINDINGS_HEADER_IN}
 							fontSize={30}
 							rotate={-1.5}
+							// Episode 02's version of this stamp sat over darker
+							// footage. Here it lands on a pale wall and a pale
+							// shirt, where red outline type on transparent was
+							// very nearly invisible — so it gets the same cream
+							// plate the chits below it have.
+							style={{background: '#efe4c8'}}
 						/>
 					</div>
 					{FINDINGS.map((f, i) => (
