@@ -550,3 +550,68 @@ them, so it cannot be baked into either figure.
 > painted onto the backdrop. No deckle edge, no torn-page border, no frame, no
 > mount, no table or wood grain. Nothing touches the edge of the frame. No text
 > anywhere in the image.
+
+---
+
+# Episode 03 — Shot 6, "Institutional Fallout"
+
+Two clippings, same rules as Episode 02's: no readable headline in the art
+(`NewsHeadline` sets the headline and quote in code so the copy stays exactly
+on the script's wording and can animate), clear space across the top third
+for that code-set type to sit in, a roughly landscape photo because two
+headlines have to share a 9:16 frame, and a flat even backdrop with no wood,
+no hands and no shadows.
+
+These cannot be reused from Episodes 01 or 02. Each clipping carries a real
+press photo inside it — Episode 02's shows office managers in lanyards,
+Episode 01's shows auto drivers — and a landlords'-association story running
+under a photo of office managers reads as a mistake rather than as a joke.
+
+**When they land:** they crop from the SOURCE jpg rather than the keyed PNG,
+like Episode 02's — a clipping never needs alpha, since `NewsHeadline` shows
+it in a box with `overflow: hidden`. Add each to `CROPS` in
+`scripts/crop-newspaper-clippings.mjs` with `fromSource: true` and a measured
+photo band, then register in `src/assets/cutouts.tsx`.
+
+## `newspaper-clip-landlords.jpg`
+
+> A photograph of a single torn clipping from an old newspaper, lying flat and
+> square-on. The paper is aged to a yellowish cream, softly foxed, with one
+> ragged torn edge down the right side and small tears at the corners.
+>
+> Across the top third the paper is EMPTY — no headline, no display type, just
+> blank newsprint with a couple of faint horizontal rules. Below that sits a
+> single black-and-white press photograph, roughly landscape, of a group of
+> Indian men in their fifties and sixties standing together on the steps of a
+> government building — plain shirts and a couple of sober jackets, a document
+> folder under one arm, mid-discussion, looking organised and mildly aggrieved.
+> The look of a property owners' delegation that has just handed in a letter.
+> Under the photo, three narrow columns of small newspaper body text in
+> unreadable greeked latin filler, slightly blurred and broken as old newsprint
+> is.
+>
+> The clipping lies on a plain flat even surface with clear margin all round —
+> cream is fine, since these are cropped from the source rather than keyed. No
+> wood grain, no desk, no hands, no drop shadow, no cast shadow. Nothing touches
+> the edge of the frame. No legible headline text anywhere in the image.
+
+## `newspaper-clip-tenantclaim.jpg`
+
+> A photograph of a single torn clipping from an old newspaper, lying flat and
+> square-on. The paper is aged to a yellowish cream, softly foxed, with one
+> ragged torn edge down the left side and small tears at the corners.
+>
+> Across the top third the paper is EMPTY — no headline, no display type, just
+> blank newsprint with a couple of faint horizontal rules. Below that sits a
+> single black-and-white press photograph, roughly landscape, of one Indian man
+> in his late twenties photographed the way a local paper photographs a
+> complainant: seated at a plain table, holding a folded sheet of paper up
+> towards the camera, looking directly at the lens with a flat, wronged
+> expression. Plain t-shirt, ordinary room behind him. Under the photo, three
+> narrow columns of small newspaper body text in unreadable greeked latin
+> filler, slightly blurred and broken as old newsprint is.
+>
+> The clipping lies on a plain flat even surface with clear margin all round —
+> cream is fine, since these are cropped from the source rather than keyed. No
+> wood grain, no desk, no hands, no drop shadow, no cast shadow. Nothing touches
+> the edge of the frame. No legible headline text anywhere in the image.

@@ -663,3 +663,77 @@ whiteboard punch-in crop (`WHITEBOARD_CROP` in that file, once it exists)
 also wants re-measuring against the real clip rather than assumed to match
 Episode 02's numbers — the board sits in roughly the same part of the frame
 by construction, but "roughly" is not "identically."
+
+## Shot 6 — the witness again, two clips
+
+The same man from Shot 4, same room, same wardrobe, same framing — a later
+part of the same call, cut back to after the fallout. He is more visibly
+shaken this time, which is the only thing that changes.
+
+Split into two because his outburst runs long for one generation and has a
+natural break in the middle. If the model gives you both halves comfortably
+in one take, one clip is fine too — this shot adapts to what arrives, same
+as Shots 4 and 5 did.
+
+**Three things learned the hard way on Shot 5's prompts, applied here:** no
+camera equipment is named (a "fixed camera on a tripod" got rendered as an
+actual tripod standing in the room); nothing describes what the edit will do
+later (a note about a cutaway "punching in" got rendered as a zoom inside the
+take); and the eyeline is stated explicitly rather than left to the model.
+
+### `ep03-witness-4.mp4` — the outburst (~7s)
+
+> A photorealistic vertical video, 9:16, of an Indian man in his late
+> twenties on a video call from home. Plain t-shirt, sitting at a small desk
+> or table against a plain wall, ordinary domestic evening light from one
+> side. Head and shoulders in the upper half of the frame; the lower half
+> stays plain torso and desk, and nothing important sits in the bottom fifth.
+>
+> Framed as a laptop webcam view, so slightly low and level with his eyes,
+> and completely static throughout — no handheld sway, no drift, no movement
+> at all. The look is a compressed, low-bitrate video call: soft focus,
+> visible sensor noise in the shadows, mild blocking around fast edges when
+> he moves, no colour grading, no shallow depth of field, no music.
+>
+> He looks directly into the camera the entire time, steady eye contact,
+> addressing the interviewer.
+>
+> He speaks these words, and only these words:
+> "He gets compensation for being nice? I had a whole speech prepared.
+> Rehearsed. Ready."
+>
+> A scripted mockumentary interview for a comedy series, played straight.
+> More visibly shaken than earlier in the call — still flat and deadpan
+> rather than shouting, but the flatness has cracked slightly: the first
+> question comes out genuinely incredulous, and "Rehearsed. Ready." lands as
+> two clipped separate words with a real stop between them, like items of
+> evidence. No performed accent, no comic timing, no mugging, no smiling at
+> the camera.
+
+### `ep03-witness-5.mp4` — the question (~6s)
+
+Cut in as a hard jump cut after the first — same framing, same light, so the
+edit reads as one call.
+
+> A photorealistic vertical video, 9:16, of the same Indian man in his late
+> twenties on a video call from home — identical framing, wardrobe, lighting
+> and background to the previous clip. Laptop webcam view, slightly low and
+> level with his eyes, completely static, no movement at all. Head and
+> shoulders in the upper half; plain torso and desk below. Same compressed,
+> low-bitrate video-call look: soft focus, sensor noise, no grade, no music.
+>
+> He looks directly into the camera throughout, steady eye contact.
+>
+> He speaks these words, and only these words:
+> "I never got to use it. Do you know what that does to a person?"
+>
+> Same fictional talking-head character, played straight. Quiet and
+> genuinely aggrieved rather than angry — he believes he is the injured
+> party, and the closing question is asked sincerely, not rhetorically, as
+> though he expects an answer. A small pause before it. No performed accent,
+> no comic timing, no mugging, no smiling at the camera.
+
+**When these land:** measure each with `scripts/measure-vo.py` against its
+extracted audio track and derive `src/compositions/episode03/shot06/beats.ts`
+from the real timings — the tear-open and tear-closed points, the chyron, and
+both headline stamps all key off where his speech actually starts and stops.
