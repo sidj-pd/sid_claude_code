@@ -543,7 +543,9 @@ to whatever actually arrives the same way those did.
 >
 > A scripted mockumentary interview for a comedy series: a fictional
 > talking-head character, played straight, not a real professional and not
-> real claims. Total academic confidence, unhurried, faintly pleased with
+> real claims. He looks directly into the camera the entire time, steady
+> eye contact, addressing the interviewer rather than glancing away or down
+> at notes. Total academic confidence, unhurried, faintly pleased with
 > himself, one small precise gesture per sentence, hands otherwise folded.
 > He never smiles at his own material. No performed accent, no comic
 > timing, no mugging.
@@ -568,8 +570,8 @@ interview, cut for time.
 > One continuous take. The colon and the ellipsis are real pauses inside it
 > — the second one longer and slightly wondering, as though he is choosing
 > the term carefully rather than reciting it. Same fictional talking-head
-> character as the previous clip, same total academic confidence, no
-> smiling.
+> character as the previous clip, same steady direct eye contact with the
+> camera throughout, same total academic confidence, no smiling.
 
 ### `ep03-expert-3.mp4` — the citation (~4s)
 
@@ -586,7 +588,8 @@ Same framing, wardrobe, office and light.
 > Flat and citational, the way a real number would land — the smallest
 > possible pause before "four, five", as though genuinely recalling a
 > figure rather than inventing one on the spot. Same fictional talking-head
-> character, same academic confidence, no smiling.
+> character, same steady direct eye contact with the camera, same academic
+> confidence, no smiling.
 
 ### `ep03-expert-4.mp4` — the early signs (~8s)
 
@@ -603,7 +606,8 @@ Same framing, wardrobe, office and light.
 >
 > The dash is a real beat. The two examples that follow it are listed
 > evenly, neither treated as more remarkable than the other to him. Same
-> fictional talking-head character, same academic confidence, no smiling.
+> fictional talking-head character, same steady direct eye contact with the
+> camera, same academic confidence, no smiling.
 
 ### `ep03-expert-5.mp4` — the progression (~5s)
 
@@ -619,8 +623,8 @@ Same framing, wardrobe, office and light.
 > fuss."
 >
 > "This" gets the tiniest lift, as though gesturing at a slide that is not
-> actually there. Same fictional talking-head character, same academic
-> confidence, no smiling.
+> actually there. Same fictional talking-head character, same steady direct
+> eye contact with the camera, same academic confidence, no smiling.
 
 ### `ep03-expert-6.mp4` — the kicker (~5s)
 
@@ -636,11 +640,12 @@ interview.
 > these words:
 > "Frankly, we're lucky he didn't offer to repaint it himself."
 >
-> Same fictional talking-head character. Completely sincere — the same
-> device both previous episodes' expert shots used for their own kicker
-> line: he delivers it as the single most reasonable sentence he has said
-> all interview, with no wink, no smile, no pause for effect beyond the
-> lean itself.
+> Same fictional talking-head character, same steady direct eye contact
+> with the camera even as he leans in. Completely sincere — the same device
+> both previous episodes' expert shots used for their own kicker line: he
+> delivers it as the single most reasonable sentence he has said all
+> interview, with no wink, no smile, no pause for effect beyond the lean
+> itself.
 
 **When these land:** measure each with `scripts/measure-vo.py` against its
 extracted audio track, transcribe with `scripts/transcribe.py` first if
