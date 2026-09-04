@@ -43,12 +43,20 @@ const EXPERT_DESCRIPTION =
 
 /**
  * Where the whiteboard sits in THIS footage, as a fraction of frame — not
- * Episodes 01 and 02's numbers. Measured off ep03-expert-6.mp4's own first
- * frame with a grid overlay and several trial crops (see beats.ts): this
- * board sits further right and needed a tighter zoom before his face cleared
- * out of the frame.
+ * Episodes 01 and 02's numbers, and not a guess: found with a grid overlay
+ * on ep03-expert-6.mp4's own first frame, then five trial crops rendered at
+ * full composition size and looked at.
+ *
+ * Two constraints fight here and 2.2x is where they balance. The source is
+ * 360x640, so the composition already upscales it 3x before any push-in: at
+ * 2.8x (tried first, and rendered) the board became unreadable mush, which
+ * defeats the entire point of a punch-in whose job is to show that his
+ * arrows connect nothing. But a gentler 1.7x leaves him centre-frame, where
+ * the kicker type — right-aligned, and deliberately large — lands across his
+ * face. At 2.2x about x=0.88 the board reads, and he sits far enough left
+ * that only his ear is under the type.
  */
-const WHITEBOARD_CROP = {x: 0.95, y: 0.3, zoom: 2.8};
+const WHITEBOARD_CROP = {x: 0.88, y: 0.26, zoom: 2.2};
 
 /**
  * The term, named on screen the moment he names it. Sits in the clear strip
