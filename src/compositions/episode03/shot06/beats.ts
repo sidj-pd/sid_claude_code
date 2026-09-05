@@ -81,18 +81,22 @@ export const HEADLINE2_STAMP = REV2_DONE + 6;
  * landing on block one, and it is a computable risk rather than a matter of
  * taste: a block's height is
  *   headlineLines*(w*0.098) + w*0.02 + quoteLines*(w*0.0525) + w*0.04 + clipHeight
- * Block one is 701 tall at width 800 (two headline lines, and its quote
- * wraps to two at 47 characters); block two is 556 at width 660. Block one's
- * static foot lands at 781 and block two's top at 852, so there is ~49px of
- * clear paper between them even allowing for the landing punch, and block
- * two's own foot reaches 1430 — inside the 1536 text limit (§15).
+ * Block one is 694 tall at width 620 (two headline lines, and its quote wraps
+ * to two at 47 characters); block two is 607 at width 560. Block one's static
+ * foot lands at 764 and block two's top at 835, so there is ~47px of clear
+ * paper between them even allowing for the landing punch, and block two's own
+ * foot reaches 1466 — inside the 1536 text limit (§15).
  *
- * These are larger than the first pass, which left 270px of dead paper below
- * the second headline on a page that had nothing else on it. The clip heights
- * are set to the crops' real aspects (1.671 and 1.613) rather than picked, so
- * object-fit: cover has nothing to trim and the whole press photo shows.
+ * The blocks are NARROWER than Episode 02's 800/600 on purpose. The clippings
+ * now carry their body-text columns as well as the photo, because cropped to
+ * the photo alone they stopped reading as newsprint and looked like plain
+ * photographs — which makes each clipping much taller (aspects 1.134 and
+ * 1.110 rather than the previous 1.671 and 1.613), and two tall clippings
+ * only share a 9:16 page if the blocks give up some width. Clip heights are
+ * still set from the crops' real aspects, so object-fit: cover has nothing to
+ * trim and no part of either clipping is cut off.
  */
-export const BLOCK1 = {left: 104, top: 80, width: 800, clipHeight: 412, rotate: -1.5};
-export const BLOCK2 = {left: 150, top: 852, width: 660, clipHeight: 352, rotate: 2};
+export const BLOCK1 = {left: 150, top: 70, width: 620, clipHeight: 470, rotate: -1.5};
+export const BLOCK2 = {left: 230, top: 835, width: 560, clipHeight: 434, rotate: 2};
 
 export const SHOT_06_DURATION = HEADLINE2_STAMP + 78;

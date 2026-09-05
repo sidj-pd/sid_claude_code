@@ -44,19 +44,29 @@ const CROPS = {
 	'newspaper-clip-ownclaim': {top: 431, height: 549, fromSource: true},
 	'newspaper-clip-hrcommittee': {top: 403, height: 611, fromSource: true},
 	/*
-	 * Episode 03. Both cropped tight to the photo band and nothing else, which
-	 * is what keeps the code-set headline visibly separate from the picture:
-	 * a crop that also carries the clipping's own empty top third puts a band
-	 * of blank newsprint between the headline and the photo, and one that
-	 * reaches the body text puts small print under it. Bands found by
-	 * rendering candidate crops and looking at them — the row-scan heuristics
-	 * this file's notes describe kept locking onto the grey backdrop instead.
+	 * Episode 03. These start below the clipping's own empty top third — that
+	 * blank band is what the code-set headline replaces, and carrying it into
+	 * the box would put a strip of empty newsprint between the headline and
+	 * the picture — and run down through the photo, its caption line, and a
+	 * good depth of the body-text columns.
+	 *
+	 * Cropping to the photo ALONE was the first attempt and was wrong: with
+	 * no caption and no columns under it the clipping stopped reading as
+	 * newsprint at all and just looked like a photograph with a headline
+	 * above it. The body text is the thing that says "newspaper", so it is
+	 * in the crop even though it costs height — which is why Shot 6's
+	 * headline blocks are narrower than Episode 02's, to fit two tall
+	 * clippings in one 9:16 page.
+	 *
+	 * Bands found by rendering candidate crops and looking at them — the
+	 * row-scan heuristics this file's notes describe kept locking onto the
+	 * grey backdrop instead.
 	 *
 	 * The generator's watermark sits low-right in both sources, well below
 	 * these bands, so the crop excludes it for free.
 	 */
-	'newspaper-clip-landlords': {left: 60, top: 510, width: 635, height: 380, fromSource: true},
-	'newspaper-clip-tenantclaim': {left: 110, top: 515, width: 605, height: 375, fromSource: true},
+	'newspaper-clip-landlords': {left: 60, top: 500, width: 635, height: 560, fromSource: true},
+	'newspaper-clip-tenantclaim': {left: 110, top: 505, width: 605, height: 545, fromSource: true},
 };
 
 const main = async () => {
