@@ -48,11 +48,23 @@ const LANDLORD_W = Math.round(LANDLORD_H * 0.516);
 const LANDLORD_LEFT = 380;
 const LANDLORD_TOP = WALL_BOTTOM + 320 - LANDLORD_H;
 
-/** The door: measured ratio 0.450, standing on the floor at frame right. */
-const DOOR_H = 900;
+/**
+ * The door: measured ratio 0.450, standing on the floor at frame right.
+ *
+ * Smaller and hinged on its RIGHT edge, both learned from the first render.
+ * At 900 tall it filled half the frame, and hinged on the left it swung its
+ * top-left corner across his head as it closed — the whole thing read as a
+ * board falling on him rather than a door being pulled shut. Pivoting on the
+ * right means the ajar position leans away from him, to the frame edge, and
+ * closing sweeps it upright into the doorway. Its closed left edge sits at
+ * 690, clear of his head at 620.
+ */
+const DOOR_H = 820;
 const DOOR_W = Math.round(DOOR_H * 0.45);
-const DOOR_LEFT = 720;
-const DOOR_TOP = WALL_BOTTOM + 335 - DOOR_H;
+const DOOR_LEFT = 690;
+const DOOR_TOP = WALL_BOTTOM + 330 - DOOR_H;
+/** Ajar, leaning to the frame's edge; 0 is shut. */
+const DOOR_AJAR_DEG = 16;
 
 /**
  * Shot 9 — Full Circle.
@@ -90,7 +102,7 @@ export const Shot09FullCircle: React.FC = () => {
 		frame < DOOR_CLOSES
 			? 0
 			: interpolate(Math.min(doorStep * 2, DOOR_FRAMES), [0, DOOR_FRAMES], [0, 1], CLAMP);
-	const doorAngle = interpolate(doorShut, [0, 1], [-19, 0]);
+	const doorAngle = interpolate(doorShut, [0, 1], [DOOR_AJAR_DEG, 0]);
 
 	return (
 		<AbsoluteFill style={{backgroundColor: '#0c0e11'}}>
@@ -180,7 +192,7 @@ export const Shot09FullCircle: React.FC = () => {
 							top: DOOR_TOP,
 							zIndex: 40,
 							transform: `rotate(${doorAngle}deg)`,
-							transformOrigin: 'left bottom',
+							transformOrigin: 'right bottom',
 						}}
 					>
 						<PaperCutout
