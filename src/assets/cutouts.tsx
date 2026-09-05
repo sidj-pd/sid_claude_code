@@ -122,7 +122,9 @@ export type CutoutAsset =
 	| 'landlord-offer'
 	| 'cash-stack'
 	| 'newspaper-clip-landlords'
-	| 'newspaper-clip-tenantclaim';
+	| 'newspaper-clip-tenantclaim'
+	| 'flat-door'
+	| 'landlord-leaving';
 
 /**
  * Episode 03 — the empty flat. The wall and its three defects are separate
@@ -143,6 +145,8 @@ export const LandlordOffer = makeCutout('cutouts-alpha/landlord-offer.png');
 export const CashStack = makeCutout('cutouts-alpha/cash-stack.png');
 export const NewspaperClipLandlords = makeCutout('cutouts-alpha/newspaper-clip-landlords.png');
 export const NewspaperClipTenantClaim = makeCutout('cutouts-alpha/newspaper-clip-tenantclaim.png');
+export const FlatDoor = makeCutout('cutouts-alpha/flat-door.png');
+export const LandlordLeaving = makeCutout('cutouts-alpha/landlord-leaving.png');
 
 export const CUTOUT_REGISTRY: Record<CutoutAsset, React.FC> = {
 	'vidhana-soudha': VidhanaSoudha,
@@ -187,4 +191,6 @@ export const CUTOUT_REGISTRY: Record<CutoutAsset, React.FC> = {
 	'cash-stack': CashStack,
 	'newspaper-clip-landlords': NewspaperClipLandlords,
 	'newspaper-clip-tenantclaim': NewspaperClipTenantClaim,
+	'flat-door': FlatDoor,
+	'landlord-leaving': LandlordLeaving,
 };

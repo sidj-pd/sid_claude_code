@@ -210,6 +210,19 @@ const OVERRIDES = {
 	// the garment.
 	'landlord-offer': {trim: true, tolerance: 42, outline: {width: 8}},
 	'cash-stack': {trim: true},
+	// Episode 03's closing beat. The door is a plain grey-brown slab on cream,
+	// far enough off it to key cleanly.
+	'flat-door': {trim: true},
+	/*
+	 * This kurta is NOT the same putty as landlord-offer's, despite the same
+	 * prompt wording — it came back much paler. Reusing that asset's
+	 * tolerance of 42 shredded it: measured, the garment's own histogram
+	 * starts at 20 and its bulk sits at 25-35 off the backdrop, so 42 was
+	 * eating the whole back of the kurta and the render showed the field
+	 * through him. 18 sits under the garment's floor and is still far more
+	 * than a flat cream backdrop needs.
+	 */
+	'landlord-leaving': {trim: true, tolerance: 18},
 	'traffic-signal': {inset: 0.1},
 	// Its windscreen is a large enclosed cream area that IS artwork (glass),
 	// not backdrop showing through, so the enclosed-hole pass must be off or
