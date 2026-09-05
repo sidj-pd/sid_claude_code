@@ -197,6 +197,18 @@
       "speaker": "narrator",
       "text": "The Bangalore Landlords' Association has formally petitioned the housing ministry, demanding compensation for members affected by F.A.Q. Syndrome.",
       "delivery": "deadpan, escalating bureaucratic absurdity — read exactly like a news brief, no irony in the voice at all. Slight emphasis of process on \"formally petitioned\", and \"F.A.Q. Syndrome\" landing completely flat, like an official term that has always existed. The same register ep01-shot08-union is delivered in"
+    },
+    {
+      "id": "ep03-shot08-committee",
+      "speaker": "narrator",
+      "text": "The housing ministry has since formed a committee to study the matter further. The first meeting was rescheduled — due to a site visit for a new project launch.",
+      "delivery": "dry and quick, a news brief being read off the wire with no time left in the bulletin. The first sentence entirely procedural; a small beat at the dash, then the reason for the rescheduling stated as flatly as the rest, with no lift on \"new project launch\" at all — the absurdity is in the fact, not the delivery. Same register as ep01-shot10-committee"
+    },
+    {
+      "id": "ep03-shot09-final",
+      "speaker": "narrator",
+      "text": "As for the landlord himself — already looking for the next tenant. Deposit policy... unchanged. For now.",
+      "delivery": "the closing line, and quieter and more ominous than the deadpan the rest of the episode is read in. A real beat at the dash. A genuine pause on the ellipsis before \"unchanged\", then \"For now\" almost thrown away — not sinister, just left hanging. The same way ep01-shot11-final and ep02-shot09-final close their episodes"
     }
   ]
 }

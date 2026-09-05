@@ -615,3 +615,68 @@ photo band, then register in `src/assets/cutouts.tsx`.
 > cream is fine, since these are cropped from the source rather than keyed. No
 > wood grain, no desk, no hands, no drop shadow, no cast shadow. Nothing touches
 > the edge of the frame. No legible headline text anywhere in the image.
+
+---
+
+# Episode 03 — Shot 9, "Full-Circle Close"
+
+Shot 9 restages Shot 1's opening image with the flat now empty, so the wall,
+crack, poster patch, stain, floor and broken tile are all reused as they are.
+Two things do not exist yet.
+
+The landlord cannot be reused: `landlord-offer` is him mid-offer with his
+palm out and the cash already in flight, which is the wrong posture for a man
+who has already handed it over and is leaving. And the door has to be its own
+piece rather than part of his artwork, because it swings shut on camera —
+the standing rule since Episode 01's meter flag is that nothing which has to
+move independently may be baked in.
+
+## `flat-door.jpg`
+
+> Hand-cut paper collage illustration in the style of a printed mid-century
+> explainer: layered construction and craft paper, matte and slightly
+> desaturated, with visible scissor-cut and torn edges and a fine halftone
+> grain over the whole piece. Flatly lit from above — no rendering, no gloss,
+> no gradient lighting.
+>
+> Subject: a single plain interior door, seen straight on and filling a tall
+> narrow portrait shape roughly two and a half times taller than it is wide.
+> Cut from a dull grey-brown paper clearly darker than cream, with a slightly
+> darker edge strip down one long side and a small pale grey circular
+> doorknob about two thirds of the way up. Cheap and flush — no panels, no
+> mouldings, no glass, no number, no letterbox. Just the door slab itself:
+> NO door frame, NO surrounding wall, NO floor, nothing behind or around it.
+>
+> Centred on a plain flat cream craft-paper backdrop running to all four
+> edges with clear empty margin all round. No drop shadow, no cast shadow, no
+> shading painted onto the backdrop. No deckle edge, no torn-page border, no
+> frame, no mount, no table or wood grain. Nothing touches the edge of the
+> frame. No text anywhere in the image.
+
+## `landlord-leaving.jpg`
+
+> Hand-cut paper collage illustration in the style of a printed mid-century
+> explainer: layered construction and craft paper, matte and slightly
+> desaturated, with visible scissor-cut and torn edges and a fine halftone
+> grain over the whole piece. Flatly lit from above — no rendering, no gloss,
+> no gradient lighting.
+>
+> Subject: the same heavy-set Indian man in his fifties as before, standing
+> FULL LENGTH in a tall narrow portrait shape about two and a half times
+> taller than it is wide, but now seen from BEHIND and slightly to his right,
+> three-quarters turned away from the viewer so only the edge of his cheek
+> and moustache are visible. He wears the same plain cream-white kurta over a
+> comfortable belly — use a warm putty and oatmeal paper so it stays clearly
+> darker than the backdrop — with dark trousers and sandals, thinning grey
+> hair. One arm is raised and extended forward at about shoulder height, the
+> hand open and turned slightly down as though resting on something just in
+> front of him and about to push it. That hand is COMPLETELY EMPTY — no
+> money, no paper, no keys, no object of any kind — and there is nothing in
+> front of him: no door, no wall, no handle, nothing for him to touch. His
+> other arm hangs at his side.
+>
+> Centred on a plain flat cream craft-paper backdrop running to all four
+> edges with clear empty margin all round. No drop shadow, no cast shadow, no
+> shading painted onto the backdrop. No deckle edge, no torn-page border, no
+> frame, no mount, no table or wood grain. Nothing touches the edge of the
+> frame. No text anywhere in the image.
