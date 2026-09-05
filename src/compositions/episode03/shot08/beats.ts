@@ -30,17 +30,23 @@ export const VO_STARTS = REV_DONE + 6;
 export const VO_FRAMES = Math.round(9.68 * S);
 
 /**
- * Reusing Episode 01's committee clipping, as agreed — an empty boardroom with
- * a clock on the wall, which is the joke for a committee whose first meeting
- * has been rescheduled. Its existing crop (768x680, aspect 1.129) already runs
- * photo through body text, so it needs nothing done to it.
+ * Reusing Episode 01's committee photograph, as agreed — an empty boardroom
+ * with a clock on the wall, which is the joke for a committee whose first
+ * meeting has been rescheduled.
  *
- * Block geometry derived the same way Shot 6's is: three headline lines at
- * width 780 is 229, the quote wraps to two at 60 characters (82), plus the
- * component's own margins (16 and 31) and a 594 clipping box set from that
- * 1.129 aspect — 952 in total. At top 430 its foot lands at 1382, clear of
- * the 1536 limit.
+ * It gets its own crop under its own name (newspaper-clip-ministry) rather
+ * than sharing Episode 01's entry, because that crop stops above the
+ * body-text columns and widening it would silently re-frame a delivered
+ * shot. Cropped Episode 03's way — photo through columns — it comes out
+ * portrait at aspect 0.753, which is much taller than Shot 6's clippings and
+ * drives the block narrower again: at width 700 the clipping box is 799
+ * tall, three headline lines are 206, the quote wraps to two at 60
+ * characters (74), plus the component's own margins (14 and 28) — 1121 in
+ * total. At top 190 its foot lands at 1311, clear of the 1536 limit.
+ *
+ * The headline's line breaks are explicit for the same reason: left to wrap
+ * at this width it broke into four lines with "SYNDROME" alone on the last.
  */
-export const BLOCK = {left: 140, top: 430, width: 780, clipHeight: 594, rotate: -1};
+export const BLOCK = {left: 190, top: 190, width: 700, clipHeight: 799, rotate: -1};
 
 export const SHOT_08_DURATION = VO_STARTS + VO_FRAMES + 20;

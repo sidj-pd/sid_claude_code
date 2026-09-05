@@ -222,7 +222,10 @@ const OVERRIDES = {
 	 * through him. 18 sits under the garment's floor and is still far more
 	 * than a flat cream backdrop needs.
 	 */
-	'landlord-leaving': {trim: true, tolerance: 18},
+	// outline, because Shot 1's figures carry one and Shot 9 restages Shot 1.
+	// Forgetting this is a render failure, not a visual one: PaperCutout's
+	// outline prop points at <asset>-outline.png and Remotion 404s on it.
+	'landlord-leaving': {trim: true, tolerance: 18, outline: {width: 8}},
 	'traffic-signal': {inset: 0.1},
 	// Its windscreen is a large enclosed cream area that IS artwork (glass),
 	// not backdrop showing through, so the enclosed-hole pass must be off or

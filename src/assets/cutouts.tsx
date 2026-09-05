@@ -123,6 +123,7 @@ export type CutoutAsset =
 	| 'cash-stack'
 	| 'newspaper-clip-landlords'
 	| 'newspaper-clip-tenantclaim'
+	| 'newspaper-clip-ministry'
 	| 'flat-door'
 	| 'landlord-leaving';
 
@@ -145,6 +146,7 @@ export const LandlordOffer = makeCutout('cutouts-alpha/landlord-offer.png');
 export const CashStack = makeCutout('cutouts-alpha/cash-stack.png');
 export const NewspaperClipLandlords = makeCutout('cutouts-alpha/newspaper-clip-landlords.png');
 export const NewspaperClipTenantClaim = makeCutout('cutouts-alpha/newspaper-clip-tenantclaim.png');
+export const NewspaperClipMinistry = makeCutout('cutouts-alpha/newspaper-clip-ministry.png');
 export const FlatDoor = makeCutout('cutouts-alpha/flat-door.png');
 export const LandlordLeaving = makeCutout('cutouts-alpha/landlord-leaving.png');
 
@@ -191,6 +193,7 @@ export const CUTOUT_REGISTRY: Record<CutoutAsset, React.FC> = {
 	'cash-stack': CashStack,
 	'newspaper-clip-landlords': NewspaperClipLandlords,
 	'newspaper-clip-tenantclaim': NewspaperClipTenantClaim,
+	'newspaper-clip-ministry': NewspaperClipMinistry,
 	'flat-door': FlatDoor,
 	'landlord-leaving': LandlordLeaving,
 };

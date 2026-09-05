@@ -50,10 +50,10 @@ export const Shot08Committee: React.FC = () => {
 					<CollageBackdrop chaos={0.16} />
 					<div style={{position: 'absolute', left: BLOCK.left, top: BLOCK.top}}>
 						<NewsHeadline
-							headline={'HOUSING MINISTRY\nFORMS COMMITTEE\nTO STUDY F.A.Q. SYNDROME'}
+							headline={'HOUSING MINISTRY FORMS\nCOMMITTEE TO STUDY\nF.A.Q. SYNDROME'}
 							quote="MEETING RESCHEDULED DUE TO SITE VISIT FOR NEW PROJECT LAUNCH"
 							quoted={false}
-							clipping="newspaper-clip-committee"
+							clipping="newspaper-clip-ministry"
 							age={frame - HEADLINE_LAND}
 							width={BLOCK.width}
 							clipHeight={BLOCK.clipHeight}

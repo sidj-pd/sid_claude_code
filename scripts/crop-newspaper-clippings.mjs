@@ -67,6 +67,15 @@ const CROPS = {
 	 */
 	'newspaper-clip-landlords': {left: 60, top: 500, width: 635, height: 560, fromSource: true},
 	'newspaper-clip-tenantclaim': {left: 110, top: 505, width: 605, height: 545, fromSource: true},
+	/*
+	 * Shot 8's committee page. The SAME source photograph as Episode 01's
+	 * newspaper-clip-committee, copied under its own name rather than sharing
+	 * that entry: Episode 01's crop is {top: 0, height: 680}, which stops
+	 * before the body-text columns, and widening it would silently re-frame a
+	 * shot that has already been delivered. This one runs photo through
+	 * columns, the shape Episode 03 settled on for every clipping.
+	 */
+	'newspaper-clip-ministry': {left: 40, top: 80, width: 678, height: 900, fromSource: true},
 };
 
 const main = async () => {
