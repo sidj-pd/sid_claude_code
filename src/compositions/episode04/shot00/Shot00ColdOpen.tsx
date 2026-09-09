@@ -21,13 +21,16 @@ const SUBJECT_W = 760;
 const SUBJECT_H = 862;
 
 /**
- * The spotlight. Geometry taken from the reference as a fraction of its frame
- * and multiplied up to 1080x1920 — diameter 0.86 of the frame width, centred
- * at (0.495, 0.520) — so the disc occupies the same share of the screen it
- * does there rather than a share that merely looked similar. Nudged onto him
- * rather than onto the geometric centre.
+ * The spotlight. The reference's disc is 0.86 of its frame width, and that
+ * fraction carried straight over cropped his shoulders and both ends of the
+ * counter — its subject is a line of type, which is much shorter than a man.
+ * So the geometry follows him instead: he spans y 449-1311 and x 160-920, and
+ * 1040 across, centred on his torso, is the smallest disc that holds all of
+ * that with a margin. He must not move or resize across the cut, so the light
+ * is the only thing left to change.
  */
-const DISC_D = 929;
+const DISC_D = 1040;
+const DISC_CY = 920;
 
 export const Shot00ColdOpen: React.FC = () => {
 	const frame = useCurrentFrame();
@@ -42,7 +45,7 @@ export const Shot00ColdOpen: React.FC = () => {
 			{lit ? (
 				<AbsoluteFill
 					style={{
-						background: `radial-gradient(circle ${DISC_D / 2}px at ${SUBJECT_CX}px ${SUBJECT_CY + 60}px, ${PAPER} 0%, ${PAPER} 82%, rgba(242,233,211,0) 100%)`,
+						background: `radial-gradient(circle ${DISC_D / 2}px at ${SUBJECT_CX}px ${DISC_CY}px, ${PAPER} 0%, ${PAPER} 82%, rgba(242,233,211,0) 100%)`,
 					}}
 				/>
 			) : (

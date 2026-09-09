@@ -46,10 +46,18 @@ type Piece = {
 };
 
 /**
- * Order in this array is PLACEMENT order, and it is not arbitrary: the grille
- * and the board go up first because they are the room, then the furniture,
- * then the paper, and the chai glass is nearly last because it is the only
- * thing here a person put down themselves.
+ * Order in this array is PLACEMENT order, and it ALTERNATES BETWEEN THE TOP
+ * AND BOTTOM HALVES of the frame. The obvious order — the room, then the
+ * furniture, then the paper — was built and rendered, and it fills the frame
+ * strictly downwards: for the first second and a half the bottom half is bare
+ * paper, which reads as a shot that has not loaded rather than one that is
+ * being built. Alternating means the pile closes in on him from both ends.
+ * Positions are unchanged, so the built frame is pixel-identical either way;
+ * only the order of arrival differs.
+ *
+ * Within that, the grille and the ledger still go first because they are the
+ * biggest, and the chai glass is last because it is the only thing here a
+ * person put down themselves.
  *
  * The numbers are not eyeballed. `scripts/flatlay-coverage.mjs` rebuilds this
  * exact composite offline and counts how many of the man's pixels are still
@@ -69,18 +77,18 @@ type Piece = {
  */
 const PIECES: Piece[] = [
 	{asset: 'bank-grille', x: 540, y: 250, w: 1160, h: 512, rot: -2},
-	{asset: 'notice-board', x: 830, y: 330, w: 680, h: 500, rot: 5},
-	{asset: 'queue-post', x: 200, y: 240, w: 430, h: 701, rot: -5},
-	{asset: 'steel-almirah', x: 150, y: 700, w: 470, h: 1023, rot: 4},
-	{asset: 'token-display', x: 470, y: 640, w: 760, h: 450, rot: 3},
-	{asset: 'file-tower', x: 930, y: 820, w: 450, h: 1054, rot: 6},
-	{asset: 'rubber-stamp', x: 170, y: 1060, w: 460, h: 303, rot: 12},
-	{asset: 'cash-stack', x: 540, y: 935, w: 520, h: 320, rot: 10},
-	{asset: 'chai-glass', x: 770, y: 1085, w: 390, h: 385, rot: -9},
 	{asset: 'ledger-open', x: 540, y: 1200, w: 980, h: 524, rot: -4},
+	{asset: 'notice-board', x: 830, y: 330, w: 680, h: 500, rot: 5},
 	{asset: 'note-counter', x: 230, y: 1460, w: 580, h: 619, rot: -7},
+	{asset: 'steel-almirah', x: 150, y: 700, w: 470, h: 1023, rot: 4},
 	{asset: 'passbook-stack', x: 860, y: 1620, w: 650, h: 483, rot: -8},
+	{asset: 'token-display', x: 470, y: 640, w: 760, h: 450, rot: 3},
 	{asset: 'form-pile', x: 330, y: 1790, w: 740, h: 497, rot: 9},
+	{asset: 'file-tower', x: 930, y: 820, w: 450, h: 1054, rot: 6},
+	{asset: 'queue-post', x: 200, y: 240, w: 430, h: 701, rot: -5},
+	{asset: 'cash-stack', x: 540, y: 935, w: 520, h: 320, rot: 10},
+	{asset: 'rubber-stamp', x: 170, y: 1060, w: 460, h: 303, rot: 12},
+	{asset: 'chai-glass', x: 770, y: 1085, w: 390, h: 385, rot: -9},
 ];
 
 /**
