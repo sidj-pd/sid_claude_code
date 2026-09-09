@@ -1012,3 +1012,233 @@ are easy to lose in a long sheet:
 > painted onto the backdrop. No deckle edge, no torn-page border, no frame, no
 > mount, no table or wood grain. Nothing touches the edge of the frame. No text
 > anywhere in the image.
+
+---
+
+# Episode 04 — the rest of the episode
+
+Same two rules as the Shot 0 sheet above, and they matter more here because
+several of these carry lettering in real life: **no text anywhere on anything**
+(every word in this episode is set in Remotion), and **nothing pale** — cream
+on cream keys out as an outline skeleton.
+
+Three of these are further poses of the man already drawn in `bank-employee`.
+Generate them with the character reference attached or they come back as a
+different man in the same shirt:
+
+    node scripts/imggen.mjs bank-employee-reach --char bank-employee
+
+## `bank-sign.jpg`
+
+> Hand-cut paper collage illustration in the style of a printed mid-century
+> explainer: layered construction and craft paper, matte and slightly
+> desaturated, with visible scissor-cut and torn edges and a fine halftone grain
+> over the whole piece. Flatly lit from above — no rendering, no gloss, no
+> gradient lighting.
+>
+> Subject: a small folding counter sign standing on its own, seen straight on
+> from the front and very slightly above, in a landscape shape about twice as
+> wide as it is tall. A rectangular card panel in dark oxblood paper held in a
+> simple dull-brass A-frame stand, the two legs splaying below it. The panel
+> face is COMPLETELY BLANK — one flat unbroken rectangle of colour with no
+> words, no letters, no engraving, no border rule, no logo, no printed panel and
+> no marks of any kind on it. No desk, no counter, no hand.
+>
+> Centred on a plain flat cream craft-paper backdrop running to all four edges
+> with clear empty margin all round. No drop shadow, no cast shadow, no shading
+> painted onto the backdrop. No deckle edge, no torn-page border, no frame, no
+> mount, no table or wood grain. Nothing touches the edge of the frame. No text
+> anywhere in the image.
+
+## `tiffin-open.jpg`
+
+> Hand-cut paper collage illustration in the style of a printed mid-century
+> explainer: layered construction and craft paper, matte and slightly
+> desaturated, with visible scissor-cut and torn edges and a fine halftone grain
+> over the whole piece. Flatly lit from above — no rendering, no gloss, no
+> gradient lighting.
+>
+> Subject: a round two-tier stainless steel tiffin box, open, seen from the
+> front and slightly above, in a shape a little wider than it is tall. The body
+> is cut from muted grey paper with a darker rim; the lid sits beside it tilted
+> against the base. In the open top tier are three or four rounded chapatis in
+> warm ochre and a dark scoop of curry in deep brick red. A small steel spoon
+> rests across the rim. Everything is clearly darker than the backdrop. No
+> steam, no hand, no table, no cloth, and no lettering or brand mark on the
+> steel.
+>
+> Centred on a plain flat cream craft-paper backdrop running to all four edges
+> with clear empty margin all round. No drop shadow, no cast shadow, no shading
+> painted onto the backdrop. No deckle edge, no torn-page border, no frame, no
+> mount, no table or wood grain. Nothing touches the edge of the frame. No text
+> anywhere in the image.
+
+## `customer-back.jpg`
+
+> Hand-cut paper collage illustration in the style of a printed mid-century
+> explainer: layered construction and craft paper, matte and slightly
+> desaturated, with visible scissor-cut and torn edges and a fine halftone grain
+> over the whole piece. Flatly lit from above — no rendering, no gloss, no
+> gradient lighting.
+>
+> Subject: an Indian man in his thirties seen ENTIRELY FROM BEHIND, standing,
+> framed from the knees up, in a tall portrait shape about twice as tall as it
+> is wide. His back is fully to the viewer and NO PART OF HIS FACE IS VISIBLE —
+> not in profile, not over a shoulder, not turned even slightly. The back of his
+> head, his hair and his shoulders are all we see. He wears an untucked
+> short-sleeved shirt in muted olive over dark trousers, with a cloth folder
+> held down at his side in one hand. Slightly rounded shoulders, weight on one
+> leg. Everything is clearly darker than the backdrop. No floor, no shadow, no
+> other people.
+>
+> Centred on a plain flat cream craft-paper backdrop running to all four edges
+> with clear empty margin all round. No drop shadow, no cast shadow, no shading
+> painted onto the backdrop. No deckle edge, no torn-page border, no frame, no
+> mount, no table or wood grain. Nothing touches the edge of the frame. No text
+> anywhere in the image.
+
+## `bank-employee-reach.jpg`
+
+> Hand-cut paper collage illustration in the style of a printed mid-century
+> explainer: layered construction and craft paper, matte and slightly
+> desaturated, with visible scissor-cut and torn edges and a fine halftone grain
+> over the whole piece. Flatly lit from above — no rendering, no gloss, no
+> gradient lighting.
+>
+> Subject: the same Indian man in his forties from the attached character
+> reference, seated behind a bank counter, seen from the front from the waist
+> up, in an upright portrait shape a little taller than it is wide. Identical
+> face, moustache, glasses, build and short-sleeved slate blue shirt with the
+> darker collar, lanyard and breast-pocket pen.
+>
+> His POSE is different and is the whole point of this picture: his LEFT arm is
+> extended across the counter to his left, palm down, in the middle of sliding
+> something aside — the arm straight, the hand flat and clearly in motion. At
+> the same time his RIGHT hand is reaching forward and down towards the viewer,
+> fingers open, about to pick something up off the counter. Both hands are
+> COMPLETELY EMPTY — no lunch box, no paper, no pen, no object of any kind
+> anywhere in the picture. His expression is the same patient blank one as the
+> reference: not smiling, not helpful, unbothered. He looks straight out at the
+> viewer. The counter top is a plain slab of dark oxblood paper crossing the
+> bottom of the shape; below its front edge, nothing.
+>
+> Centred on a plain flat cream craft-paper backdrop running to all four edges
+> with clear empty margin all round. No drop shadow, no cast shadow, no shading
+> painted onto the backdrop. No deckle edge, no torn-page border, no frame, no
+> mount, no table or wood grain. Nothing touches the edge of the frame. No text
+> anywhere in the image.
+
+## `bank-employee-eating.jpg`
+
+> Hand-cut paper collage illustration in the style of a printed mid-century
+> explainer: layered construction and craft paper, matte and slightly
+> desaturated, with visible scissor-cut and torn edges and a fine halftone grain
+> over the whole piece. Flatly lit from above — no rendering, no gloss, no
+> gradient lighting.
+>
+> Subject: the same Indian man in his forties from the attached character
+> reference, seated behind a bank counter, seen from the front from the waist
+> up, in an upright portrait shape a little taller than it is wide. Identical
+> face, moustache, glasses, build and short-sleeved slate blue shirt with the
+> darker collar, lanyard and breast-pocket pen.
+>
+> His POSE is different and is the whole point of this picture: his right hand
+> is raised to his mouth holding a torn piece of chapati in warm ochre, mid-bite,
+> the elbow up and out to the side. His left forearm still rests flat on the
+> counter. His mouth is slightly open and his cheek is full. His eyes are still
+> looking straight out at the viewer with exactly the same patient blank
+> expression as the reference — he is not enjoying this and he is not
+> apologising for it. The counter top is a plain slab of dark oxblood paper
+> crossing the bottom of the shape; below its front edge, nothing. Nothing else
+> is on the counter.
+>
+> Centred on a plain flat cream craft-paper backdrop running to all four edges
+> with clear empty margin all round. No drop shadow, no cast shadow, no shading
+> painted onto the backdrop. No deckle edge, no torn-page border, no frame, no
+> mount, no table or wood grain. Nothing touches the edge of the frame. No text
+> anywhere in the image.
+
+## `bank-clock.jpg`
+
+> Hand-cut paper collage illustration in the style of a printed mid-century
+> explainer: layered construction and craft paper, matte and slightly
+> desaturated, with visible scissor-cut and torn edges and a fine halftone grain
+> over the whole piece. Flatly lit from above — no rendering, no gloss, no
+> gradient lighting.
+>
+> Subject: a plain round institutional wall clock seen straight on, filling a
+> square shape, with a thick dark walnut-brown rim and a muted grey-green face
+> clearly darker than the backdrop. Around the face are twelve short tick marks
+> cut from dark paper, evenly spaced, with the four at the quarters slightly
+> longer than the rest — TICK MARKS ONLY, no numerals, no digits, no numbers of
+> any kind anywhere on the face, and no maker's name. There are NO HANDS on the
+> clock at all: the centre is a small dark paper disc and nothing else, no hour
+> hand, no minute hand, no second hand. No bracket, no wall, no glass reflection.
+>
+> Centred on a plain flat cream craft-paper backdrop running to all four edges
+> with clear empty margin all round. No drop shadow, no cast shadow, no shading
+> painted onto the backdrop. No deckle edge, no torn-page border, no frame, no
+> mount, no table or wood grain. Nothing touches the edge of the frame. No text
+> anywhere in the image.
+
+## `newspaper-clip-bankunion.jpg`
+
+> A photograph of a single rectangular clipping torn from a newspaper, lying
+> flat and photographed straight down from directly above, filling most of the
+> frame in an upright portrait shape. The paper is aged off-white newsprint with
+> two torn edges.
+>
+> The TOP THIRD of the clipping is EMPTY NEWSPRINT. Nothing is printed there at
+> all: no headline, no words, no letters, no characters in any script or
+> alphabet, no title, no masthead, no rule, no ornament. It is bare paper, and
+> it must stay bare — this is the single most important thing about the image.
+>
+> Below that empty band, a black-and-white press photograph occupying the middle
+> of the clipping: a row of four or five Indian bank employees in shirtsleeves
+> standing behind a counter facing the camera, unsmiling, one of them holding a
+> folded sheet of paper. Below the photograph, two narrow columns of very small
+> grey body text, so fine it reads as texture rather than as words.
+>
+> The empty band, the photograph and the text columns must not overlap — clear
+> white space separates all three. The only marks anywhere on the clipping are
+> the photograph and the two columns of fine grey texture.
+
+## `newspaper-clip-victimclaim.jpg`
+
+> A photograph of a single rectangular clipping torn from a newspaper, lying
+> flat and photographed straight down from directly above, filling most of the
+> frame in an upright portrait shape. The paper is aged off-white newsprint with
+> two torn edges.
+>
+> The clipping is laid out with a clear horizontal band of BLANK newsprint
+> across the top third where a headline would go — completely empty, no words,
+> no letters, no headline of any kind. Below that band, a black-and-white press
+> photograph occupying the middle of the clipping: a single Indian man in his
+> thirties seated alone at a table in a plain room, seen from the front, holding
+> a document in both hands and looking down at it with a flat exhausted
+> expression. Below the photograph, two narrow columns of small grey body text
+> too fine to read, and a single line of caption text between the photo and the
+> columns.
+>
+> The headline band, the photograph and the text columns must not overlap each
+> other — clear white space separates all three. No readable words anywhere.
+
+## `newspaper-clip-rbicommittee.jpg`
+
+> A photograph of a single rectangular clipping torn from a newspaper, lying
+> flat and photographed straight down from directly above, filling most of the
+> frame in an upright portrait shape. The paper is aged off-white newsprint with
+> two torn edges.
+>
+> The clipping is laid out with a clear horizontal band of BLANK newsprint
+> across the top third where a headline would go — completely empty, no words,
+> no letters, no headline of any kind. Below that band, a black-and-white press
+> photograph occupying the middle of the clipping: six Indian officials in
+> formal shirts seated along one side of a long polished committee table in a
+> government meeting room, papers and water glasses in front of them, three of
+> the chairs on the near side of the table EMPTY. Below the photograph, two
+> narrow columns of small grey body text too fine to read, and a single line of
+> caption text between the photo and the columns.
+>
+> The headline band, the photograph and the text columns must not overlap each
+> other — clear white space separates all three. No readable words anywhere.

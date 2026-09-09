@@ -171,6 +171,13 @@ const TRIM_COVERAGE = 0.02;
 const TRIM_MIN_PIXELS = 3;
 
 const OVERRIDES = {
+	// Episode 04, the rest of the episode.
+	'bank-sign': {trim: true},
+	'tiffin-open': {trim: true},
+	'customer-back': {trim: true},
+	'bank-employee-reach': {trim: true},
+	'bank-employee-eating': {trim: true},
+	'bank-clock': {trim: true},
 	// Episode 04, Shot 0. Every piece is a flat-lay element laid at an angle
 	// over its neighbours, so the art must be trimmed to its own bounds --
 	// an untrimmed canvas scales the artwork down inside its box and the

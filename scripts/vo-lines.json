@@ -1,214 +1,272 @@
 {
-  "_comment": [
-    "Voice-over lines for Bizzaro Bangalore. Generate with:",
-    "  GEMINI_API_KEY=... python3 scripts/tts.py",
-    "Output lands in public/vo/<id>.wav.",
-    "",
-    "Two separate levers, per the pipeline notes: 'character' is fixed per",
-    "speaker and never changes between lines (that is the voice); 'delivery'",
-    "is per line (that is the take). Keeping them apart is what makes the",
-    "performance directable — without a delivery note every line in a scene",
-    "comes out in the same register regardless of what is happening in it.",
-    "",
-    "Character descriptions deliberately say what NOT to do: left to itself",
-    "the model performs an accent rather than speaking in one."
-  ],
-  "voices": {
-    "narrator": {
-      "voiceName": "Fenrir",
-      "character": "a documentary narrator in the Vox explainer register — bright, articulate and conversational, speaking clean measured sentences with crisp consonants and a light forward momentum, as though walking the listener through evidence. He is dry rather than jokey, and trusts the material to be funny without selling it. Speak plainly and naturally — no announcer boom, no over-warm radio voice, no sing-song cadence, no theatrical emphasis, no caricature"
-    },
-    "passenger": {
-      "voiceName": "Puck",
-      "character": "a Bangalore software professional in his early thirties, speaking natural Indian English in an educated urban register — unhurried, fairly flat, the way someone talks when they are describing something that unsettled them and have not yet decided how they feel about it. Speak plainly and naturally — no performed or exaggerated accent, no theatrical shakiness, no comic timing, no caricature"
-    },
-    "correspondent": {
-      "voiceName": "Algenib",
-      "character": "a television correspondent in his forties, speaking clean neutral English in the flat professional register of an interviewer who is not the subject of the piece. He asks his questions plainly and does not perform interest in the answers. No announcer boom, no warmth, no sing-song, no emphasis for effect"
-    },
-    "tenant": {
-      "voiceName": "Puck",
-      "character": "a Bangalore renter in his late twenties, speaking natural Indian English in an educated urban register. He is braced for an argument he has already had in his head several times, so the words come slightly too fast and slightly too rehearsed. Speak plainly and naturally — no performed or exaggerated accent, no theatrical panic, no comic timing, no caricature"
-    },
-    "landlord": {
-      "voiceName": "Zubenelgenubi",
-      "character": "a Bangalore landlord in his late fifties, speaking unhurried Indian English in a low flat register. He is not being generous and does not think he is doing anyone a favour; he is closing a matter. Speak plainly and naturally — no warmth, no gruffness, no performed accent, no sing-song, no caricature"
-    }
-  },
-  "lines": [
-    {
-      "id": "ep01-shot01",
-      "speaker": "narrator",
-      "text": "Every day, thousands of auto rides begin in Bangalore. This is the story of the one that went right.",
-      "delivery": "matter-of-fact and unhurried, opening a case file; let the first sentence sit flat and ordinary, then land 'the one that went right' with a small dry lift — understated, never winking at the audience"
-    },
-    {
-      "id": "ep01-shot03",
-      "speaker": "narrator",
-      "text": "No pause. No haggling. He simply put the meter down.",
-      "delivery": "deadpan and clipped, almost flat; the first two fragments land like items being ticked off a list, then a small beat before the last clause, stated as plain fact rather than a punchline"
-    },
-    {
-      "id": "ep01-shot05a",
-      "speaker": "narrator",
-      "text": "According to our survey, 91% of auto drivers refuse the Whitefield route outright.",
-      "delivery": "brisk and factual, reading a finding off a page; put the weight on the figure and on 'outright', and do not editorialise around either"
-    },
-    {
-      "id": "ep01-shot05b",
-      "speaker": "narrator",
-      "text": "Of the 9% who accept — 96% still won't use the meter.",
-      "delivery": "same register, one notch drier; a small pause at the dash as though turning to the next column, then 'still' carrying a flicker of resignation without becoming a joke"
-    },
-    {
-      "id": "ep01-shot05c",
-      "speaker": "narrator",
-      "text": "Which means, statistically... this shouldn't have happened at all.",
-      "delivery": "slower and quieter, the sentence a narrator says when the evidence has stopped adding up; a real pause after 'statistically', then the last clause flat and unhurried — no build, no emphasis on 'at all'"
-    },
-    {
-      "id": "ep01-shot06-q",
-      "speaker": "correspondent",
-      "text": "Can you walk us through what happened?",
-      "delivery": "flat and procedural, an opening question asked a hundred times before; no curiosity in it at all"
-    },
-    {
-      "id": "ep01-shot06-a",
-      "speaker": "passenger",
-      "text": "He put the meter down. Without even asking. He wasn't honking. He wasn't on the phone. He stopped at every single signal. He followed every rule.",
-      "delivery": "deadpan and even, recounting ordinary things as though each one were evidence of something wrong; a small pause between each item, building only by accumulation and never by rising pitch or emphasis"
-    },
-    {
-      "id": "ep01-shot06-b",
-      "speaker": "passenger",
-      "text": "It almost felt like... I was in a parallel universe.",
-      "delivery": "quieter and drifting, as though replaying it; a real pause after 'It almost felt like', then the last phrase stated plainly as a fact rather than delivered as a punchline"
-    },
-    {
-      "id": "ep01-shot07-q",
-      "speaker": "correspondent",
-      "text": "How do you explain what happened?",
-      "delivery": "flat and procedural, identical register to the shot 6 question — this is a formula he asks everyone, not a real inquiry"
-    },
-    {
-      "id": "ep01-shot08-union",
-      "speaker": "narrator",
-      "text": "The Auto Drivers' Union has formally petitioned the state government, demanding compensation for members affected by W.T.F. Syndrome.",
-      "delivery": "deadpan, escalating bureaucratic absurdity — read exactly like a news brief, no irony in the voice at all, the driest line in the episode so far; slight emphasis of process on 'formally petitioned' and 'W.T.F. Syndrome' landing completely flat, like an official term"
-    },
-    {
-      "id": "ep01-shot10-committee",
-      "speaker": "narrator",
-      "text": "The government has since formed a committee to study the matter further.",
-      "delivery": "dry and quick, a throwaway closing fact rather than a new development — the whole line said in the tone of an afterthought"
-    },
-    {
-      "id": "ep01-shot11-final",
-      "speaker": "narrator",
-      "text": "As for the driver himself — he's back on the road. Meter running. Rules... intact. For now.",
-      "delivery": "quieter and more ominous than deadpan, unlike every other line in the episode; unhurried, a real pause after 'road' and after 'Rules', the words 'For now' dropped almost to a murmur rather than punched for a laugh"
-    },
-    {
-      "id": "ep02-shot02",
-      "speaker": "narrator",
-      "text": "Every day, thousands of leave requests are submitted in Bangalore. This is the story of the one that got approved without a follow-up call.",
-      "delivery": "the episode's opening line, and the twin of ep01-shot01 — take it at the same pace and the same flatness so the series has a recognisable way of starting. First sentence entirely ordinary, a small beat at the full stop, then 'without a follow-up call' landed as plain fact rather than as the joke it is"
-    },
-    {
-      "id": "ep02-shot03a",
-      "speaker": "narrator",
-      "text": "According to our survey, 89% of leave requests in Bangalore go unanswered for at least 48 hours.",
-      "delivery": "brisk explainer register, the way a number is read off a chart that is already on screen; no lift on the statistic, no emphasis on 'our survey' — the absurdity is in the sourcing and must not be pointed at"
-    },
-    {
-      "id": "ep02-shot03b",
-      "speaker": "narrator",
-      "text": "Of the 11% that get approved — 94% come with a passive-aggressive follow-up call anyway.",
-      "delivery": "continuous with the line before it, slightly faster; a real beat at the dash while the graphic subdivides, then 'passive-aggressive follow-up call' said in exactly the same neutral tone as the rest, with 'anyway' allowed to fall off the end rather than being punched"
-    },
-    {
-      "id": "ep02-shot03c",
-      "speaker": "narrator",
-      "text": "Which means, statistically... this approval should never have happened — let alone in under a minute.",
-      "delivery": "the cliffhanger, held on a frozen card. Slower and quieter than the two lines before it, a genuine pause on the ellipsis rather than a rhetorical one, and 'let alone in under a minute' delivered almost as an afterthought — the same register ep01-shot05c ends on"
-    },
-    {
-      "id": "ep02-shot04-q",
-      "speaker": "correspondent",
-      "text": "Can you walk us through what happened?",
-      "delivery": "off-screen, flat and procedural, a question he has asked a hundred times; no warmth and no curiosity, and no rise at the end beyond what the grammar requires"
-    },
-    {
-      "id": "ep02-shot06-assoc",
-      "speaker": "narrator",
-      "text": "The Bangalore Managers' Association has formally petitioned HR leadership, demanding compensation for members affected by S.T.F.U. Syndrome.",
-      "delivery": "straight news-desk delivery, the twin of ep01-shot08-union — institutional language read without a flicker of doubt. 'S.T.F.U. Syndrome' pronounced letter by letter as a clinical acronym, given no more weight than 'Association' or 'leadership'"
-    },
-    {
-      "id": "ep02-shot08-committee",
-      "speaker": "narrator",
-      "text": "HR has since formed a committee to study the matter further.",
-      "delivery": "dry and quick, a throwaway closing fact rather than a new development — the whole line said in the tone of an afterthought, matching ep01-shot10-committee exactly"
-    },
-    {
-      "id": "ep02-shot09-final",
-      "speaker": "narrator",
-      "text": "As for the manager himself — still at his desk most nights. Still responding fast. Boundaries... intact. For now.",
-      "delivery": "the episode's closing line and the deliberate echo of ep01-shot11-final; quieter and more ominous than deadpan, unhurried, a real pause after 'nights' and after 'Boundaries', with 'For now' dropped almost to a murmur rather than punched for a laugh"
-    },
-    {
-      "id": "ep03-shot01-tenant",
-      "speaker": "tenant",
-      "text": "About the deposit, sir — the wall, that stain, that was already like that when I—",
-      "delivery": "rushed and pre-emptively defensive, the sentence of a man who rehearsed it on the stairs; slightly too fast, listing the damage before anyone accuses him of it, and cut off dead on the last word rather than trailing away"
-    },
-    {
-      "id": "ep03-shot01-landlord",
-      "speaker": "landlord",
-      "text": "Here is the full deposit amount.",
-      "delivery": "a single flat statement, unbothered and slightly bored, as though handing over the full amount were administrative rather than remarkable — no pause for effect, no news-register lift on \"full\", no warmth. Read the way a receipt gets read out, not the way good news gets delivered. The absence of any emphasis at all is the joke"
-    },
-    {
-      "id": "ep03-shot01-vo",
-      "speaker": "narrator",
-      "text": "Every day, thousands of security deposits are settled in Bangalore. This is the story of the one that was returned in full.",
-      "delivery": "the episode opening line and the third of its kind, so take it at exactly the pace and flatness of ep01-shot01 and ep02-shot02 — the series has a recognisable way of starting. First sentence entirely ordinary, a small beat at the full stop, then \"returned in full\" landed as plain fact rather than as the joke it is"
-    },
-    {
-      "id": "ep03-shot02a",
-      "speaker": "narrator",
-      "text": "According to our survey, 98% of security deposits in Bangalore are returned with a standard one-month deduction.",
-      "delivery": "brisk explainer register, the way a number is read off a chart already on screen; no lift on the statistic, no emphasis on \"our survey\" — the absurdity is in the sourcing and must not be pointed at"
-    },
-    {
-      "id": "ep03-shot02b",
-      "speaker": "narrator",
-      "text": "Of the remaining 2% — 85% take over six months to actually hand it over.",
-      "delivery": "continuous with the line before it, slightly faster; a real beat at the dash while the graphic subdivides, then the rest of the clause in the same flat register, with \"hand it over\" allowed to fall off the end rather than being punched"
-    },
-    {
-      "id": "ep03-shot02c",
-      "speaker": "narrator",
-      "text": "Which means, statistically... this landlord shouldn't exist.",
-      "delivery": "the cliffhanger, held on a frozen card. Slower and quieter than the two lines before it, a genuine pause on the ellipsis rather than a rhetorical one, and \"this landlord shouldn't exist\" delivered flat and matter-of-fact rather than incredulous — the same register ep01-shot05c and ep02-shot03c end on"
-    },
-    {
-      "id": "ep03-shot06-assoc",
-      "speaker": "narrator",
-      "text": "The Bangalore Landlords' Association has formally petitioned the housing ministry, demanding compensation for members affected by F.A.Q. Syndrome.",
-      "delivery": "deadpan, escalating bureaucratic absurdity — read exactly like a news brief, no irony in the voice at all. Slight emphasis of process on \"formally petitioned\", and \"F.A.Q. Syndrome\" landing completely flat, like an official term that has always existed. The same register ep01-shot08-union is delivered in"
-    },
-    {
-      "id": "ep03-shot08-committee",
-      "speaker": "narrator",
-      "text": "The housing ministry has since formed a committee to study the matter further. The first meeting was rescheduled — due to a site visit for a new project launch.",
-      "delivery": "dry and quick, a news brief being read off the wire with no time left in the bulletin. The first sentence entirely procedural; a small beat at the dash, then the reason for the rescheduling stated as flatly as the rest, with no lift on \"new project launch\" at all — the absurdity is in the fact, not the delivery. Same register as ep01-shot10-committee"
-    },
-    {
-      "id": "ep03-shot09-final",
-      "speaker": "narrator",
-      "text": "As for the landlord himself — already looking for the next tenant. Deposit policy... unchanged. For now.",
-      "delivery": "the closing line, and quieter and more ominous than the deadpan the rest of the episode is read in. A real beat at the dash. A genuine pause on the ellipsis before \"unchanged\", then \"For now\" almost thrown away — not sinister, just left hanging. The same way ep01-shot11-final and ep02-shot09-final close their episodes"
-    }
-  ]
+	"_comment": [
+		"Voice-over lines for Bizzaro Bangalore. Generate with:",
+		"  GEMINI_API_KEY=... python3 scripts/tts.py",
+		"Output lands in public/vo/<id>.wav.",
+		"",
+		"Two separate levers, per the pipeline notes: 'character' is fixed per",
+		"speaker and never changes between lines (that is the voice); 'delivery'",
+		"is per line (that is the take). Keeping them apart is what makes the",
+		"performance directable — without a delivery note every line in a scene",
+		"comes out in the same register regardless of what is happening in it.",
+		"",
+		"Character descriptions deliberately say what NOT to do: left to itself",
+		"the model performs an accent rather than speaking in one."
+	],
+	"voices": {
+		"narrator": {
+			"voiceName": "Fenrir",
+			"character": "a documentary narrator in the Vox explainer register — bright, articulate and conversational, speaking clean measured sentences with crisp consonants and a light forward momentum, as though walking the listener through evidence. He is dry rather than jokey, and trusts the material to be funny without selling it. Speak plainly and naturally — no announcer boom, no over-warm radio voice, no sing-song cadence, no theatrical emphasis, no caricature"
+		},
+		"passenger": {
+			"voiceName": "Puck",
+			"character": "a Bangalore software professional in his early thirties, speaking natural Indian English in an educated urban register — unhurried, fairly flat, the way someone talks when they are describing something that unsettled them and have not yet decided how they feel about it. Speak plainly and naturally — no performed or exaggerated accent, no theatrical shakiness, no comic timing, no caricature"
+		},
+		"correspondent": {
+			"voiceName": "Algenib",
+			"character": "a television correspondent in his forties, speaking clean neutral English in the flat professional register of an interviewer who is not the subject of the piece. He asks his questions plainly and does not perform interest in the answers. No announcer boom, no warmth, no sing-song, no emphasis for effect"
+		},
+		"tenant": {
+			"voiceName": "Puck",
+			"character": "a Bangalore renter in his late twenties, speaking natural Indian English in an educated urban register. He is braced for an argument he has already had in his head several times, so the words come slightly too fast and slightly too rehearsed. Speak plainly and naturally — no performed or exaggerated accent, no theatrical panic, no comic timing, no caricature"
+		},
+		"landlord": {
+			"voiceName": "Zubenelgenubi",
+			"character": "a Bangalore landlord in his late fifties, speaking unhurried Indian English in a low flat register. He is not being generous and does not think he is doing anyone a favour; he is closing a matter. Speak plainly and naturally — no warmth, no gruffness, no performed accent, no sing-song, no caricature"
+		},
+		"banker": {
+			"voiceName": "Zubenelgenubi",
+			"character": "a bank clerk in his forties at a counter in Bangalore, speaking unhurried Indian English in a low flat register. He has said this sentence, or something like it, thousands of times, and he is not being kind -- he is disposing of a task. Speak plainly and naturally: no warmth, no briskness, no performed accent, no sing-song, no caricature"
+		}
+	},
+	"lines": [
+		{
+			"id": "ep01-shot01",
+			"speaker": "narrator",
+			"text": "Every day, thousands of auto rides begin in Bangalore. This is the story of the one that went right.",
+			"delivery": "matter-of-fact and unhurried, opening a case file; let the first sentence sit flat and ordinary, then land 'the one that went right' with a small dry lift — understated, never winking at the audience"
+		},
+		{
+			"id": "ep01-shot03",
+			"speaker": "narrator",
+			"text": "No pause. No haggling. He simply put the meter down.",
+			"delivery": "deadpan and clipped, almost flat; the first two fragments land like items being ticked off a list, then a small beat before the last clause, stated as plain fact rather than a punchline"
+		},
+		{
+			"id": "ep01-shot05a",
+			"speaker": "narrator",
+			"text": "According to our survey, 91% of auto drivers refuse the Whitefield route outright.",
+			"delivery": "brisk and factual, reading a finding off a page; put the weight on the figure and on 'outright', and do not editorialise around either"
+		},
+		{
+			"id": "ep01-shot05b",
+			"speaker": "narrator",
+			"text": "Of the 9% who accept — 96% still won't use the meter.",
+			"delivery": "same register, one notch drier; a small pause at the dash as though turning to the next column, then 'still' carrying a flicker of resignation without becoming a joke"
+		},
+		{
+			"id": "ep01-shot05c",
+			"speaker": "narrator",
+			"text": "Which means, statistically... this shouldn't have happened at all.",
+			"delivery": "slower and quieter, the sentence a narrator says when the evidence has stopped adding up; a real pause after 'statistically', then the last clause flat and unhurried — no build, no emphasis on 'at all'"
+		},
+		{
+			"id": "ep01-shot06-q",
+			"speaker": "correspondent",
+			"text": "Can you walk us through what happened?",
+			"delivery": "flat and procedural, an opening question asked a hundred times before; no curiosity in it at all"
+		},
+		{
+			"id": "ep01-shot06-a",
+			"speaker": "passenger",
+			"text": "He put the meter down. Without even asking. He wasn't honking. He wasn't on the phone. He stopped at every single signal. He followed every rule.",
+			"delivery": "deadpan and even, recounting ordinary things as though each one were evidence of something wrong; a small pause between each item, building only by accumulation and never by rising pitch or emphasis"
+		},
+		{
+			"id": "ep01-shot06-b",
+			"speaker": "passenger",
+			"text": "It almost felt like... I was in a parallel universe.",
+			"delivery": "quieter and drifting, as though replaying it; a real pause after 'It almost felt like', then the last phrase stated plainly as a fact rather than delivered as a punchline"
+		},
+		{
+			"id": "ep01-shot07-q",
+			"speaker": "correspondent",
+			"text": "How do you explain what happened?",
+			"delivery": "flat and procedural, identical register to the shot 6 question — this is a formula he asks everyone, not a real inquiry"
+		},
+		{
+			"id": "ep01-shot08-union",
+			"speaker": "narrator",
+			"text": "The Auto Drivers' Union has formally petitioned the state government, demanding compensation for members affected by W.T.F. Syndrome.",
+			"delivery": "deadpan, escalating bureaucratic absurdity — read exactly like a news brief, no irony in the voice at all, the driest line in the episode so far; slight emphasis of process on 'formally petitioned' and 'W.T.F. Syndrome' landing completely flat, like an official term"
+		},
+		{
+			"id": "ep01-shot10-committee",
+			"speaker": "narrator",
+			"text": "The government has since formed a committee to study the matter further.",
+			"delivery": "dry and quick, a throwaway closing fact rather than a new development — the whole line said in the tone of an afterthought"
+		},
+		{
+			"id": "ep01-shot11-final",
+			"speaker": "narrator",
+			"text": "As for the driver himself — he's back on the road. Meter running. Rules... intact. For now.",
+			"delivery": "quieter and more ominous than deadpan, unlike every other line in the episode; unhurried, a real pause after 'road' and after 'Rules', the words 'For now' dropped almost to a murmur rather than punched for a laugh"
+		},
+		{
+			"id": "ep02-shot02",
+			"speaker": "narrator",
+			"text": "Every day, thousands of leave requests are submitted in Bangalore. This is the story of the one that got approved without a follow-up call.",
+			"delivery": "the episode's opening line, and the twin of ep01-shot01 — take it at the same pace and the same flatness so the series has a recognisable way of starting. First sentence entirely ordinary, a small beat at the full stop, then 'without a follow-up call' landed as plain fact rather than as the joke it is"
+		},
+		{
+			"id": "ep02-shot03a",
+			"speaker": "narrator",
+			"text": "According to our survey, 89% of leave requests in Bangalore go unanswered for at least 48 hours.",
+			"delivery": "brisk explainer register, the way a number is read off a chart that is already on screen; no lift on the statistic, no emphasis on 'our survey' — the absurdity is in the sourcing and must not be pointed at"
+		},
+		{
+			"id": "ep02-shot03b",
+			"speaker": "narrator",
+			"text": "Of the 11% that get approved — 94% come with a passive-aggressive follow-up call anyway.",
+			"delivery": "continuous with the line before it, slightly faster; a real beat at the dash while the graphic subdivides, then 'passive-aggressive follow-up call' said in exactly the same neutral tone as the rest, with 'anyway' allowed to fall off the end rather than being punched"
+		},
+		{
+			"id": "ep02-shot03c",
+			"speaker": "narrator",
+			"text": "Which means, statistically... this approval should never have happened — let alone in under a minute.",
+			"delivery": "the cliffhanger, held on a frozen card. Slower and quieter than the two lines before it, a genuine pause on the ellipsis rather than a rhetorical one, and 'let alone in under a minute' delivered almost as an afterthought — the same register ep01-shot05c ends on"
+		},
+		{
+			"id": "ep02-shot04-q",
+			"speaker": "correspondent",
+			"text": "Can you walk us through what happened?",
+			"delivery": "off-screen, flat and procedural, a question he has asked a hundred times; no warmth and no curiosity, and no rise at the end beyond what the grammar requires"
+		},
+		{
+			"id": "ep02-shot06-assoc",
+			"speaker": "narrator",
+			"text": "The Bangalore Managers' Association has formally petitioned HR leadership, demanding compensation for members affected by S.T.F.U. Syndrome.",
+			"delivery": "straight news-desk delivery, the twin of ep01-shot08-union — institutional language read without a flicker of doubt. 'S.T.F.U. Syndrome' pronounced letter by letter as a clinical acronym, given no more weight than 'Association' or 'leadership'"
+		},
+		{
+			"id": "ep02-shot08-committee",
+			"speaker": "narrator",
+			"text": "HR has since formed a committee to study the matter further.",
+			"delivery": "dry and quick, a throwaway closing fact rather than a new development — the whole line said in the tone of an afterthought, matching ep01-shot10-committee exactly"
+		},
+		{
+			"id": "ep02-shot09-final",
+			"speaker": "narrator",
+			"text": "As for the manager himself — still at his desk most nights. Still responding fast. Boundaries... intact. For now.",
+			"delivery": "the episode's closing line and the deliberate echo of ep01-shot11-final; quieter and more ominous than deadpan, unhurried, a real pause after 'nights' and after 'Boundaries', with 'For now' dropped almost to a murmur rather than punched for a laugh"
+		},
+		{
+			"id": "ep03-shot01-tenant",
+			"speaker": "tenant",
+			"text": "About the deposit, sir — the wall, that stain, that was already like that when I—",
+			"delivery": "rushed and pre-emptively defensive, the sentence of a man who rehearsed it on the stairs; slightly too fast, listing the damage before anyone accuses him of it, and cut off dead on the last word rather than trailing away"
+		},
+		{
+			"id": "ep03-shot01-landlord",
+			"speaker": "landlord",
+			"text": "Here is the full deposit amount.",
+			"delivery": "a single flat statement, unbothered and slightly bored, as though handing over the full amount were administrative rather than remarkable — no pause for effect, no news-register lift on \"full\", no warmth. Read the way a receipt gets read out, not the way good news gets delivered. The absence of any emphasis at all is the joke"
+		},
+		{
+			"id": "ep03-shot01-vo",
+			"speaker": "narrator",
+			"text": "Every day, thousands of security deposits are settled in Bangalore. This is the story of the one that was returned in full.",
+			"delivery": "the episode opening line and the third of its kind, so take it at exactly the pace and flatness of ep01-shot01 and ep02-shot02 — the series has a recognisable way of starting. First sentence entirely ordinary, a small beat at the full stop, then \"returned in full\" landed as plain fact rather than as the joke it is"
+		},
+		{
+			"id": "ep03-shot02a",
+			"speaker": "narrator",
+			"text": "According to our survey, 98% of security deposits in Bangalore are returned with a standard one-month deduction.",
+			"delivery": "brisk explainer register, the way a number is read off a chart already on screen; no lift on the statistic, no emphasis on \"our survey\" — the absurdity is in the sourcing and must not be pointed at"
+		},
+		{
+			"id": "ep03-shot02b",
+			"speaker": "narrator",
+			"text": "Of the remaining 2% — 85% take over six months to actually hand it over.",
+			"delivery": "continuous with the line before it, slightly faster; a real beat at the dash while the graphic subdivides, then the rest of the clause in the same flat register, with \"hand it over\" allowed to fall off the end rather than being punched"
+		},
+		{
+			"id": "ep03-shot02c",
+			"speaker": "narrator",
+			"text": "Which means, statistically... this landlord shouldn't exist.",
+			"delivery": "the cliffhanger, held on a frozen card. Slower and quieter than the two lines before it, a genuine pause on the ellipsis rather than a rhetorical one, and \"this landlord shouldn't exist\" delivered flat and matter-of-fact rather than incredulous — the same register ep01-shot05c and ep02-shot03c end on"
+		},
+		{
+			"id": "ep03-shot06-assoc",
+			"speaker": "narrator",
+			"text": "The Bangalore Landlords' Association has formally petitioned the housing ministry, demanding compensation for members affected by F.A.Q. Syndrome.",
+			"delivery": "deadpan, escalating bureaucratic absurdity — read exactly like a news brief, no irony in the voice at all. Slight emphasis of process on \"formally petitioned\", and \"F.A.Q. Syndrome\" landing completely flat, like an official term that has always existed. The same register ep01-shot08-union is delivered in"
+		},
+		{
+			"id": "ep03-shot08-committee",
+			"speaker": "narrator",
+			"text": "The housing ministry has since formed a committee to study the matter further. The first meeting was rescheduled — due to a site visit for a new project launch.",
+			"delivery": "dry and quick, a news brief being read off the wire with no time left in the bulletin. The first sentence entirely procedural; a small beat at the dash, then the reason for the rescheduling stated as flatly as the rest, with no lift on \"new project launch\" at all — the absurdity is in the fact, not the delivery. Same register as ep01-shot10-committee"
+		},
+		{
+			"id": "ep03-shot09-final",
+			"speaker": "narrator",
+			"text": "As for the landlord himself — already looking for the next tenant. Deposit policy... unchanged. For now.",
+			"delivery": "the closing line, and quieter and more ominous than the deadpan the rest of the episode is read in. A real beat at the dash. A genuine pause on the ellipsis before \"unchanged\", then \"For now\" almost thrown away — not sinister, just left hanging. The same way ep01-shot11-final and ep02-shot09-final close their episodes"
+		},
+		{
+			"id": "ep04-shot01-banker",
+			"speaker": "banker",
+			"text": "Tell me. This is more important.",
+			"delivery": "two flat statements, not one sentence -- a real full stop after \"Tell me\". Bored rather than kind, the tone of a man moving a lunch box aside because it is in the way of a form. No lift on \"more important\", no reassurance, no generosity. The absence of any warmth at all is the joke, exactly as with ep03-shot01-landlord"
+		},
+		{
+			"id": "ep04-shot01-vo",
+			"speaker": "narrator",
+			"text": "Every day, thousands of bank visits happen in Bangalore. This is the story of the one that didn't wait for the lunch hour to end.",
+			"delivery": "the episode opening line and the fourth of its kind, so take it at exactly the pace and flatness of ep01-shot01, ep02-shot02 and ep03-shot01-vo -- the series has a recognisable way of starting. First sentence entirely ordinary, a small beat at the full stop, then \"didn't wait for the lunch hour to end\" landed as plain fact rather than as the joke it is"
+		},
+		{
+			"id": "ep04-shot02a",
+			"speaker": "narrator",
+			"text": "According to our survey, 96% of lunch-hour visits are turned away.",
+			"delivery": "brisk explainer register, the way a number is read off a chart already on screen; no lift on the statistic, no emphasis on \"our survey\" -- the absurdity is in the sourcing and must not be pointed at"
+		},
+		{
+			"id": "ep04-shot02b",
+			"speaker": "narrator",
+			"text": "Of the 4% entertained, 89% are told to come back after 3:30. The bank shuts at 4.",
+			"delivery": "continuous with the line before it, slightly faster; the two figures read off without ceremony, then a real full stop and \"The bank shuts at 4\" stated as a separate, entirely neutral fact. Do not let the last sentence sound like a punchline -- it is a closing time, read as one"
+		},
+		{
+			"id": "ep04-shot02c",
+			"speaker": "narrator",
+			"text": "Thirty minutes. Which is also, on average, how long the queue takes.",
+			"delivery": "dry, over a clock face. The first fragment flat and complete. Then \"which is also\" almost as an aside, and the rest of the clause allowed to fall off the end -- no emphasis on \"queue\", no audible awareness that this is funny"
+		},
+		{
+			"id": "ep04-shot02d",
+			"speaker": "narrator",
+			"text": "Which means, statistically... this counter should have been closed.",
+			"delivery": "the cliffhanger, held on a frozen card. Slower and quieter than the lines before it, a genuine pause on the ellipsis rather than a rhetorical one, and the last clause flat and matter-of-fact rather than incredulous -- the same register ep01-shot05c, ep02-shot03c and ep03-shot02c end on"
+		},
+		{
+			"id": "ep04-shot06-union",
+			"speaker": "narrator",
+			"text": "The Bank Employees' Union has formally petitioned the Reserve Bank, demanding compensation for members affected by K.Y.C. Syndrome, and a review of what they call unscheduled availability.",
+			"delivery": "straight news-desk delivery, the twin of ep01-shot08-union and ep03-shot06-assoc -- institutional language read without a flicker of doubt. \"K.Y.C. Syndrome\" pronounced letter by letter as a clinical acronym and given no more weight than \"Reserve Bank\". \"Unscheduled availability\" said as the official term it is pretending to be, with no air quotes in the voice"
+		},
+		{
+			"id": "ep04-shot08-committee",
+			"speaker": "narrator",
+			"text": "The Reserve Bank has since formed a committee to study the matter further. The first meeting was rescheduled. The members were at lunch.",
+			"delivery": "dry and quick, a news brief being read off the wire with no time left in the bulletin. Three sentences, each flatter than the last, with real full stops between them. \"The members were at lunch\" given no lift whatsoever -- it is the last fact in the item, not the payoff. Same register as ep01-shot10-committee and ep03-shot08-committee"
+		},
+		{
+			"id": "ep04-shot09-final",
+			"speaker": "narrator",
+			"text": "As for the employee himself, still at Counter 3. Still open through lunch. Sign... unchanged. For now.",
+			"delivery": "the closing line, and the fourth of its kind -- quieter and more ominous than the deadpan the rest of the episode is read in. A real beat after \"himself\". A genuine pause on the ellipsis before \"unchanged\", then \"For now\" almost thrown away, not sinister, just left hanging. The same way ep01-shot11-final, ep02-shot09-final and ep03-shot09-final close their episodes"
+		}
+	]
 }

@@ -42,6 +42,12 @@
  *   node scripts/imggen.mjs bank- token- ledger-     several, by prefix
  *   node scripts/imggen.mjs --missing                every sheet entry with no art yet
  *   node scripts/imggen.mjs --missing --dry-run      list what it would do
+ *   node scripts/imggen.mjs x --char bank-employee   same person, different pose
+ *
+ * `--char <asset>` attaches an existing piece as a CHARACTER reference on top
+ * of the two style ones. Use it for every additional pose of someone who has
+ * already been drawn: the prompt describes the pose, the reference carries the
+ * face, and without it the second pose is a different man in the same shirt.
  *
  * Existing art is never overwritten without --force: the sheet holds every
  * prompt in the series, and a careless --missing should not be able to redraw
@@ -115,8 +121,29 @@ const STYLE_REFS = [
 	],
 ];
 
+/**
+ * Attached by --char. Says, at length, that ONLY the person carries over --
+ * a character sheet with no disclaimer gets read as a composition to copy,
+ * and the new pose comes back as the old pose.
+ */
+const CHAR_LABEL =
+	'Character Reference — THIS IS THE SAME PERSON as the one described in the prompt below, ' +
+	'already drawn for an earlier shot in this series. His face, hair, moustache, glasses, ' +
+	'build, skin tone and clothing must match this image EXACTLY: same shirt in the same ' +
+	'colour, same collar, same lanyard, same pen in the same pocket. He must be recognisably ' +
+	'one man across the two pictures. DO NOT copy his pose, the position of his arms or hands, ' +
+	'his expression, the framing, or anything else that happens to be in this picture — the ' +
+	'prompt below describes a different moment and everything except the man himself comes ' +
+	'from there';
+
 /** Longest edge for a reference. Bigger buys nothing here and costs payload. */
 const REF_MAX_EDGE = 768;
+/**
+ * Character slots go higher. At 768 a face is a few dozen pixels across and
+ * comes back "roughly the same man"; the identity is in detail the downscale
+ * throws away.
+ */
+const CHAR_MAX_EDGE = 1024;
 
 /**
  * Parse the sheet. A prompt is a level-2 or -3 heading naming a file in
@@ -145,9 +172,9 @@ const parseSheet = () => {
 		.map((p) => ({name: p.name, text: p.lines.join('\n').replace(/\n{3,}/g, '\n\n').trim()}));
 };
 
-const shrink = async (file) => {
+const shrink = async (file, edge = REF_MAX_EDGE) => {
 	const buf = await sharp(path.join(OUT_DIR, file))
-		.resize({width: REF_MAX_EDGE, height: REF_MAX_EDGE, fit: 'inside', withoutEnlargement: true})
+		.resize({width: edge, height: edge, fit: 'inside', withoutEnlargement: true})
 		.jpeg({quality: 80})
 		.toBuffer();
 	return buf.toString('base64');
@@ -223,7 +250,11 @@ const main = async () => {
 	const force = args.includes('--force');
 	const dry = args.includes('--dry-run');
 	const missing = args.includes('--missing');
-	const selectors = args.filter((a) => !a.startsWith('--'));
+	const charAt = args.indexOf('--char');
+	const charAsset = charAt >= 0 ? args[charAt + 1] : null;
+	const selectors = args.filter(
+		(a, i) => !a.startsWith('--') && !(charAt >= 0 && i === charAt + 1),
+	);
 
 	const key = (process.env.GEMINI_API_KEY ?? '').trim();
 	if (!key && !dry) {
@@ -262,6 +293,19 @@ const main = async () => {
 		}
 		refParts.push({text: `Attached Reference Image (${label}):`});
 		refParts.push({inlineData: {mimeType: 'image/jpeg', data: await shrink(file)}});
+	}
+	if (charAsset) {
+		const file = charAsset.endsWith('.jpg') ? charAsset : `${charAsset}.jpg`;
+		if (!fs.existsSync(path.join(OUT_DIR, file))) {
+			console.error(`--char ${file} does not exist in public/cutouts/`);
+			process.exit(1);
+		}
+		// Last, so it is the reference nearest the prompt and carries most.
+		refParts.push({text: `Attached Reference Image (${CHAR_LABEL}):`});
+		refParts.push({
+			inlineData: {mimeType: 'image/jpeg', data: await shrink(file, CHAR_MAX_EDGE)},
+		});
+		console.log(`  character reference: ${file}`);
 	}
 
 	let spend = 0;

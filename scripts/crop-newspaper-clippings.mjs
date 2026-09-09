@@ -65,6 +65,21 @@ const CROPS = {
 	 * The generator's watermark sits low-right in both sources, well below
 	 * these bands, so the crop excludes it for free.
 	 */
+	/*
+	 * Episode 04. The three clippings were generated with a deliberately BLANK
+	 * band across the top third -- every headline in this episode is set in
+	 * Remotion, because the generator cannot spell and one of these came back
+	 * with a headline in Malayalam. The crop keeps about 180px of that blank
+	 * band above the photograph so the headline has somewhere to sit, then the
+	 * photo and both body-text columns, because a clipping cropped tight to its
+	 * photograph stops reading as newsprint and reads as a photograph.
+	 *
+	 * Bands measured off the sources by ink-density row and column scan rather
+	 * than by eye, then opened upward for the headline.
+	 */
+	'newspaper-clip-bankunion': {left: 99, top: 276, width: 625, height: 928, fromSource: true},
+	'newspaper-clip-victimclaim': {left: 134, top: 60, width: 578, height: 790, fromSource: true},
+	'newspaper-clip-rbicommittee': {left: 94, top: 122, width: 581, height: 974, fromSource: true},
 	'newspaper-clip-landlords': {left: 60, top: 500, width: 635, height: 560, fromSource: true},
 	'newspaper-clip-tenantclaim': {left: 110, top: 505, width: 605, height: 545, fromSource: true},
 	/*

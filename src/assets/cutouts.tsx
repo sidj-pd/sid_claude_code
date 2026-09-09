@@ -97,6 +97,20 @@ export const SteelAlmirah = makeCutout('cutouts-alpha/steel-almirah.png');
 export const NoticeBoard = makeCutout('cutouts-alpha/notice-board.png');
 export const ChaiGlass = makeCutout('cutouts-alpha/chai-glass.png');
 
+
+// Episode 04, the rest of the episode. The three clippings are cropped by
+// scripts/crop-newspaper-clippings.mjs before keying; every headline over
+// them is set in Remotion.
+export const BankSign = makeCutout('cutouts-alpha/bank-sign.png');
+export const TiffinOpen = makeCutout('cutouts-alpha/tiffin-open.png');
+export const CustomerBack = makeCutout('cutouts-alpha/customer-back.png');
+export const BankEmployeeReach = makeCutout('cutouts-alpha/bank-employee-reach.png');
+export const BankEmployeeEating = makeCutout('cutouts-alpha/bank-employee-eating.png');
+export const BankClock = makeCutout('cutouts-alpha/bank-clock.png');
+export const NewspaperClipBankUnion = makeCutout('cutouts-alpha/newspaper-clip-bankunion.png');
+export const NewspaperClipVictimClaim = makeCutout('cutouts-alpha/newspaper-clip-victimclaim.png');
+export const NewspaperClipRbiCommittee = makeCutout('cutouts-alpha/newspaper-clip-rbicommittee.png');
+
 export type CutoutAsset =
 	| 'vidhana-soudha'
 	| 'auto-rickshaw'
@@ -155,7 +169,16 @@ export type CutoutAsset =
 	| 'queue-post'
 	| 'steel-almirah'
 	| 'notice-board'
-	| 'chai-glass';
+	| 'chai-glass'
+	| 'bank-sign'
+	| 'tiffin-open'
+	| 'customer-back'
+	| 'bank-employee-reach'
+	| 'bank-employee-eating'
+	| 'bank-clock'
+	| 'newspaper-clip-bankunion'
+	| 'newspaper-clip-victimclaim'
+	| 'newspaper-clip-rbicommittee';
 
 /**
  * Episode 03 — the empty flat. The wall and its three defects are separate
@@ -239,4 +262,13 @@ export const CUTOUT_REGISTRY: Record<CutoutAsset, React.FC> = {
 	'steel-almirah': SteelAlmirah,
 	'notice-board': NoticeBoard,
 	'chai-glass': ChaiGlass,
+	'bank-sign': BankSign,
+	'tiffin-open': TiffinOpen,
+	'customer-back': CustomerBack,
+	'bank-employee-reach': BankEmployeeReach,
+	'bank-employee-eating': BankEmployeeEating,
+	'bank-clock': BankClock,
+	'newspaper-clip-bankunion': NewspaperClipBankUnion,
+	'newspaper-clip-victimclaim': NewspaperClipVictimClaim,
+	'newspaper-clip-rbicommittee': NewspaperClipRbiCommittee,
 };
