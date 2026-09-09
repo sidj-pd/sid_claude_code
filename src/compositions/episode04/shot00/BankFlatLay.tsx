@@ -3,29 +3,38 @@ import {useCurrentFrame} from 'remotion';
 import {CutoutAsset} from '../../../assets/cutouts';
 import {PaperCutout} from '../../../components/PaperCutout';
 import {useStopMotionStep} from '../../../components/useStopMotionStep';
-import {CLEAR_EVERY, CLEAR_START, PLACE_EVERY, PLACE_START, STEP} from './beats';
+import {
+	PULL_ANTICIPATE,
+	PULL_EVERY,
+	PULL_EXIT,
+	PULL_FRAMES,
+	PULL_START,
+	STEP,
+} from './beats';
 
 /**
- * The bank, as sixteen flat-lay props laid over the man behind the counter.
+ * The bank, as thirteen flat-lay props laid over the man behind the counter —
+ * all of them present from frame 0 — and then pulled off him one at a time.
  *
- * They arrive in a fixed order — the counter furniture first, then the paper,
- * then the small human debris on top — and they LEAVE from the centre
- * outwards, so the first gaps to open are the ones directly over him. That
- * ordering is the whole reveal: by the time the outer props go he has already
- * been half-visible for six or seven frames, and the last one lifting off
- * confirms something the eye has started to suspect rather than announcing
- * something new.
+ * THE PULL
  *
- * Nothing fades, in either direction. A prop is absent, then it is there;
- * later it is there, then it is gone. That is what a hand does to a table
- * between two exposures, and a cross-fade would give the game away as
- * software.
+ * Each prop tugs two frames the WRONG way, then leaves the frame along the
+ * line from him outwards, accelerating, spinning slightly as it goes. The
+ * back-tug does almost nothing on its own and is the whole reason the move
+ * reads as a string rather than as a deletion: something has to take hold
+ * before it can haul. The exit is ease-IN, never ease-out — a pulled object
+ * is fastest when it leaves, and easing out would make it look thrown and
+ * then caught.
  *
- * The layout is FIXED and only nudged between steps. The reference re-lays
- * its whole subject every frame, but its props are anonymous produce; ours
- * are recognisable objects with a right way up, and a wholesale reshuffle of
- * a steel almirah reads as a bug rather than as energy. Same hand-made pulse,
- * no broken props.
+ * They go from the CENTRE OUTWARDS, so the first gaps open directly over him
+ * and he is half-visible for a second or more before the last prop clears.
+ * The reveal confirms something the eye has already started to suspect.
+ *
+ * The layout is FIXED and barely nudged between steps — enough to say the
+ * pile is hand-made, not enough to be a wobble. The reference re-lays its
+ * whole subject every frame, but its props are anonymous produce; ours are
+ * recognisable objects with a right way up, and a steel almirah that shivers
+ * reads as a bug rather than as energy.
  */
 
 type Piece = {
@@ -98,13 +107,28 @@ const PIECES: Piece[] = [
 const SUBJECT_CX = 540;
 const SUBJECT_CY = 880;
 
-/** Placement index -> rank in the removal order (nearest the subject first). */
-const REMOVE_RANK: number[] = [];
+/** Array index -> rank in the pull order (nearest the subject goes first). */
+const PULL_RANK: number[] = [];
 PIECES.map((p, i) => ({i, d: Math.hypot(p.x - SUBJECT_CX, p.y - SUBJECT_CY)}))
 	.sort((a, b) => a.d - b.d)
 	.forEach((e, rank) => {
-		REMOVE_RANK[e.i] = rank;
+		PULL_RANK[e.i] = rank;
 	});
+
+/**
+ * How far a prop travels once pulled. The frame's longest diagonal is about
+ * 2200px, so this clears even a piece that starts dead centre.
+ */
+const TRAVEL = 2400;
+
+/**
+ * The idle shuffle, per step. This was 11px and 2.2deg and it was too much —
+ * thirteen pieces all trembling at 15Hz reads as a video artefact rather than
+ * as paper. At these values you can see the pile is hand-laid without being
+ * able to point at anything moving.
+ */
+const IDLE_SHIFT = 4;
+const IDLE_ROT = 0.7;
 
 /**
  * A stable pseudo-random in [-1, 1] from two integers. Deterministic so the
@@ -118,29 +142,69 @@ const wobble = (a: number, b: number): number => {
 
 export const BankFlatLay: React.FC = () => {
 	const frame = useCurrentFrame();
-	const {stepIndex} = useStopMotionStep(frame, STEP);
+	const {steppedFrame, stepIndex} = useStopMotionStep(frame, STEP);
 
 	return (
 		<>
 			{PIECES.map((p, i) => {
-				const placedAt = PLACE_START + i * PLACE_EVERY;
-				const removedAt = CLEAR_START + REMOVE_RANK[i] * CLEAR_EVERY;
-				if (frame < placedAt || frame >= removedAt) return null;
+				const pullAt = PULL_START + PULL_RANK[i] * PULL_EVERY;
+				const age = steppedFrame - pullAt;
+				if (age >= PULL_FRAMES) return null;
 
-				const dx = wobble(i, stepIndex) * 11;
-				const dy = wobble(i + 91, stepIndex) * 11;
-				const dr = wobble(i + 173, stepIndex) * 2.2;
+				// Outward, from him rather than from the geometric centre of
+				// the frame — a prop sitting on his head should leave upwards,
+				// not sideways. Anything within arm's length of dead centre has
+				// no meaningful outward direction of its own, so it is sent up
+				// and to alternating sides instead of jittering somewhere.
+				let vx = p.x - SUBJECT_CX;
+				let vy = p.y - SUBJECT_CY;
+				const len = Math.hypot(vx, vy);
+				if (len < 140) {
+					vx = i % 2 === 0 ? -0.5 : 0.5;
+					vy = -1;
+				} else {
+					vx /= len;
+					vy /= len;
+				}
+				const n = Math.hypot(vx, vy);
+				vx /= n;
+				vy /= n;
+
+				let px = 0;
+				let py = 0;
+				let spin = 0;
+
+				if (age >= 0) {
+					// Two frames of taking hold: the prop moves slightly the
+					// wrong way, back towards him, before it goes.
+					const tug = Math.min(1, (age + STEP) / PULL_ANTICIPATE);
+					px = -vx * 14 * tug;
+					py = -vy * 14 * tug;
+
+					const out = (age - PULL_ANTICIPATE) / PULL_EXIT;
+					if (out > 0) {
+						// Ease IN. A pulled thing is fastest as it leaves.
+						const e = out * out;
+						px = vx * TRAVEL * e;
+						py = vy * TRAVEL * e;
+						spin = (i % 2 === 0 ? -1 : 1) * 26 * e;
+					}
+				}
+
+				const dx = wobble(i, stepIndex) * IDLE_SHIFT;
+				const dy = wobble(i + 91, stepIndex) * IDLE_SHIFT;
+				const dr = wobble(i + 173, stepIndex) * IDLE_ROT;
 
 				return (
 					<div
 						key={p.asset}
 						style={{
 							position: 'absolute',
-							left: p.x - p.w / 2 + dx,
-							top: p.y - p.h / 2 + dy,
+							left: p.x - p.w / 2 + dx + px,
+							top: p.y - p.h / 2 + dy + py,
 							width: p.w,
 							height: p.h,
-							transform: `rotate(${p.rot + dr}deg)`,
+							transform: `rotate(${p.rot + dr + spin}deg)`,
 						}}
 					>
 						{/* textureOpacity 0: PaperCutout's grain overlay is an
