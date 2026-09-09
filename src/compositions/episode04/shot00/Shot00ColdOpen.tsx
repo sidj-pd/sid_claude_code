@@ -17,6 +17,8 @@ import {SPOTLIGHT} from './beats';
 const SUBJECT_CX = 540;
 const SUBJECT_CY = 880;
 const SUBJECT_W = 760;
+/** 760 / 0.881, the ratio measured off the keyed art rather than asked for. */
+const SUBJECT_H = 862;
 
 /**
  * The spotlight. Geometry taken from the reference as a fraction of its frame
@@ -51,11 +53,17 @@ export const Shot00ColdOpen: React.FC = () => {
 				style={{
 					position: 'absolute',
 					left: SUBJECT_CX - SUBJECT_W / 2,
-					top: SUBJECT_CY - SUBJECT_W / 2,
+					top: SUBJECT_CY - SUBJECT_H / 2,
 					width: SUBJECT_W,
+					height: SUBJECT_H,
 				}}
 			>
-				<PaperCutout asset="bank-employee" elevation={1} />
+				<PaperCutout
+					asset="bank-employee"
+					elevation={1}
+					textureOpacity={0}
+					style={{width: SUBJECT_W, height: SUBJECT_H}}
+				/>
 			</div>
 
 			<BankFlatLay />

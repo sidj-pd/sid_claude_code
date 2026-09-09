@@ -33,37 +33,54 @@ type Piece = {
 	/** Centre of the piece, in frame pixels. */
 	x: number;
 	y: number;
-	/** Rendered width; height follows the art's own aspect. */
+	/**
+	 * Rendered size. BOTH are given, and `h` is `w` divided by the ratio
+	 * MEASURED off the keyed PNG — not the ratio the prompt asked for, which
+	 * the generator treats as a suggestion. Setting width alone leaves the
+	 * image resolving `height: 100%` against an indefinite parent, which works
+	 * until it doesn't; setting both is the pattern Episodes 01-03 use.
+	 */
 	w: number;
+	h: number;
 	rot: number;
 };
 
 /**
- * Order in this array is PLACEMENT order. It is not arbitrary: the counter
- * and the grille go down first because everything else needs something to sit
- * on, and the chai glass is last because it is the only thing here a person
- * put down themselves.
+ * Order in this array is PLACEMENT order, and it is not arbitrary: the grille
+ * and the board go up first because they are the room, then the furniture,
+ * then the paper, and the chai glass is nearly last because it is the only
+ * thing here a person put down themselves.
  *
- * Deliberately over-scaled and overlapping — by PLACE_END not one pixel of
- * the man may be showing, or the clearing has nothing to clear.
+ * The numbers are not eyeballed. `scripts/flatlay-coverage.mjs` rebuilds this
+ * exact composite offline and counts how many of the man's pixels are still
+ * exposed; these are the values that got that to zero, out of 393,993, with
+ * 94.5% of the frame covered. Change any of them and re-run it — the shot
+ * only works if the built frame hides him completely.
+ *
+ * It took three passes to get there, and the interesting failure was the
+ * first: the grille was over his head, and 9% of him showed straight through
+ * it, because the gaps between its bars are transparent BY DESIGN. A piece
+ * that reads as solid is not necessarily a piece that covers anything.
+ *
+ * Thirteen pieces, not sixteen. `laptop-screen`, `desk-lamp` and
+ * `wall-clock-face` would have been natural additions, but all three are
+ * untrimmed Episode 02 art sitting on a 1200x896 canvas, and trimming them
+ * now would move them inside Episode 02's shots.
  */
 const PIECES: Piece[] = [
-	{asset: 'bank-grille', x: 540, y: 620, w: 980, rot: -2},
-	{asset: 'steel-almirah', x: 175, y: 380, w: 470, rot: 4},
-	{asset: 'notice-board', x: 830, y: 250, w: 520, rot: -6},
-	{asset: 'token-display', x: 400, y: 130, w: 520, rot: 3},
-	{asset: 'queue-post', x: 985, y: 780, w: 300, rot: -5},
-	{asset: 'note-counter', x: 195, y: 900, w: 480, rot: -7},
-	{asset: 'file-tower', x: 900, y: 1130, w: 420, rot: 6},
-	{asset: 'ledger-open', x: 560, y: 1000, w: 620, rot: -4},
-	{asset: 'form-pile', x: 250, y: 1290, w: 540, rot: 9},
-	{asset: 'passbook-stack', x: 700, y: 1420, w: 500, rot: -8},
-	{asset: 'cash-stack', x: 940, y: 1620, w: 460, rot: 5},
-	{asset: 'laptop-screen', x: 300, y: 1680, w: 500, rot: -6},
-	{asset: 'desk-lamp', x: 990, y: 400, w: 340, rot: 8},
-	{asset: 'wall-clock-face', x: 620, y: 1780, w: 380, rot: -10},
-	{asset: 'rubber-stamp', x: 480, y: 780, w: 340, rot: 12},
-	{asset: 'chai-glass', x: 760, y: 870, w: 280, rot: -9},
+	{asset: 'bank-grille', x: 540, y: 250, w: 1160, h: 512, rot: -2},
+	{asset: 'notice-board', x: 830, y: 330, w: 680, h: 500, rot: 5},
+	{asset: 'queue-post', x: 200, y: 240, w: 430, h: 701, rot: -5},
+	{asset: 'steel-almirah', x: 150, y: 700, w: 470, h: 1023, rot: 4},
+	{asset: 'token-display', x: 470, y: 640, w: 760, h: 450, rot: 3},
+	{asset: 'file-tower', x: 930, y: 820, w: 450, h: 1054, rot: 6},
+	{asset: 'rubber-stamp', x: 170, y: 1060, w: 460, h: 303, rot: 12},
+	{asset: 'cash-stack', x: 540, y: 935, w: 520, h: 320, rot: 10},
+	{asset: 'chai-glass', x: 770, y: 1085, w: 390, h: 385, rot: -9},
+	{asset: 'ledger-open', x: 540, y: 1200, w: 980, h: 524, rot: -4},
+	{asset: 'note-counter', x: 230, y: 1460, w: 580, h: 619, rot: -7},
+	{asset: 'passbook-stack', x: 860, y: 1620, w: 650, h: 483, rot: -8},
+	{asset: 'form-pile', x: 330, y: 1790, w: 740, h: 497, rot: 9},
 ];
 
 /**
@@ -112,12 +129,23 @@ export const BankFlatLay: React.FC = () => {
 						style={{
 							position: 'absolute',
 							left: p.x - p.w / 2 + dx,
-							top: p.y - p.w / 2 + dy,
+							top: p.y - p.h / 2 + dy,
 							width: p.w,
+							height: p.h,
 							transform: `rotate(${p.rot + dr}deg)`,
 						}}
 					>
-						<PaperCutout asset={p.asset} elevation={0.8} />
+						{/* textureOpacity 0: PaperCutout's grain overlay is an
+						    AbsoluteFill over the whole div, not the artwork's
+						    silhouette, so on thirteen stacked pieces it paints
+						    thirteen pale rectangles. The shot lays one grain
+						    pass over the finished frame instead. */}
+						<PaperCutout
+							asset={p.asset}
+							elevation={0.8}
+							textureOpacity={0}
+							style={{width: p.w, height: p.h}}
+						/>
 					</div>
 				);
 			})}

@@ -17,12 +17,13 @@
  *
  * Three acts:
  *
- *   PLACE   f0-f72    sixteen bank props arrive one at a time, on the beat,
- *                     until not one pixel of him is showing.
- *   HOLD    f72-f84   the bank, complete, with nobody visibly in it.
- *   CLEAR   f84-f120  the props leave twice as fast as they arrived, from
- *                     the centre outwards, so he is glimpsed through the
- *                     gaps several steps before the ground is bare.
+ *   PLACE   f0-f78     thirteen bank props arrive one at a time, on the beat,
+ *                      until not one pixel of him is showing — verified, not
+ *                      assumed: see scripts/flatlay-coverage.mjs.
+ *   HOLD    f78-f90    the bank, complete, with nobody visibly in it.
+ *   CLEAR   f90-f116   the props leave three times as fast as they arrived,
+ *                      from the centre outwards, so he is glimpsed through
+ *                      the gaps several steps before the ground is bare.
  *
  * Then the lights go out around him and he is left in a disc of paper light —
  * the reference's hard cut to a spotlit card, repurposed as punctuation for
@@ -41,27 +42,34 @@
  */
 export const STEP = 2;
 
-/** A prop arrives every PLACE_EVERY frames — two steps, so it lands on the beat. */
+/**
+ * A prop arrives every PLACE_EVERY frames. It must be a multiple of STEP, or
+ * placements land between the stop-motion hops and the build stops reading as
+ * one rhythm — at three steps a piece, thirteen pieces fill the frame in 2.4s.
+ */
 export const PLACE_START = 0;
-export const PLACE_EVERY = 4;
-export const PLACE_END = 72;
+export const PLACE_EVERY = 6;
+/** Last piece lands on f72; this is the frame the bank is finished. */
+export const PLACE_END = 78;
 
 /** The complete bank, held. Nobody in it. */
-export const HOLD_END = 84;
+export const HOLD_END = 90;
 
 /**
- * The clearing. One prop a step, half the placing interval: things are taken
- * away faster than they were put down, which is the joke.
+ * The clearing. One prop a step — a third of the placing interval, so the
+ * bank comes apart in 0.9s having taken 2.4s to build. Things are taken away
+ * much faster than they were put down, which is the joke.
  */
-export const CLEAR_START = 84;
+export const CLEAR_START = 90;
 export const CLEAR_EVERY = 2;
-export const CLEAR_END = 120;
+/** Last piece leaves on f114. */
+export const CLEAR_END = 116;
 
 /**
  * The lights. Not a fade — a cut, on the frame the last prop leaves, so the
  * two events read as one.
  */
-export const SPOTLIGHT = 120;
+export const SPOTLIGHT = 116;
 
 /** A held beat on him alone before the episode proper starts. */
 export const EP04_SHOT_00_DURATION = 150;

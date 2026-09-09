@@ -1,18 +1,101 @@
 {
-  "subject": {"asset": "bank-employee", "x": 540, "y": 880, "w": 760},
+  "subject": {
+    "asset": "bank-employee",
+    "x": 540,
+    "y": 880,
+    "w": 760
+  },
   "pieces": [
-    {"asset": "bank-grille",     "x": 540, "y": 250,  "w": 1160, "rot": -2},
-    {"asset": "notice-board",    "x": 830, "y": 330,  "w": 680,  "rot": 5},
-    {"asset": "queue-post",      "x": 200, "y": 240,  "w": 430,  "rot": -5},
-    {"asset": "steel-almirah",   "x": 150, "y": 700,  "w": 470,  "rot": 4},
-    {"asset": "token-display",   "x": 470, "y": 640,  "w": 760,  "rot": 3},
-    {"asset": "file-tower",      "x": 930, "y": 820,  "w": 450,  "rot": 6},
-    {"asset": "rubber-stamp",    "x": 200, "y": 1010, "w": 450,  "rot": 12},
-    {"asset": "cash-stack",      "x": 540, "y": 935,  "w": 520,  "rot": 10},
-    {"asset": "chai-glass",      "x": 800, "y": 1030, "w": 340,  "rot": -9},
-    {"asset": "ledger-open",     "x": 540, "y": 1200, "w": 980,  "rot": -4},
-    {"asset": "note-counter",    "x": 230, "y": 1460, "w": 580,  "rot": -7},
-    {"asset": "passbook-stack",  "x": 860, "y": 1620, "w": 650,  "rot": -8},
-    {"asset": "form-pile",       "x": 330, "y": 1790, "w": 740,  "rot": 9}
+    {
+      "asset": "bank-grille",
+      "x": 540,
+      "y": 250,
+      "w": 1160,
+      "rot": -2
+    },
+    {
+      "asset": "notice-board",
+      "x": 830,
+      "y": 330,
+      "w": 680,
+      "rot": 5
+    },
+    {
+      "asset": "queue-post",
+      "x": 200,
+      "y": 240,
+      "w": 430,
+      "rot": -5
+    },
+    {
+      "asset": "steel-almirah",
+      "x": 150,
+      "y": 700,
+      "w": 470,
+      "rot": 4
+    },
+    {
+      "asset": "token-display",
+      "x": 470,
+      "y": 640,
+      "w": 760,
+      "rot": 3
+    },
+    {
+      "asset": "file-tower",
+      "x": 930,
+      "y": 820,
+      "w": 450,
+      "rot": 6
+    },
+    {
+      "asset": "rubber-stamp",
+      "x": 170,
+      "y": 1060,
+      "w": 460,
+      "rot": 12
+    },
+    {
+      "asset": "cash-stack",
+      "x": 540,
+      "y": 935,
+      "w": 520,
+      "rot": 10
+    },
+    {
+      "asset": "chai-glass",
+      "x": 770,
+      "y": 1085,
+      "w": 390,
+      "rot": -9
+    },
+    {
+      "asset": "ledger-open",
+      "x": 540,
+      "y": 1200,
+      "w": 980,
+      "rot": -4
+    },
+    {
+      "asset": "note-counter",
+      "x": 230,
+      "y": 1460,
+      "w": 580,
+      "rot": -7
+    },
+    {
+      "asset": "passbook-stack",
+      "x": 860,
+      "y": 1620,
+      "w": 650,
+      "rot": -8
+    },
+    {
+      "asset": "form-pile",
+      "x": 330,
+      "y": 1790,
+      "w": 740,
+      "rot": 9
+    }
   ]
 }
