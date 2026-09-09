@@ -1,6 +1,6 @@
 import React from 'react';
 import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
-import {GANACHE_DEEP} from '../../../components/palette';
+import {BUTTER, GANACHE_DEEP} from '../../../components/palette';
 import {Ground} from '../Ground';
 import {NewsprintTexture} from '../../../components/NewsprintTexture';
 import {PaperCutout} from '../../../components/PaperCutout';
@@ -19,6 +19,14 @@ const SUBJECT_CY = 880;
 const SUBJECT_W = 760;
 /** 760 / 0.881, the ratio measured off the keyed art rather than asked for. */
 const SUBJECT_H = 862;
+
+/**
+ * The counter top runs across the bottom of his art, around y 1230. Both props
+ * stand on it, and both sit inside the open ledger's footprint (x 50-1030,
+ * y 938-1462), which is what keeps them buried until he is.
+ */
+const SIGN_Y = 1178;
+const TIFFIN_Y = 1150;
 
 /**
  * The vignette's clear centre. The reference's disc is 0.86 of its frame
@@ -73,6 +81,38 @@ export const Shot00ColdOpen: React.FC = () => {
 					textureOpacity={0}
 					style={{width: SUBJECT_W, height: SUBJECT_H}}
 				/>
+			</div>
+
+			{/* On the counter, under the pile with him. Both sit inside the
+			    ledger's footprint, which is what keeps them hidden until he
+			    is -- checked against the same coverage pass, not eyeballed. */}
+			<div style={{position: 'absolute', left: 150, top: SIGN_Y, width: 300, height: 178}}>
+				<PaperCutout asset="bank-sign" elevation={0.9} textureOpacity={0} style={{width: 300, height: 178}} />
+			</div>
+			{/* The sign's panel is blank art. Every word in this episode is set
+			    here, because the generator cannot spell -- one clipping came
+			    back with a headline in Malayalam. */}
+			<div
+				style={{
+					position: 'absolute',
+					left: 150,
+					top: SIGN_Y + 34,
+					width: 300,
+					textAlign: 'center',
+					fontFamily: 'RansomArchivoBlack, sans-serif',
+					fontSize: 34,
+					lineHeight: 1.1,
+					letterSpacing: 1,
+					color: BUTTER,
+					transform: 'rotate(-1.5deg)',
+				}}
+			>
+				OUT FOR
+				<br />
+				LUNCH
+			</div>
+			<div style={{position: 'absolute', left: 660, top: TIFFIN_Y, width: 260, height: 191}}>
+				<PaperCutout asset="tiffin-open" elevation={0.9} textureOpacity={0} style={{width: 260, height: 191}} />
 			</div>
 
 			<BankFlatLay />
