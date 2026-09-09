@@ -66,6 +66,8 @@ import {SHOT_09_DURATION as EP03_SHOT_09_DURATION} from './compositions/episode0
 import {Shot00ColdOpen} from './compositions/episode04/shot00/Shot00ColdOpen';
 import {Shot01LunchHour} from './compositions/episode04/shot01/Shot01LunchHour';
 import {EP04_SHOT_01_DURATION} from './compositions/episode04/shot01/beats';
+import {Shot02Graphic as Ep04Shot02Graphic} from './compositions/episode04/shot02/Shot02Graphic';
+import {EP04_SHOT_02_DURATION} from './compositions/episode04/shot02/beats';
 import {EP04_SHOT_00_DURATION} from './compositions/episode04/shot00/beats';
 import {Ep01CoverCard} from './compositions/covers/Ep01CoverCard';
 
@@ -252,6 +254,14 @@ export const Root: React.FC = () => {
 				id="Ep04Shot01LunchHour"
 				component={Shot01LunchHour}
 				durationInFrames={EP04_SHOT_01_DURATION}
+				fps={OPENING_MONTAGE_FPS}
+				width={OPENING_MONTAGE_WIDTH}
+				height={OPENING_MONTAGE_HEIGHT}
+			/>
+			<Composition
+				id="Ep04Shot02Graphic"
+				component={Ep04Shot02Graphic}
+				durationInFrames={EP04_SHOT_02_DURATION}
 				fps={OPENING_MONTAGE_FPS}
 				width={OPENING_MONTAGE_WIDTH}
 				height={OPENING_MONTAGE_HEIGHT}

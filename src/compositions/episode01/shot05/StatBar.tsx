@@ -29,6 +29,15 @@ export type StatBarProps = {
 	 */
 	remainderLabelInside?: boolean;
 	seed?: number;
+	/**
+	 * Palette overrides. Episodes 01-03 are cream, brown and rust and take the
+	 * defaults; Episode 04 is Aruba, Ganache and Butter and passes its own.
+	 * Optional rather than required so adding a fourth palette could not
+	 * silently restyle three delivered episodes.
+	 */
+	ink?: string;
+	paper?: string;
+	mark?: string;
 };
 
 /**
@@ -60,6 +69,9 @@ export const StatBar: React.FC<StatBarProps> = ({
 	remainderTaken = false,
 	remainderLabelInside = true,
 	seed = 1,
+	ink = INK,
+	paper = PAPER,
+	mark = MARK,
 }) => {
 	const clamped = Math.max(0, Math.min(1, fill));
 	const inkWidth = clamped * width;
@@ -76,7 +88,7 @@ export const StatBar: React.FC<StatBarProps> = ({
 			}}
 		>
 			{/* the whole quantity */}
-			<div style={{position: 'absolute', inset: 0, background: PAPER}}>
+			<div style={{position: 'absolute', inset: 0, background: paper}}>
 				<NewsprintTexture opacity={0.2} />
 			</div>
 
@@ -88,7 +100,7 @@ export const StatBar: React.FC<StatBarProps> = ({
 					top: 0,
 					width: inkWidth,
 					height: '100%',
-					background: INK,
+					background: ink,
 					overflow: 'hidden',
 				}}
 			>
@@ -102,7 +114,7 @@ export const StatBar: React.FC<StatBarProps> = ({
 							fontFamily: 'RansomArchivoBlack, sans-serif',
 							fontSize: labelSize,
 							lineHeight: 1,
-							color: PAPER,
+							color: paper,
 							// Stamped: a frame proud of the surface, then down.
 							transform: `translateY(-50%) scale(${labelAge < 2 ? 1.14 : 1})`,
 							opacity: labelAge < 1 ? 0.8 : 1,
@@ -125,7 +137,7 @@ export const StatBar: React.FC<StatBarProps> = ({
 						// Dashed once it has been taken: the block is not gone, it has
 						// been lifted out and enlarged below, and the outline it left
 						// behind is what says so.
-						border: `5px ${remainderTaken ? 'dashed' : 'solid'} ${MARK}`,
+						border: `5px ${remainderTaken ? 'dashed' : 'solid'} ${mark}`,
 						boxSizing: 'border-box',
 						background: remainderTaken ? 'transparent' : 'rgba(143,54,38,0.14)',
 						display: 'flex',
@@ -139,7 +151,7 @@ export const StatBar: React.FC<StatBarProps> = ({
 							style={{
 								fontFamily: 'RansomArchivoBlack, sans-serif',
 								fontSize: Math.min(height * 0.42, remainderWidth * 0.62),
-								color: MARK,
+								color: mark,
 								lineHeight: 1,
 							}}
 						>
@@ -154,7 +166,7 @@ export const StatBar: React.FC<StatBarProps> = ({
 				style={{
 					position: 'absolute',
 					inset: 0,
-					border: `3px solid ${INK}`,
+					border: `3px solid ${ink}`,
 					boxSizing: 'border-box',
 					pointerEvents: 'none',
 				}}
