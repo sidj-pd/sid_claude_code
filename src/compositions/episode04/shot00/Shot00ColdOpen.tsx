@@ -1,6 +1,7 @@
 import React from 'react';
 import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
-import {CollageBackdrop} from '../../../components/CollageBackdrop';
+import {GANACHE_DEEP} from '../../../components/palette';
+import {Ground} from '../Ground';
 import {NewsprintTexture} from '../../../components/NewsprintTexture';
 import {PaperCutout} from '../../../components/PaperCutout';
 import {BankFlatLay} from './BankFlatLay';
@@ -54,7 +55,7 @@ export const Shot00ColdOpen: React.FC = () => {
 
 	return (
 		<AbsoluteFill>
-			<CollageBackdrop chaos={0} />
+			<Ground />
 
 			{/* Under the pile from frame 0, never placed, never moved. */}
 			<div
@@ -76,19 +77,19 @@ export const Shot00ColdOpen: React.FC = () => {
 
 			<BankFlatLay />
 
-			{/* One grain pass over the paper and everything on it, so the man
+			{/* One grain pass over the ground and everything on it, so the man
 			    and the props are printed on the same sheet rather than
 			    composited onto it. */}
-			<NewsprintTexture opacity={0.22} />
+			<NewsprintTexture opacity={0.16} />
 
 			{/* The vignette closes OVER the finished frame rather than swapping
-			    the ground underneath it. The paper he is sitting on is the same
-			    paper it always was — the room around it just stops being lit,
+			    the ground underneath it. The sheet he is sitting on is the same
+			    sheet it always was — the room around it just stops being lit,
 			    which is why nothing appears to move at the end of the shot. */}
 			<AbsoluteFill
 				style={{
 					pointerEvents: 'none',
-					background: `radial-gradient(circle ${radius}px at ${SUBJECT_CX}px ${DISC_CY}px, rgba(11,9,6,0) 0%, rgba(11,9,6,0) 52%, #0b0906 96%)`,
+					background: `radial-gradient(circle ${radius}px at ${SUBJECT_CX}px ${DISC_CY}px, rgba(36,24,18,0) 0%, rgba(36,24,18,0) 52%, ${GANACHE_DEEP} 96%)`,
 				}}
 			/>
 		</AbsoluteFill>

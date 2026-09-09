@@ -131,6 +131,17 @@ const IDLE_SHIFT = 4;
 const IDLE_ROT = 0.7;
 
 /**
+ * Shadow depth, resting and fully hauled. PaperCutout scales both of its
+ * stacked shadows off this, so 0.8 is a piece lying almost flat on the sheet
+ * and 3.4 is one well clear of it, throwing a wide soft shadow that no longer
+ * lines up underneath it. That separation is the point: the props that stay
+ * put keep their tight contact shadow, so the one being pulled is the only
+ * thing in frame that looks airborne.
+ */
+const REST_ELEVATION = 0.8;
+const PULLED_ELEVATION = 3.4;
+
+/**
  * A stable pseudo-random in [-1, 1] from two integers. Deterministic so the
  * shuffle is identical on every render pass and every worker — Math.random
  * here would make each rendered frame disagree with its neighbours.
@@ -173,6 +184,8 @@ export const BankFlatLay: React.FC = () => {
 				let px = 0;
 				let py = 0;
 				let spin = 0;
+				// Resting on the sheet. Rises as the prop is hauled off it.
+				let lift = 0;
 
 				if (age >= 0) {
 					// Two frames of taking hold: the prop moves slightly the
@@ -188,6 +201,14 @@ export const BankFlatLay: React.FC = () => {
 						px = vx * TRAVEL * e;
 						py = vy * TRAVEL * e;
 						spin = (i % 2 === 0 ? -1 : 1) * 26 * e;
+						// And it climbs off the sheet as it goes. Without this
+						// a pulled prop slides across the ground like a decal;
+						// the shadow dropping away underneath it is most of
+						// what says the string is lifting rather than dragging.
+						// Ease the lift LINEARLY while the travel accelerates,
+						// so the shadow has opened up before the prop is moving
+						// fast enough to blur past it.
+						lift = out;
 					}
 				}
 
@@ -214,7 +235,7 @@ export const BankFlatLay: React.FC = () => {
 						    pass over the finished frame instead. */}
 						<PaperCutout
 							asset={p.asset}
-							elevation={0.8}
+							elevation={REST_ELEVATION + lift * (PULLED_ELEVATION - REST_ELEVATION)}
 							textureOpacity={0}
 							style={{width: p.w, height: p.h}}
 						/>
