@@ -26,7 +26,7 @@
  *   PULL    f12-f96    thirteen props yanked out of frame one at a time, from
  *                      the centre outwards, so he is glimpsed through the
  *                      gaps long before the last one goes.
- *   ALONE   f96-f110   him, on bare paper, unchanged.
+ *   ALONE   f96-f102   him, on bare paper, unchanged.
  *
  * Then the vignette closes and leaves him in a disc of light.
  *
@@ -70,7 +70,7 @@ export const PULL_FRAMES = PULL_ANTICIPATE + PULL_EXIT;
 export const PULL_END = 96;
 
 /** Him alone on bare paper, before the light changes. */
-export const ALONE_END = 110;
+export const ALONE_END = 102;
 
 /**
  * The vignette. Not a cut this time: the props leaving is already a sequence
@@ -79,7 +79,7 @@ export const ALONE_END = 110;
  * only easing in the shot and is why it registers as a different kind of
  * moment.
  */
-export const VIGNETTE_IN = 110;
+export const VIGNETTE_IN = 102;
 export const VIGNETTE_FRAMES = 16;
 
 /** A held beat on him alone in the light. */

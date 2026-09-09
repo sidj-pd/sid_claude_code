@@ -39,7 +39,15 @@ export const Shot00ColdOpen: React.FC = () => {
 	 * and that is what makes the ending register as a change of kind rather
 	 * than as a fourteenth prop leaving.
 	 */
-	const closed = interpolate(frame, [VIGNETTE_IN, VIGNETTE_IN + VIGNETTE_FRAMES], [0, 1], {
+	/**
+	 * The iris closes SPATIALLY: the gradient is always at full strength and
+	 * it is its radius that shrinks, from well outside the frame down onto
+	 * him. The obvious version — a fixed vignette faded up on opacity — was
+	 * built and rendered and it is wrong: at half opacity a black outer stop
+	 * over cream paper is a flat grey, so the whole frame washes muddy on the
+	 * way in and reads as a dissolve rather than as the lights going down.
+	 */
+	const radius = interpolate(frame, [VIGNETTE_IN, VIGNETTE_IN + VIGNETTE_FRAMES], [2600, DISC_D / 2], {
 		extrapolateLeft: 'clamp',
 		extrapolateRight: 'clamp',
 	});
@@ -80,8 +88,7 @@ export const Shot00ColdOpen: React.FC = () => {
 			<AbsoluteFill
 				style={{
 					pointerEvents: 'none',
-					opacity: closed,
-					background: `radial-gradient(circle ${DISC_D / 2}px at ${SUBJECT_CX}px ${DISC_CY}px, rgba(11,9,6,0) 0%, rgba(11,9,6,0) 58%, ${'#0b0906'} 100%)`,
+					background: `radial-gradient(circle ${radius}px at ${SUBJECT_CX}px ${DISC_CY}px, rgba(11,9,6,0) 0%, rgba(11,9,6,0) 52%, #0b0906 96%)`,
 				}}
 			/>
 		</AbsoluteFill>

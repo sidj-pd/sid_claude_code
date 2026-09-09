@@ -77,7 +77,7 @@ jobs:
         id: what
         env:
           SHOT: Ep04Shot00ColdOpen
-          SHOT_FRAMES: '0 12 16 20 26 34 46 58 70 82 94 104 118 149'
+          SHOT_FRAMES: '0 14 20 30 44 60 76 92 100 106 110 114 118 149'
         run: |
           COMP="${{ github.event.inputs.composition }}"
           CRF="${{ github.event.inputs.crf }}"
