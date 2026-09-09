@@ -812,10 +812,13 @@ are easy to lose in a long sheet:
 >
 > Subject: a large hardbound accounts ledger lying open, seen straight down from
 > above, in a wide landscape shape about half again as wide as it is tall. The
-> covers are dark maroon board; the two open pages are ruled with a grid of fine
-> horizontal lines and a few vertical column rules in faded grey-blue. The ruled
-> lines are the ONLY marks — the pages carry no numbers, no handwriting, no
-> words, no stamps, nothing written at all. A dark cloth spine and a ribbon
+> covers are dark maroon board. The two open pages are cut from a muted
+> grey-green paper, clearly and obviously DARKER than the cream backdrop — not
+> white, not cream, not ivory — and ruled with a grid of fine horizontal lines
+> and a few vertical column rules in a deeper slate blue. Those ruled lines are
+> the ONLY marks on the pages. The pages are otherwise COMPLETELY EMPTY: no
+> handwriting, no scribbles, no pen strokes, no figures, no numerals, no words,
+> no stamps, no smudges, no ink of any kind. A dark cloth spine and a ribbon
 > marker lie down the gutter, and the outer page edges are visibly thick and
 > slightly wavy. No hand, no pen, no desk.
 >
@@ -923,12 +926,15 @@ are easy to lose in a long sheet:
 > over the whole piece. Flatly lit from above — no rendering, no gloss, no
 > gradient lighting.
 >
-> Subject: a single retractable queue barrier post seen from the front, in a tall
-> narrow portrait shape about three times as tall as it is wide. A dark
-> gunmetal-grey column on a heavy round base, with a belt of deep maroon webbing
-> pulled out from a slot near the top and running off to one side, ending in a
-> clip that hooks onto nothing. The belt is plain — no stripe, no lettering. Only
-> one post; no second post, no rope, no floor, no queue, no people.
+> Subject: a single retractable queue barrier post seen from the front, in an
+> upright portrait shape about twice as tall as it is wide. A thick dark
+> gunmetal-grey column on a heavy round base. From a slot near the top, a wide
+> flat belt of deep maroon webbing is pulled straight out horizontally to the
+> right and runs all the way to the right-hand edge of the composition — a bold
+> solid band as thick as a finger, clearly visible, not a thin cord and not a
+> chain — ending in a steel clip that hooks onto nothing. The belt is plain: no
+> stripe, no lettering, no logo. Only one post; no second post, no rope, no
+> floor, no queue, no people.
 >
 > Centred on a plain flat cream craft-paper backdrop running to all four edges
 > with clear empty margin all round. No drop shadow, no cast shadow, no shading
@@ -969,11 +975,15 @@ are easy to lose in a long sheet:
 >
 > Subject: a cork notice board seen straight on, in a landscape shape about half
 > again as wide as it is tall. A dark walnut-brown frame around a mottled tan
-> cork field, with seven or eight small circulars pinned to it at slight angles,
-> overlapping each other, cut from dusty pink, pale olive and grey-blue paper.
-> Each sheet shows a few ruled lines and a printed grid block and NOTHING else —
-> no words, no headings, no numerals, no signatures, no stamps. Brass drawing
-> pins at the corners. Some sheets curl at a corner. No wall, no bracket.
+> cork field, with seven or eight circulars pinned to it. Every circular is a
+> RECTANGULAR SHEET OF PAPER with four straight edges and square corners — some
+> upright, some on their side, pinned at slight angles and overlapping each
+> other — cut from dusty pink, pale olive and grey-blue paper. They are not
+> round, not oval, not discs, not tags and not labels. Each sheet is BLANK apart
+> from three or four faint ruled lines across it: no words, no letters, no
+> headings, no numerals, no scribbles, no signatures, no stamps, no printing of
+> any kind. A single brass drawing pin at the top of each sheet. One or two
+> sheets curl at a bottom corner. No wall, no bracket.
 >
 > Centred on a plain flat cream craft-paper backdrop running to all four edges
 > with clear empty margin all round. No drop shadow, no cast shadow, no shading
