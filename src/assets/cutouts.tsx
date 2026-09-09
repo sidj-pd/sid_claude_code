@@ -80,6 +80,23 @@ export const ManagerDeskNight = makeCutout('cutouts-alpha/manager-desk-night.png
 // difference is the laptop being closed. A hard swap, never a blend.
 export const ManagerDeskClosed = makeCutout('cutouts-alpha/manager-desk-closed.png');
 
+
+// Episode 04, Shot 0 — the bank builds itself over the man who works there
+// and is then taken away again. See public/cutouts/README.md.
+export const BankEmployee = makeCutout('cutouts-alpha/bank-employee.png');
+export const BankGrille = makeCutout('cutouts-alpha/bank-grille.png');
+export const TokenDisplay = makeCutout('cutouts-alpha/token-display.png');
+export const FileTower = makeCutout('cutouts-alpha/file-tower.png');
+export const LedgerOpen = makeCutout('cutouts-alpha/ledger-open.png');
+export const FormPile = makeCutout('cutouts-alpha/form-pile.png');
+export const RubberStamp = makeCutout('cutouts-alpha/rubber-stamp.png');
+export const PassbookStack = makeCutout('cutouts-alpha/passbook-stack.png');
+export const NoteCounter = makeCutout('cutouts-alpha/note-counter.png');
+export const QueuePost = makeCutout('cutouts-alpha/queue-post.png');
+export const SteelAlmirah = makeCutout('cutouts-alpha/steel-almirah.png');
+export const NoticeBoard = makeCutout('cutouts-alpha/notice-board.png');
+export const ChaiGlass = makeCutout('cutouts-alpha/chai-glass.png');
+
 export type CutoutAsset =
 	| 'vidhana-soudha'
 	| 'auto-rickshaw'
@@ -125,7 +142,20 @@ export type CutoutAsset =
 	| 'newspaper-clip-tenantclaim'
 	| 'newspaper-clip-ministry'
 	| 'flat-door'
-	| 'landlord-leaving';
+	| 'landlord-leaving'
+	| 'bank-employee'
+	| 'bank-grille'
+	| 'token-display'
+	| 'file-tower'
+	| 'ledger-open'
+	| 'form-pile'
+	| 'rubber-stamp'
+	| 'passbook-stack'
+	| 'note-counter'
+	| 'queue-post'
+	| 'steel-almirah'
+	| 'notice-board'
+	| 'chai-glass';
 
 /**
  * Episode 03 — the empty flat. The wall and its three defects are separate
@@ -196,4 +226,17 @@ export const CUTOUT_REGISTRY: Record<CutoutAsset, React.FC> = {
 	'newspaper-clip-ministry': NewspaperClipMinistry,
 	'flat-door': FlatDoor,
 	'landlord-leaving': LandlordLeaving,
+	'bank-employee': BankEmployee,
+	'bank-grille': BankGrille,
+	'token-display': TokenDisplay,
+	'file-tower': FileTower,
+	'ledger-open': LedgerOpen,
+	'form-pile': FormPile,
+	'rubber-stamp': RubberStamp,
+	'passbook-stack': PassbookStack,
+	'note-counter': NoteCounter,
+	'queue-post': QueuePost,
+	'steel-almirah': SteelAlmirah,
+	'notice-board': NoticeBoard,
+	'chai-glass': ChaiGlass,
 };

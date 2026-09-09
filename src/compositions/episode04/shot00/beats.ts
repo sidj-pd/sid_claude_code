@@ -1,85 +1,67 @@
 /**
  * Episode 04 / Shot 0 — THE COLD OPEN.
  *
- * A new opening grammar for the series, taken from the director's reference
- * (analysed frame by frame in docs/EP04-OPENING-MECHANIC.md). Only the
- * MECHANIC is borrowed: the reference's palette, typeface, copy and subject
- * are its own and none of them appear here.
+ * The bank builds itself on top of the man who works there, and is then taken
+ * away again piece by piece until only he is left, sitting exactly where he
+ * was the whole time.
  *
- * The mechanic, in one line: a stop-motion clutter of paper props fills the
- * frame, a giant statistic is ALREADY COUNTING UP underneath it, the props
- * are removed piece by piece to reveal the count mid-flight, and the shot
- * hard-cuts to a spotlit card the instant the voice says the number.
+ * The one structural trick, and the only thing borrowed from the director's
+ * reference: THE SUBJECT IS UNDER EVERYTHING FROM FRAME 0. He is never placed
+ * and never fades in. The reference does this with a statistic — it starts
+ * its count-up beneath the clutter so that the reveal catches the number
+ * already in flight rather than starting it — and the same move on a person
+ * is what turns the last prop lifting off into a punchline instead of an
+ * entrance. Everything else here is ours: the props are the bank's, the
+ * palette is the series', and the build half has no equivalent in the
+ * reference at all.
  *
- * Four things make it work, and all four are timing, not art:
+ * Three acts:
  *
- *   1. The caption is up from frame 0 and survives the silence. It leaves two
- *      frames AFTER the payoff word has started, never during the pause.
- *   2. The count runs while the voice is quiet. The ~0.6s VO gap is not dead
- *      air — the number is the dialogue for that beat.
- *   3. The count lands on the stressed syllable of the spoken figure, not on
- *      the start of the word.
- *   4. The cut lands mid-word, inside the number, not on the pause before it.
+ *   PLACE   f0-f72    sixteen bank props arrive one at a time, on the beat,
+ *                     until not one pixel of him is showing.
+ *   HOLD    f72-f84   the bank, complete, with nobody visibly in it.
+ *   CLEAR   f84-f120  the props leave twice as fast as they arrived, from
+ *                     the centre outwards, so he is glimpsed through the
+ *                     gaps several steps before the ground is bare.
  *
- * Frames are 30fps. The reference runs at 25; every beat below is its
- * measured time in seconds x 30, so the rhythm is preserved exactly.
+ * Then the lights go out around him and he is left in a disc of paper light —
+ * the reference's hard cut to a spotlit card, repurposed as punctuation for
+ * "everything is gone and he is still here".
+ *
+ * Frames are 30fps.
  */
 
 /**
  * The stop-motion pulse. The reference's flat-lay was authored at ~18.75fps
- * and conformed to 25 (one duplicated frame in every four), so its props
- * re-lay roughly every 1.33 frames of its own timeline. At 30fps the nearest
- * honest quantisation is every 2 frames — 15 hops a second, which is also
- * the chunkiest step the series has used and reads as hands moving between
- * shutter clicks rather than as a stutter.
- *
- * Everything stepped in this shot uses this one value. Quantise BEFORE
- * easing, never after (see useStopMotionStep).
+ * and conformed to 25 — one duplicated frame in every four. At 30fps the
+ * nearest honest quantisation is every 2 frames: fifteen hops a second,
+ * which reads as hands moving between shutter clicks rather than as a
+ * stutter. Everything stepped in this shot uses this one value, and
+ * everything quantises BEFORE easing, never after.
  */
 export const STEP = 2;
 
-/** The clutter is whole and re-laying in place. */
-export const CLEAR_START = 40;
-/** Bare ground. Props leave in STEP-sized groups across these 9 frames. */
-export const CLEAR_END = 49;
+/** A prop arrives every PLACE_EVERY frames — two steps, so it lands on the beat. */
+export const PLACE_START = 0;
+export const PLACE_EVERY = 4;
+export const PLACE_END = 72;
+
+/** The complete bank, held. Nobody in it. */
+export const HOLD_END = 84;
 
 /**
- * The count-up. It begins under the clutter, long before anything can see it,
- * so that the figure the reveal exposes is already most of the way home —
- * that is what makes the reveal feel like catching something in motion
- * instead of starting something.
- *
- * The reference's curve is EASE-OUT QUADRATIC over this exact span. Checked
- * against four of its measured frames and it reproduces every one:
- *
- *   f46 -> 79    f49 -> 82    f63 -> 94    f72 -> 97    f76 -> 98
- *
- * so the shape is not a guess.
+ * The clearing. One prop a step, half the placing interval: things are taken
+ * away faster than they were put down, which is the joke.
  */
-export const COUNT_START = 8;
-export const COUNT_LAND = 76;
-
-/** First frame at which the figure is legible through the thinning clutter. */
-export const COUNT_VISIBLE = 46;
+export const CLEAR_START = 84;
+export const CLEAR_EVERY = 2;
+export const CLEAR_END = 120;
 
 /**
- * The caption's hard out. Two frames after the voice starts the payoff
- * figure — it must not leave during the silence at CLEAR_END..COUNT_LAND,
- * which is the whole point of rule 1 above. No fade: it cuts.
+ * The lights. Not a fade — a cut, on the frame the last prop leaves, so the
+ * two events read as one.
  */
-export const CAPTION_OUT = 64;
+export const SPOTLIGHT = 120;
 
-/**
- * The cut to the spotlit card. Mid-word, under the spoken figure, NOT on the
- * pause. The number does not move, resize or re-time across it; only the
- * ground and the light change, which is why the cut reads as a lighting
- * change rather than as a new shot.
- */
-export const CARD_CUT = 72;
-
-/** The subline arrives a word at a time, trailing the voice by ~0.2s. */
-export const SUB_IN = 88;
-export const SUB_FULL = 92;
-
-/** A held beat on the finished card before the episode proper starts. */
-export const EP04_SHOT_00_DURATION = 105;
+/** A held beat on him alone before the episode proper starts. */
+export const EP04_SHOT_00_DURATION = 150;

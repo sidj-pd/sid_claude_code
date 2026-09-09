@@ -680,3 +680,325 @@ move independently may be baked in.
 > shading painted onto the backdrop. No deckle edge, no torn-page border, no
 > frame, no mount, no table or wood grain. Nothing touches the edge of the
 > frame. No text anywhere in the image.
+
+---
+
+# Episode 04 — Shot 0, "The Cold Open"
+
+The bank builds itself on top of the man who works there, then is taken away
+again piece by piece until only he is left, exactly where he was the whole
+time. He is never placed and never revealed by a fade — he is UNDER
+everything from frame 0, so the last prop lifting off is the only reveal the
+shot gets. That means his art has to hold the centre of the frame on its own.
+
+Everything here is a FLAT-LAY piece: it will be laid over its neighbours at a
+slight angle, so each one has to read on its own silhouette with nothing
+around it. Chunky and simple beats detailed — a thing that needs squinting at
+will not survive being one of seventeen.
+
+Four cutouts we already have are reused and do not need generating:
+`cash-stack`, `wall-clock-face`, `desk-lamp`, `laptop-screen`.
+
+Two rules that cost us a shot each in Episode 03, repeated here because they
+are easy to lose in a long sheet:
+
+- **No text, anywhere, on anything.** Not on a sign, not on a spine, not on a
+  form. The generator cannot spell and the misspelling is what the eye goes
+  to. Every label in this shot is set in Remotion.
+- **Every piece must sit clearly darker than the cream backdrop.** Cream on
+  cream keys out as an outline skeleton — that is what happened to the
+  tenant's keys. Where a prop would naturally be pale, the prompt names a
+  darker paper for it.
+
+## `bank-employee.jpg`
+
+> Hand-cut paper collage illustration in the style of a printed mid-century
+> explainer: layered construction and craft paper, matte and slightly
+> desaturated, with visible scissor-cut and torn edges and a fine halftone grain
+> over the whole piece. Flatly lit from above — no rendering, no gloss, no
+> gradient lighting.
+>
+> Subject: an Indian man in his forties seated behind a bank counter, seen from
+> the front from the waist up, in an upright portrait shape a little taller than
+> it is wide. He wears a short-sleeved shirt in muted slate blue with a darker
+> collar — keep the shirt clearly darker than the backdrop — over a slight
+> paunch, with a plain lanyard round his neck and a pen in the breast pocket.
+> Neatly combed black hair going grey at the temples, a trimmed moustache,
+> reading glasses low on the nose. Both forearms rest flat on the counter top in
+> front of him, hands loosely folded, doing nothing at all. His expression is
+> patient, blank and entirely unbothered — not smiling, not annoyed, a man who
+> has been sitting exactly like this for a very long time. He looks straight out
+> at the viewer. The counter top is a plain slab of dark oxblood paper crossing
+> the bottom of the shape; below its front edge, nothing.
+>
+> Centred on a plain flat cream craft-paper backdrop running to all four edges
+> with clear empty margin all round. No drop shadow, no cast shadow, no shading
+> painted onto the backdrop. No deckle edge, no torn-page border, no frame, no
+> mount, no table or wood grain. Nothing touches the edge of the frame. No text
+> anywhere in the image.
+
+## `bank-grille.jpg`
+
+> Hand-cut paper collage illustration in the style of a printed mid-century
+> explainer: layered construction and craft paper, matte and slightly
+> desaturated, with visible scissor-cut and torn edges and a fine halftone grain
+> over the whole piece. Flatly lit from above — no rendering, no gloss, no
+> gradient lighting.
+>
+> Subject: a teller window grille seen straight on, in a wide landscape shape
+> about twice as wide as it is tall. A frame of dark bronze-brown paper holds
+> nine or ten thick vertical bars with an arched opening cut through the lower
+> middle, wide enough to pass a bundle through. Below the bars a narrow ledge
+> runs the full width in a slightly lighter tan. The gaps between the bars are
+> cut clean THROUGH the piece — open holes, not pale paper — so the artwork
+> behind will show between them. No glass, no reflection, no counter, no person.
+>
+> Centred on a plain flat cream craft-paper backdrop running to all four edges
+> with clear empty margin all round. No drop shadow, no cast shadow, no shading
+> painted onto the backdrop. No deckle edge, no torn-page border, no frame, no
+> mount, no table or wood grain. Nothing touches the edge of the frame. No text
+> anywhere in the image.
+
+## `token-display.jpg`
+
+> Hand-cut paper collage illustration in the style of a printed mid-century
+> explainer: layered construction and craft paper, matte and slightly
+> desaturated, with visible scissor-cut and torn edges and a fine halftone grain
+> over the whole piece. Flatly lit from above — no rendering, no gloss, no
+> gradient lighting.
+>
+> Subject: a wall-mounted queue token display board seen straight on, in a
+> landscape shape about twice as wide as it is tall. A boxy charcoal-grey casing
+> with rounded corners, and set into it two BLANK recessed panels of deep red
+> paper side by side where the digits would be — the panels are completely
+> empty, no numerals, no segments, no dots, no lettering of any kind. A short
+> stub of dark cable leaves the top right corner. No stand, no bracket, no wall.
+>
+> Centred on a plain flat cream craft-paper backdrop running to all four edges
+> with clear empty margin all round. No drop shadow, no cast shadow, no shading
+> painted onto the backdrop. No deckle edge, no torn-page border, no frame, no
+> mount, no table or wood grain. Nothing touches the edge of the frame. No text
+> anywhere in the image.
+
+## `file-tower.jpg`
+
+> Hand-cut paper collage illustration in the style of a printed mid-century
+> explainer: layered construction and craft paper, matte and slightly
+> desaturated, with visible scissor-cut and torn edges and a fine halftone grain
+> over the whole piece. Flatly lit from above — no rendering, no gloss, no
+> gradient lighting.
+>
+> Subject: a leaning stack of about a dozen cloth-tied office file bundles seen
+> from the side, in a tall narrow portrait shape roughly twice as tall as it is
+> wide. Each bundle is a slab of thick papers between dusty card covers in muted
+> ochre, brick red and olive, tied shut with a length of pale cord knotted at the
+> front. The stack is uneven — bundles sit slightly askew, edges of loose paper
+> stick out at the sides, and the whole tower leans a few degrees. Nothing holds
+> it and no hand appears. No shelf, no floor, no desk.
+>
+> Centred on a plain flat cream craft-paper backdrop running to all four edges
+> with clear empty margin all round. No drop shadow, no cast shadow, no shading
+> painted onto the backdrop. No deckle edge, no torn-page border, no frame, no
+> mount, no table or wood grain. Nothing touches the edge of the frame. No text
+> anywhere in the image.
+
+## `ledger-open.jpg`
+
+> Hand-cut paper collage illustration in the style of a printed mid-century
+> explainer: layered construction and craft paper, matte and slightly
+> desaturated, with visible scissor-cut and torn edges and a fine halftone grain
+> over the whole piece. Flatly lit from above — no rendering, no gloss, no
+> gradient lighting.
+>
+> Subject: a large hardbound accounts ledger lying open, seen straight down from
+> above, in a wide landscape shape about half again as wide as it is tall. The
+> covers are dark maroon board; the two open pages are ruled with a grid of fine
+> horizontal lines and a few vertical column rules in faded grey-blue. The ruled
+> lines are the ONLY marks — the pages carry no numbers, no handwriting, no
+> words, no stamps, nothing written at all. A dark cloth spine and a ribbon
+> marker lie down the gutter, and the outer page edges are visibly thick and
+> slightly wavy. No hand, no pen, no desk.
+>
+> Centred on a plain flat cream craft-paper backdrop running to all four edges
+> with clear empty margin all round. No drop shadow, no cast shadow, no shading
+> painted onto the backdrop. No deckle edge, no torn-page border, no frame, no
+> mount, no table or wood grain. Nothing touches the edge of the frame. No text
+> anywhere in the image.
+
+## `form-pile.jpg`
+
+> Hand-cut paper collage illustration in the style of a printed mid-century
+> explainer: layered construction and craft paper, matte and slightly
+> desaturated, with visible scissor-cut and torn edges and a fine halftone grain
+> over the whole piece. Flatly lit from above — no rendering, no gloss, no
+> gradient lighting.
+>
+> Subject: a loose heap of about twenty deposit-slip forms seen from slightly
+> above, in a landscape shape about half again as wide as it is tall. The slips
+> are cut from dusty pink, pale olive and grey-blue paper — no white and no cream
+> among them, so the whole heap stays clearly darker than the backdrop — fanned
+> out at all angles so a dozen separate corners and edges show. Each slip carries
+> a few ruled boxes and a printed grid, and nothing else: no words, no numerals,
+> no handwriting, no signatures. A single bulldog clip in dark steel grey grips
+> one corner of the pile. No hand, no tray, no desk.
+>
+> Centred on a plain flat cream craft-paper backdrop running to all four edges
+> with clear empty margin all round. No drop shadow, no cast shadow, no shading
+> painted onto the backdrop. No deckle edge, no torn-page border, no frame, no
+> mount, no table or wood grain. Nothing touches the edge of the frame. No text
+> anywhere in the image.
+
+## `rubber-stamp.jpg`
+
+> Hand-cut paper collage illustration in the style of a printed mid-century
+> explainer: layered construction and craft paper, matte and slightly
+> desaturated, with visible scissor-cut and torn edges and a fine halftone grain
+> over the whole piece. Flatly lit from above — no rendering, no gloss, no
+> gradient lighting.
+>
+> Subject: a round wooden-handled rubber stamp standing upright beside a square
+> ink pad, seen from the front and slightly above, in a shape a little wider than
+> it is tall. The stamp has a turned handle in dark walnut brown over a black
+> rubber base. The ink pad is an open metal tin in dull olive with a felt pad of
+> deep violet-blue inside, the lid folded back behind it. A few stray stamped
+> rings mark the surface of the pad. No paper under them, no hand, no desk, and
+> nothing printed or lettered on the stamp face or the tin.
+>
+> Centred on a plain flat cream craft-paper backdrop running to all four edges
+> with clear empty margin all round. No drop shadow, no cast shadow, no shading
+> painted onto the backdrop. No deckle edge, no torn-page border, no frame, no
+> mount, no table or wood grain. Nothing touches the edge of the frame. No text
+> anywhere in the image.
+
+## `passbook-stack.jpg`
+
+> Hand-cut paper collage illustration in the style of a printed mid-century
+> explainer: layered construction and craft paper, matte and slightly
+> desaturated, with visible scissor-cut and torn edges and a fine halftone grain
+> over the whole piece. Flatly lit from above — no rendering, no gloss, no
+> gradient lighting.
+>
+> Subject: a short stack of eight or nine small bank passbooks seen from above
+> and slightly to one side, in a landscape shape about half again as wide as it
+> is tall. Each booklet is a stapled card cover in a different muted colour —
+> teal, brick, mustard, slate — with a few pale inner pages showing at the
+> edges. They sit askew on each other so every cover is separately visible, and
+> the top one is open a crack. The covers are completely plain: no emblem, no
+> lettering, no numbering, no printed panel. No rubber band, no hand, no desk.
+>
+> Centred on a plain flat cream craft-paper backdrop running to all four edges
+> with clear empty margin all round. No drop shadow, no cast shadow, no shading
+> painted onto the backdrop. No deckle edge, no torn-page border, no frame, no
+> mount, no table or wood grain. Nothing touches the edge of the frame. No text
+> anywhere in the image.
+
+## `note-counter.jpg`
+
+> Hand-cut paper collage illustration in the style of a printed mid-century
+> explainer: layered construction and craft paper, matte and slightly
+> desaturated, with visible scissor-cut and torn edges and a fine halftone grain
+> over the whole piece. Flatly lit from above — no rendering, no gloss, no
+> gradient lighting.
+>
+> Subject: a desktop banknote counting machine seen from the front and slightly
+> above, in a shape a little wider than it is tall. A chunky boxy body in muted
+> grey-green with a sloping front, a hopper on top holding an upright wedge of
+> olive-green notes, and a shallow output tray at the bottom front with a few
+> notes fanned in it. A small blank display recess in dark charcoal sits on the
+> upper face — empty, no digits, no segments. Four rubber feet. The notes are
+> completely blank: no numerals, no portraits, no printing. No cable, no hand, no
+> desk.
+>
+> Centred on a plain flat cream craft-paper backdrop running to all four edges
+> with clear empty margin all round. No drop shadow, no cast shadow, no shading
+> painted onto the backdrop. No deckle edge, no torn-page border, no frame, no
+> mount, no table or wood grain. Nothing touches the edge of the frame. No text
+> anywhere in the image.
+
+## `queue-post.jpg`
+
+> Hand-cut paper collage illustration in the style of a printed mid-century
+> explainer: layered construction and craft paper, matte and slightly
+> desaturated, with visible scissor-cut and torn edges and a fine halftone grain
+> over the whole piece. Flatly lit from above — no rendering, no gloss, no
+> gradient lighting.
+>
+> Subject: a single retractable queue barrier post seen from the front, in a tall
+> narrow portrait shape about three times as tall as it is wide. A dark
+> gunmetal-grey column on a heavy round base, with a belt of deep maroon webbing
+> pulled out from a slot near the top and running off to one side, ending in a
+> clip that hooks onto nothing. The belt is plain — no stripe, no lettering. Only
+> one post; no second post, no rope, no floor, no queue, no people.
+>
+> Centred on a plain flat cream craft-paper backdrop running to all four edges
+> with clear empty margin all round. No drop shadow, no cast shadow, no shading
+> painted onto the backdrop. No deckle edge, no torn-page border, no frame, no
+> mount, no table or wood grain. Nothing touches the edge of the frame. No text
+> anywhere in the image.
+
+## `steel-almirah.jpg`
+
+> Hand-cut paper collage illustration in the style of a printed mid-century
+> explainer: layered construction and craft paper, matte and slightly
+> desaturated, with visible scissor-cut and torn edges and a fine halftone grain
+> over the whole piece. Flatly lit from above — no rendering, no gloss, no
+> gradient lighting.
+>
+> Subject: a tall two-door steel office cupboard seen straight on from the front,
+> in a tall portrait shape about twice as tall as it is wide. The body is cut
+> from muted grey-green paper with a slightly darker recessed panel down each
+> door, a long vertical handle bar on the right-hand door and a small round lock
+> plate beside it. One door stands open a hand's width, showing a sliver of
+> shelved files in ochre and brick inside. Short flat feet at the bottom. No
+> stickers, no plate, no numbering, no lettering anywhere on it. No wall, no
+> floor.
+>
+> Centred on a plain flat cream craft-paper backdrop running to all four edges
+> with clear empty margin all round. No drop shadow, no cast shadow, no shading
+> painted onto the backdrop. No deckle edge, no torn-page border, no frame, no
+> mount, no table or wood grain. Nothing touches the edge of the frame. No text
+> anywhere in the image.
+
+## `notice-board.jpg`
+
+> Hand-cut paper collage illustration in the style of a printed mid-century
+> explainer: layered construction and craft paper, matte and slightly
+> desaturated, with visible scissor-cut and torn edges and a fine halftone grain
+> over the whole piece. Flatly lit from above — no rendering, no gloss, no
+> gradient lighting.
+>
+> Subject: a cork notice board seen straight on, in a landscape shape about half
+> again as wide as it is tall. A dark walnut-brown frame around a mottled tan
+> cork field, with seven or eight small circulars pinned to it at slight angles,
+> overlapping each other, cut from dusty pink, pale olive and grey-blue paper.
+> Each sheet shows a few ruled lines and a printed grid block and NOTHING else —
+> no words, no headings, no numerals, no signatures, no stamps. Brass drawing
+> pins at the corners. Some sheets curl at a corner. No wall, no bracket.
+>
+> Centred on a plain flat cream craft-paper backdrop running to all four edges
+> with clear empty margin all round. No drop shadow, no cast shadow, no shading
+> painted onto the backdrop. No deckle edge, no torn-page border, no frame, no
+> mount, no table or wood grain. Nothing touches the edge of the frame. No text
+> anywhere in the image.
+
+## `chai-glass.jpg`
+
+> Hand-cut paper collage illustration in the style of a printed mid-century
+> explainer: layered construction and craft paper, matte and slightly
+> desaturated, with visible scissor-cut and torn edges and a fine halftone grain
+> over the whole piece. Flatly lit from above — no rendering, no gloss, no
+> gradient lighting.
+>
+> Subject: a small cutting-chai glass standing on a steel saucer, seen from the
+> front and slightly above, in an upright shape a little taller than it is wide.
+> The glass is a short straight-sided tumbler with a rolled rim, filled
+> two-thirds with milky tea in a warm mid-brown, cut so the tea reads as a solid
+> darker block behind the glass wall. The saucer is a shallow dull-steel disc in
+> muted grey. A faint ring of dried tea marks the saucer. No steam, no spoon, no
+> hand, no table.
+>
+> Centred on a plain flat cream craft-paper backdrop running to all four edges
+> with clear empty margin all round. No drop shadow, no cast shadow, no shading
+> painted onto the backdrop. No deckle edge, no torn-page border, no frame, no
+> mount, no table or wood grain. Nothing touches the edge of the frame. No text
+> anywhere in the image.
