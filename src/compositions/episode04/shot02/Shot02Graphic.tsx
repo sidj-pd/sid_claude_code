@@ -5,7 +5,7 @@ import {NewsprintTexture} from '../../../components/NewsprintTexture';
 import {SAFE_BOTTOM_Y, safeTop} from '../../../components/safeArea';
 import {useStopMotionStep} from '../../../components/useStopMotionStep';
 import {VoiceOver} from '../../../components/VoiceOver';
-import {ARUBA_DEEP, BUTTER, GANACHE, GANACHE_DEEP} from '../../../components/palette';
+import {BUTTER, GANACHE, GANACHE_DEEP} from '../../../components/palette';
 import {StatBar} from '../../episode01/shot05/StatBar';
 import {Ground} from '../Ground';
 import {Clock} from './Clock';
@@ -131,6 +131,28 @@ export const Shot02Graphic: React.FC = () => {
 						<Caption text="TURNED AWAY" age={frame - CAP1_IN} />
 					</div>
 
+					{/* The leftover figure, set ABOVE its block rather than in it.
+					    At 4% of the bar the block is 36px wide and there is no
+					    inside to put a number in -- the same reason Episode 01's
+					    9% and Episode 03's 2% are labelled this way. */}
+					{frame >= NUM1_STAMP ? (
+						<div
+							style={{
+								position: 'absolute',
+								right: 84,
+								top: BAR1_Y - 66,
+								fontFamily: 'RansomArchivoBlack, sans-serif',
+								fontSize: 56,
+								lineHeight: 1,
+								color: BUTTER,
+								opacity: interpolate(frame - NUM1_STAMP, [0, 2], [0, 1], CLAMP),
+								transform: `translateY(${interpolate(frame - NUM1_STAMP, [0, 3], [12, 0], CLAMP)}px)`,
+							}}
+						>
+							4%
+						</div>
+					) : null}
+
 					{/* The leftover 4% detaches and becomes the whole of bar two.
 					    It is a drawn object being carried, not a value being
 					    re-plotted — that is the entire argument of the card. */}
@@ -176,8 +198,8 @@ export const Shot02Graphic: React.FC = () => {
 				</AbsoluteFill>
 			) : (
 				<AbsoluteFill>
-					<div style={{position: 'absolute', left: 140, top: 520}}>
-						<Clock size={800} hands={hands} wedge={wedge} />
+					<div style={{position: 'absolute', left: 60, top: 470}}>
+						<Clock size={960} hands={hands} wedge={wedge} />
 					</div>
 					{frame >= WINDOW_STAMP ? (
 						<div style={{position: 'absolute', left: 0, right: 0, top: 1400, textAlign: 'center'}}>
@@ -206,9 +228,9 @@ export const Shot02Graphic: React.FC = () => {
 							top: 300,
 							textAlign: 'center',
 							fontFamily: 'RansomAnton, sans-serif',
-							fontSize: 54,
-							letterSpacing: 2,
-							color: ARUBA_DEEP,
+							fontSize: 66,
+							letterSpacing: 3,
+							color: GANACHE,
 						}}
 					>
 						3:30 — 4:00
