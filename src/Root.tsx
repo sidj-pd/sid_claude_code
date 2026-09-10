@@ -72,6 +72,8 @@ import {Shot08Committee as Ep04Shot08Committee} from './compositions/episode04/s
 import {EP04_SHOT_08_DURATION} from './compositions/episode04/shot08/beats';
 import {Shot06Fallout as Ep04Shot06Fallout} from './compositions/episode04/shot06/Shot06Fallout';
 import {EP04_SHOT_06_DURATION} from './compositions/episode04/shot06/beats';
+import {Shot05Expert as Ep04Shot05Expert} from './compositions/episode04/shot05/Shot05Expert';
+import {EP04_SHOT_05_DURATION} from './compositions/episode04/shot05/beats';
 import {Shot09FullCircle as Ep04Shot09FullCircle} from './compositions/episode04/shot09/Shot09FullCircle';
 import {EP04_SHOT_09_DURATION} from './compositions/episode04/shot09/beats';
 import {EP04_SHOT_00_DURATION} from './compositions/episode04/shot00/beats';
@@ -268,6 +270,14 @@ export const Root: React.FC = () => {
 				id="Ep04Shot02Graphic"
 				component={Ep04Shot02Graphic}
 				durationInFrames={EP04_SHOT_02_DURATION}
+				fps={OPENING_MONTAGE_FPS}
+				width={OPENING_MONTAGE_WIDTH}
+				height={OPENING_MONTAGE_HEIGHT}
+			/>
+			<Composition
+				id="Ep04Shot05Expert"
+				component={Ep04Shot05Expert}
+				durationInFrames={EP04_SHOT_05_DURATION}
 				fps={OPENING_MONTAGE_FPS}
 				width={OPENING_MONTAGE_WIDTH}
 				height={OPENING_MONTAGE_HEIGHT}
