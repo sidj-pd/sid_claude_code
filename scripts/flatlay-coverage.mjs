@@ -48,6 +48,15 @@ const run = async () => {
 	const sLeft = Math.round(s.x - s.w/2), sTop = Math.round(s.y - sh/2);
 	const sub = await alphaOf(sBuf, W, H, sLeft, sTop);
 
+	/**
+	 * Anything else that must be buried with him. The nameplate is a plain
+	 * rectangle drawn in Remotion rather than a cutout, but the pile has to
+	 * cover it just as completely -- and the top of the frame is exactly where
+	 * that is least certain, because the piece nominally covering it is the
+	 * grille, whose bar gaps are transparent by design.
+	 */
+	const rects = L.subjectRects ?? [];
+
 	// Everything laid on top of him.
 	const comps = [];
 	for (const p of L.pieces) {
@@ -59,13 +68,16 @@ const run = async () => {
 		.raw().toBuffer({resolveWithObject: true});
 
 	const sd = sub.data, cd = cov.data, ch = 4;
+	const inRect = (x, y) =>
+		rects.some((r) => x >= r.x && x < r.x + r.w && y >= r.y && y < r.y + r.h);
 	let subjectPx = 0, exposed = 0, framePx = 0, frameCovered = 0;
 	const exposeMask = Buffer.alloc(W * H);
 	for (let i = 0; i < W * H; i++) {
+		const x = i % W, y = (i / W) | 0;
 		const sa = sd[i*ch+3], ca = cd[i*ch+3];
 		if (ca > 40) frameCovered++;
 		framePx++;
-		if (sa > 40) {
+		if (sa > 40 || inRect(x, y)) {
 			subjectPx++;
 			if (ca <= 40) { exposed++; exposeMask[i] = 255; }
 		}
@@ -101,6 +113,13 @@ const run = async () => {
 	const full = await sharp({create:{width:W,height:H,channels:3,background:'#e9dfc9'}})
 		.composite([
 			{input: red, left: rl, top: rt},
+			...rects.map((r) => ({
+				input: {
+					create: {width: r.w, height: r.h, channels: 4, background: {r: 255, g: 0, b: 0, alpha: 1}},
+				},
+				left: r.x,
+				top: r.y,
+			})),
 			...comps.map((c)=>({input:c.buf,left:c.left,top:c.top})),
 		])
 		.png().toBuffer();

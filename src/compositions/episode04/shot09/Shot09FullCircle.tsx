@@ -6,6 +6,7 @@ import {PaperCutout} from '../../../components/PaperCutout';
 import {useStopMotionStep} from '../../../components/useStopMotionStep';
 import {VoiceOver} from '../../../components/VoiceOver';
 import {BUTTER, GANACHE, GANACHE_DEEP} from '../../../components/palette';
+import {BankPlate} from '../BankPlate';
 import {Ground} from '../Ground';
 import {
 	BITE,
@@ -87,6 +88,10 @@ export const Shot09FullCircle: React.FC = () => {
 						style={{width: BANKER_W, height: BANKER_H}}
 					/>
 				</div>
+
+				{/* Mounted above the counter, and under the pile with him in
+				    Shot 0 -- the coverage check counts it as part of him. */}
+				<BankPlate />
 
 				{/* The sign has not moved and does not move. That is the joke of
 				    the whole beat: the counter is still open, and it still says

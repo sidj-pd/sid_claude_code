@@ -1,6 +1,7 @@
 import React from 'react';
 import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
 import {BUTTER, GANACHE_DEEP} from '../../../components/palette';
+import {BankPlate} from '../BankPlate';
 import {Ground} from '../Ground';
 import {NewsprintTexture} from '../../../components/NewsprintTexture';
 import {PaperCutout} from '../../../components/PaperCutout';
@@ -82,6 +83,11 @@ export const Shot00ColdOpen: React.FC = () => {
 					style={{width: SUBJECT_W, height: SUBJECT_H}}
 				/>
 			</div>
+
+			{/* Mounted above the counter, and buried with him: the coverage
+			    check counts the plate's rectangle as part of the subject, and
+			    the pile had to be re-laid to hide it. */}
+			<BankPlate />
 
 			{/* On the counter, under the pile with him. Both sit inside the
 			    ledger's footprint, which is what keeps them hidden until he

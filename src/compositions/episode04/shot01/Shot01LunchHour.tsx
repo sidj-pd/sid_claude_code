@@ -5,6 +5,7 @@ import {PaperCutout} from '../../../components/PaperCutout';
 import {useStopMotionStep} from '../../../components/useStopMotionStep';
 import {VoiceOver} from '../../../components/VoiceOver';
 import {BUTTER} from '../../../components/palette';
+import {BankPlate} from '../BankPlate';
 import {Ground} from '../Ground';
 import {
 	BANKER_LINE,
@@ -117,6 +118,9 @@ export const Shot01LunchHour: React.FC = () => {
 			<Ground />
 
 			<AbsoluteFill>
+				{/* Same plate, same place, in every shot the counter appears in. */}
+				<BankPlate />
+
 				<div
 					style={{
 						position: 'absolute',

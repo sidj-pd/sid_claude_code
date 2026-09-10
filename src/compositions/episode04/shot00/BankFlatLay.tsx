@@ -75,10 +75,15 @@ type Piece = {
  * 94.5% of the frame covered. Change any of them and re-run it — the shot
  * only works if the built frame hides him completely.
  *
- * It took three passes to get there, and the interesting failure was the
- * first: the grille was over his head, and 9% of him showed straight through
- * it, because the gaps between its bars are transparent BY DESIGN. A piece
- * that reads as solid is not necessarily a piece that covers anything.
+ * The interesting failures were both the same failure. First the grille was
+ * over his head and 9% of him showed straight through it, because the gaps
+ * between its bars are transparent BY DESIGN. Then the FUCO BANK nameplate was
+ * added above him and 1% of IT showed through, in a 170px band between the
+ * almirah's right edge and the notice board's left, where again only the
+ * grille was nominally covering. A piece that reads as solid is not
+ * necessarily a piece that covers anything, and the top of this frame is where
+ * that keeps biting. The board moved left and the almirah widened; the check
+ * is back to zero, and frame coverage went up to 96.2% as a side effect.
  *
  * Thirteen pieces, not sixteen. `laptop-screen`, `desk-lamp` and
  * `wall-clock-face` would have been natural additions, but all three are
@@ -88,9 +93,9 @@ type Piece = {
 const PIECES: Piece[] = [
 	{asset: 'bank-grille', x: 540, y: 250, w: 1160, h: 512, rot: -2},
 	{asset: 'ledger-open', x: 540, y: 1200, w: 980, h: 524, rot: -4},
-	{asset: 'notice-board', x: 830, y: 330, w: 680, h: 500, rot: 5},
+	{asset: 'notice-board', x: 750, y: 320, w: 700, h: 515, rot: 5},
 	{asset: 'note-counter', x: 230, y: 1460, w: 580, h: 619, rot: -7},
-	{asset: 'steel-almirah', x: 150, y: 700, w: 470, h: 1023, rot: 4},
+	{asset: 'steel-almirah', x: 170, y: 700, w: 520, h: 1132, rot: 4},
 	{asset: 'passbook-stack', x: 860, y: 1620, w: 650, h: 483, rot: -8},
 	{asset: 'token-display', x: 470, y: 640, w: 760, h: 450, rot: 3},
 	{asset: 'form-pile', x: 330, y: 1790, w: 740, h: 497, rot: 9},
