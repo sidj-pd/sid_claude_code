@@ -821,155 +821,209 @@ the compositions exist, the chyrons and tears and overlays are timed, and
 take lengths in each shot's `beats.ts`, which are budgets until the real files
 can be measured.
 
-## THE RULE THAT KEEPS COSTING US A RE-GENERATION
+## EVERY PROMPT IS A COLD START
 
-**Never write the word camera, lens, webcam, laptop, tripod, screen or monitor
-in a prompt — not even to say there isn't one.** Episode 03 put a tripod in
-shot because a prompt named one. The first draft of this sheet said "speaking
-into a laptop webcam" and "looks directly into the lens", and the generator
-did the obvious thing and put a laptop in front of the witness. It does not
+Each of these goes to the generator as one standalone request. It has no
+memory of the last one. **"The same man", "same office", "same framing" refer
+to nothing and get you a different man in a different room** — which is
+exactly what the first draft of this sheet did, describing the witness in full
+once and then writing "the same man" for his other two clips.
+
+So every prompt below repeats the WHOLE description: who he is, what he is
+wearing, what room he is in, how he is framed, how it is lit. The repetition
+is not sloppiness, it is the format. When you change one of them — a shirt
+colour, the room — change it in all of that person's prompts or the takes will
+not cut together.
+
+## NEVER NAME THE EQUIPMENT
+
+**Never write camera, lens, webcam, laptop, tripod, screen or monitor — not
+even to say there isn't one.** Episode 03 put a tripod in shot because a
+prompt named one. The first draft of this sheet said "speaking into a laptop
+webcam" and the generator put a laptop in front of the witness. It does not
 reliably distinguish "there is a camera" from "there is no camera"; both
-mentions summon one. Negations are the weakest instruction in a prompt and the
-worst place to spend one.
+mentions summon one, and a negation is the weakest instruction in a prompt.
 
-So these prompts never name the equipment. Instead:
+Instead: **eyeline** is "looks straight at the viewer"; **the webcam look** is
+described as image quality — soft, noisy, flat, compressed; and **an empty
+desk** is stated positively ("the table in front of him is completely bare"),
+because describing what IS there is far stronger than listing what is not.
 
-- **Eyeline** is "looks straight at the viewer", never "into the lens".
-- **The webcam look** is described as image quality — soft, noisy, flat,
-  compressed — never as a device.
-- **An empty desk** is stated POSITIVELY ("the desk in front of him is bare
-  and empty"), because describing what IS there is far stronger than listing
-  what is not.
-
-Two more, also from Episode 03:
-
-- **Never describe the edit.** Saying a cutaway punches in later got the zoom
-  baked into the clip.
-- **State the eyeline explicitly, every time.** Leave it out and he looks away.
+Two more, also from Episode 03: **never describe the edit** (saying a cutaway
+punches in later baked the zoom into the clip), and **state the eyeline
+explicitly every single time** or he looks away.
 
 ## `ep04-witness-1.mp4` — Beat 4, about 13s
 
-> A photorealistic vertical video, 9:16, of an Indian man in his thirties
-> sitting at a plain table in an ordinary flat, framed from the chest up and
-> filling most of the frame, seen from a little below his eye level and quite
-> close, as though from a seat just across the table from him. Soft daylight
-> from a window off to one side. He LOOKS STRAIGHT AT THE VIEWER and holds
-> that gaze for the whole clip.
+> A photorealistic vertical video, 9:16, of an Indian man in his early thirties, slim, with short black hair parted on one
+> side, clean-shaven, wearing a plain olive-green short-sleeved shirt, seated at a plain table
+> in an ordinary domestic room with a plain off-white wall behind him and nothing
+> hung on it. Soft daylight from a window off to one side. He is framed from the chest up and filling most of the frame, seen from a little
+> below his eye level and quite close, as though from a seat just across the
+> table from him. The image is a little soft and a little noisy, with flat muted
+> colour and mild compression — the look of a low-bandwidth home video
+> recording, not a broadcast interview.
 >
-> The image itself is a little soft and a little noisy, with flat muted colour
-> and mild compression — the look of a low-bandwidth home video recording, not
-> a broadcast interview. The table in front of him is completely bare and
-> empty. The wall behind him is plain and unremarkable.
+> He LOOKS STRAIGHT AT THE VIEWER and holds that gaze. He is calm and flat, recounting something that unsettled him and that he has not
+> finished thinking about.
 >
-> He is calm and flat, recounting something that unsettled him and that he has
-> not finished thinking about. He says: "I saw the sign. I was already turning
-> around. That's what you do. He called me back. Pushed his lunch aside. No
-> token. No 'come after 3:30.' No 'sir, go to counter 2.' Done in four
-> minutes."
+> He says: "I saw the sign. I was already turning around. That's what you do. He called me back. Pushed his lunch aside. No token. No 'come after 3:30.' No 'sir, go to counter 2.' Done in four minutes."
 >
-> No writing, no signage and no logos anywhere in the image. The shot is
-> completely locked off: it does not move, drift, zoom or reframe at any point.
+> Delivered evenly, each item landing like the next thing on a list, building only
+> by accumulation and never by raising his voice.
+>
+> The table in front of him is completely bare and empty. No writing, no signage
+> and no logos anywhere in the image. The shot is completely locked off: it does
+> not move, drift, zoom or reframe at any point.
 
 ## `ep04-witness-2.mp4` — Beat 4's second half, about 9s
 
-> The same man, the same flat, the same bare table, the same close low framing
-> and the same soft noisy low-bandwidth image. He LOOKS STRAIGHT AT THE VIEWER.
-> His eyes drift off to one side for a moment before he speaks, then come back
-> to the viewer.
+> A photorealistic vertical video, 9:16, of an Indian man in his early thirties, slim, with short black hair parted on one
+> side, clean-shaven, wearing a plain olive-green short-sleeved shirt, seated at a plain table
+> in an ordinary domestic room with a plain off-white wall behind him and nothing
+> hung on it. Soft daylight from a window off to one side. He is framed from the chest up and filling most of the frame, seen from a little
+> below his eye level and quite close, as though from a seat just across the
+> table from him. The image is a little soft and a little noisy, with flat muted
+> colour and mild compression — the look of a low-bandwidth home video
+> recording, not a broadcast interview.
 >
-> He says: "I had the whole afternoon blocked off. I got home by two. I got
-> home early and caught my wife having an affair."
+> He LOOKS STRAIGHT AT THE VIEWER and holds that gaze. His eyes drift off to one side for a moment before he speaks, then come back to
+> the viewer. He looks slightly more worn than composed.
 >
-> Delivered completely flat, as a sequence of facts, with no bitterness and no
-> comic timing. The table in front of him is bare and empty. No writing, no
-> signage and no logos anywhere in the image. The shot is completely locked
-> off: it does not move, drift, zoom or reframe.
+> He says: "I had the whole afternoon blocked off. I got home by two. I got home early and caught my wife having an affair."
+>
+> Delivered completely flat, as a sequence of facts, with no bitterness and no comic
+> timing. The last sentence gets no more weight than the first.
+>
+> The table in front of him is completely bare and empty. No writing, no signage
+> and no logos anywhere in the image. The shot is completely locked off: it does
+> not move, drift, zoom or reframe at any point.
 
 ## `ep04-expert-1.mp4` — Beat 5, about 9.5s
 
-> A photorealistic vertical video, 9:16, of an Indian man in his late fifties
-> seated in a small university office, framed from the chest up. Bookshelves
-> behind him and a whiteboard to one side carrying diagrams and handwriting far
-> too small and too faint to read. He wears a shirt and a jacket. He LOOKS
-> STRAIGHT AT THE VIEWER throughout and speaks with complete, unshakeable
-> confidence, as though the conversation began some time ago.
+> A photorealistic vertical video, 9:16, of an Indian man in his late fifties, heavy-set, with thinning grey hair, a thick
+> grey moustache and black-framed glasses, wearing a pale blue shirt under a dark
+> brown jacket, seated in
+> a small university office, with a dark wooden bookshelf of mismatched books
+> directly behind him and a whiteboard at one side carrying faint diagrams and
+> handwriting far too small and too faint to read. Even, ordinary indoor
+> daylight, no dramatic shadows. He is framed from the chest up.
 >
-> Clean, evenly lit, ordinary indoor daylight. The desk in front of him is bare.
+> He LOOKS STRAIGHT AT THE VIEWER throughout. He speaks with complete, unshakeable confidence, as though the conversation began
+> some time ago and this is the middle of it.
 >
-> He says: "—K.Y.C. Syndrome. Kept Your Counter open. And I want to be very
-> clear: this is no longer a behavioural matter. This is chaos theory."
+> He says: "—K.Y.C. Syndrome. Kept Your Counter open. And I want to be very clear: this is no longer a behavioural matter. This is chaos theory."
 >
-> No readable writing, no signage, no logos and no nameplate anywhere in the
-> image. The shot is completely locked off: it does not move, drift, zoom or
-> reframe at any point.
+> The desk in front of him is bare. No readable writing, no signage, no logos and
+> no nameplate anywhere in the image. The shot is completely locked off: it does
+> not move, drift, zoom or reframe at any point.
 
 ## `ep04-expert-2.mp4` — about 11s
 
-> The same man, the same office, the same chair, the same framing and the same
-> even indoor light. He LOOKS STRAIGHT AT THE VIEWER.
+> A photorealistic vertical video, 9:16, of an Indian man in his late fifties, heavy-set, with thinning grey hair, a thick
+> grey moustache and black-framed glasses, wearing a pale blue shirt under a dark
+> brown jacket, seated in
+> a small university office, with a dark wooden bookshelf of mismatched books
+> directly behind him and a whiteboard at one side carrying faint diagrams and
+> handwriting far too small and too faint to read. Even, ordinary indoor
+> daylight, no dramatic shadows. He is framed from the chest up.
 >
-> He says: "You've heard of the butterfly effect. A butterfly flaps its wings
-> in Brazil, a typhoon forms in Texas. This is that. Except the butterfly is a
-> man skipping his lunch, and the typhoon is a marriage in Rajajinagar."
+> He LOOKS STRAIGHT AT THE VIEWER throughout. Patient and explanatory, the tone of a man who has given this example many times
+> before and still finds it useful.
 >
-> No readable writing, no signage, no logos, no nameplate. Locked off — no
-> movement, drift, zoom or reframe.
+> He says: "You've heard of the butterfly effect. A butterfly flaps its wings in Brazil, a typhoon forms in Texas. This is that. Except the butterfly is a man skipping his lunch, and the typhoon is a marriage in Rajajinagar."
+>
+> The desk in front of him is bare. No readable writing, no signage, no logos and
+> no nameplate anywhere in the image. The shot is completely locked off: it does
+> not move, drift, zoom or reframe at any point.
 
 ## `ep04-expert-3.mp4` — about 13.5s
 
-> The same man, the same office, the same framing. He LOOKS STRAIGHT AT THE
-> VIEWER.
+> A photorealistic vertical video, 9:16, of an Indian man in his late fifties, heavy-set, with thinning grey hair, a thick
+> grey moustache and black-framed glasses, wearing a pale blue shirt under a dark
+> brown jacket, seated in
+> a small university office, with a dark wooden bookshelf of mismatched books
+> directly behind him and a whiteboard at one side carrying faint diagrams and
+> handwriting far too small and too faint to read. Even, ordinary indoor
+> daylight, no dramatic shadows. He is framed from the chest up.
 >
-> He says: "The system is calibrated. The lunch hour exists for a reason. The
-> queue exists for a reason. When one counter stays open, the man reaches home
-> ninety minutes early — and ninety minutes is not nothing. Ninety minutes is
-> where things are discovered."
+> He LOOKS STRAIGHT AT THE VIEWER throughout. Measured and matter-of-fact, laying out a chain of reasoning he considers settled.
 >
-> No readable writing, no signage, no logos, no nameplate. Locked off — no
-> movement, drift, zoom or reframe.
+> He says: "The system is calibrated. The lunch hour exists for a reason. The queue exists for a reason. When one counter stays open, the man reaches home ninety minutes early — and ninety minutes is not nothing. Ninety minutes is where things are discovered."
+>
+> The desk in front of him is bare. No readable writing, no signage, no logos and
+> no nameplate anywhere in the image. The shot is completely locked off: it does
+> not move, drift, zoom or reframe at any point.
 
 ## `ep04-expert-4.mp4` — about 5.5s
 
-> The same man, the same office, the same framing. He LOOKS STRAIGHT AT THE
-> VIEWER. Deadly serious, and slower than the lines before it.
+> A photorealistic vertical video, 9:16, of an Indian man in his late fifties, heavy-set, with thinning grey hair, a thick
+> grey moustache and black-framed glasses, wearing a pale blue shirt under a dark
+> brown jacket, seated in
+> a small university office, with a dark wooden bookshelf of mismatched books
+> directly behind him and a whiteboard at one side carrying faint diagrams and
+> handwriting far too small and too faint to read. Even, ordinary indoor
+> daylight, no dramatic shadows. He is framed from the chest up.
+>
+> He LOOKS STRAIGHT AT THE VIEWER throughout. Deadly serious, and noticeably slower and quieter than the rest.
 >
 > He says: "He didn't just serve a customer. He rearranged that man's life."
 >
-> No readable writing, no signage, no logos, no nameplate. Locked off — no
-> movement, drift, zoom or reframe.
+> The desk in front of him is bare. No readable writing, no signage, no logos and
+> no nameplate anywhere in the image. The shot is completely locked off: it does
+> not move, drift, zoom or reframe at any point.
 
 ## `ep04-expert-kicker.mp4` — about 6s
 
-> The same man, the same office, the same framing. He LOOKS STRAIGHT AT THE
-> VIEWER.
+> A photorealistic vertical video, 9:16, of an Indian man in his late fifties, heavy-set, with thinning grey hair, a thick
+> grey moustache and black-framed glasses, wearing a pale blue shirt under a dark
+> brown jacket, seated in
+> a small university office, with a dark wooden bookshelf of mismatched books
+> directly behind him and a whiteboard at one side carrying faint diagrams and
+> handwriting far too small and too faint to read. Even, ordinary indoor
+> daylight, no dramatic shadows. He is framed from the chest up.
 >
-> He says: "We estimate three more counters like this and the city stops
-> functioning entirely."
+> He LOOKS STRAIGHT AT THE VIEWER throughout. Flat and certain, delivering a forecast rather than a warning.
 >
-> No readable writing, no signage, no logos, no nameplate. Locked off — no
-> movement, drift, zoom or reframe.
+> He says: "We estimate three more counters like this and the city stops functioning entirely."
+>
+> The desk in front of him is bare. No readable writing, no signage, no logos and
+> no nameplate anywhere in the image. The shot is completely locked off: it does
+> not move, drift, zoom or reframe at any point.
 
 ## `ep04-witness-claim.mp4` — Beat 6, about 7.5s
 
-> The same man from `ep04-witness-1`, the same flat, the same bare table, the
-> same close low framing and the same soft noisy low-bandwidth image — but
-> visibly more tired, hair less tidy, a day or two later. He LOOKS STRAIGHT AT
-> THE VIEWER. Flat and aggrieved rather than upset.
+> A photorealistic vertical video, 9:16, of an Indian man in his early thirties, slim, with short black hair parted on one
+> side, clean-shaven, wearing a plain olive-green short-sleeved shirt, seated at a plain table
+> in an ordinary domestic room with a plain off-white wall behind him and nothing
+> hung on it. Soft daylight from a window off to one side. He is framed from the chest up and filling most of the frame, seen from a little
+> below his eye level and quite close, as though from a seat just across the
+> table from him. The image is a little soft and a little noisy, with flat muted
+> colour and mild compression — the look of a low-bandwidth home video
+> recording, not a broadcast interview.
 >
-> He says: "He gets compensation? I lost an afternoon. I lost a marriage. All
-> I wanted was a demand draft."
+> He LOOKS STRAIGHT AT THE VIEWER and holds that gaze. He looks visibly more tired than composed — hair less tidy, shirt more creased,
+> a day or two further into this.
 >
-> The table in front of him is bare and empty. No writing, no signage and no
-> logos anywhere in the image. Locked off — no movement, drift, zoom or
-> reframe.
+> He says: "He gets compensation? I lost an afternoon. I lost a marriage. All I wanted was a demand draft."
+>
+> Flat and aggrieved rather than upset. No rising anger and no self-pity — the last
+> sentence stated as the plainest fact of the three.
+>
+> The table in front of him is completely bare and empty. No writing, no signage
+> and no logos anywhere in the image. The shot is completely locked off: it does
+> not move, drift, zoom or reframe at any point.
 
 ## `ep04-correspondent-psa.mp4` — Beat 7, about 14s
 
-> A photorealistic vertical video, 9:16, of an Indian man in his forties in a
-> jacket and open-collar shirt, standing against a smooth plain grey backdrop,
-> framed from the chest up. Even, flat, professional lighting with no dramatic
-> shadows. He LOOKS STRAIGHT AT THE VIEWER throughout and delivers the whole
-> thing in the flat register of a news sign-off, with no warmth and no irony.
+> A photorealistic vertical video, 9:16, of an Indian man in his forties, slim,
+> with neatly cut black hair, clean-shaven, wearing a charcoal jacket over a
+> white open-collar shirt. He stands against a smooth plain mid-grey backdrop,
+> framed from the chest up, under even flat professional lighting with no
+> dramatic shadows.
+>
+> He LOOKS STRAIGHT AT THE VIEWER throughout and delivers the whole thing in
+> the flat register of a news sign-off, with no warmth and no irony.
 >
 > He says: "If a bank counter has served you during the lunch hour — do not
 > celebrate. Note the time you reached home. Inform your family in advance.
