@@ -807,3 +807,137 @@ first, so the pause the script asks for before this line is a real one.
 "do not panic" is the advisory phrase that tripped Episode 02's version. Swap
 it for "there is no need to worry", which keeps the beat, and tell me so the
 on-screen wording matches.
+
+---
+
+# Episode 04 — the photoreal beats
+
+Four beats of this episode are live action and this pipeline cannot generate
+video: Beat 4 (witness testimony), Beat 5 (expert), Beat 6's middle (the
+witness again) and Beat 7 (correspondent). Every one of them is already CUT —
+the compositions exist, the chyrons and tears and overlays are timed, and
+`Footage` draws a labelled placeholder where the clip goes. Drop the MP4s into
+`public/footage/` under these names and nothing else has to move, except the
+take lengths in each shot's `beats.ts`, which are budgets until the real files
+can be measured.
+
+Three rules from Episode 03 that cost a re-generation each, and apply to all of
+these:
+
+- **Never name camera equipment.** "Tripod" in a prompt puts a tripod in shot.
+- **Never describe the edit.** Saying a cutaway punches in later got the zoom
+  baked into the clip.
+- **State the eyeline explicitly**, every time, or he looks off-camera.
+
+## `ep04-witness-1.mp4` — Beat 4, about 13s
+
+> A photorealistic vertical video, 9:16, of an Indian man in his thirties
+> sitting at a plain desk in an ordinary flat, lit by a window off to one side.
+> He is speaking into a laptop webcam and LOOKS DIRECTLY INTO THE LENS
+> throughout. Slightly soft, slightly noisy image, the look of a home video
+> call. He is calm and flat, recounting something that unsettled him and that
+> he has not finished thinking about.
+>
+> He says: "I saw the sign. I was already turning around. That's what you do.
+> He called me back. Pushed his lunch aside. No token. No 'come after 3:30.'
+> No 'sir, go to counter 2.' Done in four minutes."
+>
+> Nothing in the room is remarkable. No text, no signage, no logos anywhere in
+> frame. No camera, no camera equipment, no studio lighting visible. The shot
+> is locked off and does not move, zoom or reframe at any point.
+
+## `ep04-witness-2.mp4` — Beat 4's second half, about 9s
+
+> Same man, same desk, same flat, same webcam, same direct eyeline into the
+> lens. His eyes drift off to one side for a moment before he speaks, then
+> come back to the lens.
+>
+> He says: "I had the whole afternoon blocked off. I got home by two. I got
+> home early and caught my wife having an affair."
+>
+> Delivered completely flat, as a sequence of facts, with no bitterness and no
+> comic timing. No text or signage in frame. No camera equipment visible. The
+> shot is locked off and does not move, zoom or reframe.
+
+## `ep04-expert-1.mp4` — Beat 5, about 9.5s
+
+> A photorealistic vertical video, 9:16, of an Indian man in his late fifties
+> seated in a small university office, bookshelves behind him, a whiteboard to
+> one side carrying diagrams and handwriting too small to read. He wears a
+> shirt and a jacket. He LOOKS DIRECTLY INTO THE LENS throughout and speaks
+> with complete, unshakeable confidence, as though the interview began some
+> time ago.
+>
+> He says: "—K.Y.C. Syndrome. Kept Your Counter open. And I want to be very
+> clear: this is no longer a behavioural matter. This is chaos theory."
+>
+> No text, no readable writing, no signage, no logos, no nameplate anywhere in
+> frame. No camera or camera equipment visible. The shot is locked off and does
+> not move, zoom or reframe at any point.
+
+## `ep04-expert-2.mp4` — about 11s
+
+> Same man, same office, same chair, same direct eyeline into the lens.
+>
+> He says: "You've heard of the butterfly effect. A butterfly flaps its wings
+> in Brazil, a typhoon forms in Texas. This is that. Except the butterfly is a
+> man skipping his lunch, and the typhoon is a marriage in Rajajinagar."
+>
+> Same rules: no readable text anywhere, no camera equipment, locked off.
+
+## `ep04-expert-3.mp4` — about 13.5s
+
+> Same man, same office, same direct eyeline into the lens.
+>
+> He says: "The system is calibrated. The lunch hour exists for a reason. The
+> queue exists for a reason. When one counter stays open, the man reaches home
+> ninety minutes early — and ninety minutes is not nothing. Ninety minutes is
+> where things are discovered."
+>
+> Same rules: no readable text anywhere, no camera equipment, locked off.
+
+## `ep04-expert-4.mp4` — about 5.5s
+
+> Same man, same office, same direct eyeline into the lens. Deadly serious,
+> slower than the lines before it.
+>
+> He says: "He didn't just serve a customer. He rearranged that man's life."
+>
+> Same rules: no readable text anywhere, no camera equipment, locked off.
+
+## `ep04-expert-kicker.mp4` — about 6s
+
+> Same man, same office, same direct eyeline into the lens.
+>
+> He says: "We estimate three more counters like this and the city stops
+> functioning entirely."
+>
+> Same rules: no readable text anywhere, no camera equipment, locked off.
+
+## `ep04-witness-claim.mp4` — Beat 6, about 7.5s
+
+> The same man from `ep04-witness-1`, same desk, same flat, same webcam, same
+> direct eyeline into the lens — but visibly more tired, hair less tidy, a day
+> or two later. Flat and aggrieved rather than upset.
+>
+> He says: "He gets compensation? I lost an afternoon. I lost a marriage. All
+> I wanted was a demand draft."
+>
+> No text or signage in frame. No camera equipment. Locked off.
+
+## `ep04-correspondent-psa.mp4` — Beat 7, about 14s
+
+> A photorealistic vertical video, 9:16, of an Indian man in his forties in a
+> jacket and open-collar shirt, standing in a plain neutral studio against a
+> smooth grey backdrop, framed from the chest up. Even, professional lighting.
+> He LOOKS DIRECTLY INTO THE LENS throughout and delivers the whole thing in
+> the flat register of a news sign-off, with no warmth and no irony.
+>
+> He says: "If a bank counter has served you during the lunch hour — do not
+> celebrate. Note the time you reached home. Inform your family in advance.
+> Some things are better discovered on schedule." Then a pause, and: "Better
+> safe than sorry."
+>
+> No text, no signage, no logos, no graphics and no nameplate anywhere in
+> frame. No camera or camera equipment visible. The shot is locked off and does
+> not move, zoom or reframe at any point.
