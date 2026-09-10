@@ -70,6 +70,8 @@ import {Shot02Graphic as Ep04Shot02Graphic} from './compositions/episode04/shot0
 import {EP04_SHOT_02_DURATION} from './compositions/episode04/shot02/beats';
 import {Shot08Committee as Ep04Shot08Committee} from './compositions/episode04/shot08/Shot08Committee';
 import {EP04_SHOT_08_DURATION} from './compositions/episode04/shot08/beats';
+import {Shot06Fallout as Ep04Shot06Fallout} from './compositions/episode04/shot06/Shot06Fallout';
+import {EP04_SHOT_06_DURATION} from './compositions/episode04/shot06/beats';
 import {Shot09FullCircle as Ep04Shot09FullCircle} from './compositions/episode04/shot09/Shot09FullCircle';
 import {EP04_SHOT_09_DURATION} from './compositions/episode04/shot09/beats';
 import {EP04_SHOT_00_DURATION} from './compositions/episode04/shot00/beats';
@@ -266,6 +268,14 @@ export const Root: React.FC = () => {
 				id="Ep04Shot02Graphic"
 				component={Ep04Shot02Graphic}
 				durationInFrames={EP04_SHOT_02_DURATION}
+				fps={OPENING_MONTAGE_FPS}
+				width={OPENING_MONTAGE_WIDTH}
+				height={OPENING_MONTAGE_HEIGHT}
+			/>
+			<Composition
+				id="Ep04Shot06Fallout"
+				component={Ep04Shot06Fallout}
+				durationInFrames={EP04_SHOT_06_DURATION}
 				fps={OPENING_MONTAGE_FPS}
 				width={OPENING_MONTAGE_WIDTH}
 				height={OPENING_MONTAGE_HEIGHT}
