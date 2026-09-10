@@ -1,76 +1,83 @@
 /**
  * Episode 04 / Shot 2 — THE STAT CARD.
  *
- * The series' fourth infographic, and the first that has to do two things: two
- * bars, and then a clock. The bars wipe and the clock takes the page, because
- * the script's last two lines are about a window of time and a bar cannot show
- * a window.
+ * Built to the same page and the same grammar as Episode 03's stat card, beat
+ * for beat: the torn header block with its EXHIBIT stamp, the ruled form lines
+ * under everything, the first bar measured, the leftover DETACHING and opening
+ * out into the whole of the second bar with ruled lines running from its
+ * corners, the arrow tag onto what survives, the footnote and the source
+ * strip. Only the palette and the copy differ.
  *
- * Timings are pinned to the four measured takes, not guessed:
+ * One thing this card has that Episode 03's does not: a second page. The
+ * script's last two lines are about a window of time, and a bar cannot show a
+ * window, so the bars wipe and a clock takes the page.
  *
- *   ep04-shot02a         5.36s   96% turned away
- *   ep04-shot02b-cut     6.55s   of the 4%, 89% told to come back
- *   ep04-shot02c-cut     5.41s   thirty minutes, which is also the queue
- *   ep04-shot02d-cut     5.31s   the cliffhanger, held on the clock
+ * Every beat below is measured off the take it belongs to. The word offsets
+ * are read from the RMS envelope (scripts/measure-vo.py), not estimated:
  *
- * Every element lands a beat BEFORE the words that describe it, so the voice
- * is reading something already on screen rather than narrating an animation.
- * That is the register the first three episodes established and it is the only
- * thing keeping the fabricated statistics feeling like a citation.
+ *   ep04-shot02a       5.36s / 161f   "96%" at ~1.75s
+ *   ep04-shot02b-cut   6.55s / 197f   "4%" at ~0.5s, "89%" at ~2.06s
+ *   ep04-shot02c-cut   5.41s / 162f
+ *   ep04-shot02d-cut   5.31s / 159f
  */
 
 const S = 30;
 
-/** The episode's pulse. Everything steps on it. */
-export const STEP = 2;
+/**
+ * The pulse, and the same one Episode 03's card uses. Three frames, not two:
+ * a page of type wants a slower step than a scatter of props does.
+ */
+export const STEP = 3;
 
-export const HEADER_IN = 6;
-export const SUBHEAD_IN = 18;
+export const VO_A = {frames: 161, numberAt: Math.round(1.75 * S)};
+export const VO_B = {frames: 197, sliverAt: Math.round(0.5 * S), numberAt: Math.round(2.06 * S)};
+export const VO_C = {frames: 162};
+export const VO_D = {frames: 159};
 
-/** Bar one: 96% of lunch-hour visits turned away. */
-export const BAR1_STARTS = 40;
-export const BAR_GROW = 22;
-export const NUM1_STAMP = BAR1_STARTS + BAR_GROW - 4;
-export const CAP1_IN = NUM1_STAMP + 4;
-export const VO_A = 54;
+export const HEADER_IN = 0;
+export const HEADER_STAMP = 6;
+export const SUBHEAD_IN = 14;
 
-/** The leftover 4% detaches and becomes the whole of bar two. */
-export const SLIVER_MOVE = 208;
-export const SLIVER_MOVE_FRAMES = 26;
-export const BAR2_STARTS = SLIVER_MOVE + SLIVER_MOVE_FRAMES;
-export const BAR_2_GROW = 22;
-export const NUM2_STAMP = BAR2_STARTS + BAR_2_GROW - 4;
-export const CAP2_IN = NUM2_STAMP + 4;
-export const VO_B = 222;
+export const VO_A_STARTS = 12;
+/** The bar is measured as the figure is spoken, arriving a beat ahead of it. */
+export const BAR1_STARTS = VO_A_STARTS + VO_A.numberAt - 13;
+export const BAR_GROW = 27;
+export const NUM1_STAMP = BAR1_STARTS + BAR_GROW + 1;
+export const CAP1_IN = NUM1_STAMP + 20;
+export const REMAINDER1_IN = NUM1_STAMP + 30;
 
-/** The closing time, stamped under both bars as a flat fact. */
-export const CLOSES_STAMP = 372;
+export const VO_B_STARTS = VO_A_STARTS + VO_A.frames - 6;
+/** The leftover detaches on "of the 4%". */
+export const SLIVER_MOVE = VO_B_STARTS + VO_B.sliverAt;
+export const SLIVER_MOVE_FRAMES = 18;
+export const CALLOUT_IN = SLIVER_MOVE + SLIVER_MOVE_FRAMES + 4;
+export const BAR2_STARTS = VO_B_STARTS + VO_B.numberAt - 6;
+export const BAR_2_GROW = 24;
+export const NUM2_STAMP = BAR2_STARTS + BAR_2_GROW + 1;
+export const CAP2_IN = NUM2_STAMP + 13;
+export const REMAINDER2_IN = CAP2_IN + 22;
+
+/** The tag onto what survives, and its footnote. */
+export const TAG_STAMP = VO_B_STARTS + VO_B.frames - 34;
+export const FOOTNOTE_IN = TAG_STAMP + 24;
 
 /**
- * The bars wipe and the clock takes the page. A hard wipe rather than a fade:
- * this is a page being turned in a report, and the series has never dissolved
- * between two pieces of evidence.
+ * The page turn. A band of ground sweeps down over the bars and the clock is
+ * underneath it — the series has never dissolved between two pieces of
+ * evidence and this is not the place to start.
  */
-export const WIPE = 430;
+export const WIPE = VO_B_STARTS + VO_B.frames + 16;
 export const WIPE_FRAMES = 14;
 export const CLOCK_IN = WIPE + WIPE_FRAMES;
 
-/** Hands drawn on, then the sliver between them lit and labelled. */
 export const HANDS_IN = CLOCK_IN + 8;
 export const WEDGE_IN = HANDS_IN + 16;
 export const WINDOW_STAMP = WEDGE_IN + 10;
-export const VO_C = CLOCK_IN + 22;
+export const VO_C_STARTS = CLOCK_IN + 20;
 
-/**
- * The cliffhanger, held on a frozen clock. Nothing moves under it — the same
- * treatment ep01-shot05c, ep02-shot03c and ep03-shot02c get.
- */
-export const VO_D = 660;
-export const VO_D_FRAMES = 159;
+/** The cliffhanger, held on a frozen clock. */
+export const VO_D_STARTS = VO_C_STARTS + VO_C.frames + 14;
 
 /** Hard cut to black and silence, into the tear. */
-export const BLACKOUT = VO_D + VO_D_FRAMES + 14;
-
-export const EP04_SHOT_02_DURATION = BLACKOUT + 20;
-
-export const _UNUSED_SECONDS = S;
+export const BLACKOUT = VO_D_STARTS + VO_D.frames + 14;
+export const EP04_SHOT_02_DURATION = BLACKOUT + 18;

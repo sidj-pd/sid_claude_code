@@ -7,9 +7,7 @@ import {VoiceOver} from '../../../components/VoiceOver';
 import {BUTTER} from '../../../components/palette';
 import {Ground} from '../Ground';
 import {
-	BACK_CUT,
 	BANKER_LINE,
-	CLOSER_CUT,
 	HESITATE,
 	HESITATE_END,
 	PUSH_FRAMES,
@@ -36,10 +34,7 @@ const BANKER_H = 862;
 const SIGN_Y = 1178;
 const TIFFIN_Y = 1150;
 
-/** The closer framing: the same art, scaled about his face rather than a cut
- *  to different art, so it reads as a lens change and not a new set. */
-const CLOSER_SCALE = 1.55;
-const CLOSER_ORIGIN = '50% 34%';
+
 
 /**
  * The customer, from behind, entering from the bottom of frame. He is much
@@ -83,7 +78,6 @@ const Sign: React.FC = () => (
 export const Shot01LunchHour: React.FC = () => {
 	const frame = useCurrentFrame();
 	const {steppedFrame, stepIndex} = useStopMotionStep(frame, STEP);
-	const closer = frame >= CLOSER_CUT && frame < BACK_CUT;
 
 	/**
 	 * The approach: six discrete hops, each shorter than the last. Stepping the
@@ -122,13 +116,7 @@ export const Shot01LunchHour: React.FC = () => {
 		<AbsoluteFill>
 			<Ground />
 
-			<AbsoluteFill
-				style={
-					closer
-						? {transform: `scale(${CLOSER_SCALE})`, transformOrigin: CLOSER_ORIGIN}
-						: undefined
-				}
-			>
+			<AbsoluteFill>
 				<div
 					style={{
 						position: 'absolute',
@@ -159,11 +147,16 @@ export const Shot01LunchHour: React.FC = () => {
 				<div
 					style={{
 						position: 'absolute',
-						left: 660 + pushed * 190,
-						top: TIFFIN_Y + pushed * 26,
+						/* All the way to the far end of the counter and half out
+						   of frame, dragging slightly downward as a pushed thing
+						   does. It never leaves the desk -- he is not clearing
+						   up, he is making room, and a tiffin that vanishes
+						   reads as the former. */
+						left: 660 + pushed * 400,
+						top: TIFFIN_Y + pushed * 54,
 						width: 260,
 						height: 191,
-						transform: `rotate(${pushed * 9}deg)`,
+						transform: `rotate(${pushed * 16}deg)`,
 					}}
 				>
 					<PaperCutout asset="tiffin-open" elevation={0.9} textureOpacity={0} style={{width: 260, height: 191}} />
@@ -173,7 +166,7 @@ export const Shot01LunchHour: React.FC = () => {
 			{/* Nearest the camera, so over everything, and gone during the
 			    closer framing — the cut to him is a cut to a different lens on
 			    the same room, and he is behind the camera for it. */}
-			{!closer && steppedFrame >= WALK_IN ? (
+			{steppedFrame >= WALK_IN ? (
 				<div
 					style={{
 						position: 'absolute',

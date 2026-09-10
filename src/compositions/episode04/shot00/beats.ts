@@ -23,10 +23,10 @@
  * Three acts:
  *
  *   BURIED  f0-f12     the whole bank at once, nobody visible in it.
- *   PULL    f12-f96    thirteen props yanked out of frame one at a time, from
+  *   PULL    f12-f98    thirteen props yanked out of frame one at a time, from
  *                      the centre outwards, so he is glimpsed through the
  *                      gaps long before the last one goes.
- *   ALONE   f96-f102   him, on bare paper, unchanged.
+ *   ALONE   f98-f106   him, on bare paper, unchanged.
  *
  * Then the vignette closes and leaves him in a disc of light.
  *
@@ -63,14 +63,14 @@ export const PULL_EVERY = 6;
  * eye needs the anticipation to believe something took hold of it.
  */
 export const PULL_ANTICIPATE = 2;
-export const PULL_EXIT = 8;
+export const PULL_EXIT = 12;
 export const PULL_FRAMES = PULL_ANTICIPATE + PULL_EXIT;
 
-/** Last prop starts at f84 and is clear of the frame by f94. */
-export const PULL_END = 96;
+/** Last prop starts at f84 and is clear of the frame by f98. */
+export const PULL_END = 100;
 
 /** Him alone on bare paper, before the light changes. */
-export const ALONE_END = 102;
+export const ALONE_END = 106;
 
 /**
  * The vignette. Not a cut this time: the props leaving is already a sequence
@@ -79,7 +79,7 @@ export const ALONE_END = 102;
  * only easing in the shot and is why it registers as a different kind of
  * moment.
  */
-export const VIGNETTE_IN = 102;
+export const VIGNETTE_IN = 106;
 export const VIGNETTE_FRAMES = 16;
 
 /** A held beat on him alone in the light. */

@@ -2,6 +2,7 @@ import React from 'react';
 import {useCurrentFrame} from 'remotion';
 import {CutoutAsset} from '../../../assets/cutouts';
 import {PaperCutout} from '../../../components/PaperCutout';
+import {SHADOW_RGB} from '../../../components/palette';
 import {useStopMotionStep} from '../../../components/useStopMotionStep';
 import {
 	PULL_ANTICIPATE,
@@ -197,7 +198,7 @@ export const BankFlatLay: React.FC = () => {
 					const out = (age - PULL_ANTICIPATE) / PULL_EXIT;
 					if (out > 0) {
 						// Ease IN. A pulled thing is fastest as it leaves.
-						const e = out * out;
+						const e = Math.pow(out, 1.8);
 						px = vx * TRAVEL * e;
 						py = vy * TRAVEL * e;
 						spin = (i % 2 === 0 ? -1 : 1) * 26 * e;
@@ -212,6 +213,28 @@ export const BankFlatLay: React.FC = () => {
 					}
 				}
 
+				/**
+				 * The lift, sold three ways at once, because the shadow alone
+				 * was not readable: the first cut of this had the shadow and
+				 * nothing else and it did not survive contact with a frame
+				 * containing twelve other pieces of paper.
+				 *
+				 *   scale   a thing nearer the camera is bigger. This is the
+				 *           cue the eye actually reads, and the cheapest.
+				 *   shadow   thrown DOWN-RIGHT and away, from a fixed light
+				 *           top-left, so it separates from the art instead of
+				 *           thickening underneath it. PaperCutout's own
+				 *           elevation shadow caps out at 0.5 opacity and stays
+				 *           centred, which is right for a piece resting on the
+				 *           sheet and useless for one in the air, so the lifted
+				 *           shadow is thrown here on the wrapper instead.
+				 *   spin    already there, and does nothing on its own.
+				 */
+				const scale = 1 + lift * 0.22;
+				const shadow = lift
+					? `drop-shadow(${22 * lift}px ${30 * lift}px ${26 * lift}px rgba(${SHADOW_RGB}, ${0.42 * Math.min(1, lift * 2)}))`
+					: undefined;
+
 				const dx = wobble(i, stepIndex) * IDLE_SHIFT;
 				const dy = wobble(i + 91, stepIndex) * IDLE_SHIFT;
 				const dr = wobble(i + 173, stepIndex) * IDLE_ROT;
@@ -225,7 +248,8 @@ export const BankFlatLay: React.FC = () => {
 							top: p.y - p.h / 2 + dy + py,
 							width: p.w,
 							height: p.h,
-							transform: `rotate(${p.rot + dr + spin}deg)`,
+							transform: `rotate(${p.rot + dr + spin}deg) scale(${scale})`,
+							filter: shadow,
 						}}
 					>
 						{/* textureOpacity 0: PaperCutout's grain overlay is an

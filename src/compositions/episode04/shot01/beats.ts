@@ -42,16 +42,32 @@ export const WALK_END = WALK_IN + WALK_HOPS * WALK_EVERY;
 export const HESITATE = WALK_END;
 export const HESITATE_END = HESITATE + 24;
 
-/** Cut in to the banker, closer. The tiffin goes; the hand comes out. */
-export const CLOSER_CUT = HESITATE_END;
-export const PUSH_START = CLOSER_CUT + 8;
-export const PUSH_FRAMES = 12;
+/**
+ * He clears his lunch out of the way. No cut and no push-in.
+ *
+ * The first version cut to a closer framing for this, and it did not read: on
+ * a tight frame the tiffin leaves the edge of the shot almost at once, so
+ * there is nothing to compare its new position against and the move looks like
+ * a prop being removed rather than a man making room. Staying wide keeps the
+ * customer, the sign and the whole counter in shot, so the lunch is seen to
+ * travel ACROSS the desk and stop — which is the only thing that says he set
+ * it aside FOR somebody.
+ *
+ * It is also slower than it was. Twelve frames read as a swipe; twenty-six
+ * read as a decision.
+ */
+export const PUSH_START = HESITATE_END + 10;
+export const PUSH_FRAMES = 26;
 
 /** "Tell me. This is more important." — 2.74s from the start of the push. */
-export const BANKER_LINE = PUSH_START + 4;
+export const BANKER_LINE = PUSH_START + 16;
 export const BANKER_LINE_FRAMES = 82;
 
-/** Back to the customer, frozen exactly as we left him. */
+/**
+ * Nothing cuts here any more -- the customer never left frame, so there is
+ * nothing to cut back TO. The beat is now the held silence after the line,
+ * with him still frozen mid-turn.
+ */
 export const BACK_CUT = BANKER_LINE + BANKER_LINE_FRAMES + 6;
 
 /**
