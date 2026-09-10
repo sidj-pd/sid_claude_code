@@ -147,16 +147,19 @@ export const Shot01LunchHour: React.FC = () => {
 				<div
 					style={{
 						position: 'absolute',
-						/* All the way to the far end of the counter and half out
-						   of frame, dragging slightly downward as a pushed thing
-						   does. It never leaves the desk -- he is not clearing
-						   up, he is making room, and a tiffin that vanishes
-						   reads as the former. */
-						left: 660 + pushed * 400,
-						top: TIFFIN_Y + pushed * 54,
+						/* To the far end of the counter and no further. 400px of
+						   travel put its left edge at 1060 in a 1080 frame, so
+						   the whole box left the shot and it read as clearing
+						   up rather than making room -- the exact failure this
+						   comment was already warning about. 150 puts it at
+						   810-1070: hard against the right edge, entirely
+						   visible, plainly somewhere it was not before.
+						   Dragging slightly downward, as a pushed thing does. */
+						left: 660 + pushed * 150,
+						top: TIFFIN_Y + pushed * 44,
 						width: 260,
 						height: 191,
-						transform: `rotate(${pushed * 16}deg)`,
+						transform: `rotate(${pushed * 13}deg)`,
 					}}
 				>
 					<PaperCutout asset="tiffin-open" elevation={0.9} textureOpacity={0} style={{width: 260, height: 191}} />
