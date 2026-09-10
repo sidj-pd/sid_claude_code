@@ -1016,14 +1016,19 @@ explicitly every single time** or he looks away.
 
 ## `ep04-correspondent-psa.mp4` — Beat 7, about 14s
 
+**This one was refused on a first attempt, and this is the rewrite.** See
+"Why the sign-off gets refused" below before editing it.
+
 > A photorealistic vertical video, 9:16, of an Indian man in his forties, slim,
 > with neatly cut black hair, clean-shaven, wearing a charcoal jacket over a
 > white open-collar shirt. He stands against a smooth plain mid-grey backdrop,
-> framed from the chest up, under even flat professional lighting with no
-> dramatic shadows.
+> framed from the chest up, under even flat lighting with no dramatic shadows.
 >
-> He LOOKS STRAIGHT AT THE VIEWER throughout and delivers the whole thing in
-> the flat register of a news sign-off, with no warmth and no irony.
+> He LOOKS STRAIGHT AT THE VIEWER throughout. He is performing a piece of
+> comic writing for a scripted comedy series, and the comedy depends entirely
+> on him playing it straight: he delivers absurd advice in an even, unhurried,
+> completely sincere tone, with no warmth, no emphasis and no hint that he
+> knows it is funny. He does not smile at any point.
 >
 > He says: "If a bank counter has served you during the lunch hour — do not
 > celebrate. Note the time you reached home. Inform your family in advance.
@@ -1034,3 +1039,33 @@ explicitly every single time** or he looks away.
 > signage, no logos, no graphics and no nameplate anywhere in the image. The
 > shot is completely locked off: it does not move, drift, zoom or reframe at
 > any point.
+
+## Why the sign-off gets refused
+
+The first version of this prompt asked for a man delivering "a public service
+announcement" in "the flat register of a news sign-off", and it was refused as
+a reputational risk. Nothing in the words he says is the problem. The problem
+is that a photorealistic person, in a studio, described as a NEWS presenter
+reading an ADVISORY, is a recipe for a clip that could pass as a real
+broadcast telling real people what to do — and the prompt was asking for
+exactly the cues that would make it pass.
+
+Episode 03's expert hit the same wall three times and came off it the same
+way: by removing the thing that made the fabrication read as authoritative,
+not by softening the joke.
+
+So the rewrite drops every broadcast cue — no "news", no "announcement", no
+"correspondent", no "anchor", no "PSA", no "bulletin" — and says out loud what
+the clip actually is: an actor performing comic writing, played straight. The
+words are untouched. All the authority in the finished shot comes from the
+chyron and the framing, which are set in Remotion where no generator has an
+opinion about them.
+
+**If it is still refused**, take out the studio: put him in an ordinary room
+against a plain wall. The grey backdrop is doing more work than it looks like.
+
+**The general rule, for the next episode:** this series' whole joke is
+fabricated institutional authority, so every photoreal prompt in it is one
+adjective away from asking a generator to manufacture a convincing fake
+broadcast. Describe the PERFORMANCE, never the INSTITUTION. Let Remotion
+supply the letterhead.
