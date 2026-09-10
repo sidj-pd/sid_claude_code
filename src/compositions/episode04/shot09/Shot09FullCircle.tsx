@@ -132,8 +132,14 @@ export const Shot09FullCircle: React.FC = () => {
 				<NewsprintTexture opacity={0.16 + drained * 0.26} />
 			</AbsoluteFill>
 
+			{/* Below the counter, in the empty half of the frame. At y1180 it
+			    landed straight across the sign and the lunch and came out as
+			    "CA ... OSED", and an explicit z-index because a `filter` on the
+			    sibling above makes its own stacking context -- DOM order alone
+			    is not a promise here. Still clears SAFE_BOTTOM_Y: 1380 plus a
+			    54px face is about 1489. */}
 			{frame >= STAMP ? (
-				<div style={{position: 'absolute', left: 0, right: 0, top: 1180, textAlign: 'center'}}>
+				<div style={{position: 'absolute', left: 0, right: 0, top: 1380, textAlign: 'center', zIndex: 5}}>
 					<div style={{display: 'inline-block'}}>
 						<EvidenceStamp
 							text="CASE FILE #0004 — CLOSED"
