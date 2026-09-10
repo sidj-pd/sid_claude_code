@@ -421,7 +421,7 @@ export const Shot02Graphic: React.FC<{silent?: boolean}> = ({silent = false}) =>
 					</div>
 
 					{frame >= WINDOW_STAMP ? (
-						<div style={{position: 'absolute', left: BAR_X, top: 1520}}>
+						<div style={{position: 'absolute', left: BAR_X, top: 1362}}>
 							<EvidenceStamp
 								text="3:30 — 4:00 · THIRTY MINUTES"
 								age={frame - WINDOW_STAMP}
