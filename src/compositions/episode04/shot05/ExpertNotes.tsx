@@ -77,6 +77,18 @@ const Big: React.FC<{children: React.ReactNode; size?: number}> = ({children, si
 	</div>
 );
 
+/**
+ * A drawn arrowhead, not a glyph. "↓" was here first and it is exactly the
+ * kind of thing that renders as tofu: the container ships 59 fonts, the ones
+ * this project loads are a handful of display faces, and none of them promise
+ * an arrow. A triangle in SVG has no such question hanging over it.
+ */
+const Down: React.FC<{colour: string}> = ({colour}) => (
+	<svg width={26} height={22} style={{display: 'block', margin: '8px auto'}}>
+		<polygon points="13,22 0,4 26,4" fill={colour} opacity={0.85} />
+	</svg>
+);
+
 const Small: React.FC<{children: React.ReactNode}> = ({children}) => (
 	<div
 		style={{
@@ -121,14 +133,14 @@ export const ExpertNotes: React.FC<{
 		{frame >= at.law && frame < until.butterfly ? (
 			<Card age={frame - at.law} top={100} seed={17}>
 				<Big size={50}>A BUTTERFLY, BRAZIL</Big>
-				<Small>↓</Small>
+				<Down colour={GANACHE} />
 				<Big size={50}>A TYPHOON, TEXAS</Big>
 			</Card>
 		) : null}
 		{frame >= at.case_ && frame < until.butterfly ? (
 			<Card age={frame - at.case_} top={400} tone="ink" rotate={1.2} seed={23}>
 				<Big size={50}>A MAN, LUNCH HOUR</Big>
-				<Small>↓</Small>
+				<Down colour={BUTTER} />
 				<Big size={50}>A MARRIAGE, RAJAJINAGAR</Big>
 			</Card>
 		) : null}
