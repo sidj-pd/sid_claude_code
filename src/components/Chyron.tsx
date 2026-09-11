@@ -47,8 +47,18 @@ export type ChyronProps = {
 	 */
 	paper?: string;
 	ink?: string;
-	/** Accent rule along the top edge. Off by default; Episode 04 uses it. */
+	/** Accent rule along the top edge. Off by default. */
 	accent?: string;
+	/**
+	 * A ruled border around the card. Off by default.
+	 *
+	 * On a dark plate the torn edge stops reading as paper and starts reading
+	 * as a rendering artefact -- there is no page for it to be torn out of --
+	 * so a plate wants a straight edge and a rule instead.
+	 */
+	border?: string;
+	/** Torn edge. On by default, which is what Episodes 01-03 are cut with. */
+	torn?: boolean;
 };
 
 /**
@@ -75,6 +85,8 @@ export const Chyron: React.FC<ChyronProps> = ({
 	paper = '#efe4c8',
 	ink = INK,
 	accent,
+	border,
+	torn = true,
 }) => {
 	if (frame < fadeIn) return null;
 	const opacity =
@@ -92,7 +104,8 @@ export const Chyron: React.FC<ChyronProps> = ({
 				width,
 				background: paper,
 				padding: '20px 32px 24px',
-				clipPath: tornPolygon({seed, depth: 5, teeth: 16}),
+				clipPath: torn ? tornPolygon({seed, depth: 5, teeth: 16}) : undefined,
+				border: border ? `4px solid ${border}` : undefined,
 				boxShadow: '0 10px 22px rgba(12,10,8,0.5)',
 				opacity,
 			}}

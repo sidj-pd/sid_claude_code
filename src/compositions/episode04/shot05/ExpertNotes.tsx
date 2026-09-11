@@ -48,7 +48,7 @@ const Card: React.FC<{
 				left: 84,
 				right: 84,
 				top,
-				background: tone === 'ink' ? GANACHE : '#F6E7CB',
+				background: tone === 'ink' ? GANACHE : BUTTER,
 				color: tone === 'ink' ? BUTTER : GANACHE,
 				padding: '22px 30px 26px',
 				clipPath: tornPolygon({seed, depth: 5, teeth: 15}),
@@ -67,7 +67,11 @@ const Card: React.FC<{
 const Big: React.FC<{children: React.ReactNode; size?: number}> = ({children, size = 72}) => (
 	<div
 		style={{
-			fontFamily: 'RansomArchivoBlack, sans-serif',
+			/* Anton, not Archivo Black. The stat card's EXHIBIT / SURVEYED
+			   headings are Anton over Special Elite, the nameplate is the same
+			   pairing, and these notes were the one place still setting its
+			   big words in a different face. */
+			fontFamily: 'RansomAnton, sans-serif',
 			fontSize: size,
 			lineHeight: 1,
 			letterSpacing: 2,

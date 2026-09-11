@@ -118,6 +118,11 @@ export const ChainDiagram: React.FC<{
 									opacity,
 								}}
 							>
+								{/* Archivo Black, and the only thing in the episode
+								    left on it. The censor label is deliberately
+								    outside the palette and outside the house type:
+								    it is meant to look pasted on from elsewhere,
+								    and Anton would quietly make it belong. */}
 								<div
 									style={{
 										fontFamily: 'RansomArchivoBlack, sans-serif',
@@ -141,14 +146,15 @@ export const ChainDiagram: React.FC<{
 									top,
 									width: box.w,
 									height: box.h,
-									background: i === BOXES.length - 1 ? GANACHE : '#F3EAD8',
+									background: i === BOXES.length - 1 ? GANACHE : BUTTER,
 									color: i === BOXES.length - 1 ? BUTTER : GANACHE,
 									clipPath: tornPolygon({seed: 7 + i * 3, depth: 4, teeth: 13}),
 									display: 'flex',
 									alignItems: 'center',
 									justifyContent: 'center',
 									textAlign: 'center',
-									fontFamily: 'RansomArchivoBlack, sans-serif',
+									/* Anton, matching the stat card and the nameplates. */
+									fontFamily: 'RansomAnton, sans-serif',
 									fontSize: box.size,
 									lineHeight: 0.98,
 									letterSpacing: 1.5,
