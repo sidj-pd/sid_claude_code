@@ -26,6 +26,27 @@ export type FootageProps = {
 	 * written but never shot because Episode 01 had no line to land it on.
 	 */
 	volume?: number | ((frame: number) => number);
+	/**
+	 * Scales the clip up from its TOP edge, pushing the bottom of the source
+	 * out of frame.
+	 *
+	 * Every Episode 04 clip came back with the generator's sparkle mark burnt
+	 * into the bottom-right corner, and the sign-off came back with a burnt-in
+	 * subtitle across the bottom as well -- both despite the prompt banning
+	 * writing and marks. Neither can be removed from the pixels, so the frame
+	 * moves instead: at 1.14 the mark at roughly 91% of the height lands past
+	 * 100% and is simply not in the shot.
+	 *
+	 * Anchored to the TOP rather than the centre on purpose. These are all
+	 * chest-up framings with headroom to spare and nothing of interest at the
+	 * bottom, so growing downwards costs a strip of desk and keeps every face
+	 * where it was. Centre-anchoring would crop foreheads.
+	 *
+	 * A corner darkener was tried first, the way Episode 03 hides the same
+	 * mark. It works on a mark and not on a caption, and this needed one fix
+	 * for both.
+	 */
+	cropBottom?: number;
 	style?: React.CSSProperties;
 };
 
@@ -44,6 +65,7 @@ export const Footage: React.FC<FootageProps> = ({
 	muted = false,
 	trimBeforeInFrames,
 	volume = 1,
+	cropBottom,
 	style,
 }) => {
 	const path = `footage/${id}.mp4`;
@@ -56,7 +78,15 @@ export const Footage: React.FC<FootageProps> = ({
 				muted={muted}
 				volume={volume}
 				trimBefore={trimBeforeInFrames}
-				style={{width: '100%', height: '100%', objectFit: 'cover', ...style}}
+				style={{
+					width: '100%',
+					height: '100%',
+					objectFit: 'cover',
+					...(cropBottom
+						? {transform: `scale(${cropBottom})`, transformOrigin: '50% 0%'}
+						: null),
+					...style,
+				}}
 			/>
 		);
 	}

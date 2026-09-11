@@ -27,6 +27,10 @@ export const Shot07Psa: React.FC = () => {
 			<Footage
 				id="ep04-correspondent-psa"
 				trimBeforeInFrames={TRIM_IN}
+				/* 1.20, not the 1.14 the other clips use: this one came back with
+				   a burnt-in subtitle across the bottom as well as the corner
+				   mark, and the caption sits higher than the mark does. */
+				cropBottom={1.2}
 				description={
 					'The correspondent, direct address, news sign-off framing.\n' +
 					'"If a bank counter has served you during the lunch hour — do not\n' +
@@ -54,13 +58,16 @@ export const Shot07Psa: React.FC = () => {
 						position: 'absolute',
 						left: 90,
 						right: 90,
-						top: 300,
+						/* Low, over his chest. At y300 it sat squarely across his
+						   eyes -- the one place a card over a talking head must
+						   not go. This clears the lower third's chyron at 1340. */
+						top: 1040,
 						background: BUTTER,
 						padding: '38px 30px',
 						clipPath: tornPolygon({seed: 44, depth: 5, teeth: 15}),
 						textAlign: 'center',
 						fontFamily: 'RansomArchivoBlack, sans-serif',
-						fontSize: 76,
+						fontSize: 62,
 						lineHeight: 1.02,
 						letterSpacing: 1,
 						color: GANACHE,

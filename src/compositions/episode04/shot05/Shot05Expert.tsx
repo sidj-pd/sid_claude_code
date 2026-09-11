@@ -26,6 +26,9 @@ import {
 	TRIM_K,
 } from './beats';
 
+/** Every delivered clip has the generator's mark burnt into the bottom-right. */
+const WATERMARK_CROP = 1.14;
+
 const TAKES: {id: string; from: number; frames: number; trim: number; description: string}[] = [
 	{
 		id: 'ep04-expert-1',
@@ -72,7 +75,12 @@ export const Shot05Expert: React.FC = () => {
 			{!onDiagram
 				? TAKES.map((t) => (
 						<Sequence key={t.id} from={t.from} durationInFrames={t.frames}>
-							<Footage id={t.id} description={t.description} trimBeforeInFrames={t.trim} />
+							<Footage
+								id={t.id}
+								description={t.description}
+								trimBeforeInFrames={t.trim}
+								cropBottom={WATERMARK_CROP}
+							/>
 						</Sequence>
 					))
 				: null}
@@ -81,6 +89,7 @@ export const Shot05Expert: React.FC = () => {
 				<Footage
 					id="ep04-expert-kicker"
 					trimBeforeInFrames={TRIM_K}
+					cropBottom={WATERMARK_CROP}
 					description="Three more counters like this."
 				/>
 			</Sequence>

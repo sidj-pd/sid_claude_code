@@ -27,6 +27,7 @@ export const Shot08Committee: React.FC = () => {
 						id="ep04-correspondent-psa"
 						description={'The sign-off, on a video call.\nVertical, photoreal, with its own dialogue.'}
 						muted
+						cropBottom={1.2}
 					/>
 				</Freeze>
 			</Sequence>

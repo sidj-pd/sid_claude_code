@@ -40,6 +40,9 @@ const W2 = 'The customer, second take — the afternoon he got back.';
 /** The three things that did not happen, which is what the case rests on. */
 const ITEMS = ['NO TOKEN', 'NO "COME AFTER 3:30"', 'NO "GO TO COUNTER 2"'];
 
+/** Every delivered clip has the generator's mark burnt into the bottom-right. */
+const WATERMARK_CROP = 1.14;
+
 /** The dropout, as an offset into clip two rather than into the shot. */
 const DROPOUT_LOCAL = DROPOUT_AT - WITNESS_2_IN;
 
@@ -64,11 +67,11 @@ export const Shot04Testimony: React.FC = () => {
 			    frame zero — a visible jump the instant the page clears. */}
 			<Sequence from={0} durationInFrames={WITNESS_1_IN}>
 				<Freeze frame={0}>
-					<Footage id="ep04-witness-1" description={W1} muted />
+					<Footage id="ep04-witness-1" description={W1} muted cropBottom={WATERMARK_CROP} />
 				</Freeze>
 			</Sequence>
 			<Sequence from={WITNESS_1_IN} durationInFrames={WITNESS_1_FRAMES}>
-				<Footage id="ep04-witness-1" description={W1} />
+				<Footage id="ep04-witness-1" description={W1} cropBottom={WATERMARK_CROP} />
 			</Sequence>
 
 			{/* Clip two: a hard jump cut, no transition device. */}
@@ -77,6 +80,7 @@ export const Shot04Testimony: React.FC = () => {
 					id="ep04-witness-2"
 					description={W2}
 					trimBeforeInFrames={WITNESS_2_TRIM}
+					cropBottom={WATERMARK_CROP}
 					/* The dropout the script asks for, on the last line. Footage's
 					   volume takes a function of the frame WITHIN the clip, which
 					   is exactly what this is for -- and it means the gate stays
@@ -94,7 +98,13 @@ export const Shot04Testimony: React.FC = () => {
 			    actually on screen.
 			    It renders itself silent here: a frozen page still holding audio
 			    would fight the shot it is being pulled out of. */}
-			<PaperTear progress={1 - tearProgress} at={40} lean={-22} seed={19}>
+			{/* progress 1 is TORN OPEN and 0 is the paper closed over the frame --
+			    the opposite of what it reads like. The first cut passed
+			    `1 - tearProgress`, which runs 1 to 0, so the page closed instead
+			    of opening and the stat card sat over the testimony for the whole
+			    shot. Shots 6 and 8 tear the other way and had it right, which is
+			    what made this one easy to get backwards. */}
+			<PaperTear progress={tearProgress} at={40} lean={-22} seed={19}>
 				<Freeze frame={EP04_BLACKOUT - 4}>
 					<Shot02Graphic silent />
 				</Freeze>

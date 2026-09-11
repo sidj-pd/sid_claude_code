@@ -31,6 +31,9 @@ import {
 
 const CLAMP = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
 
+/** Every delivered clip has the generator's mark burnt into the bottom-right. */
+const WATERMARK_CROP = 1.14;
+
 const WITNESS_DESCRIPTION =
 	'The customer on a video call, same setup as Beat 4, more haggard.\n' +
 	'"He gets compensation? I lost an afternoon. I lost a marriage.\n' +
@@ -111,7 +114,12 @@ export const Shot06Fallout: React.FC = () => {
 					    shot before this one ends on him, so the paper closes over
 					    the picture the audience is already looking at rather than
 					    over a new one. */}
-					<Footage id="ep04-expert-kicker" description="The expert, held." muted />
+					<Footage
+						id="ep04-expert-kicker"
+						description="The expert, held."
+						muted
+						cropBottom={WATERMARK_CROP}
+					/>
 				</Freeze>
 			</Sequence>
 
@@ -121,6 +129,7 @@ export const Shot06Fallout: React.FC = () => {
 					id="ep04-witness-claim"
 					description={WITNESS_DESCRIPTION}
 					trimBeforeInFrames={WITNESS_TRIM}
+					cropBottom={WATERMARK_CROP}
 				/>
 			</Sequence>
 			{/* A soft corner darkener under the caption. Laid over the video
