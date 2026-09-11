@@ -73,6 +73,8 @@ export const CLOCK_IN = WIPE + WIPE_FRAMES;
 export const HANDS_IN = CLOCK_IN + 8;
 export const WEDGE_IN = HANDS_IN + 16;
 export const WINDOW_STAMP = WEDGE_IN + 10;
+/** The closing time, restated on the clock page a beat after the window. */
+export const CLOSES_STAMP2 = WINDOW_STAMP + 14;
 export const VO_C_STARTS = CLOCK_IN + 20;
 
 /** The cliffhanger, held on a frozen clock. */

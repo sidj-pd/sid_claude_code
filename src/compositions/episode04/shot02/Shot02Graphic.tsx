@@ -20,6 +20,7 @@ import {
 	CAP1_IN,
 	CAP2_IN,
 	CLOCK_IN,
+	CLOSES_STAMP2,
 	FOOTNOTE_IN,
 	HANDS_IN,
 	HEADER_IN,
@@ -73,6 +74,18 @@ const TAG_SIZE = 46;
 const FOOTNOTE_Y = 1352;
 const SOURCE_H = 64;
 const SOURCE_Y = safeTop(SOURCE_H) - 12;
+
+/**
+ * The clock page, laid out so nothing verbal sits on the dial. Title, the two
+ * stamped facts, then the picture, then the source strip -- and the clock is
+ * sized to whatever is left rather than placed and hoped for.
+ */
+const CLOCK_TITLE_Y = 220;
+const CLOCK_STAMP1_Y = 356;
+const CLOCK_STAMP2_Y = 456;
+const CLOCK_SIZE = 840;
+const CLOCK_X = (1080 - CLOCK_SIZE) / 2;
+const CLOCK_Y = 600;
 
 const SLIVER_X = BAR_X + TURNED_AWAY * BAR_W;
 const SLIVER_W = BAR_W * (1 - TURNED_AWAY);
@@ -401,11 +414,17 @@ export const Shot02Graphic: React.FC<{silent?: boolean}> = ({silent = false}) =>
 				</AbsoluteFill>
 			) : (
 				<AbsoluteFill style={{transform: drift}}>
+					{/* Title, then the two facts, then the clock.
+					    The stamp used to sit at y1362, under the clock -- which
+					    put it on top of the dial, because a 960px clock starting
+					    at y470 ends at y1430. Everything verbal is above the
+					    picture now: the page reads title, findings, evidence,
+					    top to bottom, like the bars page does. */}
 					<div
 						style={{
 							position: 'absolute',
 							left: BAR_X,
-							top: 300,
+							top: CLOCK_TITLE_Y,
 							fontFamily: 'RansomAnton, sans-serif',
 							fontSize: 88,
 							lineHeight: 0.96,
@@ -416,12 +435,8 @@ export const Shot02Graphic: React.FC<{silent?: boolean}> = ({silent = false}) =>
 						YOUR WINDOW
 					</div>
 
-					<div style={{position: 'absolute', left: 60, top: 520}}>
-						<Clock size={960} hands={hands} wedge={wedge} />
-					</div>
-
 					{frame >= WINDOW_STAMP ? (
-						<div style={{position: 'absolute', left: BAR_X, top: 1362}}>
+						<div style={{position: 'absolute', left: BAR_X, top: CLOCK_STAMP1_Y}}>
 							<EvidenceStamp
 								text="3:30 — 4:00 · THIRTY MINUTES"
 								age={frame - WINDOW_STAMP}
@@ -431,6 +446,28 @@ export const Shot02Graphic: React.FC<{silent?: boolean}> = ({silent = false}) =>
 							/>
 						</div>
 					) : null}
+
+					{/* The other half of the window, and the reason it is one:
+					    thirty minutes is only a window because of when the doors
+					    shut. The closing time was in the script and in the first
+					    cut of this card, and it did not survive the rebuild onto
+					    Episode 03's grammar -- so the clock was asserting a
+					    number with the fact it rests on nowhere on screen. */}
+					{frame >= CLOSES_STAMP2 ? (
+						<div style={{position: 'absolute', left: BAR_X, top: CLOCK_STAMP2_Y}}>
+							<EvidenceStamp
+								text="BANK CLOSES AT 4:00"
+								age={frame - CLOSES_STAMP2}
+								fontSize={44}
+								rotate={1.5}
+								color={GANACHE}
+							/>
+						</div>
+					) : null}
+
+					<div style={{position: 'absolute', left: CLOCK_X, top: CLOCK_Y}}>
+						<Clock size={CLOCK_SIZE} hands={hands} wedge={wedge} />
+					</div>
 
 					<div
 						style={{
