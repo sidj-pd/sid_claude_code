@@ -26,6 +26,7 @@ import {
 	VO_UNION_STARTS,
 	WITNESS_CHYRON_IN,
 	WITNESS_FRAMES,
+	WITNESS_TRIM,
 } from './beats';
 
 const CLAMP = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
@@ -106,17 +107,21 @@ export const Shot06Fallout: React.FC = () => {
 			{/* The expert's last frame, held, until the paper closes over it. */}
 			<Sequence from={0} durationInFrames={REV1_STARTS + REV1_FRAMES}>
 				<Freeze frame={0}>
-					<Footage
-						id="ep04-expert-last"
-						description={'The expert, held on his last frame.\nVertical, photoreal.'}
-						muted
-					/>
+					{/* The expert's own last take, held on its final frame -- the
+					    shot before this one ends on him, so the paper closes over
+					    the picture the audience is already looking at rather than
+					    over a new one. */}
+					<Footage id="ep04-expert-kicker" description="The expert, held." muted />
 				</Freeze>
 			</Sequence>
 
 			{/* The witness, between the two tears. */}
 			<Sequence from={FWD_TEAR_DONE} durationInFrames={WITNESS_FRAMES}>
-				<Footage id="ep04-witness-claim" description={WITNESS_DESCRIPTION} />
+				<Footage
+					id="ep04-witness-claim"
+					description={WITNESS_DESCRIPTION}
+					trimBeforeInFrames={WITNESS_TRIM}
+				/>
 			</Sequence>
 			{/* A soft corner darkener under the caption. Laid over the video
 			    only, never the paper, so the type has something to sit on

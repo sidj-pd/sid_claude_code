@@ -63,6 +63,7 @@ import {Shot08Committee as Ep03Shot08Committee} from './compositions/episode03/s
 import {SHOT_08_DURATION as EP03_SHOT_08_DURATION} from './compositions/episode03/shot08/beats';
 import {Shot09FullCircle as Ep03Shot09FullCircle} from './compositions/episode03/shot09/Shot09FullCircle';
 import {SHOT_09_DURATION as EP03_SHOT_09_DURATION} from './compositions/episode03/shot09/beats';
+import {Episode04, EP04_DURATION} from './compositions/episode04/Episode04';
 import {Shot00ColdOpen} from './compositions/episode04/shot00/Shot00ColdOpen';
 import {Shot01LunchHour} from './compositions/episode04/shot01/Shot01LunchHour';
 import {EP04_SHOT_01_DURATION} from './compositions/episode04/shot01/beats';
@@ -74,6 +75,8 @@ import {Shot06Fallout as Ep04Shot06Fallout} from './compositions/episode04/shot0
 import {EP04_SHOT_06_DURATION} from './compositions/episode04/shot06/beats';
 import {Shot05Expert as Ep04Shot05Expert} from './compositions/episode04/shot05/Shot05Expert';
 import {EP04_SHOT_05_DURATION} from './compositions/episode04/shot05/beats';
+import {Shot04Testimony as Ep04Shot04Testimony} from './compositions/episode04/shot04/Shot04Testimony';
+import {EP04_SHOT_04_DURATION} from './compositions/episode04/shot04/beats';
 import {Shot07Psa as Ep04Shot07Psa} from './compositions/episode04/shot07/Shot07Psa';
 import {EP04_SHOT_07_DURATION} from './compositions/episode04/shot07/beats';
 import {Shot09FullCircle as Ep04Shot09FullCircle} from './compositions/episode04/shot09/Shot09FullCircle';
@@ -253,6 +256,14 @@ export const Root: React.FC = () => {
 				height={OPENING_MONTAGE_HEIGHT}
 			/>
 			<Composition
+				id="Ep04Full"
+				component={Episode04}
+				durationInFrames={EP04_DURATION}
+				fps={OPENING_MONTAGE_FPS}
+				width={OPENING_MONTAGE_WIDTH}
+				height={OPENING_MONTAGE_HEIGHT}
+			/>
+			<Composition
 				id="Ep04Shot00ColdOpen"
 				component={Shot00ColdOpen}
 				durationInFrames={EP04_SHOT_00_DURATION}
@@ -272,6 +283,14 @@ export const Root: React.FC = () => {
 				id="Ep04Shot02Graphic"
 				component={Ep04Shot02Graphic}
 				durationInFrames={EP04_SHOT_02_DURATION}
+				fps={OPENING_MONTAGE_FPS}
+				width={OPENING_MONTAGE_WIDTH}
+				height={OPENING_MONTAGE_HEIGHT}
+			/>
+			<Composition
+				id="Ep04Shot04Testimony"
+				component={Ep04Shot04Testimony}
+				durationInFrames={EP04_SHOT_04_DURATION}
 				fps={OPENING_MONTAGE_FPS}
 				width={OPENING_MONTAGE_WIDTH}
 				height={OPENING_MONTAGE_HEIGHT}

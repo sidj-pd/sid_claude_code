@@ -10,11 +10,8 @@
  *
  * ep04-shot06-union-cut runs 11.38s / 341 frames.
  *
- * The witness footage does not exist yet: Beats 4, 5 and 7 and the middle of
- * this one are photoreal live action, and this pipeline generates images and
- * voices, not video. Footage renders a labelled placeholder card in its place,
- * so the shot cuts, times and reviews now and the clips drop in later without
- * anything moving.
+ * The witness clip and the expert freeze are both delivered footage now, and
+ * every beat below is measured off them rather than budgeted.
  */
 
 const S = 30;
@@ -33,12 +30,12 @@ export const FWD_TEAR_FRAMES = 26;
 export const FWD_TEAR_DONE = FWD_TEAR_STARTS + FWD_TEAR_FRAMES;
 
 /**
- * The witness's line, from the script: "He gets compensation? I lost an
- * afternoon. I lost a marriage. All I wanted was a demand draft." Budgeted at
- * 7.4s until the take exists; when it does, measure it and change this one
- * number — everything after it is derived.
+ * The witness's line, measured off the delivered take: ep04-witness-claim.mp4
+ * runs 8.00s with speech from 1.10 to 7.32, so 1.10s of generator lead-in is
+ * trimmed off the front and the clip ends 0.35s after the last word.
  */
-export const WITNESS_FRAMES = Math.round(7.4 * S);
+export const WITNESS_TRIM = Math.round(1.1 * S);
+export const WITNESS_FRAMES = Math.round((7.32 - 1.1 + 0.35) * S);
 export const WITNESS_CHYRON_IN = FWD_TEAR_DONE + 8;
 
 /** Second reverse tear, onto his own words in print. */

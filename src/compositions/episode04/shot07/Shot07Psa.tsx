@@ -7,7 +7,7 @@ import {tornPolygon} from '../../../components/tornEdge';
 import {SAFE_BOTTOM_Y} from '../../../components/safeArea';
 import {useStopMotionStep} from '../../../components/useStopMotionStep';
 import {BUTTER, GANACHE, GANACHE_DEEP} from '../../../components/palette';
-import {CARD_FRAMES, CARD_IN, CHYRON_IN, TAKE_FRAMES} from './beats';
+import {CARD_FRAMES, CARD_IN, CHYRON_IN, TAKE_FRAMES, TRIM_IN} from './beats';
 
 const CLAMP = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
 
@@ -26,6 +26,7 @@ export const Shot07Psa: React.FC = () => {
 		<AbsoluteFill style={{backgroundColor: GANACHE_DEEP}}>
 			<Footage
 				id="ep04-correspondent-psa"
+				trimBeforeInFrames={TRIM_IN}
 				description={
 					'The correspondent, direct address, news sign-off framing.\n' +
 					'"If a bank counter has served you during the lunch hour — do not\n' +

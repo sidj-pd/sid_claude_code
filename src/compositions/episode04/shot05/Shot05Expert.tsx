@@ -20,36 +20,36 @@ import {
 	TAKE_2_FRAMES,
 	TAKE_3,
 	TAKE_3_FRAMES,
-	TAKE_4,
-	TAKE_4_FRAMES,
+	TRIM_1,
+	TRIM_2,
+	TRIM_3,
+	TRIM_K,
 } from './beats';
 
-const TAKES: [string, number, number, string][] = [
-	[
-		'ep04-expert-1',
-		TAKE_1,
-		TAKE_1_FRAMES,
-		'Dr. Ramamurthy, mid-sentence, total confidence.\n"—K.Y.C. Syndrome. Kept Your Counter open. And I want to be very\nclear: this is no longer a behavioural matter. This is chaos theory."',
-	],
-	[
-		'ep04-expert-2',
-		TAKE_2,
-		TAKE_2_FRAMES,
-		'The butterfly effect.\n"...Except the butterfly is a man skipping his lunch, and the\ntyphoon is a marriage in Rajajinagar."',
-	],
-	[
-		'ep04-expert-3',
-		TAKE_3,
-		TAKE_3_FRAMES,
-		'The system is calibrated.\n"...ninety minutes is where things are discovered."',
-	],
-	[
-		'ep04-expert-4',
-		TAKE_4,
-		TAKE_4_FRAMES,
-		'Deadly serious.\n"He didn\'t just serve a customer. He rearranged that man\'s life."',
-	],
+const TAKES: {id: string; from: number; frames: number; trim: number; description: string}[] = [
+	{
+		id: 'ep04-expert-1',
+		from: TAKE_1,
+		frames: TAKE_1_FRAMES,
+		trim: TRIM_1,
+		description: 'K.Y.C. Syndrome. This is chaos theory.',
+	},
+	{
+		id: 'ep04-expert-2',
+		from: TAKE_2,
+		frames: TAKE_2_FRAMES,
+		trim: TRIM_2,
+		description: 'The butterfly effect. Two segments, stitched.',
+	},
+	{
+		id: 'ep04-expert-3',
+		from: TAKE_3,
+		frames: TAKE_3_FRAMES,
+		trim: TRIM_3,
+		description: 'Ninety minutes is where things are discovered.',
+	},
 ];
+
 
 /**
  * Shot 5 — Expert Commentary.
@@ -70,9 +70,9 @@ export const Shot05Expert: React.FC = () => {
 	return (
 		<AbsoluteFill style={{backgroundColor: GANACHE_DEEP}}>
 			{!onDiagram
-				? TAKES.map(([id, from, frames, description]) => (
-						<Sequence key={id} from={from} durationInFrames={frames}>
-							<Footage id={id} description={description} />
+				? TAKES.map((t) => (
+						<Sequence key={t.id} from={t.from} durationInFrames={t.frames}>
+							<Footage id={t.id} description={t.description} trimBeforeInFrames={t.trim} />
 						</Sequence>
 					))
 				: null}
@@ -80,9 +80,8 @@ export const Shot05Expert: React.FC = () => {
 			<Sequence from={KICKER} durationInFrames={KICKER_FRAMES}>
 				<Footage
 					id="ep04-expert-kicker"
-					description={
-						'The kicker.\n"We estimate three more counters like this and the city\nstops functioning entirely."'
-					}
+					trimBeforeInFrames={TRIM_K}
+					description="Three more counters like this."
 				/>
 			</Sequence>
 
