@@ -5,7 +5,7 @@ import {EvidenceStamp} from '../../../components/EvidenceStamp';
 import {Footage} from '../../../components/Footage';
 import {PaperTear} from '../../../components/PaperTear';
 import {useStopMotionStep} from '../../../components/useStopMotionStep';
-import {GANACHE, GANACHE_DEEP} from '../../../components/palette';
+import {BUTTER_DEEP, GANACHE, GANACHE_DEEP} from '../../../components/palette';
 import {ChecklistItem} from '../../episode01/shot06/Checklist';
 import {Shot02Graphic} from '../shot02/Shot02Graphic';
 import {BLACKOUT as EP04_BLACKOUT} from '../shot02/beats';
@@ -40,6 +40,9 @@ const ITEMS = ['NO TOKEN', 'NO "COME AFTER 3:30"', 'NO "GO TO COUNTER 2"'];
 
 /** Every delivered clip has the generator's mark burnt into the bottom-right. */
 const WATERMARK_CROP = 1.14;
+
+/** The same stock the nameplate is cut from, so the two read as one set. */
+const CARD = '#F6E7CB';
 
 /** Below his chin, above the nameplate. See the note at the render site. */
 const LIST_TOP = 1060;
@@ -147,6 +150,9 @@ export const Shot04Testimony: React.FC = () => {
 							width={620}
 							height={LIST_H}
 							seed={13 + i * 7}
+							ink={GANACHE}
+							paper={CARD}
+							mark={BUTTER_DEEP}
 						/>
 					</div>
 				);

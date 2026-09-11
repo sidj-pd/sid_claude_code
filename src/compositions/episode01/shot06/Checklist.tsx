@@ -6,6 +6,8 @@ import {tornPolygon} from '../../../components/tornEdge';
 const CLAMP = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
 const INK = '#241d15';
 const MARK = '#8f3626';
+/** The chit's own stock, and the default when a caller does not pass one. */
+const CARD_PAPER = '#efe4c8';
 
 export type ChecklistItemProps = {
 	text: string;
@@ -16,6 +18,14 @@ export type ChecklistItemProps = {
 	width: number;
 	height: number;
 	seed: number;
+	/**
+	 * Palette overrides, same contract as StatBar and Chyron: optional, so a
+	 * new palette cannot silently restyle three delivered episodes. Episode 04
+	 * passes Ganache, a Butter-tinted paper, and Butter for the tick.
+	 */
+	ink?: string;
+	paper?: string;
+	mark?: string;
 };
 
 /**
@@ -34,6 +44,9 @@ export const ChecklistItem: React.FC<ChecklistItemProps> = ({
 	width,
 	height,
 	seed,
+	ink = INK,
+	paper = CARD_PAPER,
+	mark = MARK,
 }) => {
 	if (age < 0) return null;
 
@@ -49,7 +62,7 @@ export const ChecklistItem: React.FC<ChecklistItemProps> = ({
 				gap: height * 0.28,
 				padding: `0 ${height * 0.3}px`,
 				boxSizing: 'border-box',
-				background: '#efe4c8',
+				background: paper,
 				clipPath: tornPolygon({seed, depth: 7, teeth: 11}),
 				boxShadow: '0 6px 14px rgba(24,16,8,0.4)',
 				// Slammed on, not faded: one frame proud of the page, then down.
@@ -62,7 +75,7 @@ export const ChecklistItem: React.FC<ChecklistItemProps> = ({
 					position: 'relative',
 					width: box,
 					height: box,
-					border: `4px solid ${INK}`,
+					border: `4px solid ${ink}`,
 					flexShrink: 0,
 				}}
 			>
@@ -81,7 +94,7 @@ export const ChecklistItem: React.FC<ChecklistItemProps> = ({
 					>
 						<path
 							d="M 18 52 L 42 76 L 86 20"
-							stroke={MARK}
+							stroke={mark}
 							strokeWidth={14}
 							strokeLinecap="round"
 							strokeLinejoin="round"
@@ -96,7 +109,7 @@ export const ChecklistItem: React.FC<ChecklistItemProps> = ({
 					fontFamily: 'RansomAnton, sans-serif',
 					fontSize: height * 0.44,
 					letterSpacing: 1.2,
-					color: INK,
+					color: ink,
 					whiteSpace: 'nowrap',
 				}}
 			>
