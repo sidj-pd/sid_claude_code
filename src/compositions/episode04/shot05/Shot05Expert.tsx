@@ -1,18 +1,22 @@
 import React from 'react';
 import {AbsoluteFill, Sequence, useCurrentFrame} from 'remotion';
-import {Chyron} from '../../../components/Chyron';
+import {NAMEPLATE_TOP, Nameplate} from '../Nameplate';
 import {Footage} from '../../../components/Footage';
-import {SAFE_BOTTOM_Y} from '../../../components/safeArea';
 import {GANACHE_DEEP} from '../../../components/palette';
 import {Ground} from '../Ground';
+import {VoiceOver} from '../../../components/VoiceOver';
 import {ChainDiagram} from './ChainDiagram';
+import {ExpertNotes} from './ExpertNotes';
 import {
 	CHYRON_IN,
 	CHYRON_OUT,
-	DIAGRAM_BOX_EVERY,
+	DIAGRAM_BOX_AT,
+	DIAGRAM_VO,
 	DIAGRAM_FRAMES,
 	DIAGRAM_IN,
 	KICKER,
+	NOTE_AT,
+	NOTE_UNTIL,
 	KICKER_FRAMES,
 	TAKE_1,
 	TAKE_1_FRAMES,
@@ -97,21 +101,23 @@ export const Shot05Expert: React.FC = () => {
 			{onDiagram ? (
 				<AbsoluteFill>
 					<Ground grain={0.16} />
-					<ChainDiagram from={DIAGRAM_IN} every={DIAGRAM_BOX_EVERY} />
+					<ChainDiagram at={DIAGRAM_BOX_AT} />
+					<VoiceOver id="ep04-shot05-chain-cut" from={DIAGRAM_VO} />
 				</AbsoluteFill>
 			) : null}
+
+			{!onDiagram ? <ExpertNotes frame={frame} at={NOTE_AT} until={NOTE_UNTIL} /> : null}
 
 			{/* His nameplate, and the footnote that undercuts it. The institute
 			    is unaccredited and the line saying so is deliberately set too
 			    small to read comfortably -- that is the joke, not a bug. */}
-			<Chyron
+			<Nameplate
 				name="DR. NAGESH RAMAMURTHY, INSTITUTIONAL BEHAVIOURIST"
 				title="BANGALORE INSTITUTE OF BANKING AND RELATIONSHIP MANAGEMENT (BIBRM)*"
 				footnote="*institute unaccredited"
 				frame={frame}
 				in={CHYRON_IN}
 				out={CHYRON_OUT}
-				top={SAFE_BOTTOM_Y - 240}
 				seed={57}
 			/>
 		</AbsoluteFill>

@@ -1,10 +1,9 @@
 import React from 'react';
 import {AbsoluteFill, Freeze, Sequence, interpolate, useCurrentFrame} from 'remotion';
-import {Chyron} from '../../../components/Chyron';
+import {NAMEPLATE_TOP, Nameplate} from '../Nameplate';
 import {EvidenceStamp} from '../../../components/EvidenceStamp';
 import {Footage} from '../../../components/Footage';
 import {PaperTear} from '../../../components/PaperTear';
-import {SAFE_BOTTOM_Y} from '../../../components/safeArea';
 import {useStopMotionStep} from '../../../components/useStopMotionStep';
 import {GANACHE, GANACHE_DEEP} from '../../../components/palette';
 import {ChecklistItem} from '../../episode01/shot06/Checklist';
@@ -14,8 +13,7 @@ import {
 	CHYRON_IN,
 	DROPOUT_AT,
 	DROPOUT_FRAMES,
-	LIST_EVERY,
-	LIST_IN,
+	LIST_AT,
 	STAMP_FRAMES,
 	STAMP_IN,
 	TEAR_FRAMES,
@@ -42,6 +40,11 @@ const ITEMS = ['NO TOKEN', 'NO "COME AFTER 3:30"', 'NO "GO TO COUNTER 2"'];
 
 /** Every delivered clip has the generator's mark burnt into the bottom-right. */
 const WATERMARK_CROP = 1.14;
+
+/** Below his chin, above the nameplate. See the note at the render site. */
+const LIST_TOP = 1060;
+const LIST_PITCH = 96;
+const LIST_H = 82;
 
 /** The dropout, as an offset into clip two rather than into the shot. */
 const DROPOUT_LOCAL = DROPOUT_AT - WITNESS_2_IN;
@@ -125,30 +128,35 @@ export const Shot04Testimony: React.FC = () => {
 				</div>
 			) : null}
 
-			{/* The evidence checklist, over the middle of his list. */}
+			{/* The evidence checklist, in the band between his chin and the
+			    nameplate. It used to start at y380, which put all three chits
+			    straight across his eyes and mouth -- measured on the delivered
+			    take, his face runs from about y160 to y1040, and the clear space
+			    is below that. Three chits of 82 on a 96 pitch run 1060-1334,
+			    which leaves 42px under the lowest one before the card at
+			    NAMEPLATE_TOP. */}
 			{ITEMS.map((text, i) => {
-				const at = LIST_IN + i * LIST_EVERY;
+				const at = LIST_AT[i];
 				if (frame < at) return null;
 				return (
-					<div key={text} style={{position: 'absolute', left: 84, top: 380 + i * 150}}>
+					<div key={text} style={{position: 'absolute', left: 84, top: LIST_TOP + i * LIST_PITCH}}>
 						<ChecklistItem
 							text={text}
 							age={frame - at}
 							tickAge={frame - at - TICK_AFTER}
-							width={640}
-							height={112}
+							width={620}
+							height={LIST_H}
 							seed={13 + i * 7}
 						/>
 					</div>
 				);
 			})}
 
-			<Chyron
+			<Nameplate
 				name="WITNESS — NAME WITHHELD"
 				title="SURVIVOR, INCIDENT #0004"
 				frame={frame}
 				in={CHYRON_IN}
-				top={SAFE_BOTTOM_Y - 196}
 				seed={29}
 			/>
 		</AbsoluteFill>

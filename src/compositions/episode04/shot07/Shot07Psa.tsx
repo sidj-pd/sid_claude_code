@@ -1,10 +1,9 @@
 import React from 'react';
 import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
-import {Chyron} from '../../../components/Chyron';
+import {NAMEPLATE_TOP, Nameplate} from '../Nameplate';
 import {Footage} from '../../../components/Footage';
 import {NewsprintTexture} from '../../../components/NewsprintTexture';
 import {tornPolygon} from '../../../components/tornEdge';
-import {SAFE_BOTTOM_Y} from '../../../components/safeArea';
 import {useStopMotionStep} from '../../../components/useStopMotionStep';
 import {BUTTER, GANACHE, GANACHE_DEEP} from '../../../components/palette';
 import {CARD_FRAMES, CARD_IN, CHYRON_IN, TAKE_FRAMES, TRIM_IN} from './beats';
@@ -40,13 +39,12 @@ export const Shot07Psa: React.FC = () => {
 				}
 			/>
 
-			<Chyron
+			<Nameplate
 				name="BIZZARO BANGALORE"
 				title="PUBLIC SERVICE ANNOUNCEMENT"
 				frame={frame}
 				in={CHYRON_IN}
 				out={TAKE_FRAMES - 6}
-				top={SAFE_BOTTOM_Y - 196}
 				seed={73}
 			/>
 

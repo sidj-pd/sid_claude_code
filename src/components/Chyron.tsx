@@ -6,6 +6,17 @@ import {tornPolygon} from './tornEdge';
 const CLAMP = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
 const INK = '#241d15';
 
+/**
+ * A hex colour at reduced opacity, as rgba. The dimmed credential lines used
+ * to be hardcoded rgba values of the default ink, which meant passing a new
+ * ink recoloured the name and left the two lines under it brown.
+ */
+const dim = (hex: string, alpha: number): string => {
+	const h = hex.replace('#', '');
+	const n = parseInt(h.length === 3 ? h.replace(/(.)/g, '$1$1') : h, 16);
+	return `rgba(${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255}, ${alpha})`;
+};
+
 export type ChyronProps = {
 	name: string;
 	title: string;
@@ -24,6 +35,20 @@ export type ChyronProps = {
 	top: number;
 	width?: number;
 	seed: number;
+	/**
+	 * Palette overrides. Episodes 01-03 are cream and brown and take the
+	 * defaults; Episode 04 is Aruba, Ganache and Butter and passes its own.
+	 * Optional rather than required so a new palette cannot silently restyle
+	 * three delivered episodes.
+	 *
+	 * `ink` also drives the two dimmed lines under the name, which are the
+	 * same colour at 75% and 42% — so a caller changes one value, not three,
+	 * and the card cannot end up with a Ganache name over a brown credential.
+	 */
+	paper?: string;
+	ink?: string;
+	/** Accent rule along the top edge. Off by default; Episode 04 uses it. */
+	accent?: string;
 };
 
 /**
@@ -47,6 +72,9 @@ export const Chyron: React.FC<ChyronProps> = ({
 	top,
 	width = 880,
 	seed,
+	paper = '#efe4c8',
+	ink = INK,
+	accent,
 }) => {
 	if (frame < fadeIn) return null;
 	const opacity =
@@ -62,7 +90,7 @@ export const Chyron: React.FC<ChyronProps> = ({
 				left,
 				top,
 				width,
-				background: '#efe4c8',
+				background: paper,
 				padding: '20px 32px 24px',
 				clipPath: tornPolygon({seed, depth: 5, teeth: 16}),
 				boxShadow: '0 10px 22px rgba(12,10,8,0.5)',
@@ -74,7 +102,7 @@ export const Chyron: React.FC<ChyronProps> = ({
 					fontFamily: 'RansomAnton, sans-serif',
 					fontSize: 52,
 					letterSpacing: 1.5,
-					color: INK,
+					color: ink,
 				}}
 			>
 				{name}
@@ -85,7 +113,7 @@ export const Chyron: React.FC<ChyronProps> = ({
 					fontFamily: 'RansomSpecialElite, monospace',
 					fontSize: 27,
 					lineHeight: 1.3,
-					color: 'rgba(36,29,21,0.75)',
+					color: dim(ink, 0.75),
 					// A caller passing two credentials on one card (a title and an
 					// institution) splits them with "\n" rather than getting a
 					// second prop — it is still one line of text, just a long one.
@@ -100,11 +128,23 @@ export const Chyron: React.FC<ChyronProps> = ({
 						marginTop: 3,
 						fontFamily: 'RansomSpecialElite, monospace',
 						fontSize: 15,
-						color: 'rgba(36,29,21,0.42)',
+						color: dim(ink, 0.42),
 					}}
 				>
 					{footnote}
 				</div>
+			) : null}
+			{accent ? (
+				<div
+					style={{
+						position: 'absolute',
+						left: 0,
+						right: 0,
+						top: 0,
+						height: 8,
+						background: accent,
+					}}
+				/>
 			) : null}
 			<NewsprintTexture opacity={0.16} />
 		</div>

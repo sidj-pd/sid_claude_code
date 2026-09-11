@@ -223,8 +223,8 @@
 		{
 			"id": "ep04-shot01-vo",
 			"speaker": "narrator",
-			"text": "Every day, thousands of bank visits happen in Bangalore. This is the story of the one that didn't wait for the lunch hour to end.",
-			"delivery": "the episode opening line and the fourth of its kind, so take it at exactly the pace and flatness of ep01-shot01, ep02-shot02 and ep03-shot01-vo -- the series has a recognisable way of starting. First sentence entirely ordinary, a small beat at the full stop, then \"didn't wait for the lunch hour to end\" landed as plain fact rather than as the joke it is"
+			"text": "Every day, thousands of bank visits happen in Bangalore. This is the story of the one that went right.",
+			"delivery": "the episode opening line and the fourth of its kind, so take it at exactly the pace and flatness of ep01-shot01, ep02-shot02 and ep03-shot01-vo -- the series has a recognisable way of starting, and this one returns to Episode 01's exact closing phrase. First sentence entirely ordinary, a small beat at the full stop, then \"the one that went right\" landed as plain fact rather than as the joke it is. No lift on \"right\" at all"
 		},
 		{
 			"id": "ep04-shot02a",
@@ -267,6 +267,12 @@
 			"speaker": "narrator",
 			"text": "As for the employee himself, still at Counter 3. Still open through lunch. Sign... unchanged. For now.",
 			"delivery": "the closing line, and the fourth of its kind -- quieter and more ominous than the deadpan the rest of the episode is read in. A real beat after \"himself\". A genuine pause on the ellipsis before \"unchanged\", then \"For now\" almost thrown away, not sinister, just left hanging. The same way ep01-shot11-final, ep02-shot09-final and ep03-shot09-final close their episodes"
+		},
+		{
+			"id": "ep04-shot05-chain",
+			"speaker": "narrator",
+			"text": "An open counter. Four minutes. Home by two. Something the Institute has declined to describe. And then, the city stops functioning.",
+			"delivery": "read over a diagram that is drawing itself, one fragment per box, so leave a clear beat between each. Entirely flat and procedural -- a caption being read aloud, not an argument being made. \"Something the Institute has declined to describe\" gets no more weight than \"four minutes\", and the last clause is stated as the next item on the list rather than as a conclusion. The escalation is in the words and must not be in the voice"
 		}
 	]
 }

@@ -13,7 +13,7 @@
  * Timings are pinned to the two takes, measured rather than guessed:
  *
  *   ep04-shot01-banker-cut   2.74s   "Tell me." | "This is more important."
- *   ep04-shot01-vo-cut       7.41s   the series' opening line
+ *   ep04-shot01-vo-cut       6.92s   the series' opening line
  *
  * Frames are 30fps.
  */
@@ -77,6 +77,11 @@ export const BACK_CUT = BANKER_LINE + BANKER_LINE_FRAMES + 6;
  */
 export const STEP_FORWARD = BACK_CUT + 10;
 export const VO_IN = STEP_FORWARD;
-export const VO_FRAMES = 223;
+/**
+ * 6.92s. The line went back to Episode 01's exact closing phrase — "the one
+ * that went right" — so the series' four openings now end the same way
+ * instead of each inventing its own.
+ */
+export const VO_FRAMES = 208;
 
 export const EP04_SHOT_01_DURATION = VO_IN + VO_FRAMES + 18;

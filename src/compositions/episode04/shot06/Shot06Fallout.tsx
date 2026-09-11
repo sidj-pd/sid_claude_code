@@ -1,8 +1,7 @@
 import React from 'react';
 import {AbsoluteFill, Audio, Freeze, Sequence, interpolate, staticFile, useCurrentFrame} from 'remotion';
-import {Chyron} from '../../../components/Chyron';
+import {NAMEPLATE_TOP, Nameplate} from '../Nameplate';
 import {Footage} from '../../../components/Footage';
-import {SAFE_BOTTOM_Y} from '../../../components/safeArea';
 import {NewsHeadline} from '../../../components/NewsHeadline';
 import {PaperTear} from '../../../components/PaperTear';
 import {useStopMotionStep} from '../../../components/useStopMotionStep';
@@ -146,13 +145,12 @@ export const Shot06Fallout: React.FC = () => {
 			) : null}
 
 			{/* His caption, up only while he is actually on screen. */}
-			<Chyron
+			<Nameplate
 				name="WITNESS — NAME WITHHELD"
 				title="NOW SEEKING COMPENSATION"
 				frame={frame}
 				in={WITNESS_CHYRON_IN}
 				out={REV2_STARTS}
-				top={SAFE_BOTTOM_Y - 196}
 				seed={91}
 			/>
 

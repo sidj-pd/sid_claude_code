@@ -5,15 +5,18 @@
  * it. Shot 2 renders itself silent for this, so the frozen page is not still
  * holding audio while it is being pulled apart.
  *
- * ONE TAKE IS MISSING
+ * Both takes are delivered and everything below is measured off them.
  *
- * `ep04-witness-1` — "I saw the sign. I was already turning around..." — has
- * not been generated. It is the main testimony and the beat the tick-stamps
- * belong to, so it is budgeted at 13s and Footage draws a placeholder. When
- * the take exists, measure it and change WITNESS_1_FRAMES and WITNESS_1_TRIM;
- * everything after them is derived.
+ * ep04-witness-1  10.01s, speech 0.02-9.81, five phrases:
  *
- * `ep04-witness-2` IS delivered: 6.02s, speech 0.72 to 5.72.
+ *   0.15-2.46  "I saw the sign. I was already turning around."
+ *   2.77-3.27  "That's what you do."
+ *   4.13-4.68  "He called me back,"
+ *   4.96-8.64  "pushed his lunch aside, no token, no come after 3:30,
+ *               no sir, go to counter two."
+ *   8.99-9.81  "Done in four minutes."
+ *
+ * ep04-witness-2   6.02s, speech 0.72-5.72.
  */
 
 const S = 30;
@@ -28,20 +31,22 @@ export const STAMP_IN = TEAR_DONE - 6;
 export const STAMP_FRAMES = 22;
 export const CHYRON_IN = STAMP_IN + STAMP_FRAMES;
 
-/** Budget — this take does not exist yet. */
+/** He starts talking on frame two of his own clip, so there is nothing to trim. */
 export const WITNESS_1_IN = TEAR_DONE - 8;
 export const WITNESS_1_TRIM = 0;
-export const WITNESS_1_FRAMES = Math.round(13.0 * S);
+export const WITNESS_1_FRAMES = Math.round(10.0 * S);
 
 /**
- * The evidence checklist, over the middle of his list. Each line is written
- * as he starts the item and ticked as he finishes it — writing and ticking on
- * one frame would make it a caption; the gap is what makes it a record being
- * kept. Offsets are into the budgeted take and will need moving with it.
+ * The evidence checklist. Each line is written as he starts that item and
+ * ticked as he finishes it — writing and ticking on one frame would make it a
+ * caption, and the gap between them is what makes it a record being kept.
+ *
+ * The three items live inside one 3.7s phrase, so their offsets are NOT evenly
+ * spaced and cannot be generated from an interval: "no token" is short, "no
+ * sir, go to counter two" is not. These are where they actually fall.
  */
-export const LIST_IN = WITNESS_1_IN + Math.round(5.6 * S);
-export const LIST_EVERY = Math.round(1.5 * S);
-export const TICK_AFTER = Math.round(1.0 * S);
+export const LIST_AT = [5.95, 6.55, 7.45].map((t) => WITNESS_1_IN + Math.round(t * S));
+export const TICK_AFTER = Math.round(0.45 * S);
 
 /**
  * Clip two: a hard jump cut, no transition device. Two takes of one call, cut

@@ -54,8 +54,45 @@ export const CHYRON_OUT = TAKE_1_FRAMES + 40;
  * on top of a talking head reads as the latter.
  */
 export const DIAGRAM_IN = TAKE_3 + TAKE_3_FRAMES;
-export const DIAGRAM_BOX_EVERY = 24;
-export const DIAGRAM_FRAMES = DIAGRAM_BOX_EVERY * 5 + 40;
+
+/**
+ * The diagram is narrated now, and the boxes are driven by the narration
+ * rather than by a fixed interval. ep04-shot05-chain-cut is 10.58s in six
+ * phrases with five 0.78s gaps between them:
+ *
+ *   0.15  "An open counter,"
+ *   1.81  "four minutes,"
+ *   3.29  "home by two."
+ *   4.66  "Something the Institute has declined to describe."
+ *   7.97  "And then,"
+ *   9.18  "the city stops functioning."
+ *
+ * Each box lands in the silence BEFORE its phrase, which is the rule the
+ * whole series' graphics follow: the picture goes up and the voice reads what
+ * is already there. A uniform interval cannot do that here — "four minutes"
+ * is short and "something the Institute has declined to describe" is not.
+ */
+export const DIAGRAM_VO = DIAGRAM_IN + 6;
+export const DIAGRAM_BOX_AT = [0, 45, 90, 132, 240].map((f) => DIAGRAM_VO + f);
+export const DIAGRAM_FRAMES = Math.round(10.58 * S) + 34;
+
+/**
+ * Notes over the expert, in the empty band above his head. Offsets are into
+ * each take, taken from where the words actually fall in it.
+ */
+export const NOTE_AT = {
+	term: TAKE_1 + 10,
+	chaos: TAKE_1 + Math.round(6.2 * S),
+	law: TAKE_2 + Math.round(2.2 * S),
+	case_: TAKE_2 + Math.round(8.0 * S),
+	minutes: TAKE_3 + Math.round(5.2 * S),
+};
+export const NOTE_UNTIL = {
+	term: TAKE_1 + Math.round(6.0 * S),
+	chaos: TAKE_2,
+	butterfly: TAKE_3,
+	minutes: DIAGRAM_IN,
+};
 
 export const KICKER = DIAGRAM_IN + DIAGRAM_FRAMES;
 export const KICKER_FRAMES = Math.round((5.92 - 1.2 + 0.4) * S);

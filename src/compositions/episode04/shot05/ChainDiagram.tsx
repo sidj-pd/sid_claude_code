@@ -44,19 +44,20 @@ const BOXES = [
 const TOPS = [110, 370, 640, 930, 1240];
 
 export const ChainDiagram: React.FC<{
-	/** Frame the first box lands on. */
-	from: number;
-	/** Frames between one box and the next. */
-	every: number;
-}> = ({from, every}) => {
+	/**
+	 * The frame each box lands on, one per box. Explicit rather than a start
+	 * plus an interval, because the narration's phrases are not evenly spaced
+	 * and the boxes follow the narration.
+	 */
+	at: number[];
+}> = ({at}) => {
 	const frame = useCurrentFrame();
 	const {steppedFrame} = useStopMotionStep(frame, STEP);
 
 	return (
 		<AbsoluteFill>
 			{BOXES.map((box, i) => {
-				const at = from + i * every;
-				const age = steppedFrame - at;
+				const age = steppedFrame - at[i];
 				if (age < 0) return null;
 
 				const left = 540 - box.w / 2;
