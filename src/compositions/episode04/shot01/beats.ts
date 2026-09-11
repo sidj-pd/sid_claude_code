@@ -12,7 +12,7 @@
  *
  * Timings are pinned to the two takes, measured rather than guessed:
  *
- *   ep04-shot01-banker-cut   2.74s   "Tell me." | "This is more important."
+ *   ep04-shot01-banker-cut   2.67s   "Tell me, my lunch break can wait."
  *   ep04-shot01-vo-cut       6.92s   the series' opening line
  *
  * Frames are 30fps.
@@ -61,7 +61,18 @@ export const PUSH_FRAMES = 26;
 
 /** "Tell me. This is more important." — 2.74s from the start of the push. */
 export const BANKER_LINE = PUSH_START + 16;
-export const BANKER_LINE_FRAMES = 82;
+/**
+ * 2.67s. The line was "Tell me. This is more important." and is now "Tell me,
+ * my lunch break can wait." -- which names the lunch he has just pushed aside
+ * instead of gesturing at importance, so the gag and the prop are the same
+ * object.
+ *
+ * The tightened take transcribed once as "...my lunch break end", which is the
+ * consonant-eating that cost Episode 03 a take. It was a flake: two further
+ * transcriptions both return the full line, and voiced content measures 1.65s
+ * against the source's 1.64s, so nothing was cut out of a word.
+ */
+export const BANKER_LINE_FRAMES = 80;
 
 /**
  * Nothing cuts here any more -- the customer never left frame, so there is
