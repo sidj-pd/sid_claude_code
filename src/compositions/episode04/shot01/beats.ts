@@ -59,7 +59,7 @@ export const HESITATE_END = HESITATE + 24;
 export const PUSH_START = HESITATE_END + 10;
 export const PUSH_FRAMES = 26;
 
-/** "Tell me. This is more important." — 2.74s from the start of the push. */
+/** "Tell me, my lunch break can wait." — starts 16 frames into the push. */
 export const BANKER_LINE = PUSH_START + 16;
 /**
  * 2.67s. The line was "Tell me. This is more important." and is now "Tell me,
