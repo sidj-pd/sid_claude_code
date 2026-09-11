@@ -158,6 +158,7 @@ export const Shot04Testimony: React.FC = () => {
 							ink={GANACHE}
 							paper={CARD}
 							mark={GANACHE}
+							torn={false}
 						/>
 					</div>
 				);

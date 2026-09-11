@@ -3,7 +3,6 @@ import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
 import {NAMEPLATE_TOP, Nameplate} from '../Nameplate';
 import {Footage} from '../../../components/Footage';
 import {NewsprintTexture} from '../../../components/NewsprintTexture';
-import {tornPolygon} from '../../../components/tornEdge';
 import {useStopMotionStep} from '../../../components/useStopMotionStep';
 import {BUTTER, GANACHE, GANACHE_DEEP} from '../../../components/palette';
 import {CARD_FRAMES, CARD_IN, CHYRON_IN, TAKE_FRAMES, TRIM_IN} from './beats';
@@ -62,7 +61,7 @@ export const Shot07Psa: React.FC = () => {
 						top: 1040,
 						background: BUTTER,
 						padding: '38px 30px',
-						clipPath: tornPolygon({seed: 44, depth: 5, teeth: 15}),
+						border: `4px solid ${GANACHE}`,
 						textAlign: 'center',
 						fontFamily: 'RansomArchivoBlack, sans-serif',
 						fontSize: 62,

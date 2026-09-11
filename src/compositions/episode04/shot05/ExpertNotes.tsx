@@ -1,9 +1,8 @@
 import React from 'react';
 import {interpolate} from 'remotion';
 import {NewsprintTexture} from '../../../components/NewsprintTexture';
-import {tornPolygon} from '../../../components/tornEdge';
 import {useStopMotionStep} from '../../../components/useStopMotionStep';
-import {BUTTER, GANACHE} from '../../../components/palette';
+import {BUTTER, BUTTER_DEEP, GANACHE} from '../../../components/palette';
 
 const CLAMP = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
 
@@ -51,7 +50,10 @@ const Card: React.FC<{
 				background: tone === 'ink' ? GANACHE : BUTTER,
 				color: tone === 'ink' ? BUTTER : GANACHE,
 				padding: '22px 30px 26px',
-				clipPath: tornPolygon({seed, depth: 5, teeth: 15}),
+				/* Square, with option C. These are captions over live action, not
+				   pages on a desk -- the torn edge only ever made sense on the
+				   collage pages, where there is a sheet to have torn it from. */
+				border: `3px solid ${tone === 'ink' ? BUTTER_DEEP : GANACHE}`,
 				boxShadow: '0 10px 22px rgba(20,13,9,0.45)',
 				textAlign: 'center',
 				transform: `rotate(${rotate}deg) scale(${interpolate(steppedFrame, [0, 2], [1.16, 1], CLAMP)})`,

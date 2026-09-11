@@ -26,6 +26,12 @@ export type ChecklistItemProps = {
 	ink?: string;
 	paper?: string;
 	mark?: string;
+	/**
+	 * Torn edge. On by default, which is how Episodes 01-03 are cut. Episode
+	 * 04 turns it off: its chits sit over live action rather than on a collage
+	 * page, and a ragged edge on a caption has no sheet to have been torn from.
+	 */
+	torn?: boolean;
 };
 
 /**
@@ -47,6 +53,7 @@ export const ChecklistItem: React.FC<ChecklistItemProps> = ({
 	ink = INK,
 	paper = CARD_PAPER,
 	mark = MARK,
+	torn = true,
 }) => {
 	if (age < 0) return null;
 
@@ -63,7 +70,8 @@ export const ChecklistItem: React.FC<ChecklistItemProps> = ({
 				padding: `0 ${height * 0.3}px`,
 				boxSizing: 'border-box',
 				background: paper,
-				clipPath: tornPolygon({seed, depth: 7, teeth: 11}),
+				clipPath: torn ? tornPolygon({seed, depth: 7, teeth: 11}) : undefined,
+				border: torn ? undefined : `3px solid ${ink}`,
 				boxShadow: '0 6px 14px rgba(24,16,8,0.4)',
 				// Slammed on, not faded: one frame proud of the page, then down.
 				transform: `scale(${age < 2 ? 1.04 : 1}) translateX(${interpolate(age, [0, 3], [-26, 0], CLAMP)}px)`,
