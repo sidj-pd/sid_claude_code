@@ -64,6 +64,7 @@ import {SHOT_08_DURATION as EP03_SHOT_08_DURATION} from './compositions/episode0
 import {Shot09FullCircle as Ep03Shot09FullCircle} from './compositions/episode03/shot09/Shot09FullCircle';
 import {SHOT_09_DURATION as EP03_SHOT_09_DURATION} from './compositions/episode03/shot09/beats';
 import {Episode04, EP04_DURATION} from './compositions/episode04/Episode04';
+import {NameplateOptions} from './compositions/episode04/NameplateOptions';
 import {Shot00ColdOpen} from './compositions/episode04/shot00/Shot00ColdOpen';
 import {Shot01LunchHour} from './compositions/episode04/shot01/Shot01LunchHour';
 import {EP04_SHOT_01_DURATION} from './compositions/episode04/shot01/beats';
@@ -251,6 +252,14 @@ export const Root: React.FC = () => {
 				id="Ep02Shot09FullCircle"
 				component={Shot09FullCircle}
 				durationInFrames={EP02_SHOT_09_DURATION}
+				fps={OPENING_MONTAGE_FPS}
+				width={OPENING_MONTAGE_WIDTH}
+				height={OPENING_MONTAGE_HEIGHT}
+			/>
+			<Composition
+				id="Ep04NameplateOptions"
+				component={NameplateOptions}
+				durationInFrames={30}
 				fps={OPENING_MONTAGE_FPS}
 				width={OPENING_MONTAGE_WIDTH}
 				height={OPENING_MONTAGE_HEIGHT}

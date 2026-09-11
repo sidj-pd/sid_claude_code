@@ -137,8 +137,14 @@ export const ExpertNotes: React.FC<{
 				<Big size={50}>A TYPHOON, TEXAS</Big>
 			</Card>
 		) : null}
+		{/* The substitution goes BELOW him, not under the first card. At top 400
+		    it sat across his hair -- measured on the delivered take his head
+		    starts at about y500, and this card is 200 tall. Putting the two
+		    halves of the rhyme at opposite ends of the frame also reads better
+		    than stacking them: the eye compares across the picture instead of
+		    down a list. The nameplate is long gone by the time this lands. */}
 		{frame >= at.case_ && frame < until.butterfly ? (
-			<Card age={frame - at.case_} top={400} tone="ink" rotate={1.2} seed={23}>
+			<Card age={frame - at.case_} top={1120} tone="ink" rotate={1.2} seed={23}>
 				<Big size={50}>A MAN, LUNCH HOUR</Big>
 				<Down colour={BUTTER} />
 				<Big size={50}>A MARRIAGE, RAJAJINAGAR</Big>
