@@ -29,6 +29,7 @@ const TITLE_LINES: [string, string][] = [
 const TAG = 'NEW KANNADA MINISERIES';
 const EPISODE_LABEL = 'EPISODE 01';
 const EPISODE_NAME = 'ಒಂದು ರೈಲಿನ ಪಯಣ';
+const TAGLINE = 'A ಜಾನಪದ Rom-com';
 
 const FRAME_WIDTH = 1080;
 const FRAME_HEIGHT = 1920;
@@ -42,6 +43,11 @@ const EPISODE_BOTTOM_Y = SAFE_BOTTOM_Y - 70;
 
 const CREAM = '#FFF3D6';
 const TURMERIC = '#F4B63F';
+/**
+ * Tagline only. Warm and romantic, and a third colour so the tagline never
+ * reads as part of the title — cream and turmeric are the title's.
+ */
+const CORAL = '#FF8F7A';
 const SHADOW =
 	'0 4px 0 rgba(30, 14, 4, 0.55), 0 10px 34px rgba(0, 0, 0, 0.65), 0 0 2px rgba(0, 0, 0, 0.5)';
 const SMALL_SHADOW = '0 2px 0 rgba(30, 14, 4, 0.5), 0 4px 16px rgba(0, 0, 0, 0.6)';
@@ -51,6 +57,8 @@ export type Treatment = {
 	title: React.CSSProperties;
 	episodeName: React.CSSProperties;
 	label: React.CSSProperties;
+	/** Optional line under the title; omitted in the A/B/C tests. */
+	tagline?: React.CSSProperties;
 };
 
 const TREATMENTS: Treatment[] = [
@@ -153,6 +161,12 @@ export const TitleOverlay: React.FC<{t: Treatment}> = ({t}) => (
 					{rest}
 				</FitLine>
 			))}
+
+			{t.tagline ? (
+				<FitLine key={`${faceKey(t.tagline)}/tagline`} style={{...t.tagline, color: CORAL, textShadow: SHADOW}}>
+					{TAGLINE}
+				</FitLine>
+			) : null}
 		</div>
 
 		<div style={{...group, bottom: FRAME_HEIGHT - EPISODE_BOTTOM_Y}}>
@@ -176,6 +190,32 @@ export const TitleOverlay: React.FC<{t: Treatment}> = ({t}) => (
 			</FitLine>
 		</div>
 	</AbsoluteFill>
+);
+
+/**
+ * The chosen title face — treatment C, Anek Kannada Condensed ExtraBold —
+ * with the "A ಜಾನಪದ Rom-com" tagline under it.
+ *
+ * The tagline is in Akaya Kanadaka rather than more Anek: a slanted brush
+ * face against a rigid condensed one, so it reads as a voice commenting on
+ * the title, not a third title line. Its folk-lettering feel suits ಜಾನಪದ, and
+ * unlike several Kannada faces it has Latin for "A" and "Rom-com". The small
+ * counter-rotation is what makes it read as a hand-set tag.
+ */
+export const KhareHelyoTitleTagline: React.FC = () => (
+	<TitleOverlay
+		t={{
+			...TREATMENTS[2],
+			tagline: {
+				fontFamily: 'KnAkaya',
+				fontWeight: 400,
+				fontSize: 84,
+				lineHeight: 1.2,
+				marginTop: 14,
+				rotate: '-3deg',
+			},
+		}}
+	/>
 );
 
 export const KhareHelyoTitle: React.FC = () => {
