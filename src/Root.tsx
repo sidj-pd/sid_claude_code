@@ -93,11 +93,20 @@ import {
 	OVERLAY_ELEMENTS,
 } from './compositions/kannada/KhareHelyoTitle';
 import {KhareHelyoTaglineOptions, TAGLINE_OPTIONS} from './compositions/kannada/KhareHelyoTaglineOptions';
+import {EPISODE_OPTIONS, KhareHelyoEpisodeOptions} from './compositions/kannada/KhareHelyoEpisodeOptions';
 import {FONT_SPECIMENS, KhareHelyoFontSpecimen} from './compositions/kannada/KhareHelyoFontSpecimen';
 
 export const Root: React.FC = () => {
 	return (
 		<>
+			<Composition
+				id="KhareHelyoEpisodeOptions"
+				component={KhareHelyoEpisodeOptions}
+				durationInFrames={EPISODE_OPTIONS.length * 2}
+				fps={OPENING_MONTAGE_FPS}
+				width={OPENING_MONTAGE_WIDTH}
+				height={OPENING_MONTAGE_HEIGHT}
+			/>
 			<Composition
 				id="KhareHelyoEp02Elements"
 				component={KhareHelyoEp02Elements}
