@@ -57,6 +57,8 @@ export type Treatment = {
 	title: React.CSSProperties;
 	episodeName: React.CSSProperties;
 	label: React.CSSProperties;
+	/** Appended to both title lines in the base colour, e.g. '...?'. */
+	titleSuffix?: string;
 	/** Optional line under the title; omitted in the A/B/C tests. */
 	tagline?: React.CSSProperties;
 };
@@ -128,6 +130,46 @@ const FitLine: React.FC<{style: React.CSSProperties; children: React.ReactNode}>
 	);
 };
 
+/**
+ * Several lines that must stay one size: all shrink by the scale the WIDEST
+ * needs. Per-line FitLine was wrong for the title — once "...?" made
+ * ಸುಳ್ಳ ಹೇಳ್ಯೋ the only line over the measure, it alone would have shrunk and
+ * the two title lines would no longer match. Key by face, as for FitLine.
+ */
+const FitLines: React.FC<{lines: React.ReactNode[]; style: React.CSSProperties}> = ({lines, style}) => {
+	const refs = useRef<(HTMLDivElement | null)[]>([]);
+	const [scale, setScale] = useState(1);
+	const [handle] = useState(() => delayRender('Fitting the title lines'));
+
+	useLayoutEffect(() => {
+		document.fonts.ready.then(() => {
+			const widest = Math.max(0, ...refs.current.map((el) => el?.offsetWidth ?? 0));
+			if (widest > MEASURE) {
+				setScale(MEASURE / widest);
+			}
+			continueRender(handle);
+		});
+	}, [handle]);
+
+	return (
+		<>
+			{lines.map((line, i) => (
+				<div
+					// Lines are positional and never reorder.
+					// eslint-disable-next-line react/no-array-index-key
+					key={i}
+					ref={(el) => {
+						refs.current[i] = el;
+					}}
+					style={{...style, fontSize: (style.fontSize as number) * scale, whiteSpace: 'nowrap'}}
+				>
+					{line}
+				</div>
+			))}
+		</>
+	);
+};
+
 const Rule: React.FC<{width: number}> = ({width}) => (
 	<div style={{width, height: 4, borderRadius: 2, backgroundColor: TURMERIC, boxShadow: SMALL_SHADOW}} />
 );
@@ -168,12 +210,17 @@ export const TitleOverlay: React.FC<{t: Treatment; only?: OverlayElement}> = ({t
 				<Rule width={70} />
 			</div>
 
-			{TITLE_LINES.map(([accent, rest]) => (
-				<FitLine key={`${faceKey(t.title)}/${accent}`} style={{...t.title, textShadow: SHADOW, ...vis(only, 'title')}}>
-					<span style={{color: TURMERIC}}>{accent}</span>
-					{rest}
-				</FitLine>
-			))}
+			<FitLines
+				key={`${faceKey(t.title)}/${t.titleSuffix ?? ''}`}
+				style={{...t.title, textShadow: SHADOW, ...vis(only, 'title')}}
+				lines={TITLE_LINES.map(([accent, rest]) => (
+					<>
+						<span style={{color: TURMERIC}}>{accent}</span>
+						{rest}
+						{t.titleSuffix}
+					</>
+				))}
+			/>
 
 			{t.tagline ? (
 				<FitLine key={`${faceKey(t.tagline)}/tagline`} style={{...t.tagline, color: CORAL, textShadow: SHADOW, ...vis(only, 'tagline')}}>
@@ -240,6 +287,15 @@ export const KhareHelyoElements: React.FC = () => {
 	const frame = useCurrentFrame();
 	return <TitleOverlay t={FINAL_TREATMENT} only={OVERLAY_ELEMENTS[Math.min(frame, OVERLAY_ELEMENTS.length - 1)]} />;
 };
+
+/**
+ * Title variation the user asked for: ಖರೆ ಹೇಳ್ಯೋ...? / ಸುಳ್ಳ ಹೇಳ್ಯೋ...?
+ * Same face and colours as the final title; the title element alone, for the
+ * elements set.
+ */
+export const KhareHelyoTitleQuestion: React.FC = () => (
+	<TitleOverlay t={{...FINAL_TREATMENT, titleSuffix: '...?'}} only="title" />
+);
 
 export const KhareHelyoTitle: React.FC = () => {
 	const frame = useCurrentFrame();
