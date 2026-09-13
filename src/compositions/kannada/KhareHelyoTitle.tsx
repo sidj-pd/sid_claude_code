@@ -48,6 +48,9 @@ const TURMERIC = '#F4B63F';
  * reads as part of the title — cream and turmeric are the title's.
  */
 const CORAL = '#FF8F7A';
+/** Ganache at 86%: dark enough to carry turmeric on a pale background, still lets texture through. */
+const DARK_PLATE = 'rgba(34, 17, 8, 0.86)';
+const PLATE_SHADOW = '0 8px 24px rgba(0, 0, 0, 0.5)';
 export const SHADOW =
 	'0 4px 0 rgba(30, 14, 4, 0.55), 0 10px 34px rgba(0, 0, 0, 0.65), 0 0 2px rgba(0, 0, 0, 0.5)';
 const SMALL_SHADOW = '0 2px 0 rgba(30, 14, 4, 0.5), 0 4px 16px rgba(0, 0, 0, 0.6)';
@@ -57,6 +60,12 @@ export type Treatment = {
 	title: React.CSSProperties;
 	episodeName: React.CSSProperties;
 	label: React.CSSProperties;
+	/**
+	 * Badge and episode name on dark plates. The series style from Ep02 on:
+	 * episode backgrounds range from a pale berth to a red news set to a
+	 * crowded festival, and only a plate kept both legible on all of them.
+	 */
+	episodePlate?: boolean;
 	/** Appended to both title lines in the base colour, e.g. '...?'. */
 	titleSuffix?: string;
 	/** Optional line under the title; omitted in the A/B/C tests. */
@@ -248,12 +257,29 @@ export const TitleOverlay: React.FC<{t: Treatment; only?: OverlayElement; episod
 					textShadow: SMALL_SHADOW,
 					boxShadow: SMALL_SHADOW,
 					whiteSpace: 'nowrap',
+					...(t.episodePlate ? {backgroundColor: DARK_PLATE, boxShadow: PLATE_SHADOW} : {}),
 					...vis(only, 'episode-badge'),
 				}}
 			>
 				{episode.label}
 			</div>
-			<FitLine key={faceKey(t.episodeName)} style={{...t.episodeName, color: TURMERIC, textShadow: SHADOW, ...vis(only, 'episode-name')}}>
+			<FitLine key={faceKey(t.episodeName)} style={{
+					...t.episodeName,
+					color: TURMERIC,
+					textShadow: SHADOW,
+					...(t.episodePlate
+						? {
+								backgroundColor: DARK_PLATE,
+								padding: '0 36px 8px',
+								borderRadius: 16,
+								lineHeight: 1.25,
+								boxShadow: PLATE_SHADOW,
+								textShadow: SMALL_SHADOW,
+							}
+						: {}),
+					...vis(only, 'episode-name'),
+				}}
+			>
 				{episode.name}
 			</FitLine>
 		</div>
@@ -272,6 +298,7 @@ export const TitleOverlay: React.FC<{t: Treatment; only?: OverlayElement; episod
  */
 const FINAL_TREATMENT: Treatment = {
 	...TREATMENTS[2],
+	episodePlate: true,
 	tagline: {
 		fontFamily: 'KnAkaya',
 		fontWeight: 400,
@@ -307,14 +334,19 @@ export const KhareHelyoTitleQuestion: React.FC = () => (
 /**
  * Per-episode elements. The series tag, title and tagline are shared across
  * episodes and already delivered; only the badge and the episode name change.
- * Frame 0 is the badge, frame 1 the name.
+ * Frame 2n is episode n+1's badge, frame 2n+1 its name. Add each new episode
+ * here — confirm the number with the user first; Ep02 was once called Ep03.
  */
-const EPISODE_02: Episode = {label: 'EPISODE 02', name: 'ಥಟ್ ಅಂತ ಹೇಳಿ'};
+export const EPISODES: Episode[] = [EPISODE_01, {label: 'EPISODE 02', name: 'ಥಟ್ ಅಂತ ಹೇಳಿ'}];
 
-export const KhareHelyoEp02Elements: React.FC = () => {
+export const KhareHelyoEpisodeElements: React.FC = () => {
 	const frame = useCurrentFrame();
 	return (
-		<TitleOverlay t={FINAL_TREATMENT} episode={EPISODE_02} only={frame === 0 ? 'episode-badge' : 'episode-name'} />
+		<TitleOverlay
+			t={FINAL_TREATMENT}
+			episode={EPISODES[Math.min(Math.floor(frame / 2), EPISODES.length - 1)]}
+			only={frame % 2 === 0 ? 'episode-badge' : 'episode-name'}
+		/>
 	);
 };
 
