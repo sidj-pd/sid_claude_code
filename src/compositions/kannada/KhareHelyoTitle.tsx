@@ -7,15 +7,17 @@ import '../../components/kannadaFonts';
  * transparent overlay to lay over footage in CapCut.
  *
  * Nothing paints the background, so `remotion still` writes a PNG with alpha.
- * The overlay goes over footage that has not been seen here, so legibility
- * comes from the type itself — a hard offset shadow plus a wide soft one —
- * rather than from a plate behind it.
+ * Legibility comes from the type itself — a hard offset shadow plus a wide
+ * soft one — rather than from a plate behind it.
+ *
+ * Laid out against Episode 01's opening shot: a night sky over the top third,
+ * a blue coach with lit windows through the middle, dark ballast and track
+ * below. So the title sits up in the sky, the episode block sits on the dark
+ * track bed, and nothing crosses the lit windows. The episode block's bottom
+ * edge is pinned above the vertical-video safe line (y = 1536).
  *
  * TEST RUN: three typeface treatments, one per second of the timeline.
  * Frame 0 = A, 30 = B, 60 = C. Render stills at those frames to compare.
- *
- * Layout is centred in the frame ABOVE the vertical-video safe line
- * (y = 1536), not in the whole 1920 — platform UI covers the bottom 20%.
  */
 
 const TITLE_LINES: [string, string][] = [
@@ -27,7 +29,12 @@ const TAG = 'NEW KANNADA MINISERIES';
 const EPISODE_LABEL = 'EPISODE 01';
 const EPISODE_NAME = 'ಒಂದು ರೈಲಿನ ಪಯಣ';
 
+const FRAME_HEIGHT = 1920;
 const SAFE_BOTTOM_Y = 1536;
+/** Clear of the platform's top bar (Reels / Shorts header). */
+const TITLE_TOP_Y = 150;
+/** Episode block ends this far above the safe line. */
+const EPISODE_BOTTOM_Y = SAFE_BOTTOM_Y - 70;
 
 const CREAM = '#FFF3D6';
 const TURMERIC = '#F4B63F';
@@ -39,12 +46,6 @@ type Treatment = {
 	title: React.CSSProperties;
 	episodeName: React.CSSProperties;
 	label: React.CSSProperties;
-	/**
-	 * Space above the episode badge. Per face, because the subscript ya in
-	 * ಹೇಳ್ಯೋ hangs well below the line box and hangs by a different amount in
-	 * each — a shared value let it touch the badge in B.
-	 */
-	titleGap: number;
 };
 
 const TREATMENTS: Treatment[] = [
@@ -52,14 +53,12 @@ const TREATMENTS: Treatment[] = [
 	{
 		// 200 ran ಸುಳ್ಳ ಹೇಳ್ಯೋ ~50px past both frame edges; sized to the 940 measure.
 		title: {fontFamily: 'KnBalooTamma', fontWeight: 800, fontSize: 160, lineHeight: 1.15},
-		titleGap: 60,
 		episodeName: {fontFamily: 'KnBalooTamma', fontWeight: 600, fontSize: 86},
 		label: {fontFamily: 'KnBalooTamma', fontWeight: 700, fontSize: 36, letterSpacing: 9},
 	},
 	// B — literary serif, cinema.
 	{
 		title: {fontFamily: 'KnTiro', fontWeight: 400, fontSize: 172, lineHeight: 1.2},
-		titleGap: 96,
 		episodeName: {fontFamily: 'KnNotoSerif', fontWeight: 600, fontSize: 80},
 		label: {fontFamily: 'KnNotoSerif', fontWeight: 600, fontSize: 34, letterSpacing: 10},
 	},
@@ -72,7 +71,6 @@ const TREATMENTS: Treatment[] = [
 			fontSize: 205,
 			lineHeight: 1.05,
 		},
-		titleGap: 76,
 		episodeName: {fontFamily: 'KnAnek', fontWeight: 600, fontStretch: '100%', fontSize: 88},
 		label: {
 			fontFamily: 'KnAnek',
@@ -88,28 +86,25 @@ const Rule: React.FC<{width: number}> = ({width}) => (
 	<div style={{width, height: 4, borderRadius: 2, backgroundColor: TURMERIC, boxShadow: SMALL_SHADOW}} />
 );
 
+const group: React.CSSProperties = {
+	position: 'absolute',
+	left: 0,
+	right: 0,
+	display: 'flex',
+	flexDirection: 'column',
+	alignItems: 'center',
+	padding: '0 70px',
+	color: CREAM,
+	textAlign: 'center',
+};
+
 export const KhareHelyoTitle: React.FC = () => {
 	const frame = useCurrentFrame();
 	const t = TREATMENTS[Math.min(TREATMENTS.length - 1, Math.floor(frame / 30))];
 
 	return (
 		<AbsoluteFill>
-			<div
-				style={{
-					position: 'absolute',
-					left: 0,
-					right: 0,
-					top: 0,
-					height: SAFE_BOTTOM_Y,
-					display: 'flex',
-					flexDirection: 'column',
-					alignItems: 'center',
-					justifyContent: 'center',
-					padding: '0 70px',
-					color: CREAM,
-					textAlign: 'center',
-				}}
-			>
+			<div style={{...group, top: TITLE_TOP_Y}}>
 				<div style={{display: 'flex', alignItems: 'center', gap: 22, marginBottom: 34}}>
 					<Rule width={70} />
 					<div style={{...t.label, color: CREAM, textShadow: SMALL_SHADOW, whiteSpace: 'nowrap'}}>
@@ -124,22 +119,23 @@ export const KhareHelyoTitle: React.FC = () => {
 						{rest}
 					</div>
 				))}
+			</div>
 
-				<div style={{marginTop: t.titleGap, marginBottom: 18}}>
-					<div
-						style={{
-							...t.label,
-							color: CREAM,
-							padding: '8px 26px 6px',
-							border: `3px solid ${TURMERIC}`,
-							borderRadius: 999,
-							textShadow: SMALL_SHADOW,
-							boxShadow: SMALL_SHADOW,
-							whiteSpace: 'nowrap',
-						}}
-					>
-						{EPISODE_LABEL}
-					</div>
+			<div style={{...group, bottom: FRAME_HEIGHT - EPISODE_BOTTOM_Y}}>
+				<div
+					style={{
+						...t.label,
+						color: CREAM,
+						padding: '8px 26px 6px',
+						marginBottom: 18,
+						border: `3px solid ${TURMERIC}`,
+						borderRadius: 999,
+						textShadow: SMALL_SHADOW,
+						boxShadow: SMALL_SHADOW,
+						whiteSpace: 'nowrap',
+					}}
+				>
+					{EPISODE_LABEL}
 				</div>
 				<div style={{...t.episodeName, color: TURMERIC, textShadow: SHADOW, whiteSpace: 'nowrap'}}>
 					{EPISODE_NAME}
