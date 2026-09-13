@@ -186,6 +186,99 @@ const FitLines: React.FC<{lines: React.ReactNode[]; style: React.CSSProperties}>
 	);
 };
 
+/**
+ * An episode name centred on its dark plate by the INK of the letters, not by
+ * the line box.
+ *
+ * CSS padding centres the line box, and Kannada ink sits unevenly inside it:
+ * top marks (ೀ ೆ) and subscripts (್ರ in ಪ್ರೀ, ಲ್ಲಿ) differ per name, so on the
+ * padded plates the letters sat high and some names sat off to one side — the
+ * user caught it. Canvas measureText reports the shaped ink bounds and the
+ * font's line metrics, which is enough to place the baseline exactly. Plates
+ * share one height unless a name's ink needs more.
+ */
+const PLATE_PAD_X = 40;
+const PLATE_MIN_PAD_Y = 12;
+
+type Ink = {left: number; right: number; ascent: number; descent: number; fontAscent: number; fontDescent: number};
+
+const CenteredPlate: React.FC<{text: string; style: React.CSSProperties; hidden: React.CSSProperties}> = ({
+	text,
+	style,
+	hidden,
+}) => {
+	const [ink, setInk] = useState<Ink | null>(null);
+	const [handle] = useState(() => delayRender('Measuring episode name ink'));
+	const base = style.fontSize as number;
+
+	useLayoutEffect(() => {
+		document.fonts.ready.then(() => {
+			const ctx = document.createElement('canvas').getContext('2d');
+			if (ctx) {
+				ctx.font = `${style.fontWeight ?? 400} ${base}px '${style.fontFamily}'`;
+				const m = ctx.measureText(text);
+				setInk({
+					left: m.actualBoundingBoxLeft,
+					right: m.actualBoundingBoxRight,
+					ascent: m.actualBoundingBoxAscent,
+					descent: m.actualBoundingBoxDescent,
+					fontAscent: m.fontBoundingBoxAscent,
+					fontDescent: m.fontBoundingBoxDescent,
+				});
+			}
+			continueRender(handle);
+		});
+		// Keyed by name and face by the caller, so these never change in place.
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [handle]);
+
+	if (!ink) {
+		return <div style={{...style, visibility: 'hidden'}}>{text}</div>;
+	}
+
+	// Same fit-to-measure rule as FitLine, applied to the whole plate.
+	const s = Math.min(1, MEASURE / (ink.left + ink.right + 2 * PLATE_PAD_X));
+	const fontSize = base * s;
+	const inkWidth = (ink.left + ink.right) * s;
+	const inkHeight = (ink.ascent + ink.descent) * s;
+	const height = Math.max(base * 1.4 * s, inkHeight + 2 * PLATE_MIN_PAD_Y * s);
+	// A line box as tall as the font size puts the baseline here inside it.
+	const baselineInLine = (fontSize - (ink.fontAscent + ink.fontDescent) * s) / 2 + ink.fontAscent * s;
+	const baselineY = (height - inkHeight) / 2 + ink.ascent * s;
+
+	return (
+		<div
+			style={{
+				position: 'relative',
+				width: inkWidth + 2 * PLATE_PAD_X * s,
+				height,
+				backgroundColor: DARK_PLATE,
+				borderRadius: 16,
+				boxShadow: PLATE_SHADOW,
+				...hidden,
+			}}
+		>
+			<div
+				style={{
+					...style,
+					position: 'absolute',
+					left: PLATE_PAD_X * s + ink.left * s,
+					top: baselineY - baselineInLine,
+					fontSize,
+					lineHeight: `${fontSize}px`,
+					margin: 0,
+					padding: 0,
+					whiteSpace: 'nowrap',
+					color: TURMERIC,
+					textShadow: SMALL_SHADOW,
+				}}
+			>
+				{text}
+			</div>
+		</div>
+	);
+};
+
 const Rule: React.FC<{width: number; outline?: boolean}> = ({width, outline}) => (
 	<div
 		style={{
@@ -290,25 +383,21 @@ export const TitleOverlay: React.FC<{t: Treatment; only?: OverlayElement; episod
 			>
 				{episode.label}
 			</div>
-			<FitLine key={faceKey(t.episodeName)} style={{
-					...t.episodeName,
-					color: TURMERIC,
-					textShadow: SHADOW,
-					...(t.episodePlate
-						? {
-								backgroundColor: DARK_PLATE,
-								padding: '0 36px 8px',
-								borderRadius: 16,
-								lineHeight: 1.25,
-								boxShadow: PLATE_SHADOW,
-								textShadow: SMALL_SHADOW,
-							}
-						: {}),
-					...vis(only, 'episode-name'),
-				}}
-			>
-				{episode.name}
-			</FitLine>
+			{t.episodePlate ? (
+				<CenteredPlate
+					key={`${faceKey(t.episodeName)}/${episode.name}`}
+					text={episode.name}
+					style={t.episodeName}
+					hidden={vis(only, 'episode-name')}
+				/>
+			) : (
+				<FitLine
+					key={faceKey(t.episodeName)}
+					style={{...t.episodeName, color: TURMERIC, textShadow: SHADOW, ...vis(only, 'episode-name')}}
+				>
+					{episode.name}
+				</FitLine>
+			)}
 		</div>
 	</AbsoluteFill>
 );
