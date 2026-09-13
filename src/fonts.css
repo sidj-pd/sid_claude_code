@@ -1,0 +1,22 @@
+/* Kannada display candidates */
+@font-face { font-family: 'Anek Kannada'; font-weight: 600; src: url('./fonts/AnekKannada-600.ttf') format('truetype'); }
+@font-face { font-family: 'Anek Kannada'; font-weight: 700; src: url('./fonts/AnekKannada-700.ttf') format('truetype'); }
+@font-face { font-family: 'Anek Kannada'; font-weight: 800; src: url('./fonts/AnekKannada-800.ttf') format('truetype'); }
+
+@font-face { font-family: 'Noto Sans Kannada'; font-weight: 700; src: url('./fonts/NotoSansKn-700.ttf') format('truetype'); }
+@font-face { font-family: 'Noto Sans Kannada'; font-weight: 800; src: url('./fonts/NotoSansKn-800.ttf') format('truetype'); }
+@font-face { font-family: 'Noto Sans Kannada'; font-weight: 900; src: url('./fonts/NotoSansKn-900.ttf') format('truetype'); }
+
+@font-face { font-family: 'Noto Serif Kannada'; font-weight: 700; src: url('./fonts/NotoSerifKn-700.ttf') format('truetype'); }
+@font-face { font-family: 'Noto Serif Kannada'; font-weight: 800; src: url('./fonts/NotoSerifKn-800.ttf') format('truetype'); }
+@font-face { font-family: 'Noto Serif Kannada'; font-weight: 900; src: url('./fonts/NotoSerifKn-900.ttf') format('truetype'); }
+
+@font-face { font-family: 'Benne'; font-weight: 400; src: url('./fonts/Benne-400.ttf') format('truetype'); }
+@font-face { font-family: 'Hubballi'; font-weight: 400; src: url('./fonts/Hubballi-400.ttf') format('truetype'); }
+
+/* Latin label candidates */
+@font-face { font-family: 'Anton'; font-weight: 400; src: url('./fonts/Anton-400.ttf') format('truetype'); }
+@font-face { font-family: 'Bebas Neue'; font-weight: 400; src: url('./fonts/BebasNeue-400.ttf') format('truetype'); }
+@font-face { font-family: 'Archivo Black'; font-weight: 400; src: url('./fonts/ArchivoBlack-400.ttf') format('truetype'); }
+@font-face { font-family: 'Oswald'; font-weight: 600; src: url('./fonts/Oswald-600.ttf') format('truetype'); }
+@font-face { font-family: 'Oswald'; font-weight: 700; src: url('./fonts/Oswald-700.ttf') format('truetype'); }
