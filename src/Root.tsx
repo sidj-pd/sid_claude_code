@@ -86,7 +86,7 @@ import {EP04_SHOT_00_DURATION} from './compositions/episode04/shot00/beats';
 import {Ep01CoverCard} from './compositions/covers/Ep01CoverCard';
 import {
 	KhareHelyoElements,
-	KhareHelyoEp03Elements,
+	KhareHelyoEp02Elements,
 	KhareHelyoTitle,
 	KhareHelyoTitleQuestion,
 	KhareHelyoTitleTagline,
@@ -99,8 +99,8 @@ export const Root: React.FC = () => {
 	return (
 		<>
 			<Composition
-				id="KhareHelyoEp03Elements"
-				component={KhareHelyoEp03Elements}
+				id="KhareHelyoEp02Elements"
+				component={KhareHelyoEp02Elements}
 				durationInFrames={2}
 				fps={OPENING_MONTAGE_FPS}
 				width={OPENING_MONTAGE_WIDTH}

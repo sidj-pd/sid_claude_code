@@ -309,12 +309,12 @@ export const KhareHelyoTitleQuestion: React.FC = () => (
  * episodes and already delivered; only the badge and the episode name change.
  * Frame 0 is the badge, frame 1 the name.
  */
-const EPISODE_03: Episode = {label: 'EPISODE 03', name: 'ಥಟ್ ಅಂತ ಹೇಳಿ'};
+const EPISODE_02: Episode = {label: 'EPISODE 02', name: 'ಥಟ್ ಅಂತ ಹೇಳಿ'};
 
-export const KhareHelyoEp03Elements: React.FC = () => {
+export const KhareHelyoEp02Elements: React.FC = () => {
 	const frame = useCurrentFrame();
 	return (
-		<TitleOverlay t={FINAL_TREATMENT} episode={EPISODE_03} only={frame === 0 ? 'episode-badge' : 'episode-name'} />
+		<TitleOverlay t={FINAL_TREATMENT} episode={EPISODE_02} only={frame === 0 ? 'episode-badge' : 'episode-name'} />
 	);
 };
 
