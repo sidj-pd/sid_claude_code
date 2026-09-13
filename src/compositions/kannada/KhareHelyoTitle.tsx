@@ -146,24 +146,37 @@ const group: React.CSSProperties = {
 
 const faceKey = (s: React.CSSProperties) => `${s.fontFamily}/${s.fontWeight}/${s.fontStretch}`;
 
-export const TitleOverlay: React.FC<{t: Treatment}> = ({t}) => (
+/** The separately deliverable pieces of the overlay, in frame order for KhareHelyoElements. */
+export const OVERLAY_ELEMENTS = ['series-tag', 'title', 'tagline', 'episode-badge', 'episode-name'] as const;
+type OverlayElement = (typeof OVERLAY_ELEMENTS)[number];
+
+/**
+ * Hides every element but `only`. visibility, not conditional rendering, so the
+ * hidden pieces still take their space and the one shown lands exactly where
+ * it sits in the full layout — and keeps its shadow, which visibility also
+ * hides on the others.
+ */
+const vis = (only: OverlayElement | undefined, el: OverlayElement): React.CSSProperties =>
+	only && only !== el ? {visibility: 'hidden'} : {};
+
+export const TitleOverlay: React.FC<{t: Treatment; only?: OverlayElement}> = ({t, only}) => (
 	<AbsoluteFill>
 		<div style={{...group, top: TITLE_TOP_Y}}>
-			<div style={{display: 'flex', alignItems: 'center', gap: 22, marginBottom: 34}}>
+			<div style={{display: 'flex', alignItems: 'center', gap: 22, marginBottom: 34, ...vis(only, 'series-tag')}}>
 				<Rule width={70} />
 				<div style={{...t.label, color: CREAM, textShadow: SMALL_SHADOW, whiteSpace: 'nowrap'}}>{TAG}</div>
 				<Rule width={70} />
 			</div>
 
 			{TITLE_LINES.map(([accent, rest]) => (
-				<FitLine key={`${faceKey(t.title)}/${accent}`} style={{...t.title, textShadow: SHADOW}}>
+				<FitLine key={`${faceKey(t.title)}/${accent}`} style={{...t.title, textShadow: SHADOW, ...vis(only, 'title')}}>
 					<span style={{color: TURMERIC}}>{accent}</span>
 					{rest}
 				</FitLine>
 			))}
 
 			{t.tagline ? (
-				<FitLine key={`${faceKey(t.tagline)}/tagline`} style={{...t.tagline, color: CORAL, textShadow: SHADOW}}>
+				<FitLine key={`${faceKey(t.tagline)}/tagline`} style={{...t.tagline, color: CORAL, textShadow: SHADOW, ...vis(only, 'tagline')}}>
 					{TAGLINE}
 				</FitLine>
 			) : null}
@@ -181,11 +194,12 @@ export const TitleOverlay: React.FC<{t: Treatment}> = ({t}) => (
 					textShadow: SMALL_SHADOW,
 					boxShadow: SMALL_SHADOW,
 					whiteSpace: 'nowrap',
+					...vis(only, 'episode-badge'),
 				}}
 			>
 				{EPISODE_LABEL}
 			</div>
-			<FitLine key={faceKey(t.episodeName)} style={{...t.episodeName, color: TURMERIC, textShadow: SHADOW}}>
+			<FitLine key={faceKey(t.episodeName)} style={{...t.episodeName, color: TURMERIC, textShadow: SHADOW, ...vis(only, 'episode-name')}}>
 				{EPISODE_NAME}
 			</FitLine>
 		</div>
@@ -202,21 +216,30 @@ export const TitleOverlay: React.FC<{t: Treatment}> = ({t}) => (
  * unlike several Kannada faces it has Latin for "A" and "Rom-com". The small
  * counter-rotation is what makes it read as a hand-set tag.
  */
-export const KhareHelyoTitleTagline: React.FC = () => (
-	<TitleOverlay
-		t={{
-			...TREATMENTS[2],
-			tagline: {
-				fontFamily: 'KnAkaya',
-				fontWeight: 400,
-				fontSize: 84,
-				lineHeight: 1.2,
-				marginTop: 14,
-				rotate: '-3deg',
-			},
-		}}
-	/>
-);
+const FINAL_TREATMENT: Treatment = {
+	...TREATMENTS[2],
+	tagline: {
+		fontFamily: 'KnAkaya',
+		fontWeight: 400,
+		fontSize: 84,
+		lineHeight: 1.2,
+		marginTop: 14,
+		rotate: '-3deg',
+	},
+};
+
+export const KhareHelyoTitleTagline: React.FC = () => <TitleOverlay t={FINAL_TREATMENT} />;
+
+/**
+ * The final design split into one element per frame (OVERLAY_ELEMENTS order),
+ * so each can be placed by hand over its shot in CapCut. The user asked for
+ * this once the tagline was found to land on Ep01's lit coach windows — a
+ * single fixed layout cannot suit every shot. Stills are cropped afterwards.
+ */
+export const KhareHelyoElements: React.FC = () => {
+	const frame = useCurrentFrame();
+	return <TitleOverlay t={FINAL_TREATMENT} only={OVERLAY_ELEMENTS[Math.min(frame, OVERLAY_ELEMENTS.length - 1)]} />;
+};
 
 export const KhareHelyoTitle: React.FC = () => {
 	const frame = useCurrentFrame();

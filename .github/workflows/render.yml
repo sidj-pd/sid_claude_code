@@ -76,8 +76,8 @@ jobs:
       - name: Resolve what to render
         id: what
         env:
-          SHOT: KhareHelyoTitleTagline
-          SHOT_FRAMES: '0'
+          SHOT: KhareHelyoElements
+          SHOT_FRAMES: '0 1 2 3 4'
         run: |
           COMP="${{ github.event.inputs.composition }}"
           CRF="${{ github.event.inputs.crf }}"
@@ -118,7 +118,9 @@ jobs:
             exit 0
           fi
           for F in ${{ steps.what.outputs.frames }}; do
-            npx remotion still "$1" "out/$1-f${F}.png" --frame="$F" || true
+            # 2x on this branch: the Kannada title elements are placed and
+            # enlarged by hand in CapCut, and 1x softens as soon as they grow.
+            npx remotion still "$1" "out/$1-f${F}.png" --frame="$F" --scale=2 || true
           done
 
       - name: Report what landed
