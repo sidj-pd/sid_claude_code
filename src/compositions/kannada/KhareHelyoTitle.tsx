@@ -39,18 +39,27 @@ type Treatment = {
 	title: React.CSSProperties;
 	episodeName: React.CSSProperties;
 	label: React.CSSProperties;
+	/**
+	 * Space above the episode badge. Per face, because the subscript ya in
+	 * ಹೇಳ್ಯೋ hangs well below the line box and hangs by a different amount in
+	 * each — a shared value let it touch the badge in B.
+	 */
+	titleGap: number;
 };
 
 const TREATMENTS: Treatment[] = [
 	// A — rounded heavy, TV serial.
 	{
-		title: {fontFamily: 'KnBalooTamma', fontWeight: 800, fontSize: 200, lineHeight: 1.12},
+		// 200 ran ಸುಳ್ಳ ಹೇಳ್ಯೋ ~50px past both frame edges; sized to the 940 measure.
+		title: {fontFamily: 'KnBalooTamma', fontWeight: 800, fontSize: 160, lineHeight: 1.15},
+		titleGap: 60,
 		episodeName: {fontFamily: 'KnBalooTamma', fontWeight: 600, fontSize: 86},
 		label: {fontFamily: 'KnBalooTamma', fontWeight: 700, fontSize: 36, letterSpacing: 9},
 	},
 	// B — literary serif, cinema.
 	{
-		title: {fontFamily: 'KnTiro', fontWeight: 400, fontSize: 190, lineHeight: 1.2},
+		title: {fontFamily: 'KnTiro', fontWeight: 400, fontSize: 172, lineHeight: 1.2},
+		titleGap: 96,
 		episodeName: {fontFamily: 'KnNotoSerif', fontWeight: 600, fontSize: 80},
 		label: {fontFamily: 'KnNotoSerif', fontWeight: 600, fontSize: 34, letterSpacing: 10},
 	},
@@ -60,9 +69,10 @@ const TREATMENTS: Treatment[] = [
 			fontFamily: 'KnAnek',
 			fontWeight: 800,
 			fontStretch: '75%',
-			fontSize: 250,
-			lineHeight: 1.0,
+			fontSize: 205,
+			lineHeight: 1.05,
 		},
+		titleGap: 76,
 		episodeName: {fontFamily: 'KnAnek', fontWeight: 600, fontStretch: '100%', fontSize: 88},
 		label: {
 			fontFamily: 'KnAnek',
@@ -115,7 +125,7 @@ export const KhareHelyoTitle: React.FC = () => {
 					</div>
 				))}
 
-				<div style={{marginTop: 54, marginBottom: 18}}>
+				<div style={{marginTop: t.titleGap, marginBottom: 18}}>
 					<div
 						style={{
 							...t.label,
