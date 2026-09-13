@@ -48,7 +48,7 @@ const TURMERIC = '#F4B63F';
  * reads as part of the title — cream and turmeric are the title's.
  */
 const CORAL = '#FF8F7A';
-const SHADOW =
+export const SHADOW =
 	'0 4px 0 rgba(30, 14, 4, 0.55), 0 10px 34px rgba(0, 0, 0, 0.65), 0 0 2px rgba(0, 0, 0, 0.5)';
 const SMALL_SHADOW = '0 2px 0 rgba(30, 14, 4, 0.5), 0 4px 16px rgba(0, 0, 0, 0.6)';
 

@@ -28,6 +28,10 @@ Checked 2026-09-13, from the font files' metadata and the projects' own pages.
 | Ambarisha2.ttf | Ambarisha (Kelvin Maa, Appaji Ambarisha Darbha) | OFL 1.1 | `ambarisha__OFL.txt`; github.com/appajid/Ambarisha |
 | LohitKannada.ttf | Lohit Kannada (Modular Infotech, 2003) | GPL | `lohit-kannada__COPYING` |
 
+Latin handwriting faces for the tagline live in `public/fonts/tagline/`:
+Kalam Bold and Caveat Brush, both OFL 1.1 from google/fonts, licence texts in
+`public/fonts/tagline/licenses/`.
+
 ## Deliberately NOT in this repo
 
 Do not add these without a licence that permits public redistribution.

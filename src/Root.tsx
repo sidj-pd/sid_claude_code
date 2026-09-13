@@ -90,11 +90,20 @@ import {
 	KhareHelyoTitleTagline,
 	OVERLAY_ELEMENTS,
 } from './compositions/kannada/KhareHelyoTitle';
+import {KhareHelyoTaglineOptions, TAGLINE_OPTIONS} from './compositions/kannada/KhareHelyoTaglineOptions';
 import {FONT_SPECIMENS, KhareHelyoFontSpecimen} from './compositions/kannada/KhareHelyoFontSpecimen';
 
 export const Root: React.FC = () => {
 	return (
 		<>
+			<Composition
+				id="KhareHelyoTaglineOptions"
+				component={KhareHelyoTaglineOptions}
+				durationInFrames={TAGLINE_OPTIONS.length}
+				fps={OPENING_MONTAGE_FPS}
+				width={OPENING_MONTAGE_WIDTH}
+				height={OPENING_MONTAGE_HEIGHT}
+			/>
 			<Composition
 				id="KhareHelyoElements"
 				component={KhareHelyoElements}

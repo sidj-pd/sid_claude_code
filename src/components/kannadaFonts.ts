@@ -49,6 +49,12 @@ const FACES: Face[] = [
 	{family: 'KnBenne', file: 'fonts/kannada/Benne-Regular.otf', weight: '400'},
 	{family: 'KnAmbarisha', file: 'fonts/kannada/Ambarisha2.ttf', weight: '400'},
 	{family: 'KnLohit', file: 'fonts/kannada/LohitKannada.ttf', weight: '400'},
+
+	// Latin-only handwriting faces for the tagline's "A" and "Rom-com". They
+	// have no Kannada, so a stack like "KnTagKalam, KnNavilu" sets ಜಾನಪದ in
+	// the second face per glyph. OFL, google/fonts; texts in fonts/tagline/licenses.
+	{family: 'KnTagKalam', file: 'fonts/tagline/Kalam-Bold.ttf', weight: '700'},
+	{family: 'KnTagCaveatBrush', file: 'fonts/tagline/CaveatBrush-Regular.ttf', weight: '400'},
 ];
 
 if (typeof document !== 'undefined') {
