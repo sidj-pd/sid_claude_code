@@ -51,6 +51,7 @@ const CORAL = '#FF8F7A';
 /** Ganache at 86%: dark enough to carry turmeric on a pale background, still lets texture through. */
 const DARK_PLATE = 'rgba(34, 17, 8, 0.86)';
 const PLATE_SHADOW = '0 8px 24px rgba(0, 0, 0, 0.5)';
+const INK = '#2A160C';
 export const SHADOW =
 	'0 4px 0 rgba(30, 14, 4, 0.55), 0 10px 34px rgba(0, 0, 0, 0.65), 0 0 2px rgba(0, 0, 0, 0.5)';
 const SMALL_SHADOW = '0 2px 0 rgba(30, 14, 4, 0.5), 0 4px 16px rgba(0, 0, 0, 0.6)';
@@ -66,6 +67,12 @@ export type Treatment = {
 	 * crowded festival, and only a plate kept both legible on all of them.
 	 */
 	episodePlate?: boolean;
+	/**
+	 * Thin dark outline on the series tag and its rules. The tag is the one
+	 * element with no plate, and on the platform episode its cream letters sat
+	 * on bright haze; the user asked for the outline across the series.
+	 */
+	tagOutline?: boolean;
 	/** Appended to both title lines in the base colour, e.g. '...?'. */
 	titleSuffix?: string;
 	/** Optional line under the title; omitted in the A/B/C tests. */
@@ -179,8 +186,16 @@ const FitLines: React.FC<{lines: React.ReactNode[]; style: React.CSSProperties}>
 	);
 };
 
-const Rule: React.FC<{width: number}> = ({width}) => (
-	<div style={{width, height: 4, borderRadius: 2, backgroundColor: TURMERIC, boxShadow: SMALL_SHADOW}} />
+const Rule: React.FC<{width: number; outline?: boolean}> = ({width, outline}) => (
+	<div
+		style={{
+			width,
+			height: 4,
+			borderRadius: 2,
+			backgroundColor: TURMERIC,
+			boxShadow: outline ? `0 0 0 2px ${INK}, ${SMALL_SHADOW}` : SMALL_SHADOW,
+		}}
+	/>
 );
 
 const group: React.CSSProperties = {
@@ -221,9 +236,21 @@ export const TitleOverlay: React.FC<{t: Treatment; only?: OverlayElement; episod
 	<AbsoluteFill>
 		<div style={{...group, top: TITLE_TOP_Y}}>
 			<div style={{display: 'flex', alignItems: 'center', gap: 22, marginBottom: 34, ...vis(only, 'series-tag')}}>
-				<Rule width={70} />
-				<div style={{...t.label, color: CREAM, textShadow: SMALL_SHADOW, whiteSpace: 'nowrap'}}>{TAG}</div>
-				<Rule width={70} />
+				<Rule width={70} outline={t.tagOutline} />
+				<div
+					style={{
+						...t.label,
+						color: CREAM,
+						textShadow: SMALL_SHADOW,
+						whiteSpace: 'nowrap',
+						// Stroke under the fill: only the outer half shows, so the letters
+						// keep their weight and gain a ~2.5px edge.
+						...(t.tagOutline ? {WebkitTextStroke: `5px ${INK}`, paintOrder: 'stroke fill'} : {}),
+					}}
+				>
+					{TAG}
+				</div>
+				<Rule width={70} outline={t.tagOutline} />
 			</div>
 
 			<FitLines
@@ -299,6 +326,7 @@ export const TitleOverlay: React.FC<{t: Treatment; only?: OverlayElement; episod
 const FINAL_TREATMENT: Treatment = {
 	...TREATMENTS[2],
 	episodePlate: true,
+	tagOutline: true,
 	tagline: {
 		fontFamily: 'KnAkaya',
 		fontWeight: 400,
@@ -337,14 +365,28 @@ export const KhareHelyoTitleQuestion: React.FC = () => (
  * Frame 2n is episode n+1's badge, frame 2n+1 its name. Add each new episode
  * here — confirm the number with the user first; Ep02 was once called Ep03.
  */
-export const EPISODES: Episode[] = [EPISODE_01, {label: 'EPISODE 02', name: 'ಥಟ್ ಅಂತ ಹೇಳಿ'}];
+export const EPISODES: Episode[] = [
+	EPISODE_01,
+	{label: 'EPISODE 02', name: 'ಥಟ್ ಅಂತ ಹೇಳಿ'},
+	{label: 'EPISODE 03', name: 'ಈ ಪ್ರೀತಿ ಮಾರಕಾ'},
+	{label: 'EPISODE 04', name: 'ನೀ ನಗುವುದು ಬಿಡವಲ್ಲಿ'},
+	{label: 'EPISODE 05', name: 'ಜಾನಪದ ಸಂಜೆ'},
+];
 
+/**
+ * The series kit: every episode's badge and name, then — on the LAST frame —
+ * the shared series tag. The tag rides along here only so one render produces
+ * everything that changes; the render workflow stills just one composition.
+ */
 export const KhareHelyoEpisodeElements: React.FC = () => {
 	const frame = useCurrentFrame();
+	if (frame >= EPISODES.length * 2) {
+		return <TitleOverlay t={FINAL_TREATMENT} only="series-tag" />;
+	}
 	return (
 		<TitleOverlay
 			t={FINAL_TREATMENT}
-			episode={EPISODES[Math.min(Math.floor(frame / 2), EPISODES.length - 1)]}
+			episode={EPISODES[Math.floor(frame / 2)]}
 			only={frame % 2 === 0 ? 'episode-badge' : 'episode-name'}
 		/>
 	);

@@ -111,7 +111,7 @@ export const Root: React.FC = () => {
 			<Composition
 				id="KhareHelyoEpisodeElements"
 				component={KhareHelyoEpisodeElements}
-				durationInFrames={EPISODES.length * 2}
+				durationInFrames={EPISODES.length * 2 + 1}
 				fps={OPENING_MONTAGE_FPS}
 				width={OPENING_MONTAGE_WIDTH}
 				height={OPENING_MONTAGE_HEIGHT}
