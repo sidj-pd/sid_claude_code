@@ -481,6 +481,48 @@ export const KhareHelyoEpisodeElements: React.FC = () => {
 	);
 };
 
+/**
+ * End-card call to action in the title's face, colours and shadow.
+ *
+ * The first word of each line takes the turmeric accent, as ಖರೆ and ಸುಳ್ಳ do
+ * in the title. Frame 0 stacks one word per line, as the user typed it;
+ * frame 1 is the two-line reading. Capitals, because condensed ExtraBold
+ * Latin reads as poster lettering in caps and as body text in lowercase.
+ */
+const FOLLOW_LAYOUTS: [string, string][][] = [
+	[
+		['FOLLOW', ''],
+		['', 'FOR'],
+		['MORE', ''],
+		['', 'EPISODES'],
+	],
+	[
+		['FOLLOW', ' FOR'],
+		['MORE', ' EPISODES'],
+	],
+];
+
+export const KhareHelyoFollow: React.FC = () => {
+	const frame = useCurrentFrame();
+	const lines = FOLLOW_LAYOUTS[Math.min(frame, FOLLOW_LAYOUTS.length - 1)];
+	return (
+		<AbsoluteFill>
+			<div style={{...group, top: 0, height: SAFE_BOTTOM_Y, justifyContent: 'center'}}>
+				<FitLines
+					key={`follow-${frame}`}
+					style={{...FINAL_TREATMENT.title, textShadow: SHADOW}}
+					lines={lines.map(([accent, rest]) => (
+						<>
+							<span style={{color: TURMERIC}}>{accent}</span>
+							{rest}
+						</>
+					))}
+				/>
+			</div>
+		</AbsoluteFill>
+	);
+};
+
 export const KhareHelyoTitle: React.FC = () => {
 	const frame = useCurrentFrame();
 	return <TitleOverlay t={TREATMENTS[Math.min(TREATMENTS.length - 1, Math.floor(frame / 30))]} />;

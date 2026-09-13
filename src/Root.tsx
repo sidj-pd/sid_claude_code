@@ -87,6 +87,7 @@ import {Ep01CoverCard} from './compositions/covers/Ep01CoverCard';
 import {
 	KhareHelyoElements,
 	KhareHelyoEpisodeElements,
+	KhareHelyoFollow,
 	EPISODES,
 	KhareHelyoTitle,
 	KhareHelyoTitleQuestion,
@@ -100,6 +101,14 @@ import {FONT_SPECIMENS, KhareHelyoFontSpecimen} from './compositions/kannada/Kha
 export const Root: React.FC = () => {
 	return (
 		<>
+			<Composition
+				id="KhareHelyoFollow"
+				component={KhareHelyoFollow}
+				durationInFrames={2}
+				fps={OPENING_MONTAGE_FPS}
+				width={OPENING_MONTAGE_WIDTH}
+				height={OPENING_MONTAGE_HEIGHT}
+			/>
 			<Composition
 				id="KhareHelyoEpisodeOptions"
 				component={KhareHelyoEpisodeOptions}
