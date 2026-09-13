@@ -85,10 +85,19 @@ import {EP04_SHOT_09_DURATION} from './compositions/episode04/shot09/beats';
 import {EP04_SHOT_00_DURATION} from './compositions/episode04/shot00/beats';
 import {Ep01CoverCard} from './compositions/covers/Ep01CoverCard';
 import {KhareHelyoTitle} from './compositions/kannada/KhareHelyoTitle';
+import {FONT_SPECIMENS, KhareHelyoFontSpecimen} from './compositions/kannada/KhareHelyoFontSpecimen';
 
 export const Root: React.FC = () => {
 	return (
 		<>
+			<Composition
+				id="KhareHelyoFontSpecimen"
+				component={KhareHelyoFontSpecimen}
+				durationInFrames={FONT_SPECIMENS.length}
+				fps={OPENING_MONTAGE_FPS}
+				width={OPENING_MONTAGE_WIDTH}
+				height={OPENING_MONTAGE_HEIGHT}
+			/>
 			<Composition
 				id="KhareHelyoTitle"
 				component={KhareHelyoTitle}

@@ -1,5 +1,5 @@
-import React from 'react';
-import {AbsoluteFill, useCurrentFrame} from 'remotion';
+import React, {useLayoutEffect, useRef, useState} from 'react';
+import {AbsoluteFill, continueRender, delayRender, useCurrentFrame} from 'remotion';
 import '../../components/kannadaFonts';
 
 /**
@@ -18,6 +18,7 @@ import '../../components/kannadaFonts';
  *
  * TEST RUN: three typeface treatments, one per second of the timeline.
  * Frame 0 = A, 30 = B, 60 = C. Render stills at those frames to compare.
+ * KhareHelyoFontSpecimen reuses TitleOverlay to try every cleared face.
  */
 
 const TITLE_LINES: [string, string][] = [
@@ -29,8 +30,11 @@ const TAG = 'NEW KANNADA MINISERIES';
 const EPISODE_LABEL = 'EPISODE 01';
 const EPISODE_NAME = 'ಒಂದು ರೈಲಿನ ಪಯಣ';
 
+const FRAME_WIDTH = 1080;
 const FRAME_HEIGHT = 1920;
 const SAFE_BOTTOM_Y = 1536;
+const SIDE_MARGIN = 70;
+const MEASURE = FRAME_WIDTH - 2 * SIDE_MARGIN;
 /** Clear of the platform's top bar (Reels / Shorts header). */
 const TITLE_TOP_Y = 150;
 /** Episode block ends this far above the safe line. */
@@ -42,7 +46,8 @@ const SHADOW =
 	'0 4px 0 rgba(30, 14, 4, 0.55), 0 10px 34px rgba(0, 0, 0, 0.65), 0 0 2px rgba(0, 0, 0, 0.5)';
 const SMALL_SHADOW = '0 2px 0 rgba(30, 14, 4, 0.5), 0 4px 16px rgba(0, 0, 0, 0.6)';
 
-type Treatment = {
+export type Treatment = {
+	/** fontSize is the largest allowed; lines shrink to fit the measure. */
 	title: React.CSSProperties;
 	episodeName: React.CSSProperties;
 	label: React.CSSProperties;
@@ -82,6 +87,39 @@ const TREATMENTS: Treatment[] = [
 	},
 ];
 
+/**
+ * One line of type, shrunk to the measure if it would overflow.
+ *
+ * Kannada faces differ in set width by more than 2x at the same size
+ * (Padyakke Expanded against Anek Condensed), so any fixed size either runs
+ * the wide ones off the frame — which is what v1 did — or leaves the narrow
+ * ones small. Callers must key this by face so it re-measures when the face
+ * changes between frames.
+ */
+const FitLine: React.FC<{style: React.CSSProperties; children: React.ReactNode}> = ({style, children}) => {
+	const ref = useRef<HTMLDivElement>(null);
+	const [scale, setScale] = useState(1);
+	const [handle] = useState(() => delayRender('Fitting a title line'));
+
+	useLayoutEffect(() => {
+		document.fonts.ready.then(() => {
+			// offsetWidth, not getBoundingClientRect: the Studio preview scales
+			// the canvas with a transform, which the latter would include.
+			const width = ref.current?.offsetWidth ?? 0;
+			if (width > MEASURE) {
+				setScale(MEASURE / width);
+			}
+			continueRender(handle);
+		});
+	}, [handle]);
+
+	return (
+		<div ref={ref} style={{...style, fontSize: (style.fontSize as number) * scale, whiteSpace: 'nowrap'}}>
+			{children}
+		</div>
+	);
+};
+
 const Rule: React.FC<{width: number}> = ({width}) => (
 	<div style={{width, height: 4, borderRadius: 2, backgroundColor: TURMERIC, boxShadow: SMALL_SHADOW}} />
 );
@@ -93,54 +131,54 @@ const group: React.CSSProperties = {
 	display: 'flex',
 	flexDirection: 'column',
 	alignItems: 'center',
-	padding: '0 70px',
+	padding: `0 ${SIDE_MARGIN}px`,
 	color: CREAM,
 	textAlign: 'center',
 };
 
+const faceKey = (s: React.CSSProperties) => `${s.fontFamily}/${s.fontWeight}/${s.fontStretch}`;
+
+export const TitleOverlay: React.FC<{t: Treatment}> = ({t}) => (
+	<AbsoluteFill>
+		<div style={{...group, top: TITLE_TOP_Y}}>
+			<div style={{display: 'flex', alignItems: 'center', gap: 22, marginBottom: 34}}>
+				<Rule width={70} />
+				<div style={{...t.label, color: CREAM, textShadow: SMALL_SHADOW, whiteSpace: 'nowrap'}}>{TAG}</div>
+				<Rule width={70} />
+			</div>
+
+			{TITLE_LINES.map(([accent, rest]) => (
+				<FitLine key={`${faceKey(t.title)}/${accent}`} style={{...t.title, textShadow: SHADOW}}>
+					<span style={{color: TURMERIC}}>{accent}</span>
+					{rest}
+				</FitLine>
+			))}
+		</div>
+
+		<div style={{...group, bottom: FRAME_HEIGHT - EPISODE_BOTTOM_Y}}>
+			<div
+				style={{
+					...t.label,
+					color: CREAM,
+					padding: '8px 26px 6px',
+					marginBottom: 18,
+					border: `3px solid ${TURMERIC}`,
+					borderRadius: 999,
+					textShadow: SMALL_SHADOW,
+					boxShadow: SMALL_SHADOW,
+					whiteSpace: 'nowrap',
+				}}
+			>
+				{EPISODE_LABEL}
+			</div>
+			<FitLine key={faceKey(t.episodeName)} style={{...t.episodeName, color: TURMERIC, textShadow: SHADOW}}>
+				{EPISODE_NAME}
+			</FitLine>
+		</div>
+	</AbsoluteFill>
+);
+
 export const KhareHelyoTitle: React.FC = () => {
 	const frame = useCurrentFrame();
-	const t = TREATMENTS[Math.min(TREATMENTS.length - 1, Math.floor(frame / 30))];
-
-	return (
-		<AbsoluteFill>
-			<div style={{...group, top: TITLE_TOP_Y}}>
-				<div style={{display: 'flex', alignItems: 'center', gap: 22, marginBottom: 34}}>
-					<Rule width={70} />
-					<div style={{...t.label, color: CREAM, textShadow: SMALL_SHADOW, whiteSpace: 'nowrap'}}>
-						{TAG}
-					</div>
-					<Rule width={70} />
-				</div>
-
-				{TITLE_LINES.map(([accent, rest]) => (
-					<div key={accent} style={{...t.title, textShadow: SHADOW, whiteSpace: 'nowrap'}}>
-						<span style={{color: TURMERIC}}>{accent}</span>
-						{rest}
-					</div>
-				))}
-			</div>
-
-			<div style={{...group, bottom: FRAME_HEIGHT - EPISODE_BOTTOM_Y}}>
-				<div
-					style={{
-						...t.label,
-						color: CREAM,
-						padding: '8px 26px 6px',
-						marginBottom: 18,
-						border: `3px solid ${TURMERIC}`,
-						borderRadius: 999,
-						textShadow: SMALL_SHADOW,
-						boxShadow: SMALL_SHADOW,
-						whiteSpace: 'nowrap',
-					}}
-				>
-					{EPISODE_LABEL}
-				</div>
-				<div style={{...t.episodeName, color: TURMERIC, textShadow: SHADOW, whiteSpace: 'nowrap'}}>
-					{EPISODE_NAME}
-				</div>
-			</div>
-		</AbsoluteFill>
-	);
+	return <TitleOverlay t={TREATMENTS[Math.min(TREATMENTS.length - 1, Math.floor(frame / 30))]} />;
 };
