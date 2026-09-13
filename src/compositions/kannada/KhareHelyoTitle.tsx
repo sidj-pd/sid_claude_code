@@ -201,7 +201,14 @@ type OverlayElement = (typeof OVERLAY_ELEMENTS)[number];
 const vis = (only: OverlayElement | undefined, el: OverlayElement): React.CSSProperties =>
 	only && only !== el ? {visibility: 'hidden'} : {};
 
-export const TitleOverlay: React.FC<{t: Treatment; only?: OverlayElement}> = ({t, only}) => (
+export type Episode = {label: string; name: string};
+const EPISODE_01: Episode = {label: EPISODE_LABEL, name: EPISODE_NAME};
+
+export const TitleOverlay: React.FC<{t: Treatment; only?: OverlayElement; episode?: Episode}> = ({
+	t,
+	only,
+	episode = EPISODE_01,
+}) => (
 	<AbsoluteFill>
 		<div style={{...group, top: TITLE_TOP_Y}}>
 			<div style={{display: 'flex', alignItems: 'center', gap: 22, marginBottom: 34, ...vis(only, 'series-tag')}}>
@@ -244,10 +251,10 @@ export const TitleOverlay: React.FC<{t: Treatment; only?: OverlayElement}> = ({t
 					...vis(only, 'episode-badge'),
 				}}
 			>
-				{EPISODE_LABEL}
+				{episode.label}
 			</div>
 			<FitLine key={faceKey(t.episodeName)} style={{...t.episodeName, color: TURMERIC, textShadow: SHADOW, ...vis(only, 'episode-name')}}>
-				{EPISODE_NAME}
+				{episode.name}
 			</FitLine>
 		</div>
 	</AbsoluteFill>
@@ -296,6 +303,20 @@ export const KhareHelyoElements: React.FC = () => {
 export const KhareHelyoTitleQuestion: React.FC = () => (
 	<TitleOverlay t={{...FINAL_TREATMENT, titleSuffix: '...?'}} only="title" />
 );
+
+/**
+ * Per-episode elements. The series tag, title and tagline are shared across
+ * episodes and already delivered; only the badge and the episode name change.
+ * Frame 0 is the badge, frame 1 the name.
+ */
+const EPISODE_03: Episode = {label: 'EPISODE 03', name: 'ಥಟ್ ಅಂತ ಹೇಳಿ'};
+
+export const KhareHelyoEp03Elements: React.FC = () => {
+	const frame = useCurrentFrame();
+	return (
+		<TitleOverlay t={FINAL_TREATMENT} episode={EPISODE_03} only={frame === 0 ? 'episode-badge' : 'episode-name'} />
+	);
+};
 
 export const KhareHelyoTitle: React.FC = () => {
 	const frame = useCurrentFrame();

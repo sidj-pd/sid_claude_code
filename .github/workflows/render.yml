@@ -76,8 +76,8 @@ jobs:
       - name: Resolve what to render
         id: what
         env:
-          SHOT: KhareHelyoTitleQuestion
-          SHOT_FRAMES: '0'
+          SHOT: KhareHelyoEp03Elements
+          SHOT_FRAMES: '0 1'
         run: |
           COMP="${{ github.event.inputs.composition }}"
           CRF="${{ github.event.inputs.crf }}"
