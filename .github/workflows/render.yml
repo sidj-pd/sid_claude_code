@@ -76,8 +76,8 @@ jobs:
       - name: Resolve what to render
         id: what
         env:
-          SHOT: Ep04Shot00ColdOpen
-          SHOT_FRAMES: '0 14 20 30 44 60 76 92 100 106 110 114 118 149'
+          SHOT: KhareHelyoTitle
+          SHOT_FRAMES: '0 30 60'
         run: |
           COMP="${{ github.event.inputs.composition }}"
           CRF="${{ github.event.inputs.crf }}"
