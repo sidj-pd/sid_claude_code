@@ -15,8 +15,9 @@ import '../../components/doubleRinseFonts';
  *   DOUBLE then sets ~916px wide against the card's 924 — a near match.
  * - New Miniseries: caps 83px, 593px wide. Gloria is wider than Crayon, so a
  *   height match alone would run 706px; 92px splits the difference.
- * - Episode line: caps 64px with wide tracking; 71px with 7px tracking keeps
- *   the look and fits the longer "Episode 2 - Hit wicket".
+ * - Episode line: caps 64px on the card; 71px. Both handwritten lines are set
+ *   3px TIGHTER than Gloria's default: the user judged Gloria with reduced
+ *   spacing the closest match to Crayon, replacing an earlier wide tracking.
  *
  * Gloria Hallelujah ships one thin weight. A same-colour stroke painted over
  * the fill thickens it to Crayon's marker weight; the soft dark halo copies
@@ -70,6 +71,9 @@ const SERIES: LineSpec = {
 	size: 92,
 	baseline: 749,
 	color: WHITE,
+	// Gloria set tighter than its default reads closest to Crayon — the user's
+	// call after comparing.
+	letterSpacing: -3,
 	stroke: 6,
 	cast: HAND_CAST,
 	shadow: HAND_SHADOW,
@@ -91,7 +95,7 @@ const episodeLine = (text: string): LineSpec => ({
 	size: 71,
 	baseline: 1288,
 	color: WHITE,
-	letterSpacing: 7,
+	letterSpacing: -3,
 	stroke: 5,
 	cast: HAND_CAST,
 	shadow: HAND_SHADOW,
@@ -151,9 +155,10 @@ const BaselineLine: React.FC<{spec: LineSpec; hidden: boolean}> = ({spec, hidden
 		fontSize: size,
 		lineHeight: `${size}px`,
 		letterSpacing: tracking,
-		// CSS adds tracking after the last letter too; pad the start to match
-		// so the ink stays centred.
-		paddingLeft: tracking,
+		// CSS adds tracking after the last letter too, which pulls centred text
+		// off by half of it. Shift back by that half — a translate, because the
+		// tracking is negative here and padding cannot be.
+		translate: `${tracking / 2}px 0`,
 		visibility: hidden ? 'hidden' : 'visible',
 	};
 

@@ -77,7 +77,7 @@ jobs:
         id: what
         env:
           SHOT: DoubleRinseCard
-          SHOT_FRAMES: '4 5 6 7'
+          SHOT_FRAMES: '0 1 2 3 4 5 6 7'
         run: |
           COMP="${{ github.event.inputs.composition }}"
           CRF="${{ github.event.inputs.crf }}"
