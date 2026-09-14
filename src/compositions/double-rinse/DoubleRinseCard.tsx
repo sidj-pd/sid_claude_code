@@ -15,9 +15,10 @@ import '../../components/doubleRinseFonts';
  *   DOUBLE then sets ~916px wide against the card's 924 — a near match.
  * - New Miniseries: caps 83px, 593px wide. Gloria is wider than Crayon, so a
  *   height match alone would run 706px; 92px splits the difference.
- * - Episode line: caps 64px on the card; 71px. Both handwritten lines are set
- *   3px TIGHTER than Gloria's default: the user judged Gloria with reduced
- *   spacing the closest match to Crayon, replacing an earlier wide tracking.
+ * - Episode line: caps 64px on the card; 71px. The user judged Gloria with
+ *   reduced spacing the closest match to Crayon. Both handwritten lines use
+ *   zero tracking — the fattening stroke already tightens them — replacing an
+ *   earlier wide +7px; a further -3px merged letters.
  *
  * Gloria Hallelujah ships one thin weight. A same-colour stroke painted over
  * the fill thickens it to Crayon's marker weight; the soft dark halo copies
@@ -71,9 +72,11 @@ const SERIES: LineSpec = {
 	size: 92,
 	baseline: 749,
 	color: WHITE,
-	// Gloria set tighter than its default reads closest to Crayon — the user's
-	// call after comparing.
-	letterSpacing: -3,
+	// The user wants Gloria's spacing reduced, as closest to Crayon. The stroke
+	// that fattens the letters already closes the gaps by ~3px a side, so zero
+	// tracking IS the reduced look. -3px on top of the stroke was tried and
+	// merged letters outright (Mini, Hit wicket, Retirement).
+	letterSpacing: 0,
 	stroke: 6,
 	cast: HAND_CAST,
 	shadow: HAND_SHADOW,
@@ -95,7 +98,7 @@ const episodeLine = (text: string): LineSpec => ({
 	size: 71,
 	baseline: 1288,
 	color: WHITE,
-	letterSpacing: -3,
+	letterSpacing: 0,
 	stroke: 5,
 	cast: HAND_CAST,
 	shadow: HAND_SHADOW,
