@@ -34,8 +34,12 @@ const MEASURE = 980;
 /** The card is 1898 tall at 1080 wide; centre it in the 1920 frame. */
 const Y_OFFSET = 11;
 
-const HAND_SHADOW = '0 3px 2px rgba(0, 0, 0, 0.55), 0 0 16px rgba(0, 0, 0, 0.75), 0 0 34px rgba(0, 0, 0, 0.45)';
-const TITLE_SHADOW = '0 6px 4px rgba(0, 0, 0, 0.45), 0 0 28px rgba(0, 0, 0, 0.7), 0 0 60px rgba(0, 0, 0, 0.45)';
+// First layer: a black shadow cast down and to the right, which the user asked
+// for on all three lines. The soft halo layers after it are the original
+// CapCut-style glow and keep the type off busy art. Offsets scale with type
+// size — the title's letters are ~2.5x the handwritten lines'.
+const HAND_SHADOW = '6px 7px 3px rgba(0, 0, 0, 0.85), 0 0 16px rgba(0, 0, 0, 0.6), 0 0 34px rgba(0, 0, 0, 0.35)';
+const TITLE_SHADOW = '12px 14px 6px rgba(0, 0, 0, 0.85), 0 0 28px rgba(0, 0, 0, 0.55), 0 0 60px rgba(0, 0, 0, 0.35)';
 
 type LineSpec = {
 	text: string;
