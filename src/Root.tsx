@@ -96,7 +96,7 @@ import {
 } from './compositions/kannada/KhareHelyoTitle';
 import {KhareHelyoTaglineOptions, TAGLINE_OPTIONS} from './compositions/kannada/KhareHelyoTaglineOptions';
 import {EPISODE_OPTIONS, KhareHelyoEpisodeOptions} from './compositions/kannada/KhareHelyoEpisodeOptions';
-import {DoubleRinseCard} from './compositions/double-rinse/DoubleRinseCard';
+import {DR_EPISODES, DoubleRinseCard} from './compositions/double-rinse/DoubleRinseCard';
 import {FONT_SPECIMENS, KhareHelyoFontSpecimen} from './compositions/kannada/KhareHelyoFontSpecimen';
 
 export const Root: React.FC = () => {
@@ -105,7 +105,7 @@ export const Root: React.FC = () => {
 			<Composition
 				id="DoubleRinseCard"
 				component={DoubleRinseCard}
-				durationInFrames={4}
+				durationInFrames={DR_EPISODES.length * 4}
 				fps={OPENING_MONTAGE_FPS}
 				width={OPENING_MONTAGE_WIDTH}
 				height={OPENING_MONTAGE_HEIGHT}

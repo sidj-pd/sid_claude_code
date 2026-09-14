@@ -22,7 +22,7 @@ import '../../components/doubleRinseFonts';
  * the fill thickens it to Crayon's marker weight; the soft dark halo copies
  * CapCut's shadow.
  *
- * Frame 0 is the whole card; 1, 2 and 3 are the series line, the title and
+ * Each episode renders the whole card plus the series line, the title and
  * the episode line alone, for placing separately.
  */
 
@@ -97,7 +97,8 @@ const episodeLine = (text: string): LineSpec => ({
 	shadow: HAND_SHADOW,
 });
 
-export const DR_TEST_EPISODE = 'Episode 2 - Hit wicket';
+/** Every episode's line, in order. Frames come in fours per entry (see DoubleRinseCard). */
+export const DR_EPISODES = ['Episode 2 - Hit wicket', 'Episode 3 - Early Retirement'];
 
 type Metrics = {ascent: number; descent: number; width: number};
 
@@ -186,16 +187,24 @@ const BaselineLine: React.FC<{spec: LineSpec; hidden: boolean}> = ({spec, hidden
 	);
 };
 
+/**
+ * Frames come in fours per DR_EPISODES entry n: 4n is the whole card, 4n+1 the
+ * series line, 4n+2 the title, 4n+3 the episode line alone. A long episode
+ * name shrinks to the measure, so its letters can come out smaller than a
+ * short one's — "Early Retirement" is the first to hit it.
+ */
 export const DoubleRinseCard: React.FC = () => {
 	const frame = useCurrentFrame();
-	const show = (part: number) => frame === 0 || frame === part;
+	const episode = DR_EPISODES[Math.min(Math.floor(frame / 4), DR_EPISODES.length - 1)];
+	const part = frame % 4;
+	const show = (p: number) => part === 0 || part === p;
 
 	return (
 		<AbsoluteFill>
 			<BaselineLine spec={SERIES} hidden={!show(1)} />
 			<BaselineLine spec={TITLE_TOP} hidden={!show(2)} />
 			<BaselineLine spec={TITLE_BOTTOM} hidden={!show(2)} />
-			<BaselineLine spec={episodeLine(DR_TEST_EPISODE)} hidden={!show(3)} />
+			<BaselineLine key={episode} spec={episodeLine(episode)} hidden={!show(3)} />
 		</AbsoluteFill>
 	);
 };
