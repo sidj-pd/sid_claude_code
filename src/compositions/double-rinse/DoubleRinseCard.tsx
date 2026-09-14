@@ -105,7 +105,20 @@ const episodeLine = (text: string): LineSpec => ({
 });
 
 /** Every episode's line, in order. Frames come in fours per entry (see DoubleRinseCard). */
-export const DR_EPISODES = ['Episode 2 - Hit wicket', 'Episode 3 - Early Retirement'];
+export const DR_EPISODES = ['Episode 2 - Hit wicket', 'Episode 3 - Early Retirement', 'Episode 6 - Protein Phase'];
+
+/**
+ * End-of-video prompts (share, follow), each set as two centred lines in the
+ * "New Miniseries" style — same face, size, stroke and shadows — because one
+ * line at that size would run nearly twice the frame width. They follow the
+ * episode frames: frame 4 * DR_EPISODES.length + n is prompt n.
+ */
+export const DR_CTAS: [string, string][] = [
+	['Send this to your', 'protein-mad spouse.'],
+	['Follow for the', 'next ‘phase.’'],
+];
+const CTA_BASELINES = [900, 1018];
+const ctaLine = (text: string, baseline: number): LineSpec => ({...SERIES, text, baseline});
 
 type Metrics = {ascent: number; descent: number; width: number};
 
@@ -203,6 +216,19 @@ const BaselineLine: React.FC<{spec: LineSpec; hidden: boolean}> = ({spec, hidden
  */
 export const DoubleRinseCard: React.FC = () => {
 	const frame = useCurrentFrame();
+
+	const cta = frame - DR_EPISODES.length * 4;
+	if (cta >= 0) {
+		const lines = DR_CTAS[Math.min(cta, DR_CTAS.length - 1)];
+		return (
+			<AbsoluteFill>
+				{lines.map((text, i) => (
+					<BaselineLine key={text} spec={ctaLine(text, CTA_BASELINES[i])} hidden={false} />
+				))}
+			</AbsoluteFill>
+		);
+	}
+
 	const episode = DR_EPISODES[Math.min(Math.floor(frame / 4), DR_EPISODES.length - 1)];
 	const part = frame % 4;
 	const show = (p: number) => part === 0 || part === p;
