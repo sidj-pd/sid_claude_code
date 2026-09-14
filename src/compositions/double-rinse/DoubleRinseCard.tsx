@@ -38,7 +38,13 @@ const Y_OFFSET = 11;
 // for on all three lines. The soft halo layers after it are the original
 // CapCut-style glow and keep the type off busy art. Offsets scale with type
 // size — the title's letters are ~2.5x the handwritten lines'.
-const HAND_SHADOW = '6px 7px 3px rgba(0, 0, 0, 0.85), 0 0 16px rgba(0, 0, 0, 0.6), 0 0 34px rgba(0, 0, 0, 0.35)';
+// The handwritten lines' cast shadow is NOT a text-shadow: text-shadow is cast
+// by the thin Gloria glyph, and the same-colour stroke that fattens the letters
+// covered most of it — the user could not see it at all. HAND_CAST draws a
+// black, equally stroked copy of the line behind it instead, so the shadow is
+// as heavy as the letters. Only the soft halo stays a text-shadow.
+const HAND_SHADOW = '0 0 16px rgba(0, 0, 0, 0.6), 0 0 34px rgba(0, 0, 0, 0.35)';
+const HAND_CAST = {x: 9, y: 11, blur: 1.5};
 const TITLE_SHADOW = '12px 14px 6px rgba(0, 0, 0, 0.85), 0 0 28px rgba(0, 0, 0, 0.55), 0 0 60px rgba(0, 0, 0, 0.35)';
 
 type LineSpec = {
@@ -52,6 +58,8 @@ type LineSpec = {
 	letterSpacing?: number;
 	/** Same-colour stroke width that fattens a thin face. */
 	stroke?: number;
+	/** A solid black copy of the line, offset down-right, drawn behind it. */
+	cast?: {x: number; y: number; blur: number};
 	shadow: string;
 };
 
@@ -63,6 +71,7 @@ const SERIES: LineSpec = {
 	baseline: 749,
 	color: WHITE,
 	stroke: 6,
+	cast: HAND_CAST,
 	shadow: HAND_SHADOW,
 };
 const TITLE_TOP: LineSpec = {
@@ -84,6 +93,7 @@ const episodeLine = (text: string): LineSpec => ({
 	color: WHITE,
 	letterSpacing: 7,
 	stroke: 5,
+	cast: HAND_CAST,
 	shadow: HAND_SHADOW,
 });
 
@@ -126,31 +136,53 @@ const BaselineLine: React.FC<{spec: LineSpec; hidden: boolean}> = ({spec, hidden
 	const tracking = (spec.letterSpacing ?? 0) * s;
 	const baselineInLine = (size - (m.ascent + m.descent) * s) / 2 + m.ascent * s;
 
+	const top = spec.baseline + Y_OFFSET - baselineInLine;
+	const strokeWidth = spec.stroke ? spec.stroke * s : 0;
+	const base: React.CSSProperties = {
+		position: 'absolute',
+		left: 0,
+		width: FRAME_WIDTH,
+		top,
+		textAlign: 'center',
+		whiteSpace: 'nowrap',
+		fontFamily: spec.family,
+		fontWeight: spec.weight,
+		fontSize: size,
+		lineHeight: `${size}px`,
+		letterSpacing: tracking,
+		// CSS adds tracking after the last letter too; pad the start to match
+		// so the ink stays centred.
+		paddingLeft: tracking,
+		visibility: hidden ? 'hidden' : 'visible',
+	};
+
 	return (
-		<div
-			style={{
-				position: 'absolute',
-				left: 0,
-				width: FRAME_WIDTH,
-				top: spec.baseline + Y_OFFSET - baselineInLine,
-				textAlign: 'center',
-				whiteSpace: 'nowrap',
-				fontFamily: spec.family,
-				fontWeight: spec.weight,
-				fontSize: size,
-				lineHeight: `${size}px`,
-				letterSpacing: tracking,
-				// CSS adds tracking after the last letter too; pad the start to match
-				// so the ink stays centred.
-				paddingLeft: tracking,
-				color: spec.color,
-				WebkitTextStroke: spec.stroke ? `${spec.stroke * s}px ${spec.color}` : undefined,
-				textShadow: spec.shadow,
-				visibility: hidden ? 'hidden' : 'visible',
-			}}
-		>
-			{spec.text}
-		</div>
+		<>
+			{spec.cast ? (
+				<div
+					style={{
+						...base,
+						left: spec.cast.x * s,
+						top: top + spec.cast.y * s,
+						color: '#000',
+						WebkitTextStroke: strokeWidth ? `${strokeWidth}px #000` : undefined,
+						filter: `blur(${spec.cast.blur * s}px)`,
+					}}
+				>
+					{spec.text}
+				</div>
+			) : null}
+			<div
+				style={{
+					...base,
+					color: spec.color,
+					WebkitTextStroke: strokeWidth ? `${strokeWidth}px ${spec.color}` : undefined,
+					textShadow: spec.shadow,
+				}}
+			>
+				{spec.text}
+			</div>
+		</>
 	);
 };
 
