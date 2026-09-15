@@ -1,7 +1,6 @@
 {
-  "status": "Measured 2026-09-15 from the delivered 720x720 episode (52.27s). Speech in/out from a 300-3400 Hz RMS envelope; words and speakers from a Gemini transcript, which matched the script word for word, so captions keep the script's spelling. Each caption: in 0.10s before speech, out 0.40s after it (at least 1.1s on screen where the next line allows), always clearing the next caption by 0.07s. Prompts start once the dissolve to the iron completes (43.9-44.6s).",
+  "status": "Measured 2026-09-15 from the delivered 720x720 episode (52.27s). Speech in/out from a 300-3400 Hz RMS envelope; words and speakers from a Gemini transcript, which matched the script word for word, so captions keep the script's spelling. Each caption: in 0.10s before speech, out 0.40s after it (at least 1.1s on screen where the next line allows), always clearing the next caption by 0.07s. Title card and prompts are separate DoubleRinseCard elements, placed by the user.",
   "durationMs": 52266,
-  "title": {"text": "Episode 7 - Uturn", "startMs": 0, "endMs": 2900},
   "rowBaselines": {"1": [967], "2": [919, 1015]},
   "captions": [
     {"speaker": "sid", "text": "Show's at three, right?", "startMs": 990, "endMs": 2290, "timestampMs": null, "confidence": null},
@@ -23,9 +22,5 @@
     {"speaker": "pooja", "text": "Turn back.", "startMs": 32860, "endMs": 33960, "timestampMs": null, "confidence": null},
     {"speaker": "sid", "text": "We're fifteen minutes\nfrom the theatre.", "startMs": 34260, "endMs": 36250, "timestampMs": null, "confidence": null},
     {"speaker": "pooja", "text": "Then it's a very\nconfident eighty-twenty.", "startMs": 36920, "endMs": 39440, "timestampMs": null, "confidence": null}
-  ],
-  "prompts": [
-    {"lines": ["Send this to your", "eighty-twenty partner"], "startMs": 44600, "endMs": 48300},
-    {"lines": ["Follow for the", "next argument"], "startMs": 48400, "endMs": 52266}
   ]
 }

@@ -77,7 +77,7 @@ jobs:
         id: what
         env:
           SHOT: DoubleRinseEp07Overlay
-          SHOT_FRAMES: '30 290 510 1000 1050 1400 1530'
+          SHOT_FRAMES: '30 290 510 1000 1050 1150'
         run: |
           COMP="${{ github.event.inputs.composition }}"
           CRF="${{ github.event.inputs.crf }}"

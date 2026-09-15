@@ -1,25 +1,27 @@
 import React from 'react';
 import {AbsoluteFill, Sequence} from 'remotion';
 import type {Caption} from '@remotion/captions';
-import {BaselineLine, SERIES, TITLE_BOTTOM, TITLE_TOP, WHITE, YELLOW, episodeLine} from './DoubleRinseCard';
+import {BaselineLine, WHITE, YELLOW, episodeLine} from './DoubleRinseCard';
 import type {LineSpec} from './DoubleRinseCard';
 import data from './ep07/overlay.json';
 
 /**
- * Double Rinse Episode 7 ("Uturn") text as a TRANSPARENT layer: the title
- * card, the dialogue captions, and the share and follow prompts over the
- * closing zoom — all in the approved series lettering from DoubleRinseCard.
+ * Double Rinse Episode 7 ("Uturn") dialogue captions as a TRANSPARENT layer,
+ * in the approved series lettering from DoubleRinseCard.
+ *
+ * Captions only. The title card and the share and follow prompts are
+ * rendered as separate elements by DoubleRinseCard, the way Episode 6's were,
+ * and the user places them in the edit.
  *
  * Rendered on its own (ProRes 4444 with alpha, see render.yml) and laid over
  * the episode on the phone with ffmpeg. The episode is unreleased and this
  * repo is public, so only these words come in here, never the footage.
  *
  * The episode arrived as a 720x720 square with the picture letterboxed across
- * the middle, y 158-570 (measured with cropdetect; the iron zoom ends at 562).
- * This layer is 1080x1080 — the card's own 1080-wide coordinates — and the
- * phone scales it to 720. Captions and prompts sit in the black bar under the
- * picture, y 855-1080 here, so they never cover a face or the iron and need
- * no backing to read.
+ * the middle, y 158-570 (measured with cropdetect). This layer is 1080x1080 —
+ * the card's own 1080-wide coordinates — and the phone scales it to 720.
+ * Captions sit in the black bar under the picture, y 855-1080 here, so they
+ * never cover a face and need no backing to read.
  *
  * Every time lives in ep07/overlay.json, in Remotion's Caption format, measured
  * from the episode's real audio: a voice-band RMS envelope for where speech
@@ -31,7 +33,6 @@ type SpokenCaption = Caption & {speaker: 'sid' | 'pooja'};
 export type OverlayData = {
 	status?: string;
 	durationMs: number;
-	title: {text: string; startMs: number; endMs: number};
 	/**
 	 * Row baselines by number of rows, in BaselineLine's coordinates (it adds
 	 * its 11px Y_OFFSET). One row is centred in the bar; two share it.
@@ -39,7 +40,6 @@ export type OverlayData = {
 	rowBaselines: {'1': number[]; '2': number[]};
 	/** "\n" in a caption's text starts its second row. */
 	captions: SpokenCaption[];
-	prompts: {lines: string[]; startMs: number; endMs: number}[];
 };
 
 export const EP07 = data as OverlayData;
@@ -55,75 +55,42 @@ const SPEAKER_COLOR = {sid: YELLOW, pooja: WHITE};
 const ROW_SIZE = 66;
 
 /** Rows in the episode line's treatment: Gloria, same-colour stroke, black cast shadow. */
-const rows = (text: string, color: string): LineSpec[] => {
-	const lines = text.split('\n');
+const rows = (caption: SpokenCaption): LineSpec[] => {
+	const lines = caption.text.split('\n');
 	const baselines = lines.length === 1 ? EP07.rowBaselines['1'] : EP07.rowBaselines['2'];
 	return lines.map((line, i) => ({
 		...episodeLine(line),
 		size: ROW_SIZE,
 		baseline: baselines[i],
-		color,
+		color: SPEAKER_COLOR[caption.speaker],
 	}));
-};
-
-/**
- * The title card is laid out for a 1080x1920 frame, spanning y 690-1324 of it.
- * Scaled to 85% about its own centre (1007) and moved up 461px, it lands on
- * the picture's centre (546) at 539px tall, inside the 618px picture band.
- */
-const TITLE_FIT: React.CSSProperties = {
-	transformOrigin: '540px 1007px',
-	transform: 'translateY(-461px) scale(0.85)',
 };
 
 const toFrame = (ms: number) => Math.round((ms / 1000) * FPS);
 
-/** Shows its children from startMs to endMs. */
-const Timed: React.FC<{startMs: number; endMs: number; children: React.ReactNode}> = ({
-	startMs,
-	endMs,
-	children,
-}) => {
-	const from = toFrame(startMs);
-	const durationInFrames = toFrame(endMs) - from;
-	if (durationInFrames <= 0) {
-		return null;
-	}
-	return (
-		<Sequence from={from} durationInFrames={durationInFrames} layout="none">
-			{children}
-		</Sequence>
-	);
-};
-
 export const DoubleRinseEp07Overlay: React.FC = () => {
 	return (
 		<AbsoluteFill>
-			<Timed startMs={EP07.title.startMs} endMs={EP07.title.endMs}>
-				<AbsoluteFill style={TITLE_FIT}>
-					<BaselineLine spec={SERIES} hidden={false} />
-					<BaselineLine spec={TITLE_TOP} hidden={false} />
-					<BaselineLine spec={TITLE_BOTTOM} hidden={false} />
-					<BaselineLine spec={episodeLine(EP07.title.text)} hidden={false} />
-				</AbsoluteFill>
-			</Timed>
-
-			{/* BaselineLine measures its text once per mount, so every row is keyed by its text */}
-			{EP07.captions.map((caption) => (
-				<Timed key={`${caption.startMs}-${caption.text}`} startMs={caption.startMs} endMs={caption.endMs}>
-					{rows(caption.text, SPEAKER_COLOR[caption.speaker]).map((spec) => (
-						<BaselineLine key={spec.text} spec={spec} hidden={false} />
-					))}
-				</Timed>
-			))}
-
-			{EP07.prompts.map((prompt) => (
-				<Timed key={prompt.lines.join('|')} startMs={prompt.startMs} endMs={prompt.endMs}>
-					{rows(prompt.lines.join('\n'), WHITE).map((spec) => (
-						<BaselineLine key={spec.text} spec={spec} hidden={false} />
-					))}
-				</Timed>
-			))}
+			{EP07.captions.map((caption) => {
+				const from = toFrame(caption.startMs);
+				const durationInFrames = toFrame(caption.endMs) - from;
+				if (durationInFrames <= 0) {
+					return null;
+				}
+				return (
+					<Sequence
+						key={`${caption.startMs}-${caption.text}`}
+						from={from}
+						durationInFrames={durationInFrames}
+						layout="none"
+					>
+						{/* BaselineLine measures its text once per mount, so every row is keyed by its text */}
+						{rows(caption).map((spec) => (
+							<BaselineLine key={spec.text} spec={spec} hidden={false} />
+						))}
+					</Sequence>
+				);
+			})}
 		</AbsoluteFill>
 	);
 };

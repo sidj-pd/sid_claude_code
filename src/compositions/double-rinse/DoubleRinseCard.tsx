@@ -105,7 +105,12 @@ export const episodeLine = (text: string): LineSpec => ({
 });
 
 /** Every episode's line, in order. Frames come in fours per entry (see DoubleRinseCard). */
-export const DR_EPISODES = ['Episode 2 - Hit wicket', 'Episode 3 - Early Retirement', 'Episode 6 - Protein Phase'];
+export const DR_EPISODES = [
+	'Episode 2 - Hit wicket',
+	'Episode 3 - Early Retirement',
+	'Episode 6 - Protein Phase',
+	'Episode 7 - Uturn',
+];
 
 /**
  * End-of-video prompts (share, follow), each set as two centred lines in the
@@ -116,6 +121,9 @@ export const DR_EPISODES = ['Episode 2 - Hit wicket', 'Episode 3 - Early Retirem
 export const DR_CTAS: [string, string][] = [
 	['Send this to your', 'protein-mad spouse.'],
 	['Follow for the', 'next ‘phase.’'],
+	// Episode 7
+	['Send this to your', 'eighty-twenty partner'],
+	['Follow for the', 'next argument'],
 ];
 const CTA_BASELINES = [900, 1018];
 const ctaLine = (text: string, baseline: number): LineSpec => ({...SERIES, text, baseline});
