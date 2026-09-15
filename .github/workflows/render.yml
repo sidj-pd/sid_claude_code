@@ -76,8 +76,8 @@ jobs:
       - name: Resolve what to render
         id: what
         env:
-          SHOT: DoubleRinseCard
-          SHOT_FRAMES: '8 9 10 11 12 13'
+          SHOT: DoubleRinseEp07Overlay
+          SHOT_FRAMES: '30 290 510 1000 1050 1400 1530'
         run: |
           COMP="${{ github.event.inputs.composition }}"
           CRF="${{ github.event.inputs.crf }}"
@@ -99,7 +99,20 @@ jobs:
           mkdir -p out
           for C in ${{ steps.what.outputs.composition }}; do
             echo "::group::$C"
-            npx remotion render "$C" "out/$C.mp4" --crf "${{ steps.what.outputs.crf }}"
+            case "$C" in
+              # A composition named *Overlay is a transparent text layer, laid
+              # over footage somewhere else: Double Rinse episodes are unreleased
+              # when captioned and this repo is public, so the phone composites
+              # them with ffmpeg and the footage never comes here. ProRes 4444
+              # carries the alpha, and only PNG frames have any alpha to carry.
+              *Overlay)
+                npx remotion render "$C" "out/$C.mov" --codec=prores --prores-profile=4444 \
+                  --pixel-format=yuva444p10le --image-format=png
+                ;;
+              *)
+                npx remotion render "$C" "out/$C.mp4" --crf "${{ steps.what.outputs.crf }}"
+                ;;
+            esac
             echo "::endgroup::"
           done
 
@@ -131,6 +144,7 @@ jobs:
           name: ${{ steps.what.outputs.composition }}
           path: |
             out/*.mp4
+            out/*.mov
             out/*.png
           retention-days: 30
           if-no-files-found: error

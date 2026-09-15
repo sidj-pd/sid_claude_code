@@ -97,6 +97,7 @@ import {
 import {KhareHelyoTaglineOptions, TAGLINE_OPTIONS} from './compositions/kannada/KhareHelyoTaglineOptions';
 import {EPISODE_OPTIONS, KhareHelyoEpisodeOptions} from './compositions/kannada/KhareHelyoEpisodeOptions';
 import {DR_CTAS, DR_EPISODES, DoubleRinseCard} from './compositions/double-rinse/DoubleRinseCard';
+import {DoubleRinseEp07Overlay, EP07_OVERLAY_FRAMES, EP07_SIZE} from './compositions/double-rinse/DoubleRinseEp07Overlay';
 import {FONT_SPECIMENS, KhareHelyoFontSpecimen} from './compositions/kannada/KhareHelyoFontSpecimen';
 
 export const Root: React.FC = () => {
@@ -109,6 +110,15 @@ export const Root: React.FC = () => {
 				fps={OPENING_MONTAGE_FPS}
 				width={OPENING_MONTAGE_WIDTH}
 				height={OPENING_MONTAGE_HEIGHT}
+			/>
+			{/* Transparent square: rendered as ProRes 4444, scaled to 720 and laid over the episode on the phone */}
+			<Composition
+				id="DoubleRinseEp07Overlay"
+				component={DoubleRinseEp07Overlay}
+				durationInFrames={EP07_OVERLAY_FRAMES}
+				fps={OPENING_MONTAGE_FPS}
+				width={EP07_SIZE}
+				height={EP07_SIZE}
 			/>
 			<Composition
 				id="KhareHelyoFollow"

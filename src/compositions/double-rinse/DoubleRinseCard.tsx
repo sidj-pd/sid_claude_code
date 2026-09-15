@@ -28,8 +28,8 @@ import '../../components/doubleRinseFonts';
  * the episode line alone, for placing separately.
  */
 
-const YELLOW = '#FFE226';
-const WHITE = '#FEFEFE';
+export const YELLOW = '#FFE226';
+export const WHITE = '#FEFEFE';
 const FRAME_WIDTH = 1080;
 /** Lines wider than this shrink; keeps ~50px clear on each side. */
 const MEASURE = 980;
@@ -49,7 +49,7 @@ const HAND_SHADOW = '0 0 16px rgba(0, 0, 0, 0.6), 0 0 34px rgba(0, 0, 0, 0.35)';
 const HAND_CAST = {x: 9, y: 11, blur: 1.5};
 const TITLE_SHADOW = '12px 14px 6px rgba(0, 0, 0, 0.85), 0 0 28px rgba(0, 0, 0, 0.55), 0 0 60px rgba(0, 0, 0, 0.35)';
 
-type LineSpec = {
+export type LineSpec = {
 	text: string;
 	family: string;
 	weight: number;
@@ -65,7 +65,7 @@ type LineSpec = {
 	shadow: string;
 };
 
-const SERIES: LineSpec = {
+export const SERIES: LineSpec = {
 	text: 'New Miniseries',
 	family: 'DrGloria',
 	weight: 400,
@@ -81,7 +81,7 @@ const SERIES: LineSpec = {
 	cast: HAND_CAST,
 	shadow: HAND_SHADOW,
 };
-const TITLE_TOP: LineSpec = {
+export const TITLE_TOP: LineSpec = {
 	text: 'DOUBLE',
 	family: 'DrPoppins',
 	weight: 900,
@@ -90,8 +90,8 @@ const TITLE_TOP: LineSpec = {
 	color: YELLOW,
 	shadow: TITLE_SHADOW,
 };
-const TITLE_BOTTOM: LineSpec = {...TITLE_TOP, text: 'RINSE', baseline: 1177};
-const episodeLine = (text: string): LineSpec => ({
+export const TITLE_BOTTOM: LineSpec = {...TITLE_TOP, text: 'RINSE', baseline: 1177};
+export const episodeLine = (text: string): LineSpec => ({
 	text,
 	family: 'DrGloria',
 	weight: 400,
@@ -127,7 +127,7 @@ type Metrics = {ascent: number; descent: number; width: number};
  * reports the face's line metrics, which fixes where the baseline falls in a
  * line box — the same technique that centres the Kannada episode plates.
  */
-const BaselineLine: React.FC<{spec: LineSpec; hidden: boolean}> = ({spec, hidden}) => {
+export const BaselineLine: React.FC<{spec: LineSpec; hidden: boolean}> = ({spec, hidden}) => {
 	const [m, setM] = useState<Metrics | null>(null);
 	const [handle] = useState(() => delayRender(`Measuring "${spec.text}"`));
 

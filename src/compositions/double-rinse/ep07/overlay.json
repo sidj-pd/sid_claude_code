@@ -1,0 +1,31 @@
+{
+  "status": "Measured 2026-09-15 from the delivered 720x720 episode (52.27s). Speech in/out from a 300-3400 Hz RMS envelope; words and speakers from a Gemini transcript, which matched the script word for word, so captions keep the script's spelling. Each caption: in 0.10s before speech, out 0.40s after it (at least 1.1s on screen where the next line allows), always clearing the next caption by 0.07s. Prompts start once the dissolve to the iron completes (43.9-44.6s).",
+  "durationMs": 52266,
+  "title": {"text": "Episode 7 - Uturn", "startMs": 0, "endMs": 2900},
+  "rowBaselines": {"1": [967], "2": [919, 1015]},
+  "captions": [
+    {"speaker": "sid", "text": "Show's at three, right?", "startMs": 990, "endMs": 2290, "timestampMs": null, "confidence": null},
+    {"speaker": "pooja", "text": "Three-thirty.", "startMs": 3070, "endMs": 4170, "timestampMs": null, "confidence": null},
+    {"speaker": "pooja", "text": "Did you switch\noff the iron?", "startMs": 5000, "endMs": 6480, "timestampMs": null, "confidence": null},
+    {"speaker": "sid", "text": "Why is that on me?", "startMs": 6550, "endMs": 7470, "timestampMs": null, "confidence": null},
+    {"speaker": "pooja", "text": "You ironed last.", "startMs": 7540, "endMs": 8570, "timestampMs": null, "confidence": null},
+    {"speaker": "sid", "text": "Then it's off.\nI always switch off.", "startMs": 8640, "endMs": 10820, "timestampMs": null, "confidence": null},
+    {"speaker": "pooja", "text": "You said that about\nthe geyser also.", "startMs": 11160, "endMs": 13460, "timestampMs": null, "confidence": null},
+    {"speaker": "sid", "text": "This is separate.", "startMs": 13530, "endMs": 14650, "timestampMs": null, "confidence": null},
+    {"speaker": "pooja", "text": "Sixty-forty.\nIn favour of off.", "startMs": 16420, "endMs": 18690, "timestampMs": null, "confidence": null},
+    {"speaker": "sid", "text": "Based on what?", "startMs": 18760, "endMs": 19730, "timestampMs": null, "confidence": null},
+    {"speaker": "pooja", "text": "Your track record.", "startMs": 19800, "endMs": 21040, "timestampMs": null, "confidence": null},
+    {"speaker": "sid", "text": "...Eighty-twenty.", "startMs": 22130, "endMs": 23350, "timestampMs": null, "confidence": null},
+    {"speaker": "pooja", "text": "Eighty in favour\nof what?", "startMs": 23420, "endMs": 25700, "timestampMs": null, "confidence": null},
+    {"speaker": "sid", "text": "...Off.\nEighty in favour of off.", "startMs": 26050, "endMs": 28200, "timestampMs": null, "confidence": null},
+    {"speaker": "pooja", "text": "Based on what?", "startMs": 29350, "endMs": 30520, "timestampMs": null, "confidence": null},
+    {"speaker": "sid", "text": "I feel confident\ntoday.", "startMs": 30990, "endMs": 32470, "timestampMs": null, "confidence": null},
+    {"speaker": "pooja", "text": "Turn back.", "startMs": 32860, "endMs": 33960, "timestampMs": null, "confidence": null},
+    {"speaker": "sid", "text": "We're fifteen minutes\nfrom the theatre.", "startMs": 34260, "endMs": 36250, "timestampMs": null, "confidence": null},
+    {"speaker": "pooja", "text": "Then it's a very\nconfident eighty-twenty.", "startMs": 36920, "endMs": 39440, "timestampMs": null, "confidence": null}
+  ],
+  "prompts": [
+    {"lines": ["Send this to your", "eighty-twenty partner"], "startMs": 44600, "endMs": 48300},
+    {"lines": ["Follow for the", "next argument"], "startMs": 48400, "endMs": 52266}
+  ]
+}
