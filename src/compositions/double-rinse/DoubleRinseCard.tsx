@@ -118,15 +118,16 @@ export const DR_EPISODES = [
  * line at that size would run nearly twice the frame width. They follow the
  * episode frames: frame 4 * DR_EPISODES.length + n is prompt n.
  */
-export const DR_CTAS: [string, string][] = [
-	['Send this to your', 'protein-mad spouse.'],
-	['Follow for the', 'next ‘phase.’'],
-	// Episode 7
-	['Send this to your', 'eighty-twenty partner'],
-	['Follow for the', 'next argument'],
+export type DrCta = {lines: [string, string]; /** Defaults to the series line's white. */ color?: string};
+export const DR_CTAS: DrCta[] = [
+	{lines: ['Send this to your', 'protein-mad spouse.']},
+	{lines: ['Follow for the', 'next ‘phase.’']},
+	// Episode 7: the user wants these in the title's yellow, still in the handwritten face
+	{lines: ['Send this to your', 'eighty-twenty partner'], color: YELLOW},
+	{lines: ['Follow for the', 'next argument'], color: YELLOW},
 ];
 const CTA_BASELINES = [900, 1018];
-const ctaLine = (text: string, baseline: number): LineSpec => ({...SERIES, text, baseline});
+const ctaLine = (text: string, baseline: number, color = WHITE): LineSpec => ({...SERIES, text, baseline, color});
 
 type Metrics = {ascent: number; descent: number; width: number};
 
@@ -227,11 +228,11 @@ export const DoubleRinseCard: React.FC = () => {
 
 	const cta = frame - DR_EPISODES.length * 4;
 	if (cta >= 0) {
-		const lines = DR_CTAS[Math.min(cta, DR_CTAS.length - 1)];
+		const {lines, color} = DR_CTAS[Math.min(cta, DR_CTAS.length - 1)];
 		return (
 			<AbsoluteFill>
 				{lines.map((text, i) => (
-					<BaselineLine key={text} spec={ctaLine(text, CTA_BASELINES[i])} hidden={false} />
+					<BaselineLine key={text} spec={ctaLine(text, CTA_BASELINES[i], color)} hidden={false} />
 				))}
 			</AbsoluteFill>
 		);
