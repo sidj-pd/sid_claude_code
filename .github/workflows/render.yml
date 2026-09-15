@@ -103,11 +103,16 @@ jobs:
               # A composition named *Overlay is a transparent text layer, laid
               # over footage somewhere else: Double Rinse episodes are unreleased
               # when captioned and this repo is public, so the phone composites
-              # them with ffmpeg and the footage never comes here. ProRes 4444
-              # carries the alpha, and only PNG frames have any alpha to carry.
+              # them with ffmpeg and the footage never comes here.
+              # VP9 WebM with alpha, not ProRes 4444: Episode 7's 52s of captions
+              # came to 136 MB as ProRes and downloads to the phone at ~0.06 MB/s
+              # (a 34-minute wait); mostly-empty frames compress to almost
+              # nothing in VP9. Decode it with -c:v libvpx-vp9 -- ffmpeg's
+              # native vp9 decoder drops the alpha and paints the frame white.
+              # Only PNG frames have any alpha to carry.
               *Overlay)
-                npx remotion render "$C" "out/$C.mov" --codec=prores --prores-profile=4444 \
-                  --pixel-format=yuva444p10le --image-format=png
+                npx remotion render "$C" "out/$C.webm" --codec=vp9 \
+                  --pixel-format=yuva420p --image-format=png
                 ;;
               *)
                 npx remotion render "$C" "out/$C.mp4" --crf "${{ steps.what.outputs.crf }}"
@@ -144,7 +149,7 @@ jobs:
           name: ${{ steps.what.outputs.composition }}
           path: |
             out/*.mp4
-            out/*.mov
+            out/*.webm
             out/*.png
           retention-days: 30
           if-no-files-found: error
