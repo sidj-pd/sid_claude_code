@@ -110,6 +110,7 @@ export const DR_EPISODES = [
 	'Episode 3 - Early Retirement',
 	'Episode 6 - Protein Phase',
 	'Episode 7 - Uturn',
+	'Episode 8 - Sambar scale',
 ];
 
 /**
@@ -125,6 +126,9 @@ export const DR_CTAS: DrCta[] = [
 	// Episode 7: the user wants these in the title's yellow, still in the handwritten face
 	{lines: ['Send this to your', 'eighty-twenty partner'], color: YELLOW},
 	{lines: ['Follow for the', 'next argument'], color: YELLOW},
+	// Episode 8, yellow like Episode 7 (user confirmed)
+	{lines: ['Send this to someone who’s', 'a ‘specialized category’'], color: YELLOW},
+	{lines: ['Follow to see if she', 'ever hits ten'], color: YELLOW},
 ];
 const CTA_BASELINES = [900, 1018];
 const ctaLine = (text: string, baseline: number, color = WHITE): LineSpec => ({...SERIES, text, baseline, color});
