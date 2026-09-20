@@ -111,6 +111,7 @@ export const DR_EPISODES = [
 	'Episode 6 - Protein Phase',
 	'Episode 7 - Uturn',
 	'Episode 8 - Sambar scale',
+	'Episode 11 - The Suitcase',
 ];
 
 /**
