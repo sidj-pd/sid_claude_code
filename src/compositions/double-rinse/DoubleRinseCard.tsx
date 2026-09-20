@@ -129,6 +129,9 @@ export const DR_CTAS: DrCta[] = [
 	// Episode 8, yellow like Episode 7 (user confirmed)
 	{lines: ['Send this to someone who’s', 'a ‘specialized category’'], color: YELLOW},
 	{lines: ['Follow to see if she', 'ever hits ten'], color: YELLOW},
+	// The beach episode, same yellow as the last two
+	{lines: ['Share if some part of you is', 'still on a beach somewhere.'], color: YELLOW},
+	{lines: ['Follow to see if the next', 'trip actually happens.'], color: YELLOW},
 ];
 const CTA_BASELINES = [900, 1018];
 const ctaLine = (text: string, baseline: number, color = WHITE): LineSpec => ({...SERIES, text, baseline, color});
