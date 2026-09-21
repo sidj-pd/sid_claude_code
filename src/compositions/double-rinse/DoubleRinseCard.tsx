@@ -112,6 +112,7 @@ export const DR_EPISODES = [
 	'Episode 7 - Uturn',
 	'Episode 8 - Sambar scale',
 	'Episode 11 - The Suitcase',
+	'Episode 12 - The Sofa Spot',
 ];
 
 /**
