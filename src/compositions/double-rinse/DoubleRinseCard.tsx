@@ -133,6 +133,9 @@ export const DR_CTAS: DrCta[] = [
 	// The beach episode, same yellow as the last two
 	{lines: ['Share if some part of you is', 'still on a beach somewhere.'], color: YELLOW},
 	{lines: ['Follow to see if the next', 'trip actually happens.'], color: YELLOW},
+	// The ‘spot’ episode; every line here is short enough to set at full size
+	{lines: ['Send this to whoever', 'has a ‘spot.’'], color: YELLOW},
+	{lines: ['Follow for new', 'episodes everyday.'], color: YELLOW},
 ];
 const CTA_BASELINES = [900, 1018];
 const ctaLine = (text: string, baseline: number, color = WHITE): LineSpec => ({...SERIES, text, baseline, color});
