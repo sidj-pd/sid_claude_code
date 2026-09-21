@@ -113,6 +113,7 @@ export const DR_EPISODES = [
 	'Episode 8 - Sambar scale',
 	'Episode 11 - The Suitcase',
 	'Episode 12 - The Sofa Spot',
+	'Episode 13 - Supermarket items',
 ];
 
 /**
@@ -137,6 +138,9 @@ export const DR_CTAS: DrCta[] = [
 	// The ‘spot’ episode; every line here is short enough to set at full size
 	{lines: ['Send this to whoever', 'has a ‘spot.’'], color: YELLOW},
 	{lines: ['Follow for new', 'episodes everyday.'], color: YELLOW},
+	// Episode 13
+	{lines: ['Send this to the guy who', 'suddenly wants to come along.'], color: YELLOW},
+	{lines: ['Follow for his next', 'terrible take.'], color: YELLOW},
 ];
 const CTA_BASELINES = [900, 1018];
 const ctaLine = (text: string, baseline: number, color = WHITE): LineSpec => ({...SERIES, text, baseline, color});
