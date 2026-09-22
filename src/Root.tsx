@@ -97,6 +97,7 @@ import {
 import {KhareHelyoTaglineOptions, TAGLINE_OPTIONS} from './compositions/kannada/KhareHelyoTaglineOptions';
 import {EPISODE_OPTIONS, KhareHelyoEpisodeOptions} from './compositions/kannada/KhareHelyoEpisodeOptions';
 import {DR_CTAS, DR_EPISODES, DoubleRinseCard} from './compositions/double-rinse/DoubleRinseCard';
+import {TR_FACES, TypistRamannaTitle} from './compositions/typist-ramanna/TypistRamannaTitle';
 import {DoubleRinseEp07Overlay, EP07_OVERLAY_FRAMES, EP07_SIZE} from './compositions/double-rinse/DoubleRinseEp07Overlay';
 import {FONT_SPECIMENS, KhareHelyoFontSpecimen} from './compositions/kannada/KhareHelyoFontSpecimen';
 
@@ -107,6 +108,14 @@ export const Root: React.FC = () => {
 				id="DoubleRinseCard"
 				component={DoubleRinseCard}
 				durationInFrames={DR_EPISODES.length * 4 + DR_CTAS.length}
+				fps={OPENING_MONTAGE_FPS}
+				width={OPENING_MONTAGE_WIDTH}
+				height={OPENING_MONTAGE_HEIGHT}
+			/>
+			<Composition
+				id="TypistRamannaTitle"
+				component={TypistRamannaTitle}
+				durationInFrames={TR_FACES.length}
 				fps={OPENING_MONTAGE_FPS}
 				width={OPENING_MONTAGE_WIDTH}
 				height={OPENING_MONTAGE_HEIGHT}
