@@ -114,6 +114,7 @@ export const DR_EPISODES = [
 	'Episode 11 - The Suitcase',
 	'Episode 12 - The Sofa Spot',
 	'Episode 13 - Supermarket items',
+	'Episode 14 - The gym',
 ];
 
 /**
