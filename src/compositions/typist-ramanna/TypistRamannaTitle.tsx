@@ -23,9 +23,12 @@ const CREAM = '#FFF1D0';
 const CAST = {x: 14, y: 16, blur: 2};
 const HALO = '0 0 26px rgba(0, 0, 0, 0.55), 0 0 60px rgba(0, 0, 0, 0.3)';
 
+/** Titan One is the LOCKED face (user, 2026-09-22); the rest stay for reference. */
+export const TR_LOCKED_FACE = 'TrTitanOne';
+
 export const TR_FACES = [
 	{family: 'TrLuckiestGuy', label: 'Luckiest Guy'},
-	{family: 'TrTitanOne', label: 'Titan One'},
+	{family: 'TrTitanOne', label: 'Titan One (locked)'},
 	{family: 'TrChewy', label: 'Chewy'},
 	{family: 'TrBungee', label: 'Bungee'},
 	{family: 'TrLilitaOne', label: 'Lilita One'},
