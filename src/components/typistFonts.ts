@@ -12,6 +12,9 @@ const FACES = [
 	{family: 'TrChewy', file: 'fonts/typist-ramanna/Chewy.woff2'},
 	{family: 'TrBungee', file: 'fonts/typist-ramanna/Bungee.woff2'},
 	{family: 'TrLilitaOne', file: 'fonts/typist-ramanna/LilitaOne.woff2'},
+	// Episode titles: worn typewriter face, matching the "DD ARCHIVE" strip.
+	// Already in the repo for Bizzaro Bangalore (Apache 2.0).
+	{family: 'TrSpecialElite', file: 'fonts/SpecialElite.woff2'},
 ];
 
 if (typeof document !== 'undefined') {
@@ -24,7 +27,7 @@ if (typeof document !== 'undefined') {
 	).join('\n');
 	document.head.appendChild(style);
 
-	Promise.all(FACES.map(({family}) => document.fonts.load(`400 200px '${family}'`, 'TYPIST RAMANNA')))
+	Promise.all(FACES.map(({family}) => document.fonts.load(`400 200px '${family}'`, 'TYPIST RAMANNA EP 02')))
 		.then(() => document.fonts.ready)
 		.then(() => continueRender(handle))
 		.catch(() => continueRender(handle));
