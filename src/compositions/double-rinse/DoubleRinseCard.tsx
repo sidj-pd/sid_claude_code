@@ -104,7 +104,11 @@ export const episodeLine = (text: string): LineSpec => ({
 	shadow: HAND_SHADOW,
 });
 
-/** Every episode's line, in order. Frames come in fours per entry (see DoubleRinseCard). */
+/**
+ * Every episode's line, in order. Frames come in fours per entry (see DoubleRinseCard).
+ * A "\n" splits the line into rows, each EPISODE_ROW_GAP below the last.
+ */
+const EPISODE_ROW_GAP = 90;
 export const DR_EPISODES = [
 	'Episode 2 - Hit wicket',
 	'Episode 3 - Early Retirement',
@@ -117,7 +121,8 @@ export const DR_EPISODES = [
 	'Episode 14 - The gym',
 	'Episode 15 - The Investigation',
 	'Episode 16 - The laundry',
-	'Episode 17 - The Kurta Exorcism',
+	// Two rows at the user's request: number, then name
+	'Episode 17\nThe Kurta Exorcism',
 ];
 
 /**
@@ -279,7 +284,13 @@ export const DoubleRinseCard: React.FC = () => {
 			<BaselineLine spec={SERIES} hidden={!show(1)} />
 			<BaselineLine spec={TITLE_TOP} hidden={!show(2)} />
 			<BaselineLine spec={TITLE_BOTTOM} hidden={!show(2)} />
-			<BaselineLine key={episode} spec={episodeLine(episode)} hidden={!show(3)} />
+			{episode.split('\n').map((row, i) => (
+				<BaselineLine
+					key={`${episode}-${i}`}
+					spec={{...episodeLine(row), baseline: episodeLine(row).baseline + i * EPISODE_ROW_GAP}}
+					hidden={!show(3)}
+				/>
+			))}
 		</AbsoluteFill>
 	);
 };
