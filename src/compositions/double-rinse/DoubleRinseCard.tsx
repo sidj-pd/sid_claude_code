@@ -123,6 +123,8 @@ export const DR_EPISODES = [
 	'Episode 16 - The laundry',
 	// Two rows at the user's request: number, then name
 	'Episode 17\nThe Kurta Exorcism',
+	// Episode 18: the user wants the name alone, without "Episode 18"
+	'Form over Function',
 ];
 
 /**
@@ -162,6 +164,8 @@ export const DR_CTAS: DrCta[] = [
 	// Episode 17
 	{lines: ['Send this to someone who', 'just bought a new dress.'], color: YELLOW},
 	{lines: ['Follow before the', 'next possession.'], color: YELLOW},
+	// Episode 18 (follow prompt only)
+	{lines: ['Follow for more of', 'Sid and Pooja'], color: YELLOW},
 ];
 const CTA_BASELINES = [900, 1018];
 const ctaLine = (text: string, baseline: number, color = WHITE): LineSpec => ({...SERIES, text, baseline, color});
