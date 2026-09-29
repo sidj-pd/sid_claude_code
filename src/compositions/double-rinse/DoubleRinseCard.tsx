@@ -125,7 +125,17 @@ export const DR_EPISODES = [
 	'Episode 17\nThe Kurta Exorcism',
 	// Episode 18: the user wants the name alone, without "Episode 18"
 	'Form over Function',
+	'The Methi Revenge',
 ];
+
+/**
+ * Episode lines set in a different face than Gloria, by the user's request.
+ * Same white, cast shadow and halo; Permanent Marker is already heavy, so its
+ * fattening stroke is lighter.
+ */
+const DR_EPISODE_FACE: Record<string, {family: string; stroke: number}> = {
+	'The Methi Revenge': {family: 'DrMarker', stroke: 2},
+};
 
 /**
  * End-of-video prompts (share, follow), each set as two centred lines in the
@@ -291,7 +301,11 @@ export const DoubleRinseCard: React.FC = () => {
 			{episode.split('\n').map((row, i) => (
 				<BaselineLine
 					key={`${episode}-${i}`}
-					spec={{...episodeLine(row), baseline: episodeLine(row).baseline + i * EPISODE_ROW_GAP}}
+					spec={{
+						...episodeLine(row),
+						...DR_EPISODE_FACE[episode],
+						baseline: episodeLine(row).baseline + i * EPISODE_ROW_GAP,
+					}}
 					hidden={!show(3)}
 				/>
 			))}

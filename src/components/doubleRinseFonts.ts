@@ -14,6 +14,8 @@ import {continueRender, delayRender, staticFile} from 'remotion';
 const FACES = [
 	{family: 'DrPoppins', file: 'fonts/double-rinse/Poppins-Black.ttf', weight: '900'},
 	{family: 'DrGloria', file: 'fonts/double-rinse/GloriaHallelujah.ttf', weight: '400'},
+	// Per-episode alternative for the episode line, asked for by name (Apache 2.0)
+	{family: 'DrMarker', file: 'fonts/double-rinse/PermanentMarker.woff2', weight: '400', format: 'woff2'},
 ];
 
 if (typeof document !== 'undefined') {
@@ -21,8 +23,8 @@ if (typeof document !== 'undefined') {
 
 	const style = document.createElement('style');
 	style.textContent = FACES.map(
-		({family, file, weight}) =>
-			`@font-face{font-family:'${family}';src:url('${staticFile(file)}') format('truetype');font-weight:${weight};font-display:block;}`,
+		({family, file, weight, format}: {family: string; file: string; weight: string; format?: string}) =>
+			`@font-face{font-family:'${family}';src:url('${staticFile(file)}') format('${format ?? 'truetype'}');font-weight:${weight};font-display:block;}`,
 	).join('\n');
 	document.head.appendChild(style);
 
