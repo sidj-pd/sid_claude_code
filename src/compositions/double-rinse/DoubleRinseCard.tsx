@@ -141,6 +141,8 @@ export const DR_EPISODES = [
  */
 const DR_EPISODE_FACE: Record<string, {family: string; stroke: number}> = {
 	'The Methi Revenge': {family: 'DrMarker', stroke: 2},
+	// Re-set in marker (2026-09-29); the Gloria version was delivered earlier as episode-18/03-form-over-function.png
+	'Form over Function': {family: 'DrMarker', stroke: 2},
 	'Kurta Exorcism': {family: 'DrMarker', stroke: 2},
 	'Pink and Peach': {family: 'DrMarker', stroke: 2},
 	'Sofa Spot': {family: 'DrMarker', stroke: 2},
