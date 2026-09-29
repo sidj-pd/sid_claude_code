@@ -126,6 +126,12 @@ export const DR_EPISODES = [
 	// Episode 18: the user wants the name alone, without "Episode 18"
 	'Form over Function',
 	'The Methi Revenge',
+	// Permanent Marker re-titles of earlier episodes (user, 2026-09-29)
+	'Kurta Exorcism',
+	'Pink and Peach',
+	'Sofa Spot',
+	'Tomorrow’s Laundry',
+	'Sambar Scale',
 ];
 
 /**
@@ -135,6 +141,11 @@ export const DR_EPISODES = [
  */
 const DR_EPISODE_FACE: Record<string, {family: string; stroke: number}> = {
 	'The Methi Revenge': {family: 'DrMarker', stroke: 2},
+	'Kurta Exorcism': {family: 'DrMarker', stroke: 2},
+	'Pink and Peach': {family: 'DrMarker', stroke: 2},
+	'Sofa Spot': {family: 'DrMarker', stroke: 2},
+	'Tomorrow’s Laundry': {family: 'DrMarker', stroke: 2},
+	'Sambar Scale': {family: 'DrMarker', stroke: 2},
 };
 
 /**
