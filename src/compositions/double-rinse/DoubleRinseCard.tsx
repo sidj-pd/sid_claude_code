@@ -132,6 +132,7 @@ export const DR_EPISODES = [
 	'Sofa Spot',
 	'Tomorrow’s Laundry',
 	'Sambar Scale',
+	'Ready in 5 (Hours)',
 ];
 
 /**
@@ -148,6 +149,7 @@ const DR_EPISODE_FACE: Record<string, {family: string; stroke: number}> = {
 	'Sofa Spot': {family: 'DrMarker', stroke: 2},
 	'Tomorrow’s Laundry': {family: 'DrMarker', stroke: 2},
 	'Sambar Scale': {family: 'DrMarker', stroke: 2},
+	'Ready in 5 (Hours)': {family: 'DrMarker', stroke: 2},
 };
 
 /**
